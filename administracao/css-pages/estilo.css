@@ -1,37 +1,440 @@
+/* =========================================== */
+/* SIDEBAR ACTIVE - DESIGN PREMIUM             */
+/* =========================================== */
 
-    /* ========== UPLOAD FOTO ========== */
-    /* ========== ALERTS MODO CLARO ========== */
-    
+/* VARIÁVEIS DE CORES */
+:root {
+  --sidebar-bg: #f8f9fa;
+  --sidebar-text: #495057;
+  --sidebar-hover: #0d6efd;
+  --sidebar-active: #0d6efd;
+  --sidebar-border: #e9ecef;
+  --sidebar-gradient: linear-gradient(135deg, #0d6efd 0%, #6f42c1 100%);
+}
+
+.dark-mode {
+  --sidebar-bg: #1a1d21;
+  --sidebar-text: #adb5bd;
+  --sidebar-hover: #6ea8fe;
+  --sidebar-active: #6ea8fe;
+  --sidebar-border: #2d3238;
+  --sidebar-gradient: linear-gradient(135deg, #6ea8fe 0%, #a370f7 100%);
+}
+
+/* 1. BASE DO SIDEBAR LINK */
+.sidebar-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+ 
+  color: var(--sidebar-text);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, color, background;
+  isolation: isolate;
+}
+
+/* 2. EFEITO DE FUNDO SUTIL AO HOVER */
+.sidebar-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--sidebar-hover);
+  opacity: 0;
+  border-radius: 10px;
+  z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+.sidebar-link:hover::before {
+  opacity: 0.06;
+}
+
+/* 3. ESTADO ATIVO - DESIGN INOVADOR */
+.sidebar-item.active > .sidebar-link,
+.sidebar-link.active {
+  color: var(--sidebar-active);
+  font-weight: 600;
+  transform: translateX(4px);
+}
+
+/* 4. EFEITO DE "PULSO" PARA ITEM ATIVO */
+.sidebar-item.active > .sidebar-link::after,
+.sidebar-link.active::after {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 70%;
+  background: var(--sidebar-gradient);
+  border-radius: 0 4px 4px 0;
+  box-shadow: 
+    0 0 15px rgba(var(--bs-primary-rgb, 13, 110, 253), 0.3),
+    inset 0 0 10px rgba(255, 255, 255, 0.2);
+  animation: pulseGlow 3s infinite;
+  z-index: 1;
+}
+
+/* 5. ANIMAÇÃO DE PULSO SUAVE */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 
+      0 0 15px rgba(var(--bs-primary-rgb, 13, 110, 253), 0.3),
+      inset 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+  50% {
+    opacity: 0.8;
+    box-shadow: 
+      0 0 20px rgba(var(--bs-primary-rgb, 13, 110, 253), 0.5),
+      inset 0 0 15px rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* 6. ÍCONES - DESIGN ELEGANTE */
+.sidebar-link .feather {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+  stroke: var(--sidebar-text);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ícone no hover */
+.sidebar-link:hover .feather {
+  stroke: var(--sidebar-hover);
+  transform: scale(1.1);
+}
+
+/* Ícone ativo */
+.sidebar-item.active .feather,
+.sidebar-link.active .feather {
+  stroke: var(--sidebar-active);
+  stroke-width: 2.2;
+  filter: drop-shadow(0 2px 4px rgba(var(--bs-primary-rgb, 13, 110, 253), 0.2));
+}
+
+/* 7. BADGES ELEGANTES */
+.sidebar-link .badge {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  background: linear-gradient(135deg, rgba(var(--bs-primary-rgb, 13, 110, 253), 0.1), rgba(var(--bs-primary-rgb, 13, 110, 253), 0.05));
+  color: var(--sidebar-text);
+  border: 1px solid rgba(var(--bs-primary-rgb, 13, 110, 253), 0.1);
+}
+
+/* Badge no hover */
+.sidebar-link:hover .badge {
+  background: linear-gradient(135deg, rgba(var(--bs-primary-rgb, 13, 110, 253), 0.2), rgba(var(--bs-primary-rgb, 13, 110, 253), 0.1));
+  color: var(--sidebar-hover);
+  border-color: rgba(var(--bs-primary-rgb, 13, 110, 253), 0.2);
+  transform: translateY(-1px);
+}
+
+/* Badge ativo */
+.sidebar-item.active .badge,
+.sidebar-link.active .badge {
+  background: var(--sidebar-gradient);
+  color: white !important;
+  border: none;
+  box-shadow: 
+    0 4px 12px rgba(var(--bs-primary-rgb, 13, 110, 253), 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+/* 8. DROPDOWN PARENT COM ANIMAÇÃO */
+.sidebar-item > a[data-bs-toggle="collapse"] {
+  position: relative;
+}
+
+/* Seta animada */
+.sidebar-item > a[data-bs-toggle="collapse"]::after {
+  content: '';
+  position: absolute;
+  right: 1rem;
+  width: 6px;
+  height: 6px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  opacity: 0.5;
+}
+
+/* Seta quando dropdown está aberto */
+.sidebar-item > a[data-bs-toggle="collapse"][aria-expanded="true"]::after {
+  transform: rotate(-135deg) translateY(-1px);
+  opacity: 1;
+}
+
+/* 9. SUBITENS COM INDENTAÇÃO ELEGANTE */
+.sidebar-dropdown .sidebar-link {
+  padding-left: 3rem;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+  position: relative;
+}
+
+/* Linha conectora para subitens */
+.sidebar-dropdown .sidebar-link::before {
+  content: '';
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  width: 12px;
+  height: 1px;
+  background: var(--sidebar-border);
+  transform: translateY(-50%);
+  transition: all 0.4s ease;
+}
+
+.sidebar-dropdown .sidebar-link:hover::before {
+  background: var(--sidebar-hover);
+  width: 16px;
+}
+
+/* Indicador ativo para subitens */
+.sidebar-dropdown .sidebar-item.active > .sidebar-link::after {
+  left: -2px;
+  height: 50%;
+}
+
+/* 10. ANIMAÇÃO DE ENTRADA PARA ITEM ATIVO */
+@keyframes slideInActive {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+}
+
+.sidebar-item.active > .sidebar-link,
+.sidebar-link.active {
+  animation: slideInActive 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+/* 11. EFEITO DE "ONDA" AO CLICAR */
+.sidebar-link:active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(var(--bs-primary-rgb, 13, 110, 253), 0.1);
+  transform: translate(-50%, -50%);
+  animation: ripple 0.6s ease-out;
+  z-index: -1;
+}
+
+@keyframes ripple {
+  to {
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+  }
+}
+
+/* 12. HEADERS ESTILIZADOS */
+.sidebar-header {
+  color: var(--sidebar-text);
+  opacity: 0.7;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 1.75rem 1rem 0.5rem;
+  padding-top: 1rem;
+  position: relative;
+}
+
+.sidebar-header::after {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: -0.5rem;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    var(--sidebar-border) 20%, 
+    var(--sidebar-border) 80%, 
+    transparent 100%
+  );
+}
+
+/* 13. RESPONSIVIDADE */
+@media (max-width: 768px) {
+  .sidebar-link {
+    padding: 0.625rem 0.875rem;
+    margin: 0.125rem 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .sidebar-item.active > .sidebar-link::after,
+  .sidebar-link.active::after {
+    left: -3px;
+    width: 3px;
+  }
+  
+  .sidebar-dropdown .sidebar-link {
+    padding-left: 2.5rem;
+  }
+  
+  .sidebar-dropdown .sidebar-link::before {
+    left: 1.5rem;
+  }
+}
+
+/* 14. ESTADO DESABILITADO (se necessário) */
+.sidebar-link.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+  filter: grayscale(0.8);
+}
+
+/* 15. EFEITO DE "FLUTUAÇÃO" PARA ITEM ATIVO */
+.sidebar-item.active {
+  position: relative;
+}
+
+.sidebar-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(var(--bs-primary-rgb, 13, 110, 253), 0.03) 50%, 
+    transparent 100%
+  );
+  border-radius: 10px;
+  z-index: -1;
+  animation: floatBackground 3s ease-in-out infinite;
+}
+
+@keyframes floatBackground {
+  0%, 100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+/* 16. TRANSITION PARA TEMA CLARO/ESCURO */
+body {
+  transition: background-color 0.6s ease, color 0.6s ease;
+}
+
+/* 17. SCROLLBAR PERSONALIZADO */
+.sidebar-content::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+  background: var(--sidebar-border);
+  border-radius: 2px;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+  background: var(--sidebar-hover);
+}
+
+/* 18. MELHORIAS DE ACESSIBILIDADE */
+.sidebar-link:focus-visible {
+  outline: 2px solid var(--sidebar-active);
+  outline-offset: 2px;
+  background: rgba(var(--bs-primary-rgb, 13, 110, 253), 0.1);
+}
+
+/* 19. EFEITO DE "GLOW" NO HOVER */
+.sidebar-link:hover {
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* 20. TEXTO COM GRADIENTE PARA ITEM ATIVO (opcional) */
+.sidebar-item.active > .sidebar-link span:not(.badge),
+.sidebar-link.active span:not(.badge) {
+  background: var(--sidebar-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+
+
+
+
+
+
+
+
+
 /* ==================== ALERTS DARK MODE ==================== */
 body.dark-mode .alert {
-    color: #f1f1f1 !important; /* texto claro */
-    border-color: #444; /* borda um pouco mais escura */
+    color: #f1f1f1 !important;
+    /* texto claro */
+    border-color: #444;
+    /* borda um pouco mais escura */
 }
 
 /* Alertas de sucesso */
 body.dark-mode .alert-success {
-    background-color: #155724 !important; /* um verde mais escuro */
+    background-color: #155724 !important;
+    /* um verde mais escuro */
     border-color: #1c5234;
     color: #d4edda;
 }
 
 /* Alertas de aviso / warning */
 body.dark-mode .alert-warning {
-    background-color: #856404 !important; /* amarelo/dourado escuro */
+    background-color: #856404 !important;
+    /* amarelo/dourado escuro */
     border-color: #66520b;
     color: #fff3cd;
 }
 
 /* Alertas de perigo / danger */
 body.dark-mode .alert-danger {
-    background-color: #721c24 !important; /* vermelho escuro */
+    background-color: #721c24 !important;
+    /* vermelho escuro */
     border-color: #501217;
     color: #f8d7da;
 }
 
 /* Alertas informativos / info */
 body.dark-mode .alert-info {
-    background-color: #0c5460 !important; /* azul escuro */
+    background-color: #0c5460 !important;
+    /* azul escuro */
     border-color: #08404c;
     color: #d1ecf1;
 }
@@ -40,6 +443,7 @@ body.dark-mode .alert-info {
 body.dark-mode .alert .btn-close {
     filter: brightness(0.8);
 }
+
 body.light-mode .alert {
     border: 1px solid transparent;
     border-radius: 0.375rem;
@@ -118,155 +522,155 @@ body.dark-mode .alert .btn-close {
     filter: invert(1);
 }
 
-    .upload-foto {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 20px;
-    }
+.upload-foto {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
 
-    .foto-preview {
-        width: 120px;
-        height: 120px;
-        border-radius: 10px;
-        object-fit: cover;
-        border: 2px solid #ccc;
-    }
+.foto-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+}
 
-    /* ======= TEMAS GERAIS ======= */
-    body.dark-mode {
-        background-color: #121212;
-        color: #fff;
-    }
+/* ======= TEMAS GERAIS ======= */
+body.dark-mode {
+    background-color: #121212;
+    color: #fff;
+}
 
-    body.dark-mode .card {
-        background-color: #1e1e1e;
-        color: #fff;
-    }
+body.dark-mode .card {
+    background-color: #1e1e1e;
+    color: #fff;
+}
 
-    body.light-mode {
-        background-color: #f8f9fa;
-        color: #212529;
-    }
+body.light-mode {
+    background-color: #f8f9fa;
+    color: #212529;
+}
 
-    .theme-toggle {
-        border: none;
-        background: none;
-        cursor: pointer;
-        color: inherit;
-    }
+.theme-toggle {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: inherit;
+}
 
-    .form-section {
-        margin-bottom: 1.5rem;
-        background-color: rgba(255, 255, 255, 0.05);
-        padding: 20px;
-        border-radius: 8px;
-    }
+.form-section {
+    margin-bottom: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 8px;
+}
 
-    .table img {
-        width: 40px;
-        height: 40px;
-        border-radius: 6px;
-        object-fit: cover;
-    }
+.table img {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+}
 
-    .card-dashboard {
-        transition: all 0.3s ease;
-    }
+.card-dashboard {
+    transition: all 0.3s ease;
+}
 
-    .card-dashboard:hover {
-        transform: translateY(-3px);
-    }
+.card-dashboard:hover {
+    transform: translateY(-3px);
+}
 
-    /* ======= ABAS (NAV TABS) ======= */
-    .nav-tabs {
-        border-bottom: 2px solid #dee2e6;
-    }
+/* ======= ABAS (NAV TABS) ======= */
+.nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+}
 
-    .nav-tabs .nav-link {
-        color: #555;
-        border: none;
-        border-bottom: 2px solid transparent;
-        background: none;
-        transition: all 0.2s ease-in-out;
-    }
+.nav-tabs .nav-link {
+    color: #555;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: none;
+    transition: all 0.2s ease-in-out;
+}
 
-    .nav-tabs .nav-link:hover {
-        color: #0d6efd;
-        border-bottom: 2px solid #0d6efd;
-        background-color: rgba(13, 110, 253, 0.05);
-    }
+.nav-tabs .nav-link:hover {
+    color: #0d6efd;
+    border-bottom: 2px solid #0d6efd;
+    background-color: rgba(13, 110, 253, 0.05);
+}
 
-    .nav-tabs .nav-link.active {
-        font-weight: bold;
-        color: #0d6efd;
-        border-bottom: 2px solid #0d6efd;
-        background-color: transparent;
-    }
+.nav-tabs .nav-link.active {
+    font-weight: bold;
+    color: #0d6efd;
+    border-bottom: 2px solid #0d6efd;
+    background-color: transparent;
+}
 
-    /* ======= MODO ESCURO PARA TABS ======= */
-    body.dark-mode .nav-tabs {
-        border-bottom-color: #333;
-    }
+/* ======= MODO ESCURO PARA TABS ======= */
+body.dark-mode .nav-tabs {
+    border-bottom-color: #333;
+}
 
-    body.dark-mode .nav-tabs .nav-link {
-        color: #bbb;
-    }
+body.dark-mode .nav-tabs .nav-link {
+    color: #bbb;
+}
 
-    body.dark-mode .nav-tabs .nav-link:hover {
-        color: #fff;
-        border-bottom: 2px solid #0d6efd;
-        background-color: rgba(13, 110, 253, 0.1);
-    }
+body.dark-mode .nav-tabs .nav-link:hover {
+    color: #fff;
+    border-bottom: 2px solid #0d6efd;
+    background-color: rgba(13, 110, 253, 0.1);
+}
 
-    body.dark-mode .nav-tabs .nav-link.active {
-        color: #0d6efd;
-        border-bottom: 2px solid #0d6efd;
-    }
+body.dark-mode .nav-tabs .nav-link.active {
+    color: #0d6efd;
+    border-bottom: 2px solid #0d6efd;
+}
 
-    /* ======= INPUTS E BOTÕES ======= */
-    body.dark-mode input,
-    body.dark-mode select,
-    body.dark-mode textarea {
-        background-color: #1a1a1a !important;
-        color: #f9f9f9 !important;
-        border: 1px solid #444 !important;
-    }
+/* ======= INPUTS E BOTÕES ======= */
+body.dark-mode input,
+body.dark-mode select,
+body.dark-mode textarea {
+    background-color: #1a1a1a !important;
+    color: #f9f9f9 !important;
+    border: 1px solid #444 !important;
+}
 
-    body.dark-mode .btn {
-        background-color: #2a2a2a !important;
-        color: #ffffff !important;
-        border-color: #3a3a3a !important;
-    }
+body.dark-mode .btn {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+    border-color: #3a3a3a !important;
+}
 
-    body.dark-mode .btn:hover {
-        background-color: #007bff !important;
-        color: #fff !important;
-    }
+body.dark-mode .btn:hover {
+    background-color: #007bff !important;
+    color: #fff !important;
+}
 
-    /* ======= CARDS ======= */
-    body.dark-mode .card {
-        background-color: #1e1e1e !important;
-        border-color: #333 !important;
-    }
+/* ======= CARDS ======= */
+body.dark-mode .card {
+    background-color: #1e1e1e !important;
+    border-color: #333 !important;
+}
 
-    body.light-mode .card {
-        background-color: #fff !important;
-        border-color: #ddd !important;
-    }
+body.light-mode .card {
+    background-color: #fff !important;
+    border-color: #ddd !important;
+}
 
-    /* ======= AJUSTE DAS TABELAS ======= */
-    .table {
-        width: 100%;
-    }
+/* ======= AJUSTE DAS TABELAS ======= */
+.table {
+    width: 100%;
+}
 
-    .table-borderless th,
-    .table-borderless td {
-        vertical-align: middle;
-    }
+.table-borderless th,
+.table-borderless td {
+    vertical-align: middle;
+}
 
 
-    /* ================= RESPONSIVIDADE DASHBOARD ================= */
+/* ================= RESPONSIVIDADE DASHBOARD ================= */
 
 /* Garante que o container principal use largura total e padding adequado */
 .row {
@@ -287,9 +691,10 @@ body.dark-mode .alert .btn-close {
     }
 
     /* Botões e selects responsivos */
-.form-select, form .btn {
-    width: 100% !important;
-}
+    .form-select,
+    form .btn {
+        width: 100% !important;
+    }
 
     .content-top p {
         font-size: 0.9rem;
@@ -302,7 +707,7 @@ body.dark-mode .alert .btn-close {
     }
 
     /* Cards da dashboard em coluna única */
-    .content-cards > .col-12 {
+    .content-cards>.col-12 {
         flex: 1 1 100%;
         max-width: 100%;
     }
@@ -365,7 +770,9 @@ canvas {
 }
 
 /* Card header e título menor em mobile */
-.card-header h5, .card-header h4, .card-header h2 {
+.card-header h5,
+.card-header h4,
+.card-header h2 {
     font-size: 0.9rem;
 }
 
@@ -382,4 +789,3 @@ canvas {
     font-size: 0.75rem;
     padding: 0.3em 0.5em;
 }
-

@@ -167,6 +167,9 @@
       scripts.forEach(s => s.remove());
       app.innerHTML = temp.innerHTML;
 
+      window.dispatchEvent(new CustomEvent('pageLoaded', {
+        detail: { filePath, title: titleHint }
+      }));
       // Executar scripts da página
       for (const s of scripts) {
         if (s.src) {
@@ -194,7 +197,8 @@
       document.title = `DeliveryHJ | ${titleHint || 'Página'}`;
       updateActiveLinks(filePath);
       toggleInterface(true);
-    } catch (err) {
+    }
+    catch (err) {
       console.error('Erro ao carregar página:', filePath, err);
       const notFoundFile = routes['/404'] ? routes['/404'].file : (BASE_PATH + '404.html');
       if (filePath !== notFoundFile) {
@@ -337,9 +341,9 @@
     loadHash();
   });
 })();
-
+    
 // ==============================
-// 🌗 MODO CLARO / ESCURO ABSOLUTO
+// 🌗 MODO CLARO / ESCURO ABSOLUTO - VERSÃO CORRIGIDA
 // ==============================
 
 function aplicarTema(tema) {
@@ -350,6 +354,22 @@ function aplicarTema(tema) {
   atualizarCoresDeTexto(tema);
   atualizarCoresDosAlerts(tema);
   atualizarIconeTema(tema);
+  preservarCoresLinksAtivos(tema); // NOVA FUNÇÃO
+}
+
+function preservarCoresLinksAtivos(tema) {
+  // NÃO aplica cor aos links que já têm classe 'active'
+  // Isso permite que o CSS mantenha suas próprias cores para links ativos
+  document.querySelectorAll('a.active, .sidebar-item.active > a').forEach(link => {
+    link.style.removeProperty('color');
+    link.style.removeProperty('background-color');
+  });
+  
+  // Também preserva badges dentro de links ativos
+  document.querySelectorAll('a.active .badge, .sidebar-item.active .badge').forEach(badge => {
+    badge.style.removeProperty('color');
+    badge.style.removeProperty('background-color');
+  });
 }
 
 function atualizarCoresDeTexto(tema) {
@@ -360,37 +380,51 @@ function atualizarCoresDeTexto(tema) {
   const corDropdownFundo = tema === 'dark' ? '#1f1f1f' : '#ffffff';
   const corDropdownHover = tema === 'dark' ? '#2a2a2a' : '#f1f1f1';
 
-  // 🔹 Todos os textos
-  document.querySelectorAll('h1,h2,h3,h4,h5,h6,p,span,a,small,strong,em,b,i,th,td,button,label,div,li,blockquote,figcaption,.progress')
-    .forEach(el => el.style.setProperty('color', corTexto, 'important'));
+  // 🔹 Seleciona elementos MAS EXCLUI LINKS ATIVOS
+  const seletores = 'h1,h2,h3,h4,h5,h6,p,span,small,strong,em,b,i,th,td,button,label,div:not(.sidebar-item.active):not(.sidebar-item.active *),li:not(.sidebar-item.active):not(.sidebar-item.active *),blockquote,figcaption,.progress';
+  
+  // Aplica cor apenas aos elementos que NÃO estão dentro de um item ativo
+  document.querySelectorAll(seletores)
+    .forEach(el => {
+      // Verifica se o elemento não é ou não está dentro de um link ativo
+      if (!el.closest('.active') && !el.classList.contains('active')) {
+        el.style.setProperty('color', corTexto, 'important');
+      }
+    });
+
+  // 🔹 Links normais (não ativos)
+  document.querySelectorAll('a:not(.active):not(.sidebar-item.active a)')
+    .forEach(link => {
+      link.style.setProperty('color', corTexto, 'important');
+    });
 
   // 🔹 Cards
   document.querySelectorAll('.card, .card-dashboard')
     .forEach(card => card.style.setProperty('background-color', corFundoCard, 'important'));
 
-  // 🔹 Badges
-  document.querySelectorAll('.badge, .indicator, .badge-soft-dark, .badge-soft-success, .badge-red, .badge-yellow, .badge-green')
+  // 🔹 Badges (exceto dentro de links ativos)
+  document.querySelectorAll('.badge:not(.active .badge), .indicator:not(.active .indicator), .badge-soft-dark:not(.active .badge-soft-dark), .badge-soft-success:not(.active .badge-soft-success), .badge-red:not(.active .badge-red), .badge-yellow:not(.active .badge-yellow), .badge-green:not(.active .badge-green)')
     .forEach(el => {
       el.style.setProperty('color', corBadgeTexto, 'important');
       el.style.setProperty('background-color', corBadgeFundo, 'important');
     });
 
-  // 🔹 Dropdown menus e links
+  // 🔹 Dropdown menus e links (exceto ativos)
   document.querySelectorAll('.dropdown-menu').forEach(menu => {
     menu.style.setProperty('background-color', corDropdownFundo, 'important');
-    menu.querySelectorAll('a').forEach(link => {
+    menu.querySelectorAll('a:not(.active)').forEach(link => {
       link.style.setProperty('color', corTexto, 'important');
       link.addEventListener('mouseenter', () => link.style.backgroundColor = corDropdownHover);
       link.addEventListener('mouseleave', () => link.style.backgroundColor = corDropdownFundo);
     });
   });
 
-  // 🔹 Ícones feather
-  document.querySelectorAll('svg.feather')
+  // 🔹 Ícones feather (exceto dentro de links ativos)
+  document.querySelectorAll('svg.feather:not(.active svg.feather)')
     .forEach(svg => svg.style.setProperty('stroke', corTexto, 'important'));
 }
 
-// 🔹 Ajuste para alertas Bootstrap
+// 🔹 Ajuste para alertas Bootstrap (mantém igual)
 function atualizarCoresDosAlerts(tema) {
   document.querySelectorAll('.alert').forEach(alert => {
     let bg = '', text = '';
@@ -442,18 +476,23 @@ function criarBotaoTema() {
   nav.appendChild(btn);
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  const temaSalvo = localStorage.getItem('deliveryhj_tema') || 'dark';
-  aplicarTema(temaSalvo);
-  criarBotaoTema();
-});
-
+// MODIFICAÇÃO IMPORTANTE: Chamar preservarCoresLinksAtivos quando o tema muda
 window.addEventListener('hashchange', () => {
   const temaAtual = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
   aplicarTema(temaAtual);
   setTimeout(criarBotaoTema, 300);
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  const temaSalvo = localStorage.getItem('deliveryhj_tema') || 'dark';
+  aplicarTema(temaSalvo);
+  criarBotaoTema();
+  
+  // Garantir que os links ativos mantenham suas cores
+  setTimeout(() => {
+    preservarCoresLinksAtivos(temaSalvo);
+  }, 100);
+});
 /**
  * Mostra um alerta dinamicamente na página.
  * @param {string} tipo - Tipo do alerta: 'success', 'danger', 'warning', 'info'
@@ -523,5 +562,70 @@ function mostrarAlerta(tipo, mensagem, duracao = 0) {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+// No final do seu arquivo router.js, adicione:
+
+// Sistema de active state para sidebar
+function updateSidebarActiveState() {
+  const currentHash = normalizeToken(location.hash);
+  
+  // Remove active de todos
+  document.querySelectorAll('#sidebar .sidebar-item, #sidebar a.sidebar-link').forEach(el => {
+    el.classList.remove('active');
+  });
+  
+  // Encontra o link correspondente
+  const selector = `#sidebar a.sidebar-link[href*="${currentHash.replace(/^\//, '')}"]`;
+  const matchingLink = document.querySelector(selector);
+  
+  if (matchingLink) {
+    // Marca link como ativo
+    matchingLink.classList.add('active');
+    
+    // Marca o item pai como ativo
+    const parentItem = matchingLink.closest('.sidebar-item');
+    if (parentItem) parentItem.classList.add('active');
+    
+    // Abre dropdowns pais
+    const dropdown = matchingLink.closest('.sidebar-dropdown.collapse');
+    if (dropdown) {
+      const bsCollapse = bootstrap.Collapse.getInstance(dropdown) || new bootstrap.Collapse(dropdown);
+      bsCollapse.show();
+      
+      // Marca o item dropdown pai como ativo
+      const parentToggle = document.querySelector(`[data-bs-target="#${dropdown.id}"]`);
+      if (parentToggle) {
+        parentToggle.closest('.sidebar-item').classList.add('active');
+      }
+    }
+  }
+}
+
+// Chama a função quando a hash muda e quando a página carrega
+window.addEventListener('hashchange', updateSidebarActiveState);
+
+// Modifique a função loadFile para chamar após carregar:
+async function loadFile(filePath, titleHint) {
+  // ... código existente ...
+  
+  // APÓS carregar com sucesso:
+  setTimeout(updateSidebarActiveState, 50);
+  
+  // ... resto do código ...
+}
+
+// Atualiza estado inicial
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(updateSidebarActiveState, 100);
+}); 
 
 
