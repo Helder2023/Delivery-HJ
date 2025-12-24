@@ -39,23 +39,21 @@
     '/visitantes': { title: 'visitantes', file: PAGINA + 'visitantes.html' },
     '/notas': { title: 'Bloco de notas', file: PAGINA + 'bloco-notas.html' },
     '/-controlo-admin-': { title: 'Controlando os status do sistema completo', file: PAGINA + 'controlo.html' },
-   
+
     '/404': { title: 'Erro 404', file: CODIGOS_HTTPS + '404.html' },
     '/manutencao': { title: 'Dashboard em manuntenção', file: CODIGOS_HTTPS + 'manutencao.html' },
     '/usuario-banido': { title: 'Usuário foi banido', file: CODIGOS_HTTPS + 'usuario-banido.html' },
-
-
 
     '/calendario': { title: 'Calendário', file: OPCOES + 'calendario.html' },
     '/reciclagem': { title: 'Reciclagem', file: OPCOES + 'reciclagem.html' },
 
     '/avaliacao': { title: 'Avalicao', file: AVALIACOES + 'avaliacoes.html' },
     '/visualizar-avaliacao': { title: 'Visualizar Avaliação', file: AVALIACOES + 'visualizar-avaliacao.html' },
-    
+
     '/mensagem': { title: 'Todas as mensagens', file: MENSAGENS + 'mensagem.html' },
     '/visualizar-mensagem': { title: 'Visualizar Mensagem', file: MENSAGENS + 'visualizar-mensagem.html' },
     '/visualizar-reclamacoes': { title: 'Visualizar Reclamação', file: MENSAGENS + 'visualizar-reclamacoes.html' },
-    
+
     '/notificacao': { title: 'Todas as notificação', file: NOTIFICACOES + 'notificacao.html' },
     '/visualizar-notificacao': { title: 'Visualizar Notificação', file: NOTIFICACOES + 'visualizar-notificacao.html' },
 
@@ -100,7 +98,7 @@
     '/exportar-dados-pessoais': { title: 'Exportar dados pessoais', file: FERRAMENTAS + 'exportar-dados-pessoais.html' },
     '/importar-dados': { title: 'Importar dados', file: FERRAMENTAS + 'importar-dados.html' },
 
-     '/privacidade': { title: 'Pulíticas de Privacidade', file: FOOTER + 'privacidade.html' },
+    '/privacidade': { title: 'Pulíticas de Privacidade', file: FOOTER + 'privacidade.html' },
     '/termosDeUso': { title: 'Termos de Uso do Serviço', file: FOOTER + 'termos_uso.html' },
     '/suporte': { title: 'Caso tivier uma dúvica é só nos contar', file: FOOTER + 'suporte.html' },
 
