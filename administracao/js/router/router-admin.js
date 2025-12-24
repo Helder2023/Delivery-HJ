@@ -19,6 +19,8 @@
   const NOTIFICACOES = '../sessao-admin/opcoes/notificacoes/';
   const FERRAMENTAS = '../sessao-admin/ferramentas/';
   const ANUNCIOS = '../sessao-admin/paginas/anucios e publicidades/';
+  const FOOTER = '../sessao-admin/paginas/footer/';
+
 
   // --- rotas ---
   const routes = {
@@ -34,14 +36,10 @@
 
     '/home': { title: 'Home', file: PAGINA + 'home.html' },
     '/config': { title: 'Configuracao', file: PAGINA + 'config.html' },
-    '/preco-pagamento': { title: 'Preco-Pagamentos', file: PAGINA + 'preco-pagamentos.html' },
     '/visitantes': { title: 'visitantes', file: PAGINA + 'visitantes.html' },
-    '/notas': { title: 'Bloco de notas', file: PAGINA + 'notas.html' },
+    '/notas': { title: 'Bloco de notas', file: PAGINA + 'bloco-notas.html' },
     '/-controlo-admin-': { title: 'Controlando os status do sistema completo', file: PAGINA + 'controlo.html' },
-    '/privacidade': { title: 'Pulíticas de Privacidade', file: PAGINA + 'privacidade.html' },
-    '/termosDeUso': { title: 'Termos de Uso do Serviço', file: PAGINA + 'termos_uso.html' },
-    '/suporte': { title: 'Caso tivier uma dúvica é só nos contar', file: PAGINA + 'suporte.html' },
-
+   
     '/404': { title: 'Erro 404', file: CODIGOS_HTTPS + '404.html' },
     '/manutencao': { title: 'Dashboard em manuntenção', file: CODIGOS_HTTPS + 'manutencao.html' },
     '/usuario-banido': { title: 'Usuário foi banido', file: CODIGOS_HTTPS + 'usuario-banido.html' },
@@ -101,6 +99,11 @@
     '/backup': { title: 'Backup', file: FERRAMENTAS + 'backup.html' },
     '/exportar-dados-pessoais': { title: 'Exportar dados pessoais', file: FERRAMENTAS + 'exportar-dados-pessoais.html' },
     '/importar-dados': { title: 'Importar dados', file: FERRAMENTAS + 'importar-dados.html' },
+
+     '/privacidade': { title: 'Pulíticas de Privacidade', file: FOOTER + 'privacidade.html' },
+    '/termosDeUso': { title: 'Termos de Uso do Serviço', file: FOOTER + 'termos_uso.html' },
+    '/suporte': { title: 'Caso tivier uma dúvica é só nos contar', file: FOOTER + 'suporte.html' },
+
   };
 
 
