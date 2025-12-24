@@ -139,7 +139,7 @@
                 </div>
                 <div class="card-body">
                     <form action="salvar-status-paginas.php" method="POST">
-                        
+
                         <div class="mb-3">
                             <label for="todos_site" class="form-label">Status Geral do Site</label>
                             <select name="todos_site" id="todos_site" class="form-select">
@@ -208,7 +208,7 @@
         <div class="card-header">
             <h5 class="card-title mb-0">Restaurantes</h5>
         </div>
-         <div class="table-responsive card-body">
+        <div class="table-responsive card-body">
             <table id="tabela_2" class="table table-borderless my-0 w-100">
                 <thead>
                     <tr>
@@ -242,7 +242,7 @@
         <div class="card-header">
             <h5 class="card-title mb-0">Entregadores</h5>
         </div>
-         <div class="table-responsive card-body">
+        <div class="table-responsive card-body">
             <table id="tabela_3" class="table table-borderless my-0 w-100">
                 <thead>
                     <tr>
@@ -276,7 +276,7 @@
         <div class="card-header">
             <h5 class="card-title mb-0">Clientes</h5>
         </div>
-         <div class="table-responsive card-body">
+        <div class="table-responsive card-body">
             <table id="tabela_4" class="table table-borderless my-0 w-100">
                 <thead>
                     <tr>
@@ -517,6 +517,92 @@
         </div>
     </div>
 </div>
+<hr>
+<!-- admin-responsaveis.html -->
+<main class="">
+    <h2>Administradores responsáveis para a manutenção do dashboard</h2>
+
+    <section class="card p-3 mb-4">
+        <h4>Cadastrar administrador</h4>
+        <form id="formAdmin">
+            <div class="row">
+                <div class="col-md-4 mb-2">
+                    <label>Email</label>
+                    <input type="email" class="form-control" required placeholder="nome@gmail.com"/>
+                </div>
+
+                <div class="col-md-4 mb-2">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" required placeholder="nome..." value="Helder Gabriel Chicale Adão" readonly/>
+                </div>
+                
+                <div class="col-md-4 mb-2">
+                    <label>Telefone</label>
+                    <input type="tel" class="form-control" placeholder="+244..." value="+244 943499135" readonly/>
+                </div>
+              
+                <div class="col-12 mt-3">
+                    <button class="btn btn-success w-100">Cadastrar</button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <section class="card p-3">
+        <div class="d-flex justify-content-between mb-3">
+            <h4>Administradores responsáveis</h4>
+        </div>
+
+        <div class="table-responsive card-body">
+            <table id="tabela_6" class="table table-borderless my-0 w-100">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Nível</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="listaAdmins">
+                    <!-- Exemplo de dados fictícios -->
+                    <tr>
+                        <td>1</td>
+                        <td>Maria Lemos</td>
+                        <td>maria@gestao.com</td>
+                        <td>Super Admin</td>
+                        <td><span class="badge bg-success">Ativo</span></td>
+                        <td>
+                            <button class="btn btn-danger btn-sm">Revogar acesso</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>João Mateus</td>
+                        <td>joao@gestao.com</td>
+                        <td>Admin Operacional</td>
+                        <td><span class="badge bg-success">Ativo</span></td>
+                        <td>
+                            <button class="btn btn-danger btn-sm">Revogar acesso</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<script>
+    // Filtro simples (simulação)
+    document.getElementById("searchAdmin").addEventListener("input", function () {
+        const termo = this.value.toLowerCase();
+        document.querySelectorAll("#listaAdmins tr").forEach(row => {
+            row.style.display = row.textContent.toLowerCase().includes(termo) ? "" : "none";
+        });
+    });
+</script>
+
 
 <script>
     function openEvidenceModal(nome) {
