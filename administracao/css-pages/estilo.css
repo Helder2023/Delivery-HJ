@@ -1,15 +1,21 @@
 /* =========================================== */
-/* SIDEBAR ACTIVE - DESIGN PREMIUM             */
+/* SIDEBAR ACTIVE - DESIGN PREMIUM CORRIGIDO   */
 /* =========================================== */
 
-/* VARIÁVEIS DE CORES */
+/* VARIÁVEIS DE CORES COM FALLBACKS */
 :root {
+  /* Cores principais */
   --sidebar-bg: #f8f9fa;
   --sidebar-text: #495057;
   --sidebar-hover: #0d6efd;
   --sidebar-active: #0d6efd;
   --sidebar-border: #e9ecef;
   --sidebar-gradient: linear-gradient(135deg, #0d6efd 0%, #6f42c1 100%);
+  
+  /* Fallback para --bs-primary-rgb que pode não existir */
+  --primary-rgb: 13, 110, 253; /* Equivalente a #0d6efd em RGB */
+  --primary-rgb-light: 13, 110, 253;
+  --primary-rgb-dark: 110, 168, 254;
 }
 
 .dark-mode {
@@ -19,52 +25,55 @@
   --sidebar-active: #6ea8fe;
   --sidebar-border: #2d3238;
   --sidebar-gradient: linear-gradient(135deg, #6ea8fe 0%, #a370f7 100%);
+  --primary-rgb: 110, 168, 254; /* Atualiza para modo escuro */
 }
 
-/* 1. BASE DO SIDEBAR LINK */
+/* RESET PARA COMPATIBILIDADE */
+.sidebar * {
+  box-sizing: border-box;
+}
+
+/* 1. BASE DO SIDEBAR LINK - OTIMIZADO */
 .sidebar-link {
   position: relative;
   display: flex;
   align-items: center;
- 
-  color: var(--sidebar-text);
+  gap: 0.875rem;
+  padding: 0.75rem 1rem;
+  margin: 0.125rem 0.75rem;
+  color: var(--sidebar-text, #495057);
   text-decoration: none;
   font-weight: 500;
   font-size: 0.95rem;
   border-radius: 10px;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, color, background;
   isolation: isolate;
+  cursor: pointer;
+  border: 1px solid transparent;
 }
 
-/* 2. EFEITO DE FUNDO SUTIL AO HOVER */
-.sidebar-link::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--sidebar-hover);
-  opacity: 0;
-  border-radius: 10px;
-  z-index: -1;
-  transition: opacity 0.4s ease;
+/* 2. EFEITO DE FUNDO SUTIL AO HOVER - CORRIGIDO */
+.sidebar-link:hover {
+  color: var(--sidebar-hover, #0d6efd);
+  border-color: rgba(var(--primary-rgb, 13, 110, 253), 0.1);
+  background-color: rgba(var(--primary-rgb, 13, 110, 253), 0.05);
+  transform: translateX(3px);
 }
 
-.sidebar-link:hover::before {
-  opacity: 0.06;
-}
-
-/* 3. ESTADO ATIVO - DESIGN INOVADOR */
+/* 3. ESTADO ATIVO - SIMPLIFICADO PARA GITHUB */
 .sidebar-item.active > .sidebar-link,
 .sidebar-link.active {
-  color: var(--sidebar-active);
+  color: var(--sidebar-active, #0d6efd) !important;
   font-weight: 600;
   transform: translateX(4px);
+  border-color: rgba(var(--primary-rgb, 13, 110, 253), 0.2);
+  background-color: rgba(var(--primary-rgb, 13, 110, 253), 0.08);
 }
 
-/* 4. EFEITO DE "PULSO" PARA ITEM ATIVO */
-.sidebar-item.active > .sidebar-link::after,
-.sidebar-link.active::after {
+/* 4. EFEITO DE "PULSO" PARA ITEM ATIVO - CORRIGIDO */
+.sidebar-item.active > .sidebar-link::before,
+.sidebar-link.active::before {
   content: '';
   position: absolute;
   left: -4px;
@@ -72,154 +81,111 @@
   transform: translateY(-50%);
   width: 4px;
   height: 70%;
-  background: var(--sidebar-gradient);
+  background: var(--sidebar-gradient, linear-gradient(to bottom, #0d6efd, #6f42c1));
   border-radius: 0 4px 4px 0;
-  box-shadow: 
-    0 0 15px rgba(var(--bs-primary-rgb, 13, 110, 253), 0.3),
-    inset 0 0 10px rgba(255, 255, 255, 0.2);
   animation: pulseGlow 3s infinite;
   z-index: 1;
 }
 
-/* 5. ANIMAÇÃO DE PULSO SUAVE */
+/* 5. ANIMAÇÃO DE PULSO SUAVE - CORRIGIDA */
 @keyframes pulseGlow {
   0%, 100% {
     opacity: 1;
-    box-shadow: 
-      0 0 15px rgba(var(--bs-primary-rgb, 13, 110, 253), 0.3),
-      inset 0 0 10px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(var(--primary-rgb, 13, 110, 253), 0.3);
   }
   50% {
     opacity: 0.8;
-    box-shadow: 
-      0 0 20px rgba(var(--bs-primary-rgb, 13, 110, 253), 0.5),
-      inset 0 0 15px rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 15px rgba(var(--primary-rgb, 13, 110, 253), 0.5);
   }
 }
 
-/* 6. ÍCONES - DESIGN ELEGANTE */
+/* 6. ÍCONES - DESIGN ELEGANTE CORRIGIDO */
 .sidebar-link .feather {
   width: 18px;
   height: 18px;
   stroke-width: 2;
-  stroke: var(--sidebar-text);
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  stroke: var(--sidebar-text, #495057);
+  transition: all 0.3s ease;
 }
 
-/* Ícone no hover */
 .sidebar-link:hover .feather {
-  stroke: var(--sidebar-hover);
-  transform: scale(1.1);
+  stroke: var(--sidebar-hover, #0d6efd);
+  transform: scale(1.05);
 }
 
-/* Ícone ativo */
 .sidebar-item.active .feather,
 .sidebar-link.active .feather {
-  stroke: var(--sidebar-active);
+  stroke: var(--sidebar-active, #0d6efd);
   stroke-width: 2.2;
-  filter: drop-shadow(0 2px 4px rgba(var(--bs-primary-rgb, 13, 110, 253), 0.2));
 }
 
-/* 7. BADGES ELEGANTES */
+/* 7. BADGES ELEGANTES - CORRIGIDOS */
 .sidebar-link .badge {
   margin-left: auto;
   font-size: 0.7rem;
   font-weight: 600;
-  padding: 0.25rem 0.5rem;
-  min-width: 1.75rem;
-  height: 1.75rem;
-  display: flex;
+  padding: 0.2rem 0.5rem;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 20px;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  background: linear-gradient(135deg, rgba(var(--bs-primary-rgb, 13, 110, 253), 0.1), rgba(var(--bs-primary-rgb, 13, 110, 253), 0.05));
-  color: var(--sidebar-text);
-  border: 1px solid rgba(var(--bs-primary-rgb, 13, 110, 253), 0.1);
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background-color: rgba(var(--primary-rgb, 13, 110, 253), 0.1);
+  color: var(--sidebar-text, #495057);
 }
 
-/* Badge no hover */
 .sidebar-link:hover .badge {
-  background: linear-gradient(135deg, rgba(var(--bs-primary-rgb, 13, 110, 253), 0.2), rgba(var(--bs-primary-rgb, 13, 110, 253), 0.1));
-  color: var(--sidebar-hover);
-  border-color: rgba(var(--bs-primary-rgb, 13, 110, 253), 0.2);
-  transform: translateY(-1px);
+  background-color: rgba(var(--primary-rgb, 13, 110, 253), 0.2);
+  color: var(--sidebar-hover, #0d6efd);
 }
 
-/* Badge ativo */
 .sidebar-item.active .badge,
 .sidebar-link.active .badge {
-  background: var(--sidebar-gradient);
+  background-color: var(--sidebar-active, #0d6efd);
   color: white !important;
-  border: none;
-  box-shadow: 
-    0 4px 12px rgba(var(--bs-primary-rgb, 13, 110, 253), 0.3),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2);
-  transform: scale(1.05);
+  box-shadow: 0 2px 6px rgba(var(--primary-rgb, 13, 110, 253), 0.3);
 }
 
-/* 8. DROPDOWN PARENT COM ANIMAÇÃO */
+/* 8. DROPDOWN PARENT - CORRIGIDO */
 .sidebar-item > a[data-bs-toggle="collapse"] {
   position: relative;
 }
 
-/* Seta animada */
 .sidebar-item > a[data-bs-toggle="collapse"]::after {
-  content: '';
+  content: '›';
   position: absolute;
   right: 1rem;
-  width: 6px;
-  height: 6px;
-  border-right: 2px solid currentColor;
-  border-bottom: 2px solid currentColor;
-  transform: rotate(45deg);
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
   opacity: 0.5;
 }
 
-/* Seta quando dropdown está aberto */
 .sidebar-item > a[data-bs-toggle="collapse"][aria-expanded="true"]::after {
-  transform: rotate(-135deg) translateY(-1px);
+  transform: rotate(90deg);
   opacity: 1;
 }
 
-/* 9. SUBITENS COM INDENTAÇÃO ELEGANTE */
+/* 9. SUBITENS - SIMPLIFICADO */
 .sidebar-dropdown .sidebar-link {
-  padding-left: 3rem;
+  padding-left: 2.5rem;
   margin-left: 0.75rem;
   margin-right: 0.75rem;
-  position: relative;
+  font-size: 0.9rem;
 }
 
-/* Linha conectora para subitens */
-.sidebar-dropdown .sidebar-link::before {
-  content: '';
-  position: absolute;
-  left: 2rem;
-  top: 50%;
-  width: 12px;
-  height: 1px;
-  background: var(--sidebar-border);
-  transform: translateY(-50%);
-  transition: all 0.4s ease;
-}
-
-.sidebar-dropdown .sidebar-link:hover::before {
-  background: var(--sidebar-hover);
-  width: 16px;
-}
-
-/* Indicador ativo para subitens */
-.sidebar-dropdown .sidebar-item.active > .sidebar-link::after {
-  left: -2px;
+.sidebar-dropdown .sidebar-item.active > .sidebar-link::before,
+.sidebar-dropdown .sidebar-link.active::before {
+  left: 1.5rem;
   height: 50%;
 }
 
-/* 10. ANIMAÇÃO DE ENTRADA PARA ITEM ATIVO */
+/* 10. ANIMAÇÃO DE ENTRADA - CORRIGIDA */
 @keyframes slideInActive {
   0% {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translateX(-10px);
   }
   100% {
     opacity: 1;
@@ -229,165 +195,154 @@
 
 .sidebar-item.active > .sidebar-link,
 .sidebar-link.active {
-  animation: slideInActive 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation: slideInActive 0.3s ease-out;
 }
 
-/* 11. EFEITO DE "ONDA" AO CLICAR */
-.sidebar-link:active::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border-radius: 50%;
-  background: rgba(var(--bs-primary-rgb, 13, 110, 253), 0.1);
-  transform: translate(-50%, -50%);
-  animation: ripple 0.6s ease-out;
-  z-index: -1;
-}
-
-@keyframes ripple {
-  to {
-    width: 200%;
-    height: 200%;
-    opacity: 0;
-  }
-}
-
-/* 12. HEADERS ESTILIZADOS */
+/* 11. HEADERS ESTILIZADOS - CORRIGIDOS */
 .sidebar-header {
-  color: var(--sidebar-text);
+  color: var(--sidebar-text, #495057);
   opacity: 0.7;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin: 1.75rem 1rem 0.5rem;
-  padding-top: 1rem;
-  position: relative;
+  letter-spacing: 0.5px;
+  margin: 1.5rem 1rem 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--sidebar-border, #e9ecef);
 }
 
-.sidebar-header::after {
-  content: '';
-  position: absolute;
-  left: 1rem;
-  right: 1rem;
-  bottom: -0.5rem;
-  height: 1px;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    var(--sidebar-border) 20%, 
-    var(--sidebar-border) 80%, 
-    transparent 100%
-  );
+.sidebar-header:first-child {
+  border-top: none;
+  margin-top: 0.5rem;
 }
 
-/* 13. RESPONSIVIDADE */
+/* 12. RESPONSIVIDADE - CORRIGIDA */
 @media (max-width: 768px) {
   .sidebar-link {
-    padding: 0.625rem 0.875rem;
+    padding: 0.6rem 0.75rem;
     margin: 0.125rem 0.5rem;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
   
-  .sidebar-item.active > .sidebar-link::after,
-  .sidebar-link.active::after {
+  .sidebar-item.active > .sidebar-link::before,
+  .sidebar-link.active::before {
     left: -3px;
     width: 3px;
   }
   
   .sidebar-dropdown .sidebar-link {
-    padding-left: 2.5rem;
-  }
-  
-  .sidebar-dropdown .sidebar-link::before {
-    left: 1.5rem;
+    padding-left: 2rem;
   }
 }
 
-/* 14. ESTADO DESABILITADO (se necessário) */
-.sidebar-link.disabled {
-  opacity: 0.4;
-  pointer-events: none;
-  filter: grayscale(0.8);
+/* 13. COMPATIBILIDADE COM BOOTSTRAP */
+/* Se Bootstrap não estiver carregando as variáveis, defina-as */
+:root:not([data-bs-theme]) {
+  --bs-primary-rgb: 13, 110, 253;
 }
 
-/* 15. EFEITO DE "FLUTUAÇÃO" PARA ITEM ATIVO */
-.sidebar-item.active {
-  position: relative;
+.dark-mode:not([data-bs-theme]) {
+  --bs-primary-rgb: 110, 168, 254;
 }
 
-.sidebar-item.active::before {
+/* 14. FALLBACK ABSOLUTO PARA TODAS AS PROPRIEDADES */
+/* Esta seção garante que mesmo se nada funcionar, ainda terá estilo básico */
+.sidebar-link {
+  /* Fallback para cores */
+  color: #495057 !important;
+}
+
+.dark-mode .sidebar-link {
+  color: #adb5bd !important;
+}
+
+.sidebar-item.active > .sidebar-link,
+.sidebar-link.active {
+  color: #0d6efd !important;
+  font-weight: 600;
+}
+
+.dark-mode .sidebar-item.active > .sidebar-link,
+.dark-mode .sidebar-link.active {
+  color: #6ea8fe !important;
+}
+
+.sidebar-item.active > .sidebar-link::before,
+.sidebar-link.active::before {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    rgba(var(--bs-primary-rgb, 13, 110, 253), 0.03) 50%, 
-    transparent 100%
-  );
-  border-radius: 10px;
-  z-index: -1;
-  animation: floatBackground 3s ease-in-out infinite;
-}
-
-@keyframes floatBackground {
-  0%, 100% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-
-/* 16. TRANSITION PARA TEMA CLARO/ESCURO */
-body {
-  transition: background-color 0.6s ease, color 0.6s ease;
-}
-
-/* 17. SCROLLBAR PERSONALIZADO */
-.sidebar-content::-webkit-scrollbar {
+  left: -4px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 4px;
+  height: 70%;
+  background: linear-gradient(to bottom, #0d6efd, #6f42c1);
+  border-radius: 0 4px 4px 0;
 }
 
-.sidebar-content::-webkit-scrollbar-track {
-  background: transparent;
+.dark-mode .sidebar-item.active > .sidebar-link::before,
+.dark-mode .sidebar-link.active::before {
+  background: linear-gradient(to bottom, #6ea8fe, #a370f7);
 }
 
-.sidebar-content::-webkit-scrollbar-thumb {
-  background: var(--sidebar-border);
-  border-radius: 2px;
+/* 15. REMOÇÃO DE CONFLITOS */
+/* Remove estilos que podem causar problemas no GitHub */
+.sidebar-link:active::after,
+.sidebar-item.active::before,
+.sidebar-header::after,
+.sidebar-dropdown .sidebar-link::before {
+  /* Desabilita efeitos complexos que podem não funcionar */
+  display: none;
 }
 
-.sidebar-content::-webkit-scrollbar-thumb:hover {
-  background: var(--sidebar-hover);
+/* 16. ESTILO MÍNIMO FUNCIONAL */
+/* Se tudo falhar, este estilo básico ainda funcionará */
+.sidebar-link {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
 }
 
-/* 18. MELHORIAS DE ACESSIBILIDADE */
-.sidebar-link:focus-visible {
-  outline: 2px solid var(--sidebar-active);
-  outline-offset: 2px;
-  background: rgba(var(--bs-primary-rgb, 13, 110, 253), 0.1);
-}
-
-/* 19. EFEITO DE "GLOW" NO HOVER */
 .sidebar-link:hover {
-  box-shadow: 
-    0 4px 12px rgba(0, 0, 0, 0.05),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background-color: #f5f5f5;
 }
 
-/* 20. TEXTO COM GRADIENTE PARA ITEM ATIVO (opcional) */
-.sidebar-item.active > .sidebar-link span:not(.badge),
-.sidebar-link.active span:not(.badge) {
-  background: var(--sidebar-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.sidebar-item.active > .sidebar-link {
+  color: #0066cc;
+  font-weight: bold;
+  border-left: 3px solid #0066cc;
+}
+
+/* 17. OTIMIZAÇÃO PARA PERFORMANCE */
+/* Remove animações complexas para ambientes com limitações */
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-link,
+  .sidebar-link .feather,
+  .sidebar-link .badge,
+  .sidebar-item > a[data-bs-toggle="collapse"]::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .sidebar-item.active > .sidebar-link,
+  .sidebar-link.active {
+    animation: none !important;
+  }
+}
+
+/* 18. GARANTIA DE VISIBILIDADE */
+/* Assegura que o estado ativo seja sempre visível */
+.sidebar-item.active,
+.sidebar-link.active {
+  position: relative;
+  z-index: 1;
+}
+
+/* 19. CORREÇÃO PARA SCROLLBAR (opcional) */
+.sidebar-content {
+  scrollbar-width: thin;
+  scrollbar-color: var(--sidebar-border, #e9ecef) transparent;
 }
 
 
