@@ -21,42 +21,40 @@
       <p><strong>Data:</strong> 01/11/2025 17:30</p>
       <p><strong>Usuário:</strong> Ana Silva</p>
       <p><strong>Nota:</strong> 
-        <span style="color: #f39c12 !important;">★★★★☆</span> (4/5)
+        4/5
       </p>
       <p><strong>Comentário:</strong></p>
       <p>Excelente atendimento e comida saborosa, mas o tempo de espera foi um pouco longo.</p>
     </div>
   </div>
 
-  <!-- Área para responder à avaliação -->
-  <div class="card flex-fill shadow-sm mb-4">
-    <div class="card-header gradient-header">
-      <h5 class="card-title mb-0 text-light">Responder Avaliação</h5>
+   <!-- Área para responder -->
+    <div class="card flex-fill shadow-sm mt-4">
+        <div class="card-header gradient-header">
+            <h5 class="card-title mb-0 text-light">Avisar ao Restaurante</h5>
+        </div>
+        <div class="card-body">
+            <form action="responder_mensagem.php" method="post" class="row g-3 needs-validation" novalidate>
+                <input type="hidden" name="id_mensagem" value="123"> <!-- ID da mensagem -->
+
+                <div class="col-md-12">
+                    <label for="telefone" class="form-label">Restaurente</label>
+                    <input type="text" class="form-control" value="Lorem ipsum dolor sit" readonly>
+                </div>
+                
+                <div class="col-12">
+                    <label for="resposta" class="form-label">Mensagem (Aviso)</label>
+                    <textarea id="resposta" name="resposta" class="form-control" rows="4"
+                        placeholder="Digite sua resposta aqui..." required></textarea>
+                    <div class="invalid-feedback">Digite uma resposta antes de enviar.</div>
+                </div>
+
+                <div class="col-12 text-left mt-3">
+                    <button type="submit" class="btn btn-primary w-25">Enviar Aviso</button>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="card-body">
-      <form action="responder_avaliacao.php" method="post" class="row g-3 needs-validation" novalidate>
-        <input type="hidden" name="id_avaliacao" value="205">
-
-        <div class="col-12">
-          <label for="resposta" class="form-label">Resposta</label>
-          <textarea id="resposta" name="resposta" class="form-control" rows="3" placeholder="Escreva sua resposta..." required></textarea>
-          <div class="invalid-feedback">Digite uma resposta antes de enviar.</div>
-        </div>
-
-        <div class="col-12">
-          <label for="visivel" class="form-label">Exibir no site</label>
-          <select id="visivel" name="visivel" class="form-control">
-            <option value="sim">Sim</option>
-            <option value="nao">Não</option>
-          </select>
-        </div>
-
-        <div class="col-12 text-left mt-3">
-          <button type="submit" class="btn btn-primary w-25">Salvar Resposta</button>
-        </div>
-      </form>
-    </div>
-  </div>
 
   <!-- Tabela de respostas anteriores -->
   <div class="card flex-fill shadow-sm">

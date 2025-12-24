@@ -14,6 +14,9 @@
   const GERENCIAR_RESTAURANTE = '../sessao-admin/restaurante/gerenciar-restaurante/';
   const ENTREGADOR = '../sessao-admin/entregador/';
   const OPCOES = '../sessao-admin/opcoes/';
+  const AVALIACOES = '../sessao-admin/opcoes/avaliacoes/';
+  const MENSAGENS = '../sessao-admin/opcoes/mensagens/';
+  const NOTIFICACOES = '../sessao-admin/opcoes/notificacoes/';
   const FERRAMENTAS = '../sessao-admin/ferramentas/';
   const ANUNCIOS = '../sessao-admin/paginas/anucios e publicidades/';
 
@@ -44,15 +47,19 @@
     '/usuario-banido': { title: 'Usuário foi banido', file: CODIGOS_HTTPS + 'usuario-banido.html' },
 
 
-    '/mensagem': { title: 'Todas as mensagens', file: OPCOES + 'mensagem.html' },
-    '/notificacao': { title: 'Todas as notificação', file: OPCOES + 'notificacao.html' },
+
     '/calendario': { title: 'Calendário', file: OPCOES + 'calendario.html' },
-    '/avaliacao': { title: 'Avalicao', file: OPCOES + 'avaliacoes.html' },
     '/reciclagem': { title: 'Reciclagem', file: OPCOES + 'reciclagem.html' },
-    '/visualizar-mensagem': { title: 'Visualizar Mensagem', file: OPCOES + 'visualizar-mensagem.html' },
-    '/visualizar-reclamacoes': { title: 'Visualizar Reclamação', file: OPCOES + 'visualizar-reclamacoes.html' },
-    '/visualizar-notificacao': { title: 'Visualizar Notificação', file: OPCOES + 'visualizar-notificacao.html' },
-    '/visualizar-avaliacao': { title: 'Visualizar Avaliação', file: OPCOES + 'visualizar-avaliacao.html' },
+
+    '/avaliacao': { title: 'Avalicao', file: AVALIACOES + 'avaliacoes.html' },
+    '/visualizar-avaliacao': { title: 'Visualizar Avaliação', file: AVALIACOES + 'visualizar-avaliacao.html' },
+    
+    '/mensagem': { title: 'Todas as mensagens', file: MENSAGENS + 'mensagem.html' },
+    '/visualizar-mensagem': { title: 'Visualizar Mensagem', file: MENSAGENS + 'visualizar-mensagem.html' },
+    '/visualizar-reclamacoes': { title: 'Visualizar Reclamação', file: MENSAGENS + 'visualizar-reclamacoes.html' },
+    
+    '/notificacao': { title: 'Todas as notificação', file: NOTIFICACOES + 'notificacao.html' },
+    '/visualizar-notificacao': { title: 'Visualizar Notificação', file: NOTIFICACOES + 'visualizar-notificacao.html' },
 
 
     '/pedidos': { title: 'Gerencia todos os pedidos dos retaurantes', file: PEDIDOS + 'pedidos.html' },
@@ -341,7 +348,7 @@
     loadHash();
   });
 })();
-    
+
 // ==============================
 // 🌗 MODO CLARO / ESCURO ABSOLUTO - VERSÃO CORRIGIDA
 // ==============================
@@ -364,7 +371,7 @@ function preservarCoresLinksAtivos(tema) {
     link.style.removeProperty('color');
     link.style.removeProperty('background-color');
   });
-  
+
   // Também preserva badges dentro de links ativos
   document.querySelectorAll('a.active .badge, .sidebar-item.active .badge').forEach(badge => {
     badge.style.removeProperty('color');
@@ -382,7 +389,7 @@ function atualizarCoresDeTexto(tema) {
 
   // 🔹 Seleciona elementos MAS EXCLUI LINKS ATIVOS
   const seletores = 'h1,h2,h3,h4,h5,h6,p,span,small,strong,em,b,i,th,td,button,label,div:not(.sidebar-item.active):not(.sidebar-item.active *),li:not(.sidebar-item.active):not(.sidebar-item.active *),blockquote,figcaption,.progress';
-  
+
   // Aplica cor apenas aos elementos que NÃO estão dentro de um item ativo
   document.querySelectorAll(seletores)
     .forEach(el => {
@@ -487,7 +494,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const temaSalvo = localStorage.getItem('deliveryhj_tema') || 'dark';
   aplicarTema(temaSalvo);
   criarBotaoTema();
-  
+
   // Garantir que os links ativos mantenham suas cores
   setTimeout(() => {
     preservarCoresLinksAtivos(temaSalvo);
@@ -577,30 +584,30 @@ function mostrarAlerta(tipo, mensagem, duracao = 0) {
 // Sistema de active state para sidebar
 function updateSidebarActiveState() {
   const currentHash = normalizeToken(location.hash);
-  
+
   // Remove active de todos
   document.querySelectorAll('#sidebar .sidebar-item, #sidebar a.sidebar-link').forEach(el => {
     el.classList.remove('active');
   });
-  
+
   // Encontra o link correspondente
   const selector = `#sidebar a.sidebar-link[href*="${currentHash.replace(/^\//, '')}"]`;
   const matchingLink = document.querySelector(selector);
-  
+
   if (matchingLink) {
     // Marca link como ativo
     matchingLink.classList.add('active');
-    
+
     // Marca o item pai como ativo
     const parentItem = matchingLink.closest('.sidebar-item');
     if (parentItem) parentItem.classList.add('active');
-    
+
     // Abre dropdowns pais
     const dropdown = matchingLink.closest('.sidebar-dropdown.collapse');
     if (dropdown) {
       const bsCollapse = bootstrap.Collapse.getInstance(dropdown) || new bootstrap.Collapse(dropdown);
       bsCollapse.show();
-      
+
       // Marca o item dropdown pai como ativo
       const parentToggle = document.querySelector(`[data-bs-target="#${dropdown.id}"]`);
       if (parentToggle) {
@@ -616,16 +623,16 @@ window.addEventListener('hashchange', updateSidebarActiveState);
 // Modifique a função loadFile para chamar após carregar:
 async function loadFile(filePath, titleHint) {
   // ... código existente ...
-  
+
   // APÓS carregar com sucesso:
   setTimeout(updateSidebarActiveState, 50);
-  
+
   // ... resto do código ...
 }
 
 // Atualiza estado inicial
 document.addEventListener('DOMContentLoaded', () => {
   setTimeout(updateSidebarActiveState, 100);
-}); 
+});
 
 

@@ -40,35 +40,36 @@
         </div>
     </div>
 
-     <div class="col-12 col-sm-6 col-xxl-3 d-flex">
-            <div class="card flex-fill card-dashboard">
-                <div class="card-body py-4">
-                    <div class="d-flex align-items-start">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-2">
-                                <span id="real-time" class="time-display">--:--:--</span>
-                                <span id="time-period" class="time-period"></span>
-                            </h3>
-                            <p class="mb-2">Hora atual em tempo real</p>
-                            <div class="mb-0">
-                                <span class="text-muted" style="color: rgba(255, 255, 255, 0.699) !important;" id="current-date">
-                                    Carregando data...
-                                </span>
-                            </div>
-                            <div class="mb-0 date-display" id="full-date" style="margin-top: 5px;">
-                                <!-- Data completa será inserida aqui -->
-                            </div>
-                           
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">
+                            <span id="real-time" class="time-display">--:--:--</span>
+                            <span id="time-period" class="time-period"></span>
+                        </h3>
+                        <p class="mb-2">Hora atual em tempo real</p>
+                        <div class="mb-0">
+                            <span class="text-muted" style="color: rgba(255, 255, 255, 0.699) !important;"
+                                id="current-date">
+                                Carregando data...
+                            </span>
                         </div>
-                        <div class="d-inline-block ms-3">
-                            <div class="stat" style="background-color: white; color: black !important;">
-                                <i class="align-middle text-success fas fa-clock pulse" data-feather="clock"></i>
-                            </div>
+                        <div class="mb-0 date-display" id="full-date" style="margin-top: 5px;">
+                            <!-- Data completa será inserida aqui -->
+                        </div>
+
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <i class="align-middle text-success fas fa-clock pulse" data-feather="clock"></i>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
     <div class="col-12 col-sm-6 col-xxl-3 d-flex">
         <div class="card flex-fill card-dashboard">
@@ -267,7 +268,7 @@
 
 
 <div class="row">
-        <div class="col-12 col-lg-6 d-flex">
+    <div class="col-12 col-lg-6 d-flex">
         <div class="card flex-fill w-100 card-dashboard">
             <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
                 <span class="badge float-end" style="background-color: white; color: black !important;">Hoje</span>
@@ -338,7 +339,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="col-12 col-lg-6 d-flex">
         <div class="card flex-fill card-dashboard">
             <div class="card-header d-flex justify-content-between align-items-center"
@@ -390,59 +391,60 @@
 </div>
 <!-- ===== TABELA RESTAURANTES ATRASADOS ===== -->
 
-  <div class="row mt-3">
-  <div class="col-12 d-flex">
-    <div class="card flex-fill card-dashboard">
-      <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
-        <h5 class="card-title mb-0" style="color: white;"> <i class="align-middle text-info"
-            data-feather="alert-triangle" style="color: black !important; margin-top: -6px; margin-right: 5px;"></i>
-          Pagamentos em Atrasos dos Restaurantes</h5>
-      </div>
-      <div class="card-body">
-        <table id="datatables-column-search-select-inputs"  class="table table-borderless my-0 w-100">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Restaurante</th>
-                    <th>Valor (Kz)</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="tabelaPagamentos">
-                <tr>
-                    <td>001</td>
-                    <td>Restaurante Kapital</td>
-                    <td>12.500</td>
-                    <td><i class="status naoPago">Não Pago</i></td>
-                </tr>
-                <tr>
-                    <td>002</td>
-                    <td>Burguer House</td>
-                    <td>8.300</td>
-                    <td><i class="status naoPago">Não Pago</i></td>
-                </tr>
-                <tr>
-                    <td>003</td>
-                    <td>Pizza na Pedra</td>
-                    <td>10.200</td>
-                    <td><i class="status naoPago">Não Pago</i></td>
-                </tr>
-                <tr>
-                    <td>004</td>
-                    <td>Food City</td>
-                    <td>9.800</td>
-                    <td><i class="status naoPago">Não Pago</i></td>
-                    <td>—</td>
+<div class="row mt-3">
+    <div class="col-12 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+                <h5 class="card-title mb-0" style="color: white;"> <i class="align-middle text-info"
+                        data-feather="alert-triangle"
+                        style="color: black !important; margin-top: -6px; margin-right: 5px;"></i>
+                    Pagamentos em Atrasos dos Restaurantes</h5>
+            </div>
+            <div class="card-body">
+                <table id="datatables-column-search-select-inputs" class="table table-borderless my-0 w-100">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Restaurante</th>
+                            <th>Valor (Kz)</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaPagamentos">
+                        <tr>
+                            <td>001</td>
+                            <td>Restaurante Kapital</td>
+                            <td>12.500</td>
+                            <td><i class="status naoPago">Não Pago</i></td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>Burguer House</td>
+                            <td>8.300</td>
+                            <td><i class="status naoPago">Não Pago</i></td>
+                        </tr>
+                        <tr>
+                            <td>003</td>
+                            <td>Pizza na Pedra</td>
+                            <td>10.200</td>
+                            <td><i class="status naoPago">Não Pago</i></td>
+                        </tr>
+                        <tr>
+                            <td>004</td>
+                            <td>Food City</td>
+                            <td>9.800</td>
+                            <td><i class="status naoPago">Não Pago</i></td>
+                            <td>—</td>
 
-                </tr>
-            </tbody>
-        </table>
-      </div>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-  </div>
-  </div>
+</div>
 
- 
+
 
 <div class="row">
     <div class="col-md-12 d-flex">
@@ -452,47 +454,55 @@
             </div>
             <div class="card-body">
                 <ul class="timeline">
-                    <li class="timeline-item">
-                        <strong style="color: white;">João Pessela</strong>
-                        <span class="float-end text-muted text-sm">30m ago</span>
-                        <p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet
-                            nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris...</p>
-                    </li>
-
-                    <li class="timeline-item">
-                        <strong style="color: white;">Cristiano Amdaeu</strong>
-                        <span class="float-end text-muted text-sm">2h
-                            ago</span>
-                        <p>Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer
-                            eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper
-                            ipsum rutrum
-                            nunc...</p>
-                    </li>
-                    <li class="timeline-item">
-                        <strong style="color: white;">Helder Adão</strong>
-                        <span class="float-end text-muted text-sm">3h
-                            ago</span>
-                        <p>Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet,
-                            leo. Maecenas malesuada...</p>
-                    </li>
-                    <li class="timeline-item">
-                        <strong style="color: white;">Black time</strong>
-                        <span class="float-end text-muted text-sm">30m ago</span>
-                        <p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet
-                            nec, imperdiet iaculis, ipsum...</p>
-                    </li>
-
-                    <li class="timeline-item">
-                        <strong style="color: white;">Black time</strong>
-                        <span class="float-end text-muted text-sm">30m ago</span>
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis ex
-                            ratione dolorem tempora numquam, alias, libero dolore, rem mollitia
-                            itaque recusandae eum eius architecto amet harum officiis nostrum.
-                            Possimus repellendus vero voluptas totam consectetur eos vel aut eum
-                            voluptatibus suscipit dolores, quas quae laboriosam odio maxime. Placeat
-                            deleniti dicta minima magni labore cumque illo fugiat eum dolorem.
-                            Dignissimos, id blanditiis.</p>
-                    </li>
+                    <a href="admin.html#/visualizar-avaliacao">
+                        <li class="timeline-item">
+                            <strong style="color: white;">João Pessela</strong>
+                            <span class="float-end text-muted text-sm">30m ago</span>
+                            <p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet
+                                nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris...</p>
+                        </li>
+                    </a>
+                    <a href="admin.html#/visualizar-avaliacao">
+                        <li class="timeline-item">
+                            <strong style="color: white;">Cristiano Amdaeu</strong>
+                            <span class="float-end text-muted text-sm">2h
+                                ago</span>
+                            <p>Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer
+                                eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper
+                                ipsum rutrum
+                                nunc...</p>
+                        </li>
+                    </a>
+                    <a href="admin.html#/visualizar-avaliacao">
+                        <li class="timeline-item">
+                            <strong style="color: white;">Helder Adão</strong>
+                            <span class="float-end text-muted text-sm">3h
+                                ago</span>
+                            <p>Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet,
+                                leo. Maecenas malesuada...</p>
+                        </li>
+                    </a>
+                    <a href="admin.html#/visualizar-avaliacao">
+                        <li class="timeline-item">
+                            <strong style="color: white;">Black time</strong>
+                            <span class="float-end text-muted text-sm">30m ago</span>
+                            <p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet
+                                nec, imperdiet iaculis, ipsum...</p>
+                        </li>
+                    </a>
+                    <a href="admin.html#/visualizar-avaliacao">
+                        <li class="timeline-item">
+                            <strong style="color: white;">Black time</strong>
+                            <span class="float-end text-muted text-sm">30m ago</span>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis ex
+                                ratione dolorem tempora numquam, alias, libero dolore, rem mollitia
+                                itaque recusandae eum eius architecto amet harum officiis nostrum.
+                                Possimus repellendus vero voluptas totam consectetur eos vel aut eum
+                                volupt  atibus suscipit dolores, quas quae laboriosam odio maxime. Placeat
+                                deleniti dicta minima magni labore cumque illo fugiat eum dolorem.
+                                Dignissimos, id blanditiis.</p>
+                        </li>
+                    </a>
                 </ul>
                 <div class="d-grid">
                     <a href="admin.html#/avaliacao" class="btn btn-primary">Ver todas as
@@ -643,160 +653,160 @@
 </script>
 
 <script>
-// Elementos DOM
-const realTimeElement = document.getElementById('real-time');
-const timePeriodElement = document.getElementById('time-period');
-const currentDateElement = document.getElementById('current-date');
-const fullDateElement = document.getElementById('full-date');
-const timezoneLink = document.getElementById('timezone-link');
+    // Elementos DOM
+    const realTimeElement = document.getElementById('real-time');
+    const timePeriodElement = document.getElementById('time-period');
+    const currentDateElement = document.getElementById('current-date');
+    const fullDateElement = document.getElementById('full-date');
+    const timezoneLink = document.getElementById('timezone-link');
 
-// Nomes dos meses e dias em português
-const monthNames = [
-    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-];
+    // Nomes dos meses e dias em português
+    const monthNames = [
+        "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+        "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+    ];
 
-const dayNames = [
-    "Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", 
-    "Quinta-feira", "Sexta-feira", "Sábado"
-];
+    const dayNames = [
+        "Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira",
+        "Quinta-feira", "Sexta-feira", "Sábado"
+    ];
 
-// Função para formatar número com 2 dígitos
-function formatTwoDigits(num) {
-    return num < 10 ? '0' + num : num;
-}
+    // Função para formatar número com 2 dígitos
+    function formatTwoDigits(num) {
+        return num < 10 ? '0' + num : num;
+    }
 
-// Atualizar hora e data em tempo real
-function updateTime() {
-    const now = new Date();
-    
-    // Obter horas, minutos e segundos
-    let hours = now.getHours();
-    let minutes = now.getMinutes();
-    let seconds = now.getSeconds();
-    
-    // Formatar para 2 dígitos
-    hours = formatTwoDigits(hours);
-    minutes = formatTwoDigits(minutes);
-    seconds = formatTwoDigits(seconds);
-    
-    // Atualizar elemento de hora
-    if (realTimeElement) {
-        realTimeElement.textContent = `${hours}:${minutes}:${seconds}`;
-    }
-    
-    // Determinar AM/PM
-    const period = now.getHours() >= 12 ? 'AM' : 'PM';
-    if (timePeriodElement) {
-        timePeriodElement.textContent = period;
-    }
-    
-    // Formatar data
-    const dayName = dayNames[now.getDay()];
-    const day = now.getDate();
-    const month = monthNames[now.getMonth()];
-    const year = now.getFullYear();
-    
-    // Atualizar elementos de data
-    if (currentDateElement) {
-        currentDateElement.textContent = `${dayName}, ${day} de ${month}`;
-    }
-    
-    if (fullDateElement) {
-        fullDateElement.textContent = `${day} de ${month} de ${year}`;
-    }
-    
-    // Atualizar fuso horário
-    if (timezoneLink) {
-        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        const gmtOffset = -now.getTimezoneOffset() / 60;
-        const gmtSign = gmtOffset >= 0 ? '+' : '-';
-        const gmtFormatted = `GMT${gmtSign}${Math.abs(gmtOffset)}`;
-        
-        timezoneLink.textContent = `Fuso horário: ${gmtFormatted}`;
-        timezoneLink.title = timezone;
-    }
-    
-    // Adicionar efeito de pulso nos segundos pares
-    if (realTimeElement) {
-        if (now.getSeconds() % 2 === 0) {
-            realTimeElement.classList.add('pulse');
-        } else {
-            realTimeElement.classList.remove('pulse');
+    // Atualizar hora e data em tempo real
+    function updateTime() {
+        const now = new Date();
+
+        // Obter horas, minutos e segundos
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        let seconds = now.getSeconds();
+
+        // Formatar para 2 dígitos
+        hours = formatTwoDigits(hours);
+        minutes = formatTwoDigits(minutes);
+        seconds = formatTwoDigits(seconds);
+
+        // Atualizar elemento de hora
+        if (realTimeElement) {
+            realTimeElement.textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // Determinar AM/PM
+        const period = now.getHours() >= 12 ? 'AM' : 'PM';
+        if (timePeriodElement) {
+            timePeriodElement.textContent = period;
+        }
+
+        // Formatar data
+        const dayName = dayNames[now.getDay()];
+        const day = now.getDate();
+        const month = monthNames[now.getMonth()];
+        const year = now.getFullYear();
+
+        // Atualizar elementos de data
+        if (currentDateElement) {
+            currentDateElement.textContent = `${dayName}, ${day} de ${month}`;
+        }
+
+        if (fullDateElement) {
+            fullDateElement.textContent = `${day} de ${month} de ${year}`;
+        }
+
+        // Atualizar fuso horário
+        if (timezoneLink) {
+            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+            const gmtOffset = -now.getTimezoneOffset() / 60;
+            const gmtSign = gmtOffset >= 0 ? '+' : '-';
+            const gmtFormatted = `GMT${gmtSign}${Math.abs(gmtOffset)}`;
+
+            timezoneLink.textContent = `Fuso horário: ${gmtFormatted}`;
+            timezoneLink.title = timezone;
+        }
+
+        // Adicionar efeito de pulso nos segundos pares
+        if (realTimeElement) {
+            if (now.getSeconds() % 2 === 0) {
+                realTimeElement.classList.add('pulse');
+            } else {
+                realTimeElement.classList.remove('pulse');
+            }
         }
     }
-}
 
-// Inicialização
-function initTimeCard() {
-    // Verificar se os elementos existem
-    if (!realTimeElement) {
-        console.error('Elemento real-time não encontrado');
-        return;
-    }
-    
-    // Atualizar imediatamente
-    updateTime();
-    
-    // Atualizar a cada segundo
-    setInterval(updateTime, 1000);
-    
-    // Adicionar evento de clique no card de hora
-    const timeCard = document.querySelector('.col-12.col-sm-6.col-xxl-3:nth-child(2) .card');
-    if (timeCard) {
-        timeCard.addEventListener('click', function() {
-            // Efeito visual de clique
-            this.style.transform = 'scale(0.98)';
-            setTimeout(() => {
-                this.style.transform = '';
-            }, 150);
-            
-            // Copiar hora atual para a área de transferência
-            const timeText = `Hora: ${realTimeElement.textContent} ${timePeriodElement.textContent}\nData: ${currentDateElement.textContent}`;
-            
-            // Usar API de clipboard se disponível
-            if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(timeText).then(() => {
-                    // Feedback visual
-                    const originalColor = realTimeElement.style.color;
-                    realTimeElement.style.color = '#4d96ff';
-                    setTimeout(() => {
-                        realTimeElement.style.color = originalColor;
-                    }, 500);
-                }).catch(err => {
-                    console.log('Erro ao copiar: ', err);
-                });
-            } else {
-                // Fallback para navegadores mais antigos
-                try {
-                    const textArea = document.createElement('textarea');
-                    textArea.value = timeText;
-                    document.body.appendChild(textArea);
-                    textArea.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(textArea);
-                    
-                    // Feedback visual
-                    const originalColor = realTimeElement.style.color;
-                    realTimeElement.style.color = '#4d96ff';
-                    setTimeout(() => {
-                        realTimeElement.style.color = originalColor;
-                    }, 500);
-                } catch (err) {
-                    console.log('Erro ao copiar: ', err);
+    // Inicialização
+    function initTimeCard() {
+        // Verificar se os elementos existem
+        if (!realTimeElement) {
+            console.error('Elemento real-time não encontrado');
+            return;
+        }
+
+        // Atualizar imediatamente
+        updateTime();
+
+        // Atualizar a cada segundo
+        setInterval(updateTime, 1000);
+
+        // Adicionar evento de clique no card de hora
+        const timeCard = document.querySelector('.col-12.col-sm-6.col-xxl-3:nth-child(2) .card');
+        if (timeCard) {
+            timeCard.addEventListener('click', function () {
+                // Efeito visual de clique
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+
+                // Copiar hora atual para a área de transferência
+                const timeText = `Hora: ${realTimeElement.textContent} ${timePeriodElement.textContent}\nData: ${currentDateElement.textContent}`;
+
+                // Usar API de clipboard se disponível
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(timeText).then(() => {
+                        // Feedback visual
+                        const originalColor = realTimeElement.style.color;
+                        realTimeElement.style.color = '#4d96ff';
+                        setTimeout(() => {
+                            realTimeElement.style.color = originalColor;
+                        }, 500);
+                    }).catch(err => {
+                        console.log('Erro ao copiar: ', err);
+                    });
+                } else {
+                    // Fallback para navegadores mais antigos
+                    try {
+                        const textArea = document.createElement('textarea');
+                        textArea.value = timeText;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+
+                        // Feedback visual
+                        const originalColor = realTimeElement.style.color;
+                        realTimeElement.style.color = '#4d96ff';
+                        setTimeout(() => {
+                            realTimeElement.style.color = originalColor;
+                        }, 500);
+                    } catch (err) {
+                        console.log('Erro ao copiar: ', err);
+                    }
                 }
-            }
-        });
+            });
+        }
     }
-}
 
-// Iniciar quando a página carregar
-document.addEventListener('DOMContentLoaded', initTimeCard);
+    // Iniciar quando a página carregar
+    document.addEventListener('DOMContentLoaded', initTimeCard);
 
-// Também executar se a página já estiver carregada
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-    setTimeout(initTimeCard, 100);
-}
+    // Também executar se a página já estiver carregada
+    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        setTimeout(initTimeCard, 100);
+    }
 </script>
 <style>
     .status {
@@ -822,4 +832,3 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
         color: white;
     }
 </style>
-
