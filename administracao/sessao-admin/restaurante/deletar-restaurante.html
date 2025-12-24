@@ -1,0 +1,237 @@
+<div class="container-fluid p-0">
+
+    <div class="row mb-2 mb-xl-3 dados">
+        <div class="col-auto d-sm-block">
+            <h3>Deletar utilizador "@nomedeutilizador"</h3>
+        </div>
+
+        <div class="col-auto ms-auto text-end mt-n1">
+            <button class="btn btn-light bg-white shadow-sm no-underline" onclick="pdf()">
+                <i class="align-middle mt-n1">&nbsp;</i> <i data-feather="printer"></i>
+                Imprimir
+            </button>
+            <button class="btn btn-primary shadow-sm">
+                <i class="align-middle" data-feather="refresh-cw" id="refresh"
+                    onclick="window.location.reload();">&nbsp;</i>
+            </button>
+        </div>
+    </div>
+
+    <div class="card flex-fill">
+        <div class="card-header">
+            <div class="card-actions float-none">
+
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3 class="mb-3">Termos e responsabilidade</h3>
+                        <h5>Pedido para remocão da conta de "nomedotulizador"</h5>
+                    </div>
+                    <style>
+                        p {
+                            text-align: justify;
+                        }
+                    </style>
+                    <div class="card-body text-center row">
+
+                        <div class="w-50">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing
+                                elit. Nisi ex voluptas
+                                numquam consectetur a ipsum fugiat repellendus eveniet quod reiciendis
+                                expedita velit ab quo assumenda, provident minima. Quam, aliquid
+                                aliquam.
+                            </p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi ex voluptas
+                                numquam consectetur a ipsum fugiat repellendus eveniet quod reiciendis
+                                expedita velit ab quo assumenda, provident minima. Quam, aliquid
+                                aliquam.
+                            </p>
+                            <h4 class="font-bold text-left">Lorem ipsum dolor sit amet consectetur
+                                adipisicing
+                                elit</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
+                                quisquam adipisci nihil modi praesentium laboriosam ab atque delectus.
+                                Praesentium veritatis fugit error aliquam perferendis consequuntur amet
+                                dicta libero nulla nemo!</p>
+                        </div>
+                        <div class="w-50">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi ex voluptas
+                                numquam consectetur a ipsum fugiat repellendus eveniet quod reiciendis
+                                expedita velit ab quo assumenda, provident minima. Quam, aliquid
+                                aliquam.
+                            </p>
+                            <h4 class="font-bold text-left">Lorem ipsum elit</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus
+                                quisquam adipisci nihil modi praesentium laboriosam ab atque delectus.
+                                Praesentium veritatis fugit error aliquam perferendis consequuntur amet
+                                dicta libero nulla nemo!</p>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi ex voluptas
+                                numquam consectetur a ipsum fugiat repellendus eveniet quod reiciendis
+                                expedita velit ab quo assumenda, provident minima. Quam, aliquid
+                                aliquam.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <section class="row">
+
+
+                    <div class="table-responsive">
+                        <table class="table  align-middle">
+                            <tbody>
+                                <tr>
+                                    <td><strong>Logo</strong></td>
+                                    <td>
+                                        <img src="../assets/img/avatar/avatar.png"
+                                            class="avatar-lg rounded-circle shadow-sm" alt="Logo do Restaurante">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><strong>ID</strong></td>
+                                    <td>R-001</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Nome do Restaurante</strong></td>
+                                    <td>Pizzaria Bella Itália</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Categoria</strong></td>
+                                    <td>Pizzaria</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Telefone</strong></td>
+                                    <td><a href="tel:+244999888777" class="link-profile">+244 999 888 777</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>E-mail Comercial</strong></td>
+                                    <td><a href="mailto:contato@bellaitalia.com"
+                                            class="link-profile">contato@bellaitalia.com</a></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Província</strong></td>
+                                    <td>Luanda</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Endereço Completo</strong></td>
+                                    <td>Rua 21 de Janeiro, nº 45 - Talatona, Luanda</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Status</strong></td>
+                                    <td><i class="status ativo">Ativo</i></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Horário de Funcionamento</strong></td>
+                                    <td>08h00 às 22h00</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Gerente Responsável</strong></td>
+                                    <td>Helder Gabriel Adão</td>
+                                </tr>
+
+                                <tr>
+                                    <td><strong>Data de Criação</strong></td>
+                                    <td>2025-05-21 14:20</td>
+                                </tr>
+
+
+                                <tr class="cee">
+                                    <td><strong class="text-dark">Imprimido ás:</strong></td>
+                                    <td><span id="hour">00</span>:<span id="minutes">00</span>:<span
+                                            id="seconds">00</span> - <span id="data_processo"></span></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </section>
+                <form action="" method="post" class="row g-3 needs-validation dados" novalidate accept-charset="utf-8"
+                    id="caixa-sms">
+                    <div class="checkbox col-md-12">
+                        <label for="send_user_notification" class="form-label">Sim, li os termos e
+                            responsabilidade e
+                            concordo</label> &nbsp;
+                        <input type="checkbox" required name="send_user_notification" id="send_user_notification"
+                            value="1" />
+                        <div class="valid-feedback">
+                        </div>
+                        <div class="invalid-feedback">
+                            Por favor, você precisa concordar com os termos e responsabilidades
+
+                        </div>
+                    </div>
+                    <div class="mt-3"><button type="submit" class="btn btn-danger">Eliminar a conta do
+                            restaurante</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function pdf() {
+        document.getElementById("data_processo").innerHTML = dataActual();
+        window.print();
+
+    }
+    function dataActual() {
+        let data = new Date();
+        return dayName[data.getDay()] + ", " + data.getDate() + " de " + monName[data.getMonth()] + " de " + data.getFullYear();
+    }
+    const dayName = [
+        "domingo",
+        "segunda-feira",
+        "terça-feira",
+        "quarta-feira",
+        "quinta-feira",
+        "sexta-feira",
+        "sábado",
+    ];
+    const monName = [
+        "Janeiro",
+        "Fevereiro",
+        "Março",
+        "Abril",
+        "Maio",
+        "Junho",
+        "Agosto",
+        "Outubro",
+        "Novembro",
+        "Dezembro",
+    ];
+</script>
+
+<script>
+    function clock() {
+
+        let hours = document.getElementById('hour');
+        let minutes = document.getElementById('minutes');
+        let seconds = document.getElementById('seconds');
+        let ampm = document.getElementById('ampm');
+
+        let h = new Date().getHours();
+        let m = new Date().getMinutes();
+        let s = new Date().getSeconds();
+        var am = "AM";
+
+        //Convert 24 Hour Time To 12 Hour with AM PM Indicator
+        if (h > 24) {
+            h = h - 24;
+            var am = "PM"
+        }
+
+        //Add 0 to the beginning of number if less than 10
+        h = (h < 10) ? "0" + h : h
+        m = (m < 10) ? "0" + m : m
+        s = (s < 10) ? "0" + s : s
+
+        hours.innerHTML = h;
+        minutes.innerHTML = m;
+        seconds.innerHTML = s;
+        ampm.innerHTML = am
+
+    }
+    var interval = setInterval(clock, 1000);
+</script>

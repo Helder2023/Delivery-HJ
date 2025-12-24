@@ -1,0 +1,112 @@
+<div class="container-fluid p-0">
+    <div class="row mb-3 align-items-center">
+        <div class="col">
+            <h3 class="page-title">Editar Anuncio / Publicidade</h3>
+        </div>
+        <div class="col-auto text-end">
+            <button class="btn shadow-sm" onclick="window.history.back()">
+                <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+            </button>
+        </div>
+    </div>
+
+
+    <div class="modal-body">
+        <form id="formAnuncio">
+
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label class="form-label">Título</label>
+                    <input type="text" class="form-control" required>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Tipo de Anúncio</label>
+                    <select class="form-select">
+                        <option>Restaurante</option>
+                        <option>Entrega</option>
+                        <option>Institucional</option>
+                    </select>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">Descrição</label>
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Data de início</label>
+                    <input type="date" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Data de término</label>
+                    <input type="date" class="form-control">
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">Imagem do Anúncio</label>
+                    <input type="file" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Status</label>
+                    <select class="form-select">
+                        <option>Ativo</option>
+                        <option>Inativo</option>
+                    </select>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+<style>
+    .status.ativo {
+        background-color: #198754;
+        color: white;
+    }
+
+    .status.inativo {
+        background-color: #dc3545;
+        color: white;
+    }
+
+
+    .status.pendente {
+        background-color: #616300;
+        color: white;
+    }
+
+
+    .anuncio-card {
+        border-radius: 14px;
+        overflow: hidden;
+        transition: all .3s ease;
+    }
+
+    .anuncio-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, .15);
+    }
+
+    .anuncio-card img {
+        height: 180px;
+        object-fit: cover;
+    }
+
+    .anuncio-inativo {
+        opacity: .7;
+    }
+
+    /* Dark mode */
+    [data-theme="dark"] .anuncio-card {
+        background-color: #1e1e1e;
+        color: #eaeaea;
+    }
+
+    [data-theme="dark"] .modal-content {
+        background-color: #1c1c1c;
+        color: #fff;
+    }
+</style>

@@ -1,0 +1,149 @@
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Detalhes do Restaurante</h2>
+    <div style="column-gap: 13px;">
+      <button class="btn shadow-sm" onclick="window.history.back()">
+        <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+      </button>
+
+      <a href="admin.html#/gerenciar-restaurante" class="btn btn-outline-light">
+        <i data-feather="eye"></i> Gerenciar o Restaurante
+      </a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h4 class="mb-0">Informações Gerais</h4>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table  align-middle">
+          <tbody>
+            <tr>
+              <td><strong>Logo</strong></td>
+              <td>
+                <img src="../assets/img/avatar/avatar.png" class="avatar-lg rounded-circle shadow-sm"
+                  alt="Logo do Restaurante">
+              </td>
+            </tr>
+            <tr>
+              <td><strong>ID</strong></td>
+              <td>R-001</td>
+            </tr>
+            <tr>
+              <td><strong>Nome do Restaurante</strong></td>
+              <td>Pizzaria Bella Itália</td>
+            </tr>
+            <tr>
+              <td><strong>Categoria</strong></td>
+              <td>Pizzaria</td>
+            </tr>
+            <tr>
+              <td><strong>Telefone</strong></td>
+              <td><a href="tel:+244999888777" class="link-profile">+244 999 888 777</a></td>
+            </tr>
+            <tr>
+              <td><strong>E-mail Comercial</strong></td>
+              <td><a href="mailto:contato@bellaitalia.com" class="link-profile">contato@bellaitalia.com</a></td>
+            </tr>
+            <tr>
+              <td><strong>Província</strong></td>
+              <td>Luanda</td>
+            </tr>
+            <tr>
+              <td><strong>Endereço Completo</strong></td>
+              <td>Rua 21 de Janeiro, nº 45 - Talatona, Luanda</td>
+            </tr>
+            <tr>
+              <td><strong>Status</strong></td>
+              <td><i class="status ativo">Ativo</i></td>
+            </tr>
+            <tr>
+              <td><strong>Horário de Funcionamento</strong></td>
+              <td>08h00 às 22h00</td>
+            </tr>
+            <tr>
+              <td><strong>Data de Criação</strong></td>
+              <td>2025-05-21 14:20</td>
+            </tr>
+            <tr>
+              <td><strong>Última Atualização</strong></td>
+              <td>2025-11-08 10:42</td>
+            </tr>
+            <tr>
+              <td><strong>Gerente Responsável</strong></td>
+              <td>Helder Gabriel Adão</td>
+            </tr>
+            <tr>
+              <td><strong>Motivo do bloquio em</strong></td>
+              <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas totam facilis dicta. <br> Pariatur
+                in nostrum nihil ullam veritatis quis beatae?</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+<style>
+  .status {
+    border-radius: 50px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .status.ativo {
+    background-color: #198754;
+    color: white;
+  }
+
+  .status.bloqueiado {
+    background-color: #dc3545;
+    color: white;
+  }
+
+
+  .status.pendente {
+    background-color: #616300;
+    color: white;
+  }
+
+  .card {
+    background-color: #1e1e1e;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .table td {
+    padding: 1rem;
+    vertical-align: middle;
+  }
+
+  .avatar-lg {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+
+  .link-profile {
+    color: #0dcaf0;
+    text-decoration: none;
+  }
+
+  .link-profile:hover {
+    text-decoration: underline;
+  }
+
+  .badge {
+    font-size: 0.9rem;
+  }
+</style>

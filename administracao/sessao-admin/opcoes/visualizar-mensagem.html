@@ -1,0 +1,218 @@
+<style>
+
+
+    /* ========== UPLOAD LOGO ========== */
+    .upload-logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .logo-preview {
+        width: 120px;
+        height: 120px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid #ccc;
+    }
+
+    /* ========== AJUSTES ========== */
+    a.no-underline {
+        text-decoration: none !important;
+    }
+</style>
+
+
+<div class="container-fluid p-0">
+
+    <!-- Cabeçalho -->
+    <div class="row mb-3 align-items-center justify-content-between">
+        <div class="col-auto">
+            <h3 class="page-title">Mensagem</h3>
+        </div>
+        <div class="col-auto d-flex gap-2">
+            <button class="btn shadow-sm" onclick="window.history.back()">
+                <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Card da Mensagem -->
+    <div class="card flex-fill shadow-sm">
+        <div class="card-header gradient-header">
+            <h5 class="card-title mb-0 text-light">Mensagem de João Pedro</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Assunto:</strong> Solicitação de Informação</p>
+            <p><strong>Data:</strong> 01/11/2025 14:30</p>
+            <hr>
+            <p><strong>Mensagem:</strong></p>
+            <p>Olá, gostaria de saber se a minha encomenda do restaurante Capital já foi processada e quando será
+                entregue.</p>
+                    <button class="btn btn-primary" onclick="marcarComoLida(this)">Marcar como lida</button>
+
+        </div>
+
+        
+    </div>
+
+    <!-- Área para responder -->
+    <div class="card flex-fill shadow-sm mt-4">
+        <div class="card-header gradient-header">
+            <h5 class="card-title mb-0 text-light">Responder Mensagem</h5>
+        </div>
+        <div class="card-body">
+            <form action="responder_mensagem.php" method="post" class="row g-3 needs-validation" novalidate>
+                <input type="hidden" name="id_mensagem" value="123"> <!-- ID da mensagem -->
+
+                <div class="col-12">
+                    <label for="resposta" class="form-label">Sua resposta</label>
+                    <textarea id="resposta" name="resposta" class="form-control" rows="4"
+                        placeholder="Digite sua resposta aqui..." required></textarea>
+                    <div class="invalid-feedback">Digite uma resposta antes de enviar.</div>
+                </div>
+
+                <div class="col-12 text-left mt-3">
+                    <button type="submit" class="btn btn-primary w-25">Enviar Resposta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+function marcarComoLida(botao) {
+    const mensagem = botao.parentElement;
+    mensagem.classList.toggle("lida");
+    botao.textContent = mensagem.classList.contains("lida") ? "Lida" : "Marcar como lida";
+    botao.classList.toggle("lida");
+}
+</script>
+<style>
+       .mensagem {
+        background-color: #fff;
+        border-left: 5px solid #ff4d4f; /* vermelho para não lida */
+        padding: 15px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease;
+    }
+
+    .mensagem.lida {
+        border-left-color: #28a745; /* verde para lida */
+        background-color: #e6ffe6;
+    }
+
+    .mensagem p {
+        margin: 0;
+    }
+
+    .btn-lida {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-lida:hover {
+        background-color: #0056b3;
+    }
+
+    .btn-lida.lida {
+        background-color: #28a745;
+    }
+</style>
+<style>
+    :root {
+        --bg-light: #ffffff;
+        --text-light: #1a1a1a;
+        --header-light: linear-gradient(120deg, #f0f0f0 70%, #d4d4d4 120%);
+        --bg-dark: #121212;
+        --text-dark: #eaeaea;
+        --header-dark: linear-gradient(120deg, #161718 80%, #414345 120%);
+    }
+
+    body.light-mode {
+        background-color: var(--bg-light);
+        color: var(--text-light);
+    }
+
+    body.dark-mode {
+        background-color: var(--bg-dark);
+        color: var(--text-dark);
+    }
+
+    .gradient-header {
+        background: var(--header-dark);
+    }
+
+    body.light-mode .gradient-header {
+        background: var(--header-light);
+    }
+
+    .page-title {
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .card {
+        border-radius: 0.5rem;
+    }
+
+    textarea.form-control {
+        resize: none;
+    }
+</style>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const savedTheme = localStorage.getItem("theme");
+        const currentTheme = savedTheme || (prefersDark ? "dark-mode" : "light-mode");
+
+        document.body.classList.add(currentTheme);
+        updateThemeIcon(currentTheme);
+
+        document.getElementById("themeToggle").addEventListener("click", () => {
+            const isDark = document.body.classList.contains("dark-mode");
+            document.body.classList.toggle("dark-mode", !isDark);
+            document.body.classList.toggle("light-mode", isDark);
+
+            const newTheme = isDark ? "light-mode" : "dark-mode";
+            localStorage.setItem("theme", newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        feather.replace(); // Ativa ícones
+    });
+
+    function updateThemeIcon(theme) {
+        const icon = document.querySelector("#themeToggle i");
+        icon.dataset.feather = theme === "dark-mode" ? "sun" : "moon";
+        feather.replace();
+    }
+</script>

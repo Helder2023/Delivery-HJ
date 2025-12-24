@@ -1,0 +1,229 @@
+<div class="row mb-2 mb-xl-3">
+    <div class="content-top col-auto d-sm-block">
+        <h1>Mensagens dos Usuários</h1>
+        <p>Veja todas as mensagens enviadas pelos utilizadores do Delivery HJ</p>
+    </div>
+
+    <div class="col-auto ms-auto text-end mt-n1">
+          <button class="btn shadow-sm" onclick="window.history.back()">
+            <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+        </button>
+        <button class="btn shadow-sm" onclick="window.location.reload()"
+            style="background-color: white; color: black !important;">
+            <i class="align-middle" data-feather="refresh-cw">&nbsp;</i>
+        </button>
+    </div>
+</div>
+
+<!-- Cards de Resumo -->
+<div class="row content-cards">
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <h3 class="mb-2">Total de Mensagens <span class="badge badge-soft-dark"
+                        style="background-color: white; color: black !important;">125</span></h3>
+                <p class="mb-0">Mensagens recebidas desde o lançamento.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <h3 class="mb-2">Reclamações dos Utilizadores <span class="badge badge-soft-dark"
+                        style="background-color: white; color: black !important;">12</span></h3>
+                <p class="mb-0">Mensagens recebidas nas últimas 24h.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <h3 class="mb-2">Respondidas <span class="badge badge-soft-dark"
+                        style="background-color: white; color: black !important;">98</span></h3>
+                <p class="mb-0">Mensagens já tratadas pela equipe.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <h3 class="mb-2">Pendentes <span class="badge badge-soft-dark"
+                        style="background-color: white; color: black !important;">27</span></h3>
+                <p class="mb-0">Aguardando resposta.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Tabela de Mensagens -->
+<div class="card flex-fill card-dashboard mt-4">
+    <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: white;">
+        <h4 class="card-title mb-0">Mensagens Recebidas dos Restaurantes</h4>
+    </div>
+    <div class="card-body">
+        <table id="datatables-column-search-select-inputs" class="table table-borderless my-0 w-100"
+            style="color: white;">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Restaurante</th>
+                    <th>Email</th>
+                    <th>Assunto</th>
+                    <th>Mensagem</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>001</td>
+                    <td>Loremipsumdolorsit.</td>
+                    <td>joao@mail.com</td>
+                    <td>Lorem ipsum dolor sit amet.</td>
+                    <td>Queria saber se posso alterar o endereço após o pedido...</td>
+                    <td>20/10/2025</td>
+                    <td><i class="status pendente">Pendente</i>
+                    </td>
+                    <td>
+                        <a style="margin-right: 7px;" href="admin.html#/visualizar-mensagem"><i
+                                data-feather="eye"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>002</td>
+                    <td>Cristiano Amadeu</td>
+                    <td>cristiano@mail.com</td>
+                    <td>Problema no pagamento</td>
+                    <td>Meu pedido não foi finalizado, mesmo com saldo suficiente...</td>
+                    <td>19/10/2025</td>
+                    <td><i class="status respondido">Respondido</i></td>
+                    <td>
+                        <a style="margin-right: 7px;" href="admin.html#/visualizar-mensagem"><i
+                                data-feather="eye"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>003</td>
+                    <td>Helena Muxima</td>
+                    <td>helena@mail.com</td>
+                    <td>Sugestão</td>
+                    <td>Seria bom adicionar uma opção de pagamento por Multicaixa Express...</td>
+                    <td>18/10/2025</td>
+                    <td><i class="status lido">Lido</span>
+                    </td>
+                    <td>
+                        <a style="margin-right: 7px;" href="admin.html#/visualizar-mensagem"><i
+                                data-feather="eye"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card flex-fill card-dashboard mt-4">
+    <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: white;">
+        <h4 class="card-title mb-0">Reclamações dos Utilizadores</h4>
+    </div>
+    <div class="card-body">
+        <table id="datatables-column-search-select-inputs" class="table table-borderless my-0 w-100"
+            style="color: white;">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>Restaurante</th>
+                    <th>Email</th>
+                    <th>Assunto</th>
+                    <th>Mensagem</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>001</td>
+                    <td>Loremip sumdolorsit.</td>
+                    <td>Loremipsumdolorsit.</td>
+                    <td>joao@mail.com</td>
+                    <td>Reclamação</td>
+                    <td>Queria saber se posso alterar o endereço após o pedido...</td>
+                    <td>20/10/2025</td>
+                    <td><i class="status pendente">Pendente</i>
+                    </td>
+                    <td>
+                        <a style="margin-right: 7px;" href="admin.html#/visualizar-reclamacoes"><i
+                                data-feather="eye"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>002</td>
+                    <td>Loremip sumdolorsit.</td>
+                    <td>Loremipsumdolorsit.</td>
+                    <td>cristiano@mail.com</td>
+                    <td>Reclamação</td>
+                    <td>Meu pedido não foi finalizado, mesmo com saldo suficiente...</td>
+                    <td>19/10/2025</td>
+                    <td><i class="status respondido">Respondido</i></td>
+                    <td>
+                        <a style="margin-right: 7px;" href="admin.html#/visualizar-reclamacoes"><i
+                                data-feather="eye"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>003</td>
+                    <td>Loremipsu mdolorsit.</td>
+                    <td>Loremipsumdolorsit.</td>
+                    <td>helena@mail.com</td>
+                    <td>Reclamação</td>
+                    <td>Seria bom adicionar uma opção de pagamento por Multicaixa Express...</td>
+                    <td>18/10/2025</td>
+                    <td><i class="status lido">Lido</span>
+                    </td>
+                    <td>
+                        <a style="margin-right: 7px;" href="admin.html#/visualizar-reclamacoes"><i
+                                data-feather="eye"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<style>
+    input {
+        background-color: #1e1e1e !important;
+        color: #fff !important;
+        border: 1px solid #333 !important;
+    }
+
+
+    .status {
+        border-radius: 50px;
+        padding: 3px 10px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status.respondido {
+        background-color: #198754;
+        color: white;
+    }
+
+    .status.lido {
+        background-color: #ffffff;
+        color: black !important;
+    }
+
+    .status.pendente {
+        background-color: #616300;
+        color: white;
+    }
+</style>

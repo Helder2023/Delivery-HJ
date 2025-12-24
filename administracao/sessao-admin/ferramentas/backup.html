@@ -1,0 +1,216 @@
+<!-- ===== Página de Backup de Dados - Delivery HJ ===== -->
+<div class="row mb-2 mb-xl-3">
+  <div class="content-top col-auto d-sm-block">
+    <h1>Backup de Dados</h1>
+    <p>Faça cópias de segurança e gerencie seus arquivos de backup do Delivery HJ</p>
+  </div>
+
+  <div class="col-auto ms-auto text-end mt-n1">
+    <button class="btn shadow-sm" onclick="window.location.reload()"
+      style="background-color: white; color: black !important;">
+      <i class="align-middle" data-feather="refresh-cw">&nbsp;</i>
+    </button>
+  </div>
+</div>
+
+<!-- Cards de Resumo -->
+<div class="row">
+  <!-- Último Backup -->
+  <div class="col-12 col-sm-6 d-flex">
+    <div class="card flex-fill">
+      <div class="card-body py-4">
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2">Último Backup
+              <span class="badge badge-soft-dark indicator"
+                style="background-color: white; color: black !important;">12/12/2025 - 14:32</span>
+            </h3>
+            <p class="mb-2">Mostra a data e hora do backup mais <br> recente.</p>
+          
+
+            <div class="mb-0">
+              <span class="text-muted">
+              <button class="btn btn-primary" onclick="gerarBackup()">Gerar Novo Backup</button>
+              </span>
+            </div>
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat" style="background-color: white; color: black !important;">
+              <a href="#" title="Detalhes do último backup">
+                <i class="align-middle text-info" data-feather="clock" style="color: black !important;"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Status do Backup Automático -->
+  <div class="col-12 col-sm-6 d-flex">
+    <div class="card flex-fill">
+      <div class="card-body py-4">
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2">Backup Automático
+              <span class="badge badge-soft-dark indicator"
+                style="background-color: white; color: black !important;">Ativo</span>
+            </h3>
+            <p class="mb-2">Indica se o sistema está a gerar backups automaticamente.</p>
+            <div class="mb-0">
+              <span class="text-muted">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#modalBackupAuto">Configurar</a>
+              </span>
+            </div>
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat" style="background-color: white; color: black !important;">
+              <a href="#" title="Configurar backup automático">
+                <i class="align-middle text-info" data-feather="settings" style="color: black !important;"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tabela de Backups -->
+<div class="card">
+  <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: white;">
+    <h4 class="card-title mb-0">Backups Existentes</h4>
+  </div>
+  <div class="card-body">
+    <table id="datatables-column-search-select-inputs" class="table table-borderless my-0 w-100" style="color: white;">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nome do Arquivo</th>
+          <th>Data de Criação</th>
+          <th>Tamanho</th>
+          <th>Tipo</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaBackups">
+        <tr>
+          <td>001</td>
+          <td>backup_2025_10_15.zip</td>
+          <td>15/10/2025</td>
+          <td>65 MB</td>
+          <td>Automático</td>
+          <td>
+            <button class="btn btn-sm btn-light" onclick="baixarBackup()"><i data-feather="download"></i></button>
+            <button class="btn btn-sm btn-warning" onclick="restaurarBackup()"><i data-feather="trash-2"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>002</td>
+          <td>backup_2025_10_17.zip</td>
+          <td>17/10/2025</td>
+          <td>70 MB</td>
+          <td>Manual</td>
+          <td>
+            <button class="btn btn-sm btn-light" onclick="baixarBackup()"><i data-feather="download"></i></button>
+            <button class="btn btn-sm btn-warning" onclick="restaurarBackup()"><i data-feather="trash-2"></i></button>
+          </td>
+        </tr>
+        <tr>
+          <td>003</td>
+          <td>backup_2025_10_19.zip</td>
+          <td>19/10/2025</td>
+          <td>75 MB</td>
+          <td>Automático</td>
+         <td>
+            <button class="btn btn-sm btn-light" onclick="baixarBackup()"><i data-feather="download"></i></button>
+            <button class="btn btn-sm btn-warning" onclick="restaurarBackup()"><i data-feather="trash-2"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+<!-- Modal Configuração do Backup Automático -->
+<div class="modal fade" id="modalBackupAuto" tabindex="-1" aria-labelledby="modalBackupAutoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalBackupAutoLabel">Configurar Backup Automático</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Estado do Backup -->
+        <div class="mb-3">
+          <label class="form-label">Estado do Backup Automático:</label>
+          <select class="form-select" id="estadoBackup">
+            <option value="ativo">Ativo</option>
+            <option value="desativo">Desativo</option>
+          </select>
+        </div>
+
+        <!-- Escolher Dia -->
+        <div class="mb-3">
+          <label class="form-label">Dia do Backup Automático:</label>
+          <select class="form-select" id="diaBackup">
+            <option value="segunda">Segunda-feira</option>
+            <option value="terca">Terça-feira</option>
+            <option value="quarta">Quarta-feira</option>
+            <option value="quinta">Quinta-feira</option>
+            <option value="sexta">Sexta-feira</option>
+            <option value="sabado">Sábado</option>
+            <option value="domingo">Domingo</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" id="salvarBackupAuto">Salvar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<script>
+  document.getElementById("salvarBackupAuto").addEventListener("click", function () {
+    const estadoBackup = document.getElementById("estadoBackup").value;
+    const badge = document.querySelector("#cardBackupAutoEstado");
+
+    if (badge) {
+      badge.innerText = estadoBackup === "ativo" ? "Ativo" : "Desativo";
+    }
+
+    // Fecha o modal
+    const modal = bootstrap.Modal.getInstance(document.getElementById("modalBackupAuto"));
+    modal.hide();
+  });
+</script>
+
+<!-- Scripts Simulados -->
+<script>
+  function gerarBackup() {
+    alert("✅ Novo backup criado com sucesso!");
+  }
+
+  function baixarBackup() {
+    alert("⬇️ O backup será baixado em breve.");
+  }
+
+  function restaurarBackup() {
+    alert("♻️ O backup foi restaurado (simulação).");
+  }
+
+  function excluirBackup() {
+    if (confirm("Tem certeza que deseja excluir este backup permanentemente?")) {
+      alert("🗑️ Backup excluído com sucesso!");
+    }
+  }
+</script>

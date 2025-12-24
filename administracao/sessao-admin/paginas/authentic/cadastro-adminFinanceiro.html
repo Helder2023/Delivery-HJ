@@ -1,0 +1,529 @@
+
+<main class="content">
+    <div class="container-fluid p-0">
+        <section class="py-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 offset-xl-3 col-md-8 text col-12">
+                        <div class="text-center mt-2">
+                            <h1 class="mb-2">DeliveryHJ</h1>
+                            <p class="mb-2">
+                                Aréa somente para funcionários com acesso permitido!
+                            </p>
+                            <h4>Seja bem vindo ao ADM de DeliveryHJ!</h4>
+                            <br>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+        <!--Pageheader end-->
+        <!--Sign in start-->
+        <div class="row">
+            <section>
+                <div class="form">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-8 col-lg-6 col-md-8 col-12">
+                            <div class="card shadow-sm mb-6">
+                                <div class="card-body">
+                                    <div id="alert-placeholder" class="mt-3"></div>
+
+                                    <form id="wizard-form" class="needs-validation" novalidate>
+
+                                        <!-- BARRA DE PROGRESSO -->
+                                        <div class="progress mb-3" style="height: 6px;">
+                                            <div id="progress-bar" class="progress-bar bg-primary" style="width: 33%;">
+                                            </div>
+                                        </div>
+
+                                        <!-- INDICADOR DE ETAPAS -->
+                                        <ul class="nav nav-pills mb-4 justify-content-center" id="wizard-steps">
+                                            <li class="nav-item"><a class="nav-link active" data-step="1" href="#">1.
+                                                    Dados Pessoais</a></li>
+                                            <li class="nav-item"><a class="nav-link disabled" data-step="2" href="#">2.
+                                                    Perfil</a></li>
+                                            <li class="nav-item"><a class="nav-link disabled" data-step="3" href="#">3.
+                                                    Conta Bancária</a></li>
+                                        </ul>
+
+                                        <div class="tab-content">
+
+                                            <!-- ====================== ETAPA 1 ====================== -->
+                                            <div class="wizard-step" id="step-1">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Primeiro nome *</label>
+                                                    <input type="text" class="form-control" placeholder="Primeiro nome"
+                                                        name="first_name" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Segundo nome (opcional)</label>
+                                                    <input type="text" class="form-control" placeholder="Segundo nome"
+                                                        name="second_name">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Email *</label>
+                                                    <input type="email" class="form-control"
+                                                        placeholder="usuario@exemplo.com" name="email" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Data de Nascimanto *</label>
+                                                    <input type="date" class="form-control" name="nascimento" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Status *</label>
+                                                    <input type="text" class="form-control" placeholder="Primeiro nome"
+                                                        name="status" required readonly value="Admin Financeiro">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="genero" class="form-label">Gênero</label>
+                                                    <select class="form-control" id="genero" name="genero">
+                                                        <option value="">Selecione...</option>
+                                                        <option>Masculino</option>
+                                                        <option>Feminino</option>
+                                                    </select>
+                                                </div>  
+                                                <div class="mb-3">
+                                                    <label class="form-label">Password *</label>
+                                                    <div class="input-group">
+                                                        <input type="password" class="form-control" id="password"
+                                                            name="password" placeholder="Password" required
+                                                            minlength="8">
+                                                        <button type="button" class="btn btn-outline-secondary"
+                                                            onclick="togglePassword('password')">
+                                                            <i data-feather="eye"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Confirmar Password *</label>
+                                                    <input type="password" class="form-control" id="confirm_password"
+                                                        name="confirm_password" placeholder="Confirme password" required
+                                                        minlength="8">
+                                                </div>
+
+                                                <div class="d-flex justify-content-end mt-3">
+                                                    <button type="button" class="btn btn-primary"
+                                                        onclick="nextStep()">Próximo</button>
+                                                </div>
+                                            </div>
+                                            <!-- ====================== ETAPA 2 ====================== -->
+
+                                            <div class="wizard-step d-none" id="step-2">
+
+                                                <div class="mb-3 text-center">
+                                                    <label class="form-label">Foto de perfil *</label>
+
+                                                    <!-- Container da pré-visualização -->
+
+                                                    <div class="profile-preview-wrapper mb-2">
+                                                        <img id="logoPreview" src="../assets/img/avatar/avatar.png"
+                                                            alt="Preview" class="profile-preview">
+                                                        <div class="overlay">
+                                                            <label for="logoUpload">
+                                                                <i data-feather="camera"></i> Alterar
+                                                            </label>
+                                                        </div>
+                                                        <!-- Input file escondido dentro do wrapper -->
+                                                        <input type="file" id="logoUpload" name="profile_photo"
+                                                            accept="image/*" class="d-none" required>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">Biografia *</label>
+                                                    <textarea class="form-control" name="biography" rows="4"
+                                                        placeholder="Conte mais sobre você" required></textarea>
+                                                    <small id="bio-counter" class="text-muted">0/300 caracteres</small>
+                                                </div>
+
+                                                <div class="d-flex justify-content-between mt-3">
+                                                    <button type="button" class="btn btn-outline-secondary"
+                                                        onclick="prevStep()">Voltar</button>
+                                                    <button type="button" class="btn btn-primary"
+                                                        onclick="nextStep()">Próximo</button>
+                                                </div>
+
+                                            </div>
+
+
+
+                                            <!-- ====================== ETAPA 3 ====================== -->
+                                            <div class="wizard-step d-none" id="step-3">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Nome do proprietário da conta *</label>
+                                                    <input type="text" class="form-control" name="account_owner"
+                                                        placeholder="Nome completo" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">IBAN *</label>
+                                                    <input type="text" class="form-control" name="iban"
+                                                        placeholder="Ex: AO0600..." required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Nome do banco *</label>
+                                                    <input type="text" class="form-control" name="bank_name"
+                                                        placeholder="Ex: BFA, BAI..." required>
+                                                </div>
+
+                                                <div class="d-flex justify-content-between mt-3">
+                                                    <button type="button" class="btn btn-outline-secondary"
+                                                        onclick="prevStep()">Voltar</button>
+                                                    <button type="submit" class="btn btn-success">Finalizar
+                                                        Cadastro</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 mb-2">
+                                        <div class="text-center">
+                                            <div class="mb-lg-0 text-body-tertiary">
+                                                <span><a href="">Suporte</a> | </span>
+                                                <span class="text-primary"><a href="#">Privacidade</a></span>
+                                                | Visite site »
+                                                <span class="text-primary"><a
+                                                        href='../../../New Version/index.html'>Wasom
+                                                        Upfy</a></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    </section>
+    <!--Sign in end-->
+    </div>
+    </div>
+</main>
+
+
+<style>
+    .sidebar-content,
+    .sidebar,
+    .navbar {
+        display: none;
+    }
+</style>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        feather.replace();
+        updateStepIndicator(1);
+    });
+
+    let currentStep = 1;
+    const totalSteps = 3;
+
+    function nextStep() {
+        if (!validateStep(currentStep)) return;
+        currentStep++;
+        showStep(currentStep);
+    }
+
+    function prevStep() {
+        currentStep--;
+        showStep(currentStep);
+    }
+
+    function showStep(step) {
+        const steps = document.querySelectorAll(".wizard-step");
+        steps.forEach(s => {
+            s.classList.add("d-none");
+            s.classList.remove("fade-in");
+        });
+
+        const current = document.getElementById(`step-${step}`);
+        current.classList.remove("d-none");
+        current.classList.add("fade-in");
+
+        updateStepIndicator(step);
+        updateProgressBar(step);
+    }
+
+    function updateStepIndicator(step) {
+        const links = document.querySelectorAll("#wizard-steps .nav-link");
+        links.forEach(link => {
+            const linkStep = parseInt(link.dataset.step);
+            link.classList.remove("active");
+            link.classList.add("disabled");
+            if (linkStep === step) {
+                link.classList.add("active");
+                link.classList.remove("disabled");
+            }
+        });
+    }
+
+    function updateProgressBar(step) {
+        const bar = document.getElementById("progress-bar");
+        const width = (step / totalSteps) * 100;
+        bar.style.width = width + "%";
+    }
+
+    function validateStep(step) {
+        const current = document.getElementById(`step-${step}`);
+        const inputs = current.querySelectorAll("input, textarea, select");
+        let valid = true;
+
+        inputs.forEach(input => {
+            if (!input.checkValidity()) {
+                input.classList.add("is-invalid");
+                valid = false;
+            } else {
+                input.classList.remove("is-invalid");
+            }
+        });
+
+        if (step === 1) {
+            const pass = document.getElementById("password").value;
+            const confirm = document.getElementById("confirm_password").value;
+            if (pass !== confirm) {
+                showAlert("As senhas não coincidem!", "danger");
+                return false;
+            }
+        }
+
+        return valid;
+    }
+
+    function togglePassword(id) {
+        const input = document.getElementById(id);
+        input.type = input.type === "password" ? "text" : "password";
+    }
+
+    function showAlert(message, type = "success") {
+        const placeholder = document.getElementById("alert-placeholder");
+        const div = document.createElement("div");
+        div.className = `alert alert-${type}`;
+        div.innerText = message;
+        placeholder.innerHTML = "";
+        placeholder.appendChild(div);
+        setTimeout(() => div.remove(), 4000);
+    }
+
+    // ================== AJAX SUBMIT ==================
+    document.getElementById("wizard-form").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        if (!validateStep(currentStep)) return;
+
+        const formData = new FormData(this);
+
+        fetch("processar_cadastro.php", {
+            method: "POST",
+            body: formData
+        })
+            .then(r => r.text())
+            .then(res => {
+                showAlert("Cadastro concluído com sucesso!", "success");
+                this.reset();
+                currentStep = 1;
+                showStep(currentStep);
+            })
+            .catch(err => {
+                console.error(err);
+                showAlert("Erro ao enviar os dados!", "danger");
+            });
+    });
+
+</script>
+<script>
+    // Inicializa feather icons
+    if (window.feather) feather.replace();
+
+    // Abrir seletor de arquivo ao clicar na pré-visualização ou overlay
+    const previewWrapper = document.querySelector('.profile-preview-wrapper');
+    const fileInput = document.getElementById('profile-photo');
+    const previewImg = document.getElementById('profile-preview');
+
+    previewWrapper.addEventListener('click', () => {
+        fileInput.click();
+    });
+
+    // Atualizar preview da imagem selecionada
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                previewImg.src = e.target.result;
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Contador de caracteres da biografia
+    const bioInput = document.querySelector("textarea[name='biography']");
+    const bioCounter = document.getElementById('bio-counter');
+
+    bioInput.addEventListener('input', function () {
+        const len = this.value.length;
+        bioCounter.textContent = `${len}/300 caracteres`;
+    });
+
+</script>
+<script>
+    // Preview da logo
+    document.getElementById('logoUpload').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = e => document.getElementById('logoPreview').src = e.target.result;
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Geração automática de senha segura
+    function gerarSenha(tamanho = 15) {
+        const caracteres = "0123456789";
+        let senha = "Delivery_HJ_" + "";
+        for (let i = 0; i < tamanho; i++) {
+            senha += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+        }
+        return senha;
+    }
+
+    // Exibir senha ao carregar a página
+    window.addEventListener("DOMContentLoaded", () => {
+        const inputSenha = document.getElementById("password");
+        inputSenha.value = gerarSenha();
+    });
+
+    // Regenerar senha ao clicar no botão
+    document.getElementById("btnRegenerate").addEventListener("click", () => {
+        document.getElementById("password").value = gerarSenha();
+    });
+
+    // Validação do formulário
+    (() => {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+</script>
+
+<style>
+    .profile-preview-wrapper {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid #007bff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .profile-preview-wrapper:hover {
+        transform: scale(1.05);
+    }
+
+    .profile-preview-wrapper .overlay {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 35%;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .profile-preview-wrapper:hover .overlay {
+        opacity: 1;
+    }
+
+    .profile-preview {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+
+
+    .wizard-step {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .wizard-step.fade-in {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+
+    .wizard-step.fade-out {
+        opacity: 0 !important;
+        transform: translateY(-10px) !important;
+    }
+
+    .d-none {
+        display: none !important;
+    }
+</style>
+
+<script>
+    // progressao de senha
+    function checkPasswordStrength() {
+        const password = document.getElementById("password_employees").value;
+        const strength = calculatePasswordStrength(password);
+        const progressBar = document.getElementById("password_strength");
+        progressBar.style.width = `${strength}%`;
+        progressBar.style.backgroundColor = getProgressBarColor(strength);
+    }
+    function calculatePasswordStrength(password) {
+        // Implement your password strength calculation logic here
+        // For simplicity, let's assume the strength is based on password length
+        return Math.min(password.length * 10, 100);
+    }
+    function getProgressBarColor(strength) {
+        if (strength >= 75) {
+            password_strength.style.display = "block";
+            return "green";
+        }
+        if (strength >= 45) {
+            password_strength.style.display = "block";
+            return "orange";
+        }
+        else if (strength >= 30) {
+            password_strength.style.display = "block";
+            return "red";
+        }
+    }
+    // botao de exibir, e esconder a palavra pass
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("password_employees");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            mostrar.style.display = "none";
+            mostrar1.style.display = "block";
+
+        } else {
+            passwordInput.type = "password";
+            mostrar1.style.display = "none";
+            mostrar.style.display = "block";
+        }
+    }
+
+</script>

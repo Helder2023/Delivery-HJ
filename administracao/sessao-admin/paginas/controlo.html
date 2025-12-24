@@ -1,0 +1,541 @@
+<div class="row mb-2 mb-xl-3">
+    <div class="content-top col-auto d-sm-block">
+        <h1>Links para fácil Acesso</h1>
+        <p>Gerencie a disponibilidade de páginas do site e do dashboard</p>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div class="card col-12 col-lg-12 d-flex p-4">
+        <form action="" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+
+            <div class="col-md-6">
+                <label for="nome_entregador" class="form-label">Nome</label>
+                <input type="text" minlength="3" maxlength="50" placeholder="Insira o nome da página"
+                    class="form-control" id="nome_entregador" name="nome" required>
+            </div>
+
+            <div class="col-md-6">
+                <label for="nome_entregador" class="form-label">Link</label>
+                <input type="search" placeholder="Insira o link da página" class="form-control" name="nome" required>
+            </div>
+
+
+            <div class="col-12 text-left mt-4">
+                <button class="btn btn-primary w-25" type="submit">Cadastrar Link</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<div class="card card-dashboard p-3 mt-3">
+
+    <table id="datatables-column-search-select-inputs" class="table table-borderless my-0 w-100">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Link</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>Login</td>
+                <td id="copiar_link1">http://127.0.0.1:5500/administracao/sessao-admin/admin.html#/login</td>
+                <td>
+                    <button class="btn btn-sm btn-secondary" onclick="copiarLink('copiar_link1')">Copiar Link</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Cadastrar - Super Admin</td>
+                <td id="copiar_link2">http://127.0.0.1:5500/administracao/sessao-admin/admin.html#/-cadastro-superAdmin-
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-secondary" onclick="copiarLink('copiar_link2')">Copiar Link</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Cadastrar - Editor</td>
+                <td id="copiar_link3">http://127.0.0.1:5500/administracao/sessao-admin/admin.html#/-cadastro-editor-
+                </td>
+                <td>
+                    <button class="btn btn-sm btn-secondary" onclick="copiarLink('copiar_link3')">Copiar Link</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Cadastrar - Admin Financeiro</td>
+                <td id="copiar_link4">
+                    http://127.0.0.1:5500/administracao/sessao-admin/admin.html#/-cadastro-adminFinanceiro-</td>
+                <td>
+                    <button class="btn btn-sm btn-secondary" onclick="copiarLink('copiar_link4')">Copiar Link</button>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+<hr>
+
+<script>
+    function copiarLink(id) {
+        const iban = document.getElementById(id).textContent;
+        navigator.clipboard.writeText(iban).then(() => {
+            alert("Link copiado: " + iban);
+        }).catch(err => {
+            console.error("Erro ao copiar o link: ", err);
+        });
+    }
+</script>
+
+<div class="row mb-2 mb-xl-3">
+    <div class="content-top col-auto d-sm-block">
+        <h1>Controle de Páginas</h1>
+        <p>Gerencie a disponibilidade de páginas do site e do dashboard</p>
+    </div>
+
+</div>
+
+<div class="content-cards">
+
+    <!-- Controle de páginas do Site -->
+    <div class="row">
+
+        <div class="col-12 col-lg-6 d-flex">
+            <div class="card flex-fill card-dashboard">
+                <div class="card-header" style="background-color: rgba(255,255,255,0.048); color:white;">
+                    <h5 class="card-title mb-0">Páginas do Dashboard</h5>
+                </div>
+                <div class="card-body">
+                    <!-- Controle de páginas do Dashboard -->
+                    <div class="mb-3">
+                        <label for="todos_dashboard" class="form-label">Status Geral do Dashboard</label>
+                        <select name="todos_dashboard" id="todos_dashboard" class="form-select">
+                            <option value="ativado">Ativado</option>
+                            <option value="desativado">Desativado</option>
+                        </select>
+                    </div>
+
+                    <div class="d-grid mt-3">
+                        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                    </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6 d-flex">
+            <div class="card flex-fill card-dashboard">
+
+                <div class="card-header" style="background-color: rgba(255,255,255,0.048); color:white;">
+                    <h5 class="card-title mb-0">Páginas do Site</h5>
+                </div>
+                <div class="card-body">
+                    <form action="salvar-status-paginas.php" method="POST">
+                        
+                        <div class="mb-3">
+                            <label for="todos_site" class="form-label">Status Geral do Site</label>
+                            <select name="todos_site" id="todos_site" class="form-select">
+                                <option value="ativado">Ativado</option>
+                                <option value="desativado">Desativado</option>
+                            </select>
+                        </div>
+                        <div class="d-grid mt-3">
+                            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Feather Icons -->
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+<script src="../js/data-tables.js"></script>
+
+<div>
+
+    <h1 class="h3 mb-4">Gestão de Usuários & Banimentos</h1>
+
+    <!-- ================= ADMINS ================= -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Administradores</h5>
+        </div>
+        <div class="table-responsive card-body">
+            <table id="tabela_1" class="table table-borderless my-0 w-100">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#A01</td>
+                        <td>Admin Geral</td>
+                        <td>admin@deliveryhj.com</td>
+                        <td><span class="badge bg-success">Ativo</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-danger" onclick="openBanModal('Admin Geral','admin','A01')">
+                                Banir
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ================= RESTAURANTES ================= -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Restaurantes</h5>
+        </div>
+         <div class="table-responsive card-body">
+            <table id="tabela_2" class="table table-borderless my-0 w-100">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Avaliação</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#R15</td>
+                        <td>Pizzaria Central</td>
+                        <td>4.3 ⭐</td>
+                        <td><span class="badge bg-warning">Em análise</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-danger"
+                                onclick="openBanModal('Pizzaria Central','restaurante','R15')">
+                                Banir
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ================= ENTREGADORES ================= -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Entregadores</h5>
+        </div>
+         <div class="table-responsive card-body">
+            <table id="tabela_3" class="table table-borderless my-0 w-100">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Pedidos</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#E33</td>
+                        <td>Carlos Manuel</td>
+                        <td>128</td>
+                        <td><span class="badge bg-success">Ativo</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-danger"
+                                onclick="openBanModal('Carlos Manuel','entregador','E33')">
+                                Banir
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ================= CLIENTES ================= -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Clientes</h5>
+        </div>
+         <div class="table-responsive card-body">
+            <table id="tabela_4" class="table table-borderless my-0 w-100">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Pedidos</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>#C90</td>
+                        <td>Helder Gabriel</td>
+                        <td>54</td>
+                        <td><span class="badge bg-success">Ativo</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-danger"
+                                onclick="openBanModal('Helder Gabriel','cliente','C90')">
+                                Banir
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<div class="modal fade" id="banModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Banir Usuário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <p><strong id="banUserName"></strong></p>
+
+                <input type="hidden" id="banUserId">
+                <input type="hidden" id="banUserType">
+
+                <div class="mb-3">
+                    <label class="form-label">Tipo de Banimento</label>
+                    <select class="form-select" id="banType">
+                        <option value="temporario">Temporário</option>
+                        <option value="permanente">Permanente</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Motivo</label>
+                    <select class="form-select" id="banReason">
+                        <option>Fraude</option>
+                        <option>Abuso de sistema</option>
+                        <option>Conduta imprópria</option>
+                        <option>Violação de termos</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Observações</label>
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" required>
+                    <label class="form-check-label">
+                        Confirmo que esta ação será registrada para auditoria
+                    </label>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-danger">Confirmar Banimento</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div>
+
+    <h1 class="h3 mb-4">Solicitações de Revisão de Banimento</h1>
+
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="card-title mb-0">Pedidos pendentes</h5>
+            <span class="badge bg-warning text-dark">Em análise</span>
+        </div>
+
+        <div class="table-responsive card-body">
+            <table id="tabela_5" class="table table-borderless my-0 w-100">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tipo</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Motivo do Recurso</th>
+                        <th>Evidências</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <!-- Restaurante -->
+                    <tr>
+                        <td>#RV102</td>
+                        <td>
+                            <span class="badge bg-primary">Restaurante</span>
+                        </td>
+                        <td>Pizzaria Central</td>
+                        <td>contato@pizzariacentral.ao</td>
+                        <td>Banimento indevido por denúncia falsa</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-info" onclick="openEvidenceModal('Pizzaria Central')">
+                                Ver arquivos
+                            </button>
+                        </td>
+                        <td>
+                            <span class="badge bg-warning text-dark">Pendente</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-success">Aprovar</button>
+                            <button class="btn btn-sm btn-danger">Rejeitar</button>
+                        </td>
+                    </tr>
+
+                    <!-- Entregador -->
+                    <tr>
+                        <td>#RV118</td>
+                        <td>
+                            <span class="badge bg-info">Entregador</span>
+                        </td>
+                        <td>Carlos Manuel</td>
+                        <td>carlos@deliveryhj.com</td>
+                        <td>Erro no sistema de avaliação</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-info" onclick="openEvidenceModal('Carlos Manuel')">
+                                Ver arquivos
+                            </button>
+                        </td>
+                        <td>
+                            <span class="badge bg-warning text-dark">Pendente</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-success">Aprovar</button>
+                            <button class="btn btn-sm btn-danger">Rejeitar</button>
+                        </td>
+                    </tr>
+
+                    <!-- Cliente -->
+                    <tr>
+                        <td>#RV134</td>
+                        <td>
+                            <span class="badge bg-secondary">Cliente</span>
+                        </td>
+                        <td>Helder Gabriel</td>
+                        <td>helder@email.com</td>
+                        <td>Conta suspensa sem aviso prévio</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-info" onclick="openEvidenceModal('Helder Gabriel')">
+                                Ver arquivos
+                            </button>
+                        </td>
+                        <td>
+                            <span class="badge bg-warning text-dark">Pendente</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-success">Aprovar</button>
+                            <button class="btn btn-sm btn-danger">Rejeitar</button>
+                        </td>
+                    </tr>
+
+                    <!-- Admin -->
+                    <tr>
+                        <td>#RV140</td>
+                        <td>
+                            <span class="badge bg-danger">Administrador</span>
+                        </td>
+                        <td>Admin Júnior</td>
+                        <td>adminjr@deliveryhj.com</td>
+                        <td>Banimento aplicado sem autorização</td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-info" onclick="openEvidenceModal('Admin Júnior')">
+                                Ver arquivos
+                            </button>
+                        </td>
+                        <td>
+                            <span class="badge bg-warning text-dark">Pendente</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-success">Aprovar</button>
+                            <button class="btn btn-sm btn-danger">Rejeitar</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<div class="modal fade" id="evidenceModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Evidências do Recurso</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <p><strong id="evidenceUser"></strong></p>
+
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        📄 Documento.pdf
+                        <a href="#" class="float-end">Visualizar</a>
+                    </li>
+                    <li class="list-group-item">
+                        🖼️ Foto-denuncia.jpg
+                        <a href="#" class="float-end">Visualizar</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function openEvidenceModal(nome) {
+        document.getElementById('evidenceUser').innerText =
+            `Evidências enviadas por ${nome}`;
+
+        new bootstrap.Modal(document.getElementById('evidenceModal')).show();
+    }
+</script>
+
+
+<script>
+    function openBanModal(nome, tipo, id) {
+        document.getElementById('banUserName').innerText =
+            `${nome} (${tipo.toUpperCase()})`;
+
+        document.getElementById('banUserId').value = id;
+        document.getElementById('banUserType').value = tipo;
+
+        new bootstrap.Modal(document.getElementById('banModal')).show();
+    }
+</script>

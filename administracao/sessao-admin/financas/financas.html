@@ -1,0 +1,806 @@
+<script src="../js/data-tables.js"></script>
+
+<div class="row mb-2 mb-xl-3">
+    <div class="content-top col-auto d-sm-block">
+        <h1>Dashboard Financeiro</h1>
+        <p>Bem-vindo ao painel Financeiro do DeliveryHJ</p>
+    </div>
+
+    <div class="col-auto ms-auto text-end mt-n1">
+
+        <button class="btn shadow-sm" onclick="window.location.reload()"
+            style="background-color: white; color: black !important;">
+            <i class="align-middle" data-feather="refresh-cw" id="refresh">&nbsp;</i>
+        </button>
+
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Cards estilo Dashboard -->
+<div class="row g-3 mb-4">
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Receita Total
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important; margin-top: -20px !important;">12.540
+                                Kz</span>
+                        </h3>
+                        <p class="mb-2">Valor total recebido neste mês.</p>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat">
+                            <i data-feather="dollar-sign" class="align-middle text-info"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Despesas
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important; margin-top: -20px !important;">3.450
+                                Kz</span>
+                        </h3>
+                        <p class="mb-2">Custos operacionais e gastos gerais.</p>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat">
+                            <i data-feather="credit-card" class="align-middle text-danger"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Saldo final
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important; margin-top: -20px !important;">9.090
+                                Kz</span>
+                        </h3>
+                        <p class="mb-2">Lucro líquido do período atual.</p>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat">
+                            <i data-feather="trending-up" class="align-middle text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Pendentes
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important; margin-top: -20px !important;">1.200
+                                Kz</span>
+                        </h3>
+                        <p class="mb-2">Pagamentos ainda não confirmados.</p>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat">
+                            <i data-feather="clock" class="align-middle text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card card-dashboard p-3 " style="margin-top: -15px;">
+    <h4>Cadastrar Conta Bancária da DeliveryHJ</h4>
+
+    <!-- FORMULÁRIO -->
+    <form id="formConta" class="mb-4">
+        <div class="mb-2">
+            <label for="banco" class="form-label">Nome do Banco:</label>
+            <input type="text" id="banco" class="form-control" placeholder="Ex: Banco Nacional" required>
+        </div>
+
+        <div class="mb-2">
+            <label for="iban" class="form-label">IBAN:</label>
+            <input type="text" id="iban" class="form-control" placeholder="Ex: AO06 1234 5678 9012 3456 7890" required>
+        </div>
+
+        <div class="mb-2">
+            <label for="nomeDono" class="form-label">Nome do Dono da Conta:</label>
+            <input type="text" id="nomeDono" class="form-control" placeholder="Ex: João Silva" required>
+        </div>
+
+        <div class="mb-2">
+            <label for="senha" class="form-label">Senha:</label>
+            <input type="password" id="senha" class="form-control" placeholder="Senha de segurança" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary mt-2">Cadastrar</button>
+    </form>
+    <hr>
+    <!-- TABELA DE CONTAS -->
+    <h5>Contas Bancárias</h5>
+    <table id="tabela_1" class="table table-borderless my-0 w-100">
+        <thead>
+            <tr>
+                <th>Banco</th>
+                <th>IBAN</th>
+                <th>Nome do Dono</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Banco Popular</td>
+                <td id="iban1">AO88 9876 5432 1098 7654 3210</td>
+                <td>Maria Fernandes</td>
+                <td>
+                    <button class="btn btn-sm btn-secondary" onclick="copiarIBAN('iban1')">Copiar IBAN</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<hr>
+
+<div class="content-top col-auto d-sm-block">
+    <p>
+    <h3>Lista de Restaurantes com os status </h3><i class="status pago">Pago</i> / <i
+        class="status pendente">Pendete</i>
+    </p>
+</div>
+
+<!-- Tabela de pagamentos de restaurantes -->
+<div class="card card-dashboard">
+    <div class="card-header">
+        <h5 class="card-title mb-0" style="color: white;">Pagamentos de Restaurantes</h5>
+    </div>
+    <div class="card-body table-responsive">
+        <table id="tabela_2" class="table table-borderless my-0 w-100">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Restaurante</th>
+                    <th>Status</th>
+                    <th>Data de Pagamento</th>
+                    <th>Valor (Kz)</th>
+                    <th>Comprovativo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaPagamentos">
+                <tr>
+                    <td>001</td>
+                    <td>Restaurante Kapital</td>
+                    <td><span class="status pago">Pago</span></td>
+                    <td>2025-11-05</td>
+                    <td>12.500</td>
+                    <td>
+                        <a href="admin.html#/analisando" class="text-decoration-none">
+                            <i data-feather="external-link"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
+                                data-feather="eye"></i></a>
+                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>002</td>
+                    <td>Burguer House</td>
+                    <td><span class="status pendente">Pendente</span></td>
+                    <td>—</td>
+                    <td>8.300</td>
+                    <td>
+                        <a href="detalhes-pagamento.html?id=002" class="text-decoration-none">
+                            <i data-feather="external-link"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
+                                data-feather="eye"></i></a>
+                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>003</td>
+                    <td>Pizza na Pedra</td>
+                    <td><span class="status pago">Pago</span></td>
+                    <td>2025-11-04</td>
+                    <td>10.200</td>
+                    <td>
+                        <a href="detalhes-pagamento.html?id=003" class="text-decoration-none">
+                            <i data-feather="external-link"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
+                                data-feather="eye"></i></a>
+                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>004</td>
+                    <td>Food City</td>
+                    <td><span class="status pago">Pago</span></td>
+                    <td>—</td>
+                    <td>9.800</td>
+                    <td>
+                        <a href="detalhes-pagamento.html?id=004" class="text-decoration-none">
+                            <i data-feather="external-link"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
+                                data-feather="eye"></i></a>
+                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<hr>
+<div class="content-top col-auto d-sm-block">
+    <p>
+    <h3>Lista de Restaurantes com os status </h3> <i class="status naoPago">Não Pago</i>
+    </p>
+</div>
+<!-- CARD FINANÇAS -->
+<div class="card card-dashboard p-3 mt-3" id="cardFinancas" style="cursor: pointer;">
+    <h4 class="d-flex align-items-center gap-2">
+        <i data-feather="alert-circle"></i>
+        Restaurantes com Pagamentos Atrasados
+    </h4>
+    <button class="btn btn-confirm">Clique para enviar mensagem automática</button>
+</div>
+<div class="card card-dashboard">
+    <div class="card-header">
+        <h5 class="card-title mb-0" style="color: white;">Pagamentos em Atrasos dos Restaurantes</h5>
+    </div>
+    <div class="card-body table-responsive">
+        <table id="tabela_3" class="table table-borderless my-0 w-100">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Restaurante</th>
+                    <th>Status</th>
+                    <th>Data de Pagamento</th>
+                    <th>Valor (Kz)</th>
+                    <th>Comprovativo</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaPagamentos">
+                <tr>
+                    <td>001</td>
+                    <td>Restaurante Kapital</td>
+                    <td><span class="status naoPago">Não Pago</span></td>
+                    <td>2025-11-05</td>
+                    <td>12.500</td>
+                    <td>
+                        <a href="admin.html#/analisando" class="text-decoration-none">
+                            <i data-feather="external-link"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
+                                data-feather="eye"></i></a>
+                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>002</td>
+                    <td>Burguer House</td>
+                    <td><span class="status naoPago">Não Pago</span></td>
+                    <td>—</td>
+                    <td>8.300</td>
+                    <td>
+                        <a href="detalhes-pagamento.html?id=002" class="text-decoration-none">
+                            <i data-feather="external-link"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
+                                data-feather="eye"></i></a>
+                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>003</td>
+                    <td>Pizza na Pedra</td>
+                    <td><span class="status naoPago">Não Pago</span></td>
+                    <td>2025-11-04</td>
+                    <td>10.200</td>
+                    <td>
+                        <a href="detalhes-pagamento.html?id=003" class="text-decoration-none">
+                            <i data-feather="external-link"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
+                                data-feather="eye"></i></a>
+                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>004</td>
+                    <td>Food City</td>
+                    <td><span class="status naoPago">Não Pago</span></td>
+                    <td>—</td>
+                    <td>9.800</td>
+                    <td>
+                        <a href="detalhes-pagamento.html?id=004" class="text-decoration-none">
+                            <i data-feather="external-link"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
+                                data-feather="eye"></i></a>
+                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="col-12">
+    <div class="card flex-fill card-dashboard">
+        <div class="card-header d-flex justify-content-between align-items-center"
+            style="background-color: rgba(255, 255, 255, 0.048);">
+            <h2 class="card-title mb-0" style="color: white;">Resumo Financeiro Anual</h2>
+
+            <div>
+                <label for="anoFiltro" class="text-white me-2">Ano:</label>
+                <select id="anoFiltro" class="form-select" style="display:inline-block; width: auto;"></select>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <canvas id="financeiroChart" height="460"></canvas>
+        </div>
+    </div>
+</div>
+
+
+<hr>
+<div class="content-top col-auto d-sm-block">
+    <h3>Registar todas as dispesas</h3>
+</div>
+<!-- ===== FORMULÁRIO DE CADASTRO DE DESPESAS ===== -->
+<div class="card mb-4 card-dashboard">
+    <div class="card-header">
+        <h5 class="card-title mb-0" style="color: white;">Cadastrar Despesa</h5>
+    </div>
+    <div class="card-body">
+        <form id="formDespesa" class="row g-3">
+            <div class="col-md-6">
+                <label for="descricaoDespesa" class="form-label">Descrição da Despesa</label>
+                <input type="text" class="form-control" id="descricaoDespesa" placeholder="Ex: Compra de embalagens">
+            </div>
+            <div class="col-md-3">
+                <label for="valorDespesa" class="form-label">Valor (Kz)</label>
+                <input type="number" class="form-control" id="valorDespesa" placeholder="Ex: 5000">
+            </div>
+            <div class="col-md-3">
+                <label for="dataDespesa" class="form-label">Data</label>
+                <input type="date" class="form-control" id="dataDespesa">
+            </div>
+            <div class="col-12 text-end">
+                <button type="submit" class="btn btn-primary">
+                    <i data-feather="plus-circle"></i> Adicionar Despesa
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ===== TABELA DE DESPESAS ===== -->
+<div class="card card-dashboard">
+    <div class="card-header">
+        <h5 class="card-title mb-0" style="color: white;">Despesas Registradas</h5>
+    </div>
+    <div class="card-body table-responsive">
+        <table id="tabela_4" class="table table-borderless my-0 w-100">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descrição</th>
+                    <th>Valor (Kz)</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dados fictícios -->
+                <tr>
+                    <td>1</td>
+                    <td>Compra de embalagens</td>
+                    <td>5.000</td>
+                    <td>01/11/2025</td>
+                    <td>
+                        <a href="admin.html#/editar-nota" class="text-info" title="Editar"><i
+                                data-feather="edit"></i></a>
+                        <a href="#" class="text-danger" title="Excluir"><i data-feather="trash-2"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Pagamento de internet</td>
+                    <td>10.000</td>
+                    <td>02/11/2025</td>
+                    <td>
+                        <a href="#" class="text-info" title="Editar"><i data-feather="edit"></i></a>
+                        <a href="#" class="text-danger" title="Excluir"><i data-feather="trash-2"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Manutenção da moto</td>
+                    <td>7.500</td>
+                    <td>03/11/2025</td>
+                    <td>
+                        <a href="#" class="text-info" title="Editar"><i data-feather="edit"></i></a>
+                        <a href="#" class="text-danger" title="Excluir"><i data-feather="trash-2"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="content-top col-auto d-sm-block">
+    <h3>Administradores e Contas Bancárias</h3>
+</div>
+<div class="card card-dashboard p-3 mt-3">
+
+    <table id="tabela_5" class="table table-borderless my-0 w-100">
+        <thead>
+            <tr>
+                <th>Nome do Administrador</th>
+                <th>Cargo</th>
+                <th>IBAN</th>
+                <th>Banco</th>
+                <th>Proprietário da Conta</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>João Silva</td>
+                <td>Super Admin</td>
+                <td id="iban1">AO06 1234 5678 9012 3456 7890</td>
+                <td>Banco Nacional</td>
+                <td>João Silva</td>
+                <td>
+                    <button class="btn btn-sm btn-secondary" onclick="copiarIBAN('iban1')">Copiar IBAN</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Maria Fernandes</td>
+                <td>Admin Financeiro</td>
+                <td id="iban2">AO88 9876 5432 1098 7654 3210</td>
+                <td>Banco Popular</td>
+                <td>Maria Fernandes</td>
+                <td>
+                    <button class="btn btn-sm btn-secondary" onclick="copiarIBAN('iban2')">Copiar IBAN</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Pedro António</td>
+                <td>Editor</td>
+                <td id="iban3">AO11 2345 6789 0123 4567 8901</td>
+                <td>Banco Económico</td>
+                <td>Pedro António</td>
+                <td>
+                    <button class="btn btn-sm btn-secondary" onclick="copiarIBAN('iban3')">Copiar IBAN</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    function copiarIBAN(id) {
+        const iban = document.getElementById(id).textContent;
+        navigator.clipboard.writeText(iban).then(() => {
+            alert("IBAN copiado: " + iban);
+        }).catch(err => {
+            console.error("Erro ao copiar IBAN: ", err);
+        });
+    }
+</script>
+
+
+<script>
+    // ==========================================
+    // CARD DE FINANÇAS — ENVIAR MENSAGEM A ATRASADOS
+    // ==========================================
+
+    document.getElementById("cardFinancas").addEventListener("click", () => {
+
+        // Lista fictícia de restaurantes (podes trocar por BD real depois)
+        const restaurantes = [
+            { id: 1, nome: "Restaurante Kapital", atrasado: true },
+            { id: 2, nome: "Burguer House", atrasado: false },
+            { id: 3, nome: "Pizza na Pedra", atrasado: true },
+            { id: 4, nome: "Food City", atrasado: false }
+        ];
+
+        // Filtrar apenas os atrasados
+        const atrasados = restaurantes.filter(r => r.atrasado === true);
+
+        if (atrasados.length === 0) {
+            alert("Nenhum restaurante com atraso de pagamento!");
+            return;
+        }
+
+        let lista = atrasados.map(r => "- " + r.nome).join("\n");
+
+        // Mensagem padrão
+        const mensagem =
+            "⚠️ *ATENÇÃO!* \n" +
+            "Detectamos atraso no pagamento das comissões. \n" +
+            "Pedimos que regularizem o mais rápido possível. Obrigado!";
+
+        // Simulação do envio
+        alert(
+            "Mensagem enviada para os seguintes restaurantes:\n\n" +
+            lista +
+            "\n\n📩 Mensagem:\n" +
+            mensagem
+        );
+    });
+</script>
+<script>
+    const filtroData = document.getElementById('filtroData');
+    const btnFiltrar = document.getElementById('btnFiltrar');
+    const btnLimparFiltro = document.getElementById('btnLimparFiltro');
+    const tabela = document.getElementById('tabelaPagamentos');
+
+    btnFiltrar.addEventListener('click', () => {
+        const dataSelecionada = filtroData.value; // YYYY-MM-DD
+        let encontrou = false;
+
+        Array.from(tabela.rows).forEach(row => {
+            const dataPagamento = row.cells[4].textContent.trim(); // coluna da data
+            if (dataPagamento === dataSelecionada) {
+                row.style.display = '';
+                encontrou = true;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Verifica se encontrou algum resultado
+        if (!encontrou) {
+            // Remove linha antiga se existir
+            const linhaNaoEncontradoExistente = document.getElementById('linhaNaoEncontrado');
+            if (linhaNaoEncontradoExistente) linhaNaoEncontradoExistente.remove();
+
+            // Cria nova linha
+            const tr = document.createElement('tr');
+            tr.id = 'linhaNaoEncontrado';
+            tr.innerHTML = `<td colspan="6" class="text-center text-muted">Nenhum registro encontrado para esta data.</td>`;
+            tabela.appendChild(tr);
+        } else {
+            // Remove linha "não encontrado" se existir
+            const linhaNaoEncontradoExistente = document.getElementById('linhaNaoEncontrado');
+            if (linhaNaoEncontradoExistente) linhaNaoEncontradoExistente.remove();
+        }
+    });
+
+    btnLimparFiltro.addEventListener('click', () => {
+        filtroData.value = '';
+        Array.from(tabela.rows).forEach(row => row.style.display = '');
+        const linhaNaoEncontradoExistente = document.getElementById('linhaNaoEncontrado');
+        if (linhaNaoEncontradoExistente) linhaNaoEncontradoExistente.remove();
+    });
+</script>
+
+<script>
+    const anoAtual = new Date().getFullYear();
+    const anoFiltro = document.getElementById("anoFiltro");
+
+    // Gerar últimos 5 anos
+    for (let i = 0; i < 5; i++) {
+        const ano = anoAtual - i;
+        const op = document.createElement("option");
+        op.value = ano;
+        op.textContent = ano;
+        if (ano === anoAtual) op.selected = true;
+        anoFiltro.appendChild(op);
+    }
+
+    // ============================
+    // DADOS FINANCEIROS (EXEMPLO)
+    // ============================
+    const dadosFinanceiros = {
+        [anoAtual]: {
+            receitas: [4000, 4300, 4500, 4700, 5000, 5200, 5500, 5800, 6000, 6500, 7000, 7500],
+            despesas: [2000, 2100, 2200, 2500, 2400, 2600, 2700, 2900, 3000, 3100, 3200, 3300]
+        },
+        [anoAtual - 1]: {
+            receitas: [3500, 3600, 3800, 3900, 4200, 4400, 4700, 4900, 5100, 5300, 5500, 5800],
+            despesas: [1800, 1900, 2000, 2200, 2100, 2300, 2400, 2600, 2700, 2800, 2900, 3000]
+        }
+    };
+
+    // Calcula lucro automaticamente
+    function calcularLucro(receitas, despesas) {
+        return receitas.map((v, i) => v - despesas[i]);
+    }
+
+    const ctx = document.getElementById("financeiroChart").getContext("2d");
+
+    const chartData = {
+        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+        datasets: [
+            {
+                label: "Receitas",
+                type: "bar",
+                data: dadosFinanceiros[anoAtual].receitas,
+                backgroundColor: "#0d6efd",
+                borderRadius: 6
+            },
+            {
+                label: "Despesas",
+                type: "bar",
+                data: dadosFinanceiros[anoAtual].despesas,
+                backgroundColor: "#dc3545",
+                borderRadius: 6
+            },
+            {
+                label: "Lucro",
+                type: "line",
+                data: calcularLucro(dadosFinanceiros[anoAtual].receitas, dadosFinanceiros[anoAtual].despesas),
+                borderColor: "white",
+                borderWidth: 3,
+                tension: 0.4,
+                pointRadius: 5,
+                pointBackgroundColor: "white",
+                pointHoverRadius: 7
+            }
+        ]
+    };
+
+    const financeiroChart = new Chart(ctx, {
+        data: chartData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { labels: { color: "white", font: { weight: "bold" } } },
+                tooltip: {
+                    mode: "index",
+                    intersect: false,
+                    callbacks: {
+                        label: function (context) {
+                            return `${context.dataset.label}: ${context.formattedValue} kz`;
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: { color: "white", font: { weight: "bold" } },
+                    grid: { display: false }
+                },
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: "white" },
+                    grid: { color: "rgba(255,255,255,0.1)" }
+                }
+            }
+        }
+    });
+
+    // Atualizar ao mudar ano
+    anoFiltro.addEventListener("change", () => {
+        const ano = anoFiltro.value;
+        const dados = dadosFinanceiros[ano];
+
+        financeiroChart.data.datasets[0].data = dados.receitas;
+        financeiroChart.data.datasets[1].data = dados.despesas;
+        financeiroChart.data.datasets[2].data = calcularLucro(dados.receitas, dados.despesas);
+
+        financeiroChart.update();
+    });
+</script>
+
+<style>
+    .status {
+        border-radius: 50px;
+        padding: 3px 10px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status.pago {
+        background-color: #198754;
+        color: white;
+    }
+
+    .status.naoPago {
+        background-color: #dc3545;
+        color: white;
+    }
+
+
+    .status.pendente {
+        background-color: #616300;
+        color: white;
+    }
+
+    .chart-container {
+        position: relative;
+        height: 320px;
+        width: 100%;
+    }
+
+    .badge-soft-dark {
+        font-size: 0.85rem;
+        background-color: white;
+        color: black !important;
+    }
+</style>
+
+<style>
+    /* ========== BASE GERAL ========== */
+    * {
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+
+    /* ========== UPLOAD FOTO ========== */
+    .upload-foto {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .foto-preview {
+        width: 120px;
+        height: 120px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid #ccc;
+    }
+
+    /* ========== AJUSTES ========== */
+    a.no-underline {
+        text-decoration: none !important;
+    }
+</style>
+
+
+
+<!-- Chart.js -->
+<!-- Cabeçalho -->

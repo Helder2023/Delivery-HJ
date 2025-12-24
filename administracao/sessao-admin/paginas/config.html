@@ -1,0 +1,534 @@
+<div class="container-fluid p-0">
+  <div class="row mb-2 mb-xl-3">
+    <div class="col-auto d-sm-block">
+      <h3>Configurações</h3>
+    </div>
+    <div class="col-auto ms-auto text-end mt-n1">
+      <button class="btn shadow-sm" onclick="window.location.reload();" style="background-color: #000; color: white;">
+        <i class="align-middle" data-feather="refresh-cw" id="refresh"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 col-xl-3">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">Painel de Configurações</h5>
+        </div>
+        <div class="list-group list-group-flush" role="tablist">
+         
+          <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#seguranca" role="tab">
+            Segurança
+          </a>
+          <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#sistema" role="tab">
+            Sistema / Aplicação
+          </a>
+          <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#chat" role="tab">
+            WhatsApp e Email (Chat)
+          </a>
+          <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#notificacoes" role="tab">
+            Notificações & Automações
+          </a>
+
+          <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#suporte" role="tab">
+            Suporte e Manual do Utilizador
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8 col-xl-9">
+      <div class="tab-content">
+        
+        <!-- Segurança -->
+        <div class="tab-pane fade show active" id="seguranca" role="tabpanel">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title mb-0">Segurança da Conta</h5>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="mb-3">
+                  <label class="form-label">Alterar Senha Atual</label>
+                  <input type="password" class="form-control" placeholder="Senha atual">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Nova Senha</label>
+                  <input type="password" class="form-control" placeholder="Nova senha">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Confirmar Nova Senha</label>
+                  <input type="password" class="form-control" placeholder="Confirmar senha">
+                </div>
+                <button class="btn btn-dark">Atualizar Senha</button>
+              </form>
+
+              <hr>
+              <h6 class="mt-4">Sessões Ativas</h6>
+              <p class="text-muted small">Você está conectado nos seguintes dispositivos:</p>
+              <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Chrome - Windows
+                  <button class="btn btn-sm btn-outline-danger">Encerrar</button>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  Safari - iPhone 13
+                  <button class="btn btn-sm btn-outline-danger">Encerrar</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sistema / Aplicação -->
+        <div class="tab-pane fade" id="sistema" role="tabpanel">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title mb-0">Sistema e Aplicação</h5>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="mb-3">
+                  <label class="form-label">Nome do Sistema / Empresa</label>
+                  <input type="text" class="form-control" value="Delivery HJ">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Taxa de Comissão (%)</label>
+                  <input type="number" class="form-control" placeholder="Ex: 15">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Dias de Pagamento</label>
+                  <select class="form-select">
+                    <option value="sexta">Sexta-feira</option>
+                    <option value="sábado">Sábado</option>
+                    <option value="domingo">Domingo</option>
+                  </select>
+                </div>
+                <button class="btn btn-dark">Guardar Alterações</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- WhatsApp e Email (Chat) -->
+        <div class="tab-pane fade" id="chat" role="tabpanel">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title mb-0">Canais de Comunicação</h5>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="mb-3">
+                  <label class="form-label">Número WhatsApp Oficial</label>
+                  <input type="text" class="form-control" placeholder="+244 999 000 000">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Link do Chat WhatsApp</label>
+                  <input type="url" class="form-control" placeholder="https://wa.me/244999000000">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">E-mail do Suporte</label>
+                  <input type="email" class="form-control" placeholder="suporte@deliveryhj.com">
+                </div>
+                <button class="btn btn-dark">Salvar Configurações</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notificações e Automações -->
+        <div class="tab-pane fade" id="notificacoes" role="tabpanel">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="card-title mb-0">Notificações e Automações</h5>
+            </div>
+            <div class="card-body">
+              <form>
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="checkbox" id="alertaDívida" checked>
+                  <label class="form-check-label" for="alertaDívida">
+                    Enviar alerta automático quando restaurante não pagar
+                  </label>
+                </div>
+                <div class="form-check mb-3">
+                  <input class="form-check-input" type="checkbox" id="lembreteEmail">
+                  <label class="form-check-label" for="lembreteEmail">
+                    Enviar lembrete de pagamento por e-mail
+                  </label>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Tempo para enviar lembrete</label>
+                  <select class="form-select">
+                    <option>1 dia antes</option>
+                    <option>3 dias antes</option>
+                    <option>1 semana antes</option>
+                  </select>
+                </div>
+                <button class="btn btn-dark">Atualizar Automações</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Suporte e Ajuda -->
+        <div class="card tab-pane fade overflow-auto" id="suporte" role="tabpanel" style="height: 530px;">
+
+          <div>
+            <div class="card-header">
+              <h5 class="card-title mb-0">Suporte e Manual do Utilizador</h5>
+            </div>
+
+            <div class="card-body">
+
+              <h4 class="mb-3">📘 Manual do Sistema Delivery HJ</h4>
+              <p class="text-muted">
+                Bem-vindo ao manual oficial do sistema <strong>Delivery HJ – Administração</strong>.
+                Aqui encontras explicações detalhadas sobre todas as páginas, funcionalidades e operações disponíveis
+                para administradores, supervisores e operadores.
+              </p>
+
+              <hr>
+
+              <!-- =========================== MENU INTERNO =========================== -->
+              <h5>📑 Secções do Manual</h5>
+
+              <ul class="list-group mb-4">
+                <li class="list-group-item"><a href="#m-visao-geral">1. Visão Geral do Sistema</a></li>
+                <li class="list-group-item"><a href="#m-dashboard">2. Dashboard Principal</a></li>
+                <li class="list-group-item"><a href="#m-restaurantes">3. Gestão de Restaurantes</a></li>
+                <li class="list-group-item"><a href="#m-pedidos">4. Gestão de Pedidos</a></li>
+                <li class="list-group-item"><a href="#m-financeiro">5. Módulo Financeiro</a></li>
+                <li class="list-group-item"><a href="#m-utilizadores">6. Gestão de Utilizadores</a></li>
+                <li class="list-group-item"><a href="#m-chat">7. Chat e Comunicação</a></li>
+                <li class="list-group-item"><a href="#m-config">8. Configurações do Sistema</a></li>
+                <li class="list-group-item"><a href="#m-suporte">9. Como Pedir Suporte</a></li>
+              </ul>
+
+              <hr>
+
+              <!-- =========================== 1. VISÃO GERAL =========================== -->
+              <h4 id="m-visao-geral">1. Visão Geral do Sistema</h4>
+              <p>
+                O painel administrativo do Delivery HJ permite controlar restaurantes, pedidos, pagamentos, utilizadores
+                e todo o ecossistema da plataforma.
+                Ele funciona com navegação por <strong>sidebar</strong> e páginas carregadas dinamicamente usando o
+                sistema de rotas <code>#</code>.
+              </p>
+
+              <hr>
+
+              <!-- =========================== 2. DASHBOARD =========================== -->
+              <h4 id="m-dashboard">2. Dashboard Principal</h4>
+              <p>O dashboard apresenta um resumo geral das operações:</p>
+
+              <ul>
+                <li><strong>Total de pedidos do dia</strong></li>
+                <li><strong>Top 5 restaurantes</strong></li>
+                <li><strong>Crescimento semanal/mensal</strong></li>
+                <li><strong>Pedidos pendentes / concluídos</strong></li>
+                <li><strong>Mapa de calor das zonas</strong></li>
+                <li><strong>Status dos restaurantes</strong> – online, offline, atrasado</li>
+              </ul>
+
+              <p>
+                Os gráficos são atualizados automaticamente a partir dos dados enviados pela API interna.
+              </p>
+
+              <hr>
+
+              <!-- =========================== 3. RESTAURANTES =========================== -->
+              <h4 id="m-restaurantes">3. Gestão de Restaurantes</h4>
+              <p>Nesta área podem-se gerir todos os restaurantes parceiros:</p>
+
+              <ul>
+                <li>Registar novos restaurantes</li>
+                <li>Ver documentos enviados (alvará, logotipo, etc.)</li>
+                <li>Alterar estado (ativo, suspenso, pendente, atrasado)</li>
+                <li>Acompanhar desempenho mensal</li>
+                <li>Consultar histórico de pagamentos</li>
+                <li>Avaliações dos clientes</li>
+              </ul>
+
+              <p>
+                Também podes entrar no perfil de um restaurante para ver gráficos
+                detalhados de rendimento por semana, mês ou ano.
+              </p>
+
+              <hr>
+
+              <!-- =========================== 4. PEDIDOS =========================== -->
+              <h4 id="m-pedidos">4. Gestão de Pedidos</h4>
+              <p>Permite acompanhar pedidos em tempo real:</p>
+
+              <ul>
+                <li>Ver todos os pedidos abertos, concluídos ou cancelados</li>
+                <li>Filtro por data, restaurante ou estado</li>
+                <li>Linha do tempo (timeline) do pedido</li>
+                <li>Botão para contactar restaurante</li>
+                <li>Relatórios de pedidos perdidos</li>
+              </ul>
+
+              <hr>
+
+              <!-- =========================== 5. FINANCEIRO =========================== -->
+              <h4 id="m-financeiro">5. Módulo Financeiro</h4>
+              <p>Responsável por toda a gestão monetária:</p>
+
+              <h6>5.1 Pagamentos dos Restaurantes</h6>
+              <ul>
+                <li>Ver restaurantes pagos, atrasados e pendentes</li>
+                <li>Validar comprovativos enviados</li>
+                <li>Alertas automáticos de atraso</li>
+              </ul>
+
+              <h6>5.2 Faturação</h6>
+              <ul>
+                <li>Gerar faturas automáticas</li>
+                <li>Consultar histórico por restaurante</li>
+              </ul>
+
+              <h6>5.3 Comissão</h6>
+              <ul>
+                <li>Configurar percentuais por restaurante</li>
+                <li>Cálculo automático do valor devido</li>
+              </ul>
+
+              <hr>
+
+              <!-- =========================== 6. UTILIZADORES =========================== -->
+              <h4 id="m-utilizadores">6. Gestão de Utilizadores</h4>
+              <p>Aqui administra-se acesso e permissões:</p>
+
+              <ul>
+                <li>Super Admin</li>
+                <li>Financeiro</li>
+                <li>Suporte</li>
+                <li>Operador de Restaurantes</li>
+              </ul>
+
+              <p>
+                Cada utilizador tem permissões diferentes conforme o papel.
+              </p>
+
+              <hr>
+
+              <!-- =========================== 7. CHAT =========================== -->
+              <h4 id="m-chat">7. WhatsApp, Email e Comunicação</h4>
+              <p>Inclui:</p>
+
+              <ul>
+                <li>Número oficial WhatsApp</li>
+                <li>Link do WhatsApp API</li>
+                <li>E-mail oficial do suporte</li>
+                <li>Comunicação direta com restaurantes</li>
+              </ul>
+
+              <hr>
+
+              <!-- =========================== 8. CONFIG =========================== -->
+              <h4 id="m-config">8. Configurações do Sistema</h4>
+              <p>Podes editar:</p>
+
+              <ul>
+                <li>Nome da empresa</li>
+                <li>Taxa de comissão</li>
+                <li>Dias de pagamento</li>
+                <li>Ativar / desativar automações</li>
+                <li>Modo claro ou escuro</li>
+              </ul>
+
+              <hr>
+
+              <!-- =========================== 9. SUPORTE =========================== -->
+              <h4 id="m-suporte">9. Como Pedir Suporte</h4>
+
+              <p>Se tiveres dúvidas, problemas ou sugestões:</p>
+
+              <ul>
+                <li>📲 Contacta via WhatsApp: <strong>+244 XXX XXX XXX</strong></li>
+                <li>📧 Email oficial: <strong>suporte@deliveryhj.com</strong></li>
+                <li>🔧 Reportar erros diretamente no sistema</li>
+              </ul>
+
+              <p class="text-muted small">
+                O suporte está disponível das <strong>08h às 20h</strong>, de segunda a sábado.
+              </p>
+
+              <hr>
+
+              <h5>Obrigado por usar o Delivery HJ!</h5>
+              <p class="text-muted">Estamos sempre a melhorar para oferecer a melhor experiência possível.</p>
+
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  feather.replace();
+</script>
+
+<style>
+  /* ========== BASE GERAL ========== */
+  /* ========== BASE GERAL ========== */
+  * {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* ========== MODO ESCURO ========== */
+  body.dark-mode {
+    background-color: #121212 !important;
+    color: #f1f1f1 !important;
+  }
+
+  body.dark-mode .card,
+  body.dark-mode .list-group-item {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border-color: #333 !important;
+  }
+
+  body.dark-mode .card-header {
+    background-color: #232323 !important;
+    color: #fff !important;
+  }
+
+  body.dark-mode h1,
+  body.dark-mode h2,
+  body.dark-mode h3,
+  body.dark-mode h4,
+  body.dark-mode h5,
+  body.dark-mode h6,
+  body.dark-mode p,
+  body.dark-mode label,
+  body.dark-mode span,
+  body.dark-mode a,
+  body.dark-mode strong,
+  body.dark-mode small {
+    color: #ffffff !important;
+  }
+
+  /* Inputs, selects e textareas */
+  body.dark-mode input,
+  body.dark-mode select,
+  body.dark-mode textarea {
+    background-color: #1a1a1a !important;
+    color: #f9f9f9 !important;
+    border: 1px solid #444 !important;
+  }
+
+  body.dark-mode input::placeholder,
+  body.dark-mode textarea::placeholder {
+    color: #bbb !important;
+  }
+
+  /* Quando o input estiver focado */
+  body.dark-mode input:focus,
+  body.dark-mode select:focus,
+  body.dark-mode textarea:focus {
+    background-color: #222 !important;
+    border-color: #007bff !important;
+    color: #fff !important;
+  }
+
+  /* Botões no modo escuro */
+  body.dark-mode .btn {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+    border-color: #3a3a3a !important;
+  }
+
+  body.dark-mode .btn:hover,
+  body.dark-mode .btn:focus {
+    background-color: #007bff !important;
+    color: #ffffff !important;
+    border-color: #007bff !important;
+  }
+
+  /* List-group item ativo */
+  body.dark-mode .list-group-item.active {
+    background-color: #007bff !important;
+    color: #fff !important;
+    border-color: #007bff !important;
+  }
+
+  /* Switches */
+  body.dark-mode .form-check-input:checked {
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+  }
+
+  /* ========== MODO CLARO ========== */
+  body.light-mode {
+    background-color: #f9f9f9 !important;
+    color: #222 !important;
+  }
+
+  body.light-mode .card,
+  body.light-mode .list-group-item {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #ddd !important;
+  }
+
+  body.light-mode .card-header {
+    background-color: #f2f2f2 !important;
+    color: #000000 !important;
+  }
+
+  /* Inputs e selects no modo claro */
+  body.light-mode input,
+  body.light-mode select,
+  body.light-mode textarea {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #ccc !important;
+  }
+
+  body.light-mode input::placeholder,
+  body.light-mode textarea::placeholder {
+    color: #666 !important;
+  }
+
+  body.light-mode input:focus,
+  body.light-mode select:focus,
+  body.light-mode textarea:focus {
+    background-color: #fff !important;
+    border-color: #007bff !important;
+    color: #000 !important;
+  }
+
+  /* Botões no modo claro */
+  body.light-mode .btn {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #ccc !important;
+  }
+
+  body.light-mode .btn:hover,
+  body.light-mode .btn:focus {
+    background-color: #007bff !important;
+    color: #ffffff !important;
+    border-color: #007bff !important;
+  }
+
+  /* List-group item ativo no modo claro */
+  body.light-mode .list-group-item.active {
+    background-color: #007bff !important;
+    color: #fff !important;
+    border-color: #007bff !important;
+  }
+
+  /* Switches */
+  body.light-mode .form-check-input:checked {
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+  }
+</style>

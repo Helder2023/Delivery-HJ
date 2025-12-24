@@ -1,0 +1,578 @@
+<div class="container-fluid p-0">
+
+    <div class="row mb-2 mb-xl-3">
+        <div class="col-auto d-sm-block">
+            <h3 style="color: white;">Todos os utilizadores</h3>
+        </div>
+
+        <div class="col-auto ms-auto text-end mt-n1">
+
+            <button class="btn shadow-sm no-underline" style="background-color: #000;">
+                <i class="align-middle mt-n1">&nbsp;</i> <a class="no-underline" href="admin.html#/adicionar-utilizador"
+                    style="color: white;">
+                    <i data-feather="user-plus"></i> Adcionar novo
+                    utilizador</a>
+            </button>
+
+            <button class="btn shadow-sm" style="background-color: #000;">
+                <i class="align-middle" data-feather="refresh-cw" id="refresh" onclick="window.location.reload();"
+                    style="color: white;">&nbsp;</i>
+            </button>
+        </div>
+    </div>
+
+    <!-- === BARRA DE PESQUISA === -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Pesquisar utilizadores...">
+    </div>
+
+    <!-- === CONTAINER DOS CARDS === -->
+    <div id="cards-container" class="row g-4">
+        <div class="col-12 col-md-6 col-lg-4 card-item">
+            <div class="admin-card d-flex align-items-center gap-3">
+                <img src="https://randomuser.me/api/portraits/women/10.jpg" class="admin-avatar" alt="Cliente">
+                <div class="flex-grow-1">
+                    <h6 class="mb-1">Ana Paula</h6>
+                    <p class="text-secondary mb-1">Cliente desde 2023</p>
+                    <span class="status ativo">Ativo</span>
+                </div>
+                <div>
+                    <a href="admin.html#/visualizar-utilizador">
+                        <button class="btn btn-sm btn-primary" style="border-radius: 5px;"><i
+                                data-feather="eye"></i></button>
+                    </a>
+                    <a href="admin.html#/editar-utilizador">
+                        <button class="btn btn-sm btn-danger" style="border-radius: 5px;"><i
+                                data-feather="edit"></i></button>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4 card-item">
+            <div class="admin-card d-flex align-items-center gap-3">
+                <img src="https://randomuser.me/api/portraits/men/21.jpg" class="admin-avatar" alt="Cliente">
+                <div class="flex-grow-1">
+                    <h6 class="mb-1">Ricardo Silva</h6>
+                    <p class="text-secondary mb-1">Cliente desde 2024</p>
+                    <span class="status ativo">Ativo</span>
+                </div>
+                <div>
+                    <button class="btn btn-sm btn-primary" style="border-radius: 5px;"><i
+                            data-feather="eye"></i></button>
+                    <button class="btn btn-sm btn-danger" style="border-radius: 5px;"><i
+                            data-feather="edit"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4 card-item">
+            <div class="admin-card d-flex align-items-center gap-3">
+                <img src="https://randomuser.me/api/portraits/women/18.jpg" class="admin-avatar" alt="Cliente">
+                <div class="flex-grow-1">
+                    <h6 class="mb-1">Marta Gomes</h6>
+                    <p class="text-secondary mb-1">Cliente desde 2022</p>
+                    <span class="status ativo">Ativo</span>
+                </div>
+                <div>
+                    <button class="btn btn-sm btn-primary" style="border-radius: 5px;"><i
+                            data-feather="eye"></i></button>
+                    <button class="btn btn-sm btn-danger" style="border-radius: 5px;"><i
+                            data-feather="edit"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4 card-item">
+            <div class="admin-card d-flex align-items-center gap-3">
+                <img src="https://randomuser.me/api/portraits/men/42.jpg" class="admin-avatar" alt="Cliente">
+                <div class="flex-grow-1">
+                    <h6 class="mb-1">Carlos Alberto</h6>
+                    <p class="text-secondary mb-1">Cliente desde 2023</p>
+                    <span class="status ativo">Ativo</span>
+                </div>
+                <div>
+                    <button class="btn btn-sm btn-primary" style="border-radius: 5px;"><i
+                            data-feather="eye"></i></button>
+                    <button class="btn btn-sm btn-danger" style="border-radius: 5px;"><i
+                            data-feather="edit"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4 card-item">
+            <div class="admin-card d-flex align-items-center gap-3">
+                <img src="https://randomuser.me/api/portraits/men/37.jpg" class="admin-avatar" alt="Cliente">
+                <div class="flex-grow-1">
+                    <h6 class="mb-1">António Miguel</h6>
+                    <p class="text-secondary mb-1">Cliente desde 2021</p>
+                    <span class="status ativo">Ativo</span>
+                </div>
+                <div>
+                    <button class="btn btn-sm btn-primary" style="border-radius: 5px;"><i
+                            data-feather="eye"></i></button>
+                    <button class="btn btn-sm btn-danger" style="border-radius: 5px;"><i
+                            data-feather="edit"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4 card-item">
+            <div class="admin-card d-flex align-items-center gap-3">
+                <img src="https://randomuser.me/api/portraits/women/28.jpg" class="admin-avatar" alt="Cliente">
+                <div class="flex-grow-1">
+                    <h6 class="mb-1">Helena Costa</h6>
+                    <p class="text-secondary mb-1">Cliente desde 2020</p>
+                    <span class="status ativo">Ativo</span>
+                </div>
+                <div>
+                    <button class="btn btn-sm btn-primary" style="border-radius: 5px;"><i
+                            data-feather="eye"></i></button>
+                    <button class="btn btn-sm btn-danger" style="border-radius: 5px;"><i
+                            data-feather="edit"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- === PAGINAÇÃO === -->
+    <div id="pagination" class="pagination mt-3 d-flex justify-content-center"></div>
+</div>
+
+
+<div class="row mt-3">
+    <div class="col-12 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+                <h5 class="card-title mb-0" style="color: white;"> <i class="align-middle text-info"
+                        data-feather="alert-triangle"
+                        style="color: black !important; margin-top: -6px; margin-right: 5px;"></i>
+                    Avisos de Utilizadores</h5>
+            </div>
+            <div class="card-body">
+                <table id="datatables-column-search-select-inputs" class="table table-borderless my-0 w-100">
+                    <thead>
+                        <tr>
+                            <th>Foto</th>
+                            <th>Nome Completo</th>
+                            <th>Telefone</th>
+                            <th>E-mail</th>
+                            <th>Data Nascimento</th>
+                            <th>Gênero</th>
+                            <th>Bairro</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="../assets/img/avatar/avatar.png" class="foto-mini"></td>
+                            <td>Pedro António</td>
+                            <td>+244 923 456 789</td>
+                            <td>pedro.antonio@email.com</td>
+                            <td>1998-01-12</td>
+                            <td>Masculino</td>
+                            <td>Talatona</td>
+                            <td><i class="status pendente">Pendente</i></td>
+                            <td>
+                                <a style="margin-right: 7px;" href="admin.html#/visualizar-utilizador"><i data-feather="eye"></i></a> 
+                                <a href="admin.html#/deletar-utilizador"><i data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><img src="../assets/img/avatar/avatar.png" class="foto-mini"></td>
+                            <td>Maria Silva</td>
+                            <td>+244 912 000 111</td>
+                            <td>maria.silva@email.com</td>
+                            <td>1990-06-28</td>
+                            <td>Feminino</td>
+                            <td>Rocha Pinto</td>
+                            <td><i class="status bloqueiado">Bloqueiado</i></td>
+                            <td>
+                                <a style="margin-right: 7px;" href="admin.html#/visualizar-utilizador"><i data-feather="eye"></i></a>
+                                <a href="admin.html#/deletar-utilizador"><i data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <!-- Adicione mais linhas conforme necessário -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<style>
+  /* ====== TRANSIÇÃO SUAVE GLOBAL ====== */
+  * {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* ====== ESTILO BASE (COMUM AOS DOIS MODOS) ====== */
+  .admin-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .admin-card {
+    border-radius: 12px;
+    padding: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 500px;
+  }
+
+  .admin-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  }
+
+  .status {
+    border-radius: 50px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .status.ativo {
+    background-color: #198754;
+    color: #fff;
+  }
+
+  .status.inativo {
+    background-color: #dc3545;
+    color: #fff;
+  }
+
+  #pagination-controls {
+    margin: 30px 0;
+  }
+
+  #pagination-controls button {
+    border: none;
+    transition: 0.3s;
+  }
+
+  .no-underline {
+    text-decoration: none !important;
+  }
+
+  /* ====== MODO ESCURO ====== */
+  body.dark-mode {
+    background-color: #121212 !important;
+    color: #f1f1f1 !important;
+  }
+
+  body.dark-mode h3,
+  body.dark-mode h6,
+  body.dark-mode p,
+  body.dark-mode span {
+    color: #fff !important;
+  }
+
+  body.dark-mode .admin-card {
+    background-color: #1e1e1e !important;
+    border: 1px solid #333 !important;
+  }
+
+  body.dark-mode .search-bar input {
+    background-color: #1e1e1e !important;
+    color: #fff !important;
+    border: 1px solid #333 !important;
+  }
+
+  body.dark-mode .search-bar input::placeholder {
+    color: #aaa !important;
+  }
+
+  body.dark-mode .btn {
+    background-color: #2a2a2a !important;
+    color: #fff !important;
+    border: 1px solid #3a3a3a !important;
+  }
+
+  body.dark-mode .btn:hover,
+  body.dark-mode .btn:focus {
+    background-color: #007bff !important;
+    color: #fff !important;
+    border-color: #007bff !important;
+  }
+
+  /* Paginação */
+  body.dark-mode #pagination-controls button {
+    background-color: #1e1e1e !important;
+    color: #fff !important;
+  }
+
+  body.dark-mode #pagination-controls button:hover:not(:disabled),
+  body.dark-mode #pagination-controls .btn-primary {
+    background-color: #007bff !important;
+    color: #fff !important;
+  }
+
+  /* ====== MODO CLARO ====== */
+  body.light-mode {
+    background-color: #f9f9f9 !important;
+    color: #000 !important;
+  }
+
+  body.light-mode h3,
+  body.light-mode h6,
+  body.light-mode p,
+  body.light-mode span {
+    color: #000 !important;
+  }
+
+  body.light-mode .admin-card {
+    background-color: #fff !important;
+    border: 1px solid #ddd !important;
+  }
+
+  body.light-mode .search-bar input {
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+  }
+
+  body.light-mode .search-bar input::placeholder {
+    color: #666 !important;
+  }
+
+  body.light-mode .btn {
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 1px solid #ccc !important;
+  }
+
+  body.light-mode .btn:hover,
+  body.light-mode .btn:focus {
+    background-color: #007bff !important;
+    color: #fff !important;
+    border-color: #007bff !important;
+  }
+
+  /* Paginação */
+  body.light-mode #pagination-controls button {
+    background-color: #f1f1f1 !important;
+    color: #000 !important;
+  }
+
+  body.light-mode #pagination-controls button:hover:not(:disabled),
+  body.light-mode #pagination-controls .btn-primary {
+    background-color: #007bff !important;
+    color: #fff !important;
+  }
+
+  /* ====== AJUSTE DE ÍCONES FEATHER ====== */
+  body.dark-mode svg.feather {
+    stroke: #fff !important;
+  }
+
+  body.light-mode svg.feather {
+    stroke: #000 !important;
+  }
+</style>
+<style>
+    .search-bar input {
+        max-width: 500px;
+        margin-bottom: 20px;
+        position: relative;
+        border: 1px solid white !important;
+    }
+
+    .search-bar input {
+        color: #fff;
+        border: none;
+        padding: 12px 40px;
+        width: 100%;
+        border-radius: 8px;
+        outline: none;
+    }
+
+    .search-bar i {
+        position: absolute;
+        left: 12px;
+        top: 12px;
+        color: #aaa;
+    }
+
+    .flex-grow-1 h6,
+    .flex-grow-1 p {
+        color: white !important;
+    }
+
+    .admin-card {
+        border-radius: 12px;
+        border: 1px solid #3a3a3a;
+        padding: 10px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        max-width: 500px;
+    }
+
+    .admin-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .admin-avatar {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .status {
+        border-radius: 50px;
+        padding: 3px 10px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status.ativo {
+        background-color: #198754;
+        color: white;
+    }
+
+    .status.bloqueiado {
+        background-color: #dc3545;
+        color: white;
+    }
+
+
+    .status.pendente {
+        background-color: #616300;
+        color: white;
+    }
+
+    .btn-action {
+        background-color: #a71d2a;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        transition: background 0.3s ease;
+    }
+
+    .btn-action:hover {
+        background-color: #8b1824;
+    }
+
+    #pagination-controls {
+        margin: 30px 0;
+    }
+
+    #pagination-controls button {
+        background-color: #f1f1f1;
+        border: none;
+        color: #000;
+        transition: 0.3s;
+    }
+
+    #pagination-controls button:hover:not(:disabled) {
+        background-color: #a71d2a;
+        color: white;
+    }
+
+    #pagination-controls .btn-primary {
+        background-color: #a71d2a !important;
+        color: white !important;
+    }
+</style>
+<script>
+    feather.replace();
+
+    (function () {
+        'use strict';
+
+        const cardsPerPage = 6;
+        const cardsContainer = document.getElementById('cards-container');
+        const paginationContainer = document.createElement('div');
+        paginationContainer.id = 'pagination-controls';
+        paginationContainer.className = 'd-flex justify-content-center mt-4';
+        cardsContainer.insertAdjacentElement('afterend', paginationContainer);
+
+        const searchInput = document.getElementById('searchInput');
+        const cards = Array.from(cardsContainer.querySelectorAll('.card-item'));
+
+        let filteredCards = [...cards];
+        let currentPage = 1;
+
+        function showPage(page) {
+            currentPage = page;
+            const start = (page - 1) * cardsPerPage;
+            const end = start + cardsPerPage;
+
+            filteredCards.forEach((card, index) => {
+                card.style.display = index >= start && index < end ? 'block' : 'none';
+            });
+
+            renderPagination();
+        }
+
+        function renderPagination() {
+            paginationContainer.innerHTML = '';
+            const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
+
+            const prevBtn = document.createElement('button');
+            prevBtn.textContent = '← Anterior';
+            prevBtn.className = 'btn btn-sm mx-1 shadow-sm';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.onclick = () => showPage(currentPage - 1);
+            paginationContainer.appendChild(prevBtn);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i;
+                btn.className = 'btn btn-sm mx-1 shadow-sm ' + (i === currentPage ? 'btn-primary' : 'btn-light');
+                btn.onclick = () => showPage(i);
+                paginationContainer.appendChild(btn);
+            }
+
+            const nextBtn = document.createElement('button');
+            nextBtn.textContent = 'Próximo →';
+            nextBtn.className = 'btn btn-sm mx-1 shadow-sm';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.onclick = () => showPage(currentPage + 1);
+            paginationContainer.appendChild(nextBtn);
+        }
+
+        function filterCards() {
+            const searchValue = searchInput.value.toLowerCase().trim();
+            filteredCards = cards.filter(card => card.textContent.toLowerCase().includes(searchValue));
+            currentPage = 1;
+            showPage(1);
+        }
+
+        searchInput.addEventListener('input', filterCards);
+        showPage(1);
+    })();
+
+
+</script>
+<script>
+    feather.replace();
+
+    // FILTRAGEM PELOS CAMPOS (NOME, CARGO, STATUS)
+    document.getElementById("searchInput").addEventListener("input", function () {
+        const searchValue = this.value.toLowerCase().trim();
+        const cards = document.querySelectorAll(".card-item");
+
+        cards.forEach(card => {
+            const nome = card.querySelector("h6").textContent.toLowerCase();
+            const cargo = card.querySelector("p").textContent.toLowerCase();
+            const status = card.querySelector(".status").textContent.toLowerCase();
+
+            if (nome.includes(searchValue) || cargo.includes(searchValue) || status.includes(searchValue)) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    });
+</script>

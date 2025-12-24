@@ -1,0 +1,321 @@
+<div class="container-fluid p-0">
+
+  <!-- TOPO -->
+  <div class="row mb-3 align-items-center">
+    <div class="col">
+      <h3 class="page-title">Editar perfil</h3>
+    </div>
+    <div class="col-auto text-end">
+             <button class="btn shadow-sm" onclick="window.history.back()">
+            <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+        </button>
+    </div>
+  </div>
+
+  <!-- CARD PRINCIPAL -->
+  <div class="card flex-fill">
+    <div class="card-header bg-gradient-dark">
+      <div class="tabs-to-dropdown">
+        <!-- NAV TABS -->
+        <ul class="nav nav-pills nav-fill mb-0" id="editProfileTabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="tab-info" data-bs-toggle="pill" href="#tab-content-info" role="tab"
+              aria-controls="tab-content-info" aria-selected="true">
+              Informações pessoais
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="tab-about" data-bs-toggle="pill" href="#tab-content-about" role="tab"
+              aria-controls="tab-content-about" aria-selected="false">
+              Sobre si
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="tab-security" data-bs-toggle="pill" href="#tab-content-security" role="tab"
+              aria-controls="tab-content-security" aria-selected="false">
+              Gestão da Conta
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <div class="tab-content" id="editProfileTabsContent">
+
+        <!-- TAB 1: INFORMAÇÕES PESSOAIS -->
+        <div class="tab-pane fade show active" id="tab-content-info" role="tabpanel" aria-labelledby="tab-info">
+          <div class="mb-4">
+            <h4>Editar as minhas informações</h4>
+            <p class="text-muted mb-0">Atualize os seus dados pessoais. Os campos marcados com * são obrigatórios.</p>
+          </div>
+
+          <!-- Formulário -->
+          <form action="editar_admin.php" method="post" enctype="multipart/form-data" class="row g-3 needs-validation"
+            novalidate>
+
+
+            <div class="col-md-6">
+              <label for="first_name" class="form-label">Primeiro Nome <span class="text-danger">*</span></label>
+              <input type="text" minlength="3" maxlength="25" class="form-control" id="first_name" name="first_name"
+                required value="Helder">
+              <div class="invalid-feedback">Informe o primeiro nome.</div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="second_name" class="form-label">Segundo Nome</label>
+              <input type="text" maxlength="25" class="form-control" id="second_name" name="second_name"
+                value="Gabriel">
+            </div>
+
+            <div class="col-md-6">
+              <label for="email" class="form-label">E-mail <span class="text-danger">*</span></label>
+              <input type="email" maxlength="60" class="form-control" id="email" name="email" required
+                value="helder@deliveryhj.com">
+              <div class="invalid-feedback">Insira um e-mail válido!</div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="tel" class="form-label">Telefone</label>
+              <input type="tel" maxlength="18" class="form-control" id="tel" name="tel" value="+244 999 000 111">
+            </div>
+
+            <div class="col-md-6">
+              <label for="cargo" class="form-label">Cargo / Papel <span class="text-danger">*</span></label>
+              <select class="form-control" id="cargo" name="cargo" required>
+                <option disabled>Selecione o cargo...</option>
+                <option selected>Administrador</option>
+                <option>Editor</option>
+              </select>
+              <div class="invalid-feedback">Selecione o cargo!</div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="genero" class="form-label">Gênero</label>
+              <select class="form-control" id="genero" name="genero">
+                <option value="">Selecione...</option>
+                <option selected>Masculino</option>
+                <option>Feminino</option>
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label for="data_nasc" class="form-label">Data de Nascimento</label>
+              <input type="date" id="data_nasc" name="data_nasc" class="form-control" value="1998-06-22">
+            </div>
+
+            <div class="col-md-6">
+              <label for="status" class="form-label">Status</label>
+              <select class="form-control" id="status" name="status">
+                <option selected>Ativo</option>
+                <option>Inativo</option>
+              </select>
+            </div>
+
+
+            <div class="col-md-12 text-end mt-4">
+              <button class="btn btn-primary w-25" type="submit">Salvar Alterações</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- TAB 2: SOBRE SI -->
+        <div class="tab-pane fade" id="tab-content-about" role="tabpanel" aria-labelledby="tab-about">
+          <h4>Editar o meu perfil</h4>
+          <p class="text-muted">Atualize sua biografia e foto de perfil.</p>
+          <form class="row g-3">
+            <div class="col-lg-8">
+              <div class="mb-3">
+                <label class="form-label">Informação biográfica</label>
+                <textarea class="form-control" rows="5" placeholder="Partilhe um pouco sobre você..."></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Imagem de perfil</label>
+                <input type="file" accept="image/*" class="form-control" id="logoUpload">
+              </div>
+            </div>
+            <div class="col-4 text-center" style="display: flex; flex-direction: column; row-gap: 10px;">
+              <!-- Upload da Logo -->
+              <img id="logoPreview" src="../assets/img/avatar/avatar.png" class="img-fluid" alt="Logo Preview"
+                style="height: 200px;">
+              <button class="btn btn-danger">Remover foto</button>
+            </div>
+            <div class="col-12 text-start mt-4">
+              <button class="btn btn-primary">Guardar alterações</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- TAB 3: GESTÃO DE CONTA -->
+        <div class="tab-pane fade" id="tab-content-security" role="tabpanel" aria-labelledby="tab-security">
+          <h4>Alterar palavra-passe</h4>
+          <p class="text-muted">Por segurança, sua nova palavra-passe deve ter pelo menos 8 caracteres.</p>
+          <form class="row g-3">
+            <div class="col-lg-6">
+              <div class="mb-3">
+                <label class="form-label">Antiga palavra-passe</label>
+                <input type="password" class="form-control" placeholder="Digite a atual" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Nova palavra-passe</label>
+                <input type="password" class="form-control" placeholder="Digite a nova" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Confirmar nova palavra-passe</label>
+                <input type="password" class="form-control" placeholder="Repita a nova senha" required>
+              </div>
+              <button class="btn btn-primary mt-2">Guardar alterações</button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<script>
+  // Preview da logo
+  document.getElementById('logoUpload').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => document.getElementById('logoPreview').src = e.target.result;
+      reader.readAsDataURL(file);
+    }
+  });
+</script>
+
+
+<style>
+  /* ================= RESPONSIVIDADE EDITAR PERFIL ================= */
+
+/* Ajusta margens e padding gerais */
+.container-fluid.p-0 {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* ================= MOBILE (até 767px) ================= */
+@media (max-width: 767px) {
+    .row.mb-3.align-items-center .col-auto.text-end {
+        margin-top: 10px;
+        text-align: center !important;
+    }
+
+    /* Formulários: inputs em coluna única */
+    form.row.g-3 .col-md-6,
+    form.row.g-3 .col-lg-6,
+    form.row.g-3 .col-lg-8,
+    form.row.g-3 .col-4 {
+        flex: 1 1 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Botões centralizados e full-width */
+    form .btn {
+        width: 100% !important;
+        margin-top: 10px !important;
+    }
+
+    /* Upload de imagem */
+    #logoPreview {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Ajuste da div da imagem e botão remover */
+    .col-4.text-center {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 10px;
+        margin-top: 15px;
+    }
+
+    /* Títulos menores */
+    .page-title,
+    h3.page-title,
+    .card-header h4,
+    .card-header h5 {
+        font-size: 1.2rem;
+    }
+
+    /* Tabs responsivas: quebra em scroll horizontal */
+    .tabs-to-dropdown ul.nav {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+    .tabs-to-dropdown ul.nav li {
+        flex: 0 0 auto;
+    }
+
+}
+
+/* ================= TABLETS (768px - 1024px) ================= */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    /* Formulários: ajustar largura de colunas */
+    form.row.g-3 .col-md-6 {
+        flex: 1 1 48% !important;
+        max-width: 48% !important;
+    }
+
+    form.row.g-3 .col-lg-8 {
+        flex: 1 1 65% !important;
+        max-width: 65% !important;
+    }
+
+    form.row.g-3 .col-4 {
+        flex: 1 1 30% !important;
+        max-width: 30% !important;
+    }
+
+    /* Upload de imagem */
+    #logoPreview {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    /* Botões */
+    form .btn {
+        width: auto !important;
+    }
+
+    /* Tabs: scroll horizontal */
+    .tabs-to-dropdown ul.nav {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* ================= AJUSTES GERAIS ================= */
+
+/* Ajusta textarea para não ultrapassar container */
+textarea.form-control {
+    width: 100% !important;
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Ajuste de imagem do avatar preview */
+#logoPreview {
+    border-radius: 10px;
+    object-fit: cover;
+    max-width: 100%;
+}
+
+/* Ajuste de overflow em tab content */
+.tab-content {
+    overflow-x: hidden;
+}
+
+</style>

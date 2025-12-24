@@ -1,0 +1,241 @@
+<div class="container-fluid p-0">
+
+  <!-- Cabeçalho -->
+  <div class="row mb-3 align-items-center justify-content-between">
+    <div class="col-auto">
+      <h3 class="page-title">Perfil do Entregador</h3>
+    </div>
+    
+    <div class="col-auto d-flex gap-2">
+      <button class="btn shadow-sm" onclick="window.history.back()">
+        <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+      </button>
+      <button class="btn btn-dark shadow-sm">
+        <a href="admin.html#/editar-entregador" class="text-white text-decoration-none">
+          <i data-feather="user-check" class="me-1"></i> Editar perfil
+        </a>
+      </button>
+      <button class="btn btn-dark shadow-sm" onclick="window.location.reload();">
+        <i data-feather="refresh-cw" class="text-white"></i>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Cartão de perfil do entregador -->
+  <div class="card flex-fill shadow-sm">
+    <div class="card-header gradient-header">
+      <h5 class="card-title mb-0 text-light">Informações do Entregador</h5>
+    </div>
+
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <tbody>
+            <tr>
+              <td><strong>Foto</strong></td>
+              <td>
+                <img src="../assets/img/avatar/avatar.png" class="avatar-lg rounded-circle shadow-sm"
+                  alt="Foto Entregador">
+              </td>
+            </tr>
+            <tr>
+              <td><strong>ID</strong></td>
+              <td>1</td>
+            </tr>
+            <tr>
+              <td><strong>Nome Completo</strong></td>
+              <td>João da Silva Pereira</td>
+            </tr>
+            <tr>
+              <td><strong>Telefone</strong></td>
+              <td><a href="tel:+244912345678" class="link-profile">+244 912 345 678</a></td>
+            </tr>
+            <tr>
+              <td><strong>E-mail</strong></td>
+              <td><a href="mailto:joao.entregador@gmail.com" class="link-profile">joao.entregador@gmail.com</a></td>
+            </tr>
+            <tr>
+              <td><strong>Data de Nascimento</strong></td>
+              <td>1995-07-12</td>
+            </tr>
+            <tr>
+              <td><strong>Gênero</strong></td>
+              <td>Masculino</td>
+            </tr>
+            <tr>
+              <td><strong>Status</strong></td>
+              <td><i class="status ativo">Ativo</i></td>
+            </tr>
+            <tr>
+              <td><strong>Tipo de Veículo</strong></td>
+              <td>Motocicleta</td>
+            </tr>
+            <tr>
+              <td><strong>Matrícula / Placa</strong></td>
+              <td>ABC-1234</td>
+            </tr>
+            <tr>
+              <td><strong>Endereço</strong></td>
+              <td>Rua Principal, Bairro Central, Luanda</td>
+            </tr>
+            <tr>
+              <td><strong>Senha gerada</strong></td>
+              <td>Joao@2025!</td>
+            </tr>
+            <tr>
+              <td><strong>Criado em</strong></td>
+              <td>2025-11-01 10:30:00</td>
+            </tr>
+            <tr>
+              <td><strong>Modificado em</strong></td>
+              <td>2025-11-01 11:00:00</td>
+            </tr>
+            <tr>
+              <td><strong>Motivo do bloquio em</strong></td>
+              <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas totam facilis dicta. <br> Pariatur
+                in nostrum nihil ullam veritatis quis beatae?</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  .status {
+    border-radius: 50px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .status.ativo {
+    background-color: #198754;
+    color: white;
+  }
+
+  .status.bloqueiado {
+    background-color: #dc3545;
+    color: white;
+  }
+
+
+  .status.pendente {
+    background-color: #616300;
+    color: white;
+  }
+
+  :root {
+    --bg-light: #ffffff;
+    --text-light: #1a1a1a;
+    --header-light: linear-gradient(120deg, #f0f0f0 70%, #d4d4d4 120%);
+    --bg-dark: #121212;
+    --text-dark: #eaeaea;
+    --header-dark: linear-gradient(120deg, #161718 80%, #414345 120%);
+  }
+
+  body.light-mode {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+  }
+
+  body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+  }
+
+  .gradient-header {
+    background: var(--header-dark);
+  }
+
+  body.light-mode .gradient-header {
+    background: var(--header-light);
+  }
+
+  .page-title {
+    font-weight: 600;
+  }
+
+  .avatar-lg {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+  }
+
+  .link-profile {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .link-profile:hover {
+    text-decoration: underline;
+  }
+
+  .table td,
+  .table th {
+    vertical-align: middle;
+  }
+
+  .btn-dark,
+  .btn-secondary {
+    transition: 0.3s;
+  }
+
+  body.light-mode .btn-dark {
+    background-color: #444;
+    color: white;
+  }
+
+  body.light-mode .btn-dark:hover {
+    background-color: #000;
+  }
+
+  body.dark-mode .btn-secondary {
+    background-color: #222;
+    color: #fff;
+  }
+
+  body.dark-mode .btn-secondary:hover {
+    background-color: #444;
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const savedTheme = localStorage.getItem("theme");
+    const currentTheme = savedTheme || (prefersDark ? "dark-mode" : "light-mode");
+
+    document.body.classList.add(currentTheme);
+    updateThemeIcon(currentTheme);
+
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      const isDark = document.body.classList.contains("dark-mode");
+      document.body.classList.toggle("dark-mode", !isDark);
+      document.body.classList.toggle("light-mode", isDark);
+
+      const newTheme = isDark ? "light-mode" : "dark-mode";
+      localStorage.setItem("theme", newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    feather.replace(); // Ativa os ícones feather
+  });
+
+  function updateThemeIcon(theme) {
+    const icon = document.querySelector("#themeToggle i");
+    icon.dataset.feather = theme === "dark-mode" ? "sun" : "moon";
+    feather.replace();
+  }
+</script>

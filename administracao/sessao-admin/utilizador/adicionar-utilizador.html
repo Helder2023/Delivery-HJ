@@ -1,0 +1,180 @@
+
+  <style>
+
+
+/* ========== UPLOAD FOTO ========== */
+.upload-foto {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.foto-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
+/* ========== AJUSTES ========== */
+a.no-underline {
+  text-decoration: none !important;
+}
+  </style>
+
+
+<div class="container-fluid p-3">
+
+  <div class="row mb-2 mb-xl-3">
+    <div class="col-auto d-sm-block">
+      <h3>Cadastrar Utilizador (Cliente)</h3>
+    </div>
+
+    <div class="col-auto ms-auto text-end mt-n1">
+      <button class="btn shadow-sm" style="background-color: #000;">
+        <a class="no-underline" href="admin.html#/todos-utilizadores" style="color: white;">
+          <i data-feather="users"></i> Todos os Utilizadores
+        </a>
+      </button>
+    </div>
+  </div>
+
+  <div class="card flex-fill p-4">
+    
+    <form action="processa_utilizador.php" method="post" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
+
+      <!-- Upload da Foto -->
+      <div class="upload-foto">
+        <img id="fotoPreview" src="../assets/img/avatar/avatar.png" class="foto-preview" alt="Foto Preview">
+        <input type="file" id="fotoUpload" class="form-control w-50" accept="image/*" name="foto_utilizador">
+      </div>
+
+      <div class="col-md-6">
+        <label for="nome_completo" class="form-label">Nome completo <span class="text-danger">*</span></label>
+        <input type="text" minlength="3" maxlength="50" placeholder="Insira o nome completo"
+               class="form-control" id="nome_completo" name="nome" required>
+        <div class="invalid-feedback">Por favor insira o nome completo do utilizador.</div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="telefone" class="form-label">Número de Telefone</label>
+        <input type="tel" maxlength="18" placeholder="+244 900 000 000"
+               class="form-control" id="telefone" name="telefone">
+      </div>
+
+      <div class="col-md-6">
+        <label for="email" class="form-label">E-mail <span class="text-danger">*</span></label>
+        <input type="email" maxlength="60" placeholder="utilizador@exemplo.com"
+               class="form-control" id="email" name="email" required>
+        <div class="invalid-feedback">Insira um e-mail válido!</div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="data_nasc" class="form-label">Data de Nascimento</label>
+        <input type="date" name="data_nasc" id="data_nasc" class="form-control">
+      </div>
+
+      <div class="col-md-6">
+        <label for="genero" class="form-label">Gênero</label>
+        <select class="form-control" id="genero" name="genero">
+          <option value="">Selecione...</option>
+          <option>Masculino</option>
+          <option>Feminino</option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label for="bairro" class="form-label">Bairro</label>
+        <input type="text" maxlength="40" placeholder="Ex: Rocha Pinto, Ingombota, Talatona"
+               class="form-control" id="bairro" name="bairro">
+      </div>
+
+      <div class="col-md-12">
+        <label for="endereco" class="form-label">Endereço Completo</label>
+        <textarea id="endereco" name="endereco" class="form-control" rows="2" placeholder="Ex: Rua Principal, Casa nº, Cidade"></textarea>
+      </div>
+
+      <div class="col-md-6">
+        <label for="password" class="form-label">Senha gerada automaticamente</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="password" name="password" readonly>
+          <button type="button" class="btn btn-outline-secondary" id="btnRegenerate">Gerar senha</button>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label class="form-label">Status</label>
+        <select class="form-control" name="status">
+          <option>Ativo</option>
+          <option>Inativo</option>
+          <option>Em verificação</option>
+        </select>
+      </div>
+
+      <div class="col-md-12 form-check">
+        <input class="form-check-input" type="checkbox" name="notificar" id="notificar" checked>
+        <label class="form-check-label" for="notificar">
+          Enviar e-mail com dados de acesso ao utilizador
+        </label>
+      </div>
+
+      <div class="col-12 text-left mt-4">
+        <button class="btn btn-primary w-25" type="submit">Cadastrar Utilizador</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<script>
+// Preview da foto
+document.getElementById('fotoUpload').addEventListener('change', function(event) {
+  const file = event.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = e => document.getElementById('fotoPreview').src = e.target.result;
+    reader.readAsDataURL(file);
+  }
+});
+
+// Geração automática de senha personalizada
+function gerarSenha(tamanho = 15) {
+  const numeros = "0123456789";
+  let senha = "Delivery_HJ_";
+  const chars = numeros;
+  for (let i = 0; i < tamanho; i++) {
+    senha += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return senha;
+}
+
+// Exibir senha ao carregar a página
+window.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("password").value = gerarSenha();
+});
+
+// Regenerar senha manualmente
+document.getElementById("btnRegenerate").addEventListener("click", () => {
+  document.getElementById("password").value = gerarSenha();
+});
+
+// Validação do formulário
+(() => {
+  'use strict';
+  const forms = document.querySelectorAll('.needs-validation');
+  Array.from(forms).forEach(form => {
+    form.addEventListener('submit', event => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<script src="../js/data-tables.js"></script>
+
+
+
+<div class="row mb-2 mb-xl-3">
+    <div class="content-top col-auto d-sm-block">
+        <h1>Gestão de Pedidos</h1>
+        <p>Visualize e gerencie todos os pedidos dos restaurantes</p>
+    </div>
+
+    <div class="col-auto ms-auto text-end mt-n1">
+         <button class="btn shadow-sm" onclick="window.history.back()">
+            <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+        </button>
+        <button class="btn shadow-sm" onclick="window.location.reload()"
+            style="background-color: white; color: black !important;">
+            <i class="align-middle" data-feather="refresh-cw">&nbsp;</i>
+        </button>
+    </div>
+</div>
+<!-- ===== FILTRO DE STATUS ===== -->
+<div class="row mb-3">
+    <div class="col-md-3">
+        <label for="filtroStatus" class="form-label">Filtrar por Estado:</label>
+        <select id="filtroStatus" class="form-select">
+            <option value="todos">Todos</option>
+            <option value="em-preparacao">Em Preparação</option>
+            <option value="entregue">Entregue</option>
+            <option value="cancelado">Cancelado</option>
+        </select>
+    </div>
+</div>
+
+<!-- ===== TABELA DE PEDIDOS ===== -->
+<div class="row mt-3">
+    <div class="col-12 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body">
+                <table id="datatables-column-search-select-inputs" class="table table-borderless  my-0 w-100">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Restaurante</th>
+                            <th>Status</th>
+                            <th>Data</th>
+                            <th>Motivo Cancelamento</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-status="em-preparacao">
+                            <td>101</td>
+                            <td>Churrasqueira Central</td>
+                            <td><i class="status emPreparacao">Em Preparação</i></td>
+                            <td>22/11/2025</td>
+                            <td>-</td>
+                            <td><a href="admin.html#/visualizar-pedido" class="btn btn-sm btn-primary"><i
+                                        data-feather="eye"></i></a></td>
+                        </tr>
+                        <tr data-status="cancelado">
+                            <td>102</td>
+                            <td>Bom Gosto</td>
+                            <td><i class="status cancelado">Cancelado</i></td>
+                            <td>21/11/2025</td>
+                            <td>Cliente desistiu do pedido</td>
+                            <td><a href="admin.html#/visualizar-pedido" class="btn btn-sm btn-primary"><i
+                                        data-feather="eye"></i></a></td>
+                        </tr>
+                        <tr data-status="entregue">
+                            <td>103</td>
+                            <td>Express Pizza</td>
+                            <td><i class="status entregue">Entregue</i></td>
+                            <td>20/11/2025</td>
+                            <td>-</td>
+                            <td><a href="admin.html#/visualizar-pedido" class="btn btn-sm btn-primary"><i
+                                        data-feather="eye"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== SCRIPT FILTRO ===== -->
+<script>
+
+</script>
+
+
+
+
+
+<style>
+    .status {
+        border-radius: 50px;
+        padding: 3px 10px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status.entregue {
+        background-color: #198754;
+        color: white;
+    }
+
+    .status.cancelado {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .status.emPreparacao {
+        background-color: #616300;
+        color: white;
+    }
+</style>

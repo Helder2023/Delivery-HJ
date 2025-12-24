@@ -1,0 +1,116 @@
+<div class="row mb-2 mb-xl-3">
+    <div class="content-top col-auto d-sm-block">
+        <h2>Bloco de Notas</h2>
+        <p>Adiciona as suas notas aqui</p>
+
+    </div>
+
+    <div class="col-auto ms-auto text-end mt-n1">
+
+        <button class="btn shadow-sm" onclick="window.history.back()">
+            <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+        </button>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Adicionar Nota</h2>
+    <form>
+        <label for="nota">Escreva sua nota:</label>
+        <textarea id="nota" rows="4" placeholder="Digite aqui a nota..." required></textarea>
+        <button class="btn btn-confirm btn-sm" type="submit"> <i class="align-middle" data-feather="plus">&nbsp;</i>
+            Adicionar Nota</button>
+    </form>
+</div>
+
+<div class="card">
+    <h2>Notas Registradas</h2>
+    <table id="datatables-column-search-select-inputs" class="table table-borderless my-0 w-100">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nota</th>
+                <th>Data</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>#001</td>
+                <td>Comprar mantimentos para a semana.</td>
+                <td>2025-11-23</td>
+                <td>
+                    <a style="margin-right: 7px;" href="admin.html#/notas"><i data-feather="eye"></i></a>
+                    <a href="admin.html#/notas"><i data-feather="trash"></i></a>
+                </td>
+            </tr>
+            <tr>
+                <td>#002</td>
+                <td>Revisar relatórios financeiros do mês.</td>
+                <td>2025-11-22</td>
+                <td>
+                    <a style="margin-right: 7px;" href="admin.html#/notas"><i data-feather="eye"></i></a>
+                    <a href="admin.html#/notas"><i data-feather="trash"></i></a>
+                </td>
+            </tr>
+            <tr>
+                <td>#003</td>
+                <td>Agendar reunião com a equipe de marketing.</td>
+                <td>2025-11-21</td>
+                <td>
+                    <a style="margin-right: 7px;" href="admin.html#/notas"><i data-feather="eye"></i></a>
+                    <a href="admin.html#/notas"><i data-feather="trash"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
+
+
+<style>
+    h2 {
+        color: #333;
+    }
+
+    .card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    form label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+
+    form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        resize: vertical;
+    }
+
+    form button {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    form button:hover {
+        background-color: #0056b3;
+    }
+</style>

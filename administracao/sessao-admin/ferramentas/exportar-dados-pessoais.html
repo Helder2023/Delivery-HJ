@@ -1,0 +1,279 @@
+<script src="../js/data-tables.js"></script>
+
+
+
+<div class="container-fluid">
+    <!-- Top Row -->
+    <div class="row mb-2 mb-xl-3">
+        <div class="col-auto d-sm-block">
+            <h3>Exportar Dados - Delivery HJ</h3>
+        </div>
+        <div class="col-auto ms-auto text-end mt-n1">
+            <button class="btn btn-light shadow-sm" onclick="window.location.reload();">
+                <i data-feather="refresh-cw"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- EXPORTAÇÃO: ADMINISTRADORES -->
+    <div class="card">
+        <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: white;">
+            <h4>Exportação para Administradores</h4>
+            <h4>Exporta dados de administradores para Excel ou PDF.</h4>
+        </div>  
+        <div class="card-body">
+            <table id="impressao_excel_pdf" class="table table-borderless my-0 w-100"
+                style="color: white;">
+                <thead>
+                    <tr>
+                        <th>Primeiro Nome</th>
+                        <th>Segundo Nome</th>
+                        <th>Telefone</th>
+                        <th>Cargo</th>
+                        <th>E-mail</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Maria</td>
+                        <td>Fernandes</td>
+                        <td>+244 923 456 789</td>
+                        <td>Editor</td>
+                        <td>maria.fernandes@email.com</td>
+                        <td><i class="status inativo">Inativo</i></td>
+                    </tr>
+
+                    <tr>
+                        <td>João</td>
+                        <td>Silva</td>
+                        <td>+244 912 345 876</td>
+                        <td>Supervisor</td>
+                        <td>joao.silva@email.com</td>
+                        <td><i class="status ativo">Ativo</i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- EXPORTAÇÃO: RESTAURANTES -->
+       <div class="card">
+        <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: white;">
+            <h4>Exportação para Restaurantes</h4>
+            <h4>Exporta dados de restaurantes para Excel ou PDF.</h4>
+        </div>
+        <div class="card-body">
+            <table id="tabela_2" class="table table-borderless my-0 w-100"
+                style="color: white;">
+                <thead>
+                    <tr>
+                        <th>Nome do Restaurante</th>
+                        <th>Categoria</th>
+                        <th>Telefone</th>
+                        <th>E-mail</th>
+                        <th>Endereço</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pizzaria Bella Itália</td>
+                        <td>Pizzaria</td>
+                        <td>+244 912 345 678</td>
+                        <td>bella.italia@email.com</td>
+                        <td>Rua 21 de Janeiro, nº 45</td>
+                        <td><i class="status pendente">Pendente</i></td>
+                    </tr>
+
+                    <tr>
+                        <td>Hamburgueria King</td>
+                        <td>Hamburgueria</td>
+                        <td>+244 923 456 789</td>
+                        <td>king.burger@email.com</td>
+                        <td>Avenida da Independência, nº 10</td>
+                        <td><i class="status bloquiado">Bloqueado</i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- EXPORTAÇÃO: ENTREGADORES -->
+       <div class="card">
+        <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: white;">
+            <h4>Exportação para Entregadores</h4>
+            <h4>Exporta dados de entregadores para Excel ou PDF.</h4>
+        </div>
+        <div class="card-body">
+            <table id="tabela_3" class="table table-borderless my-0 w-100"
+                style="color: white;">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Telefone</th>
+                        <th>Email</th>
+                        <th>Nascimento</th>
+                        <th>Gênero</th>
+                        <th>Veículo</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Maria António</td>
+                        <td>+244 910 222 333</td>
+                        <td>maria.antonio@email.com</td>
+                        <td>1998-09-21</td>
+                        <td>Feminino</td>
+                        <td>Bicicleta</td>
+                        <td><i class="status pendente">Pendente</i></td>
+                    </tr>
+
+                    <tr>
+                        <td>Carlos Alberto</td>
+                        <td>+244 911 987 654</td>
+                        <td>carlos.alberto@email.com</td>
+                        <td>1995-02-19</td>
+                        <td>Masculino</td>
+                        <td>Moto</td>
+                        <td><i class="status ativo">Ativo</i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <!-- EXPORTAÇÃO: UTILIZADORES -->
+      <div class="card">
+        <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: white;">
+             <h4>Exportação para Utilizadores</h4>
+            <h4>Exporta dados de utilizadores finais para Excel ou PDF.</h4>
+        </div>
+        <div class="card-body">
+            <table id="tabela_4" class="table table-borderless my-0 w-100"
+                style="color: white;">
+                 <thead>
+                    <tr>
+                        <th>Nome Completo</th>
+                        <th>Telefone</th>
+                        <th>E-mail</th>
+                        <th>Data Nascimento</th>
+                        <th>Gênero</th>
+                        <th>Bairro</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pedro António</td>
+                        <td>+244 923 456 789</td>
+                        <td>pedro.antonio@email.com</td>
+                        <td>1998-01-12</td>
+                        <td>Masculino</td>
+                        <td>Talatona</td>
+                        <td><i class="status pendente">Pendente</i></td>
+                    </tr>
+
+                    <tr>
+                        <td>Maria Silva</td>
+                        <td>+244 912 000 111</td>
+                        <td>maria.silva@email.com</td>
+                        <td>1990-06-28</td>
+                        <td>Feminino</td>
+                        <td>Rocha Pinto</td>
+                        <td><i class="status bloquiado">Bloqueado</i></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable"></script>
+
+<script>
+    feather.replace();
+
+    // Função principal de exportação
+    function handleExport(tableClass, prefix) {
+        const type = document.getElementById("exportType").value;
+
+        if (type === "excel") {
+            exportTableExcel(tableClass, prefix);
+        } else {
+            exportTablePDF(tableClass, prefix);
+        }
+    }
+
+    // Exportar Excel
+    function exportTableExcel(tableClass, prefix) {
+        const today = new Date().toISOString().split('T')[0];
+
+        document.querySelectorAll(`.${tableClass}`).forEach((table, index) => {
+            const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+            XLSX.writeFile(wb, `DeliveryHJ_${prefix}_${today}_${index + 1}.xlsx`);
+        });
+    }
+
+    // Exportar PDF
+    function exportTablePDF(tableClass, prefix) {
+        const today = new Date().toISOString().split('T')[0];
+
+        document.querySelectorAll(`.${tableClass}`).forEach((table, index) => {
+            const doc = new window.jspdf.jsPDF();
+            const data = [];
+
+            for (let row of table.tBodies[0].rows) {
+                data.push([...row.cells].map(cell => cell.innerText));
+            }
+
+            doc.setFontSize(14);
+            doc.text("Delivery HJ", 10, 10);
+            doc.text("Data: " + new Date().toLocaleDateString(), 10, 18);
+
+            doc.autoTable({
+                startY: 25,
+                head: [[...table.tHead.rows[0].cells].map(c => c.innerText)],
+                body: data
+            });
+
+            doc.save(`DeliveryHJ_${prefix}_${today}_${index + 1}.pdf`);
+        });
+    }
+</script>
+<style>
+    .status {
+        border-radius: 50px;
+        padding: 3px 10px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status.ativo {
+        background-color: #198754;
+        color: #fff;
+    }
+
+    .status.inativo {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .status.bloquiado {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
+    .status.pendente {
+        background-color: #616300;
+        color: white;
+    }
+</style>
+
+

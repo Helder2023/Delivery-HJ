@@ -1,0 +1,222 @@
+<style>
+  
+
+  /* ========== UPLOAD FOTO ========== */
+  .upload-foto {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .foto-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+  }
+
+  /* ========== AJUSTES ========== */
+  a.no-underline {
+    text-decoration: none !important;
+  }
+</style>
+
+
+<div class="container-fluid p-0">
+
+  <!-- Cabeçalho -->
+  <div class="row mb-3 align-items-center justify-content-between">
+    <div class="col-auto">
+      <h3 class="page-title">Editar Utilizador</h3>
+    </div>
+    <div class="col-auto d-flex gap-2">
+             <button class="btn shadow-sm" onclick="window.history.back()">
+            <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+        </button>
+
+    </div>
+  </div>
+
+  <!-- Formulário de edição -->
+  <div class="card flex-fill shadow-sm">
+    <div class="card-header gradient-header">
+      <h5 class="card-title mb-0 text-light">Informações do Utilizador</h5>
+    </div>
+
+    <div class="card-body">
+      <form action="processa_utilizador.php" method="post" enctype="multipart/form-data"
+        class="row g-3 needs-validation" novalidate>
+
+        <!-- Upload da Foto -->
+        <div class="upload-foto col-12 mb-3">
+          <img id="fotoPreview" src="../assets/img/avatar/avatar.png" class="foto-preview rounded-circle shadow-sm"
+            alt="Foto do Utilizador">
+          <input type="file" id="fotoUpload" class="form-control w-50 mt-2" accept="image/*" name="foto_utilizador">
+        </div>
+
+        <div class="col-md-6">
+          <label for="nome_completo" class="form-label">Nome completo <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="nome_completo" name="nome" value="Maria José da Silva" required>
+          <div class="invalid-feedback">Por favor insira o nome completo do utilizador.</div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="telefone" class="form-label">Número de Telefone</label>
+          <input type="tel" class="form-control" id="telefone" name="telefone" value="+244 923 456 789">
+        </div>
+
+        <div class="col-md-6">
+          <label for="email" class="form-label">E-mail <span class="text-danger">*</span></label>
+          <input type="email" class="form-control" id="email" name="email" value="maria.utilizador@gmail.com" required>
+          <div class="invalid-feedback">Insira um e-mail válido!</div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="data_nasc" class="form-label">Data de Nascimento</label>
+          <input type="date" class="form-control" id="data_nasc" name="data_nasc" value="1992-03-15">
+        </div>
+
+        <div class="col-md-6">
+          <label for="genero" class="form-label">Gênero</label>
+          <select class="form-control" id="genero" name="genero">
+            <option value="">Selecione...</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino" selected>Feminino</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label">Status</label>
+          <select class="form-control" name="status">
+            <option value="Ativo" selected>Ativo</option>
+            <option value="Inativo">Inativo</option>
+            <option value="Em verificação">Bloquiado</option>
+          </select>
+        </div>
+
+        <div class="col-md-12">
+          <label for="bairro" class="form-label">Bairro</label>
+          <input type="text" class="form-control" id="bairro" name="bairro" value="Ingombota">
+        </div>
+
+        <div class="col-md-12">
+          <label for="endereco" class="form-label">Endereço Completo</label>
+          <textarea id="endereco" name="endereco" class="form-control"
+            rows="2">Rua Central, Casa nº 45, Luanda</textarea>
+        </div>
+
+        <div class="col-12 form-check">
+          <input class="form-check-input" type="checkbox" name="notificar" id="notificar" checked>
+          <label class="form-check-label" for="notificar">
+            Enviar e-mail com dados de acesso ao utilizador
+          </label>
+        </div>
+
+        <div class="col-12 text-left mt-4">
+          <button class="btn btn-primary w-25" type="submit">Salvar Alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ========================= -->
+<!-- 🌙 SCRIPT DE GERAÇÃO DE SENHA E PREVIEW -->
+<!-- ========================= -->
+<script>
+  document.getElementById('btnRegenerate').addEventListener('click', function () {
+    const passwordField = document.getElementById('password');
+    const randomPassword = Math.random().toString(36).slice(-8) + '!';
+    passwordField.value = randomPassword;
+  });
+
+  // Preview da imagem
+  const fotoUpload = document.getElementById('fotoUpload');
+  const fotoPreview = document.getElementById('fotoPreview');
+  fotoUpload.addEventListener('change', function (e) {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      fotoPreview.src = event.target.result;
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  });
+</script>
+
+<!-- ========================= -->
+<!-- 🌙 ESTILO DOS TEMAS -->
+<!-- ========================= -->
+<style>
+  :root {
+    --bg-light: #ffffff;
+    --text-light: #1a1a1a;
+    --header-light: linear-gradient(120deg, #f0f0f0 70%, #d4d4d4 120%);
+    --bg-dark: #121212;
+    --text-dark: #eaeaea;
+    --header-dark: linear-gradient(120deg, #161718 80%, #414345 120%);
+  }
+
+  body.light-mode {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+  }
+
+  body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+  }
+
+  .gradient-header {
+    background: var(--header-dark);
+  }
+
+  body.light-mode .gradient-header {
+    background: var(--header-light);
+  }
+
+  .page-title {
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .avatar-lg {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .upload-foto img {
+    margin-bottom: 0.5rem;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const savedTheme = localStorage.getItem("theme");
+    const currentTheme = savedTheme || (prefersDark ? "dark-mode" : "light-mode");
+
+    document.body.classList.add(currentTheme);
+    updateThemeIcon(currentTheme);
+
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      const isDark = document.body.classList.contains("dark-mode");
+      document.body.classList.toggle("dark-mode", !isDark);
+      document.body.classList.toggle("light-mode", isDark);
+
+      const newTheme = isDark ? "light-mode" : "dark-mode";
+      localStorage.setItem("theme", newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    feather.replace(); // Ativa ícones
+  });
+
+  function updateThemeIcon(theme) {
+    const icon = document.querySelector("#themeToggle i");
+    icon.dataset.feather = theme === "dark-mode" ? "sun" : "moon";
+    feather.replace();
+  }
+</script>

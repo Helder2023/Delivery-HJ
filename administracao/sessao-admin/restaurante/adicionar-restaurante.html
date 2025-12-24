@@ -1,0 +1,178 @@
+<style>
+   
+
+    /* ========== UPLOAD LOGO ========== */
+    .upload-logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .logo-preview {
+        width: 120px;
+        height: 120px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid #ccc;
+
+    }
+
+
+</style>
+
+<div class="container-fluid p-0">
+    <div class="row mb-2 mb-xl-3">
+        <div class="col-auto d-sm-block">
+            <h3>Adicionar novo Restaurante</h3>
+        </div>
+        <div class="col-auto ms-auto text-end mt-n1">
+            <button class="btn shadow-sm" style="background-color: #000;">
+                <a href="admin.html#/todos-restaurantes" class="text-white text-decoration-none">
+                    <i data-feather="home"></i> Todos os restaurantes
+                </a>
+            </button>
+        </div>
+    </div>
+
+    <div class="card flex-fill shadow-sm">
+
+        <div class="card-body">
+            <form>
+                <!-- Upload da Logo -->
+                <div class="upload-logo">
+                    <img id="logoPreview" src="../assets/img/avatar/restaurante.jpg" class="logo-preview"
+                        alt="Logo Preview">
+                    <input type="file" id="logoUpload" class="form-control w-50" accept="image/*" name="foto_admin">
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Nome do restaurante <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" required placeholder="Ex: Pizzaria Bella Itália">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Categoria <span class="text-danger">*</span></label>
+                        <select class="form-control" required>
+                            <option value="">Selecione...</option>
+                            <option>Pizzaria</option>
+                            <option>Hamburgueria</option>
+                            <option>Pastelaria</option>
+                            <option>Churrascaria</option>
+                            <option>Peixaria</option>
+                            <option>Padaria</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Telefone</label>
+                        <input type="tel" class="form-control" placeholder="+244 999 999 999">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">E-mail comercial</label>
+                        <input type="email" class="form-control" placeholder="restaurante@exemplo.com">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Província <span class="text-danger">*</span></label>
+                        <select class="form-control" required>
+                            <option value="">Selecione...</option>
+                            <option>Bengo</option>
+                            <option>Benguela</option>
+                            <option>Bié</option>
+                            <option>Cabinda</option>
+                            <option>Cunene</option>
+                            <option>Huambo</option>
+                            <option>Huíla</option>
+                            <option>Luanda</option>
+                            <option>Lunda Norte</option>
+                            <option>Lunda Sul</option>
+                            <option>Malanje</option>
+                            <option>Moxico</option>
+                            <option>Namibe</option>
+                            <option>Uíge</option>
+                            <option>Zaire</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Endereço completo</label>
+                        <input type="text" class="form-control" placeholder="Ex: Rua 21 de Janeiro, nº 45 - Luanda">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="password" class="form-label">Senha gerada automaticamente</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="password" name="password" readonly>
+                            <button type="button" class="btn btn-outline-secondary" id="btnRegenerate">Gerar
+                                senha</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label">Status</label>
+                        <select class="form-control">
+                            <option>Ativo</option>
+                            <option>Inativo</option>
+                            <option>Bloqueido</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label" style="margin-top: 13px;">Nome do Responsável <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" required placeholder="nome do responsável">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label" style="margin-top: 13px;">Horário de funcionamento</label>
+                        <input type="text" class="form-control" placeholder="Ex: 08h00 às 22h00">
+                    </div>
+
+                </div>
+
+
+                <div class="col-12 mt-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i data-feather="save"></i> Cadastrar Restaurante
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    // Preview da foto
+    document.getElementById('logoUpload').addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = e => document.getElementById('logoPreview').src = e.target.result;
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Geração automática de senha personalizada
+    function gerarSenha(tamanho = 15) {
+        const numeros = "0123456789";
+        let senha = "Delivery_HJ_";
+        const chars = numeros;
+        for (let i = 0; i < tamanho; i++) {
+            senha += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return senha;
+    }
+
+    // Exibir senha ao carregar a página
+    window.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("password").value = gerarSenha();
+    });
+
+    // Regenerar senha manualmente
+    document.getElementById("btnRegenerate").addEventListener("click", () => {
+        document.getElementById("password").value = gerarSenha();
+    });
+</script>

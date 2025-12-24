@@ -1,0 +1,825 @@
+<div class="row mb-2 mb-xl-3">
+    <div class="content-top col-auto d-sm-block">
+        <h1>Dashboard</h1>
+        <p>Bem-vindo ao painel administrativo do DeliveryHJ</p>
+    </div>
+
+    <div class="col-auto ms-auto text-end mt-n1">
+
+        <button class="btn shadow-sm" onclick="window.location.reload()"
+            style="background-color: white; color: black !important;">
+            <i class="align-middle" data-feather="refresh-cw" id="refresh">&nbsp;</i>
+        </button>
+
+    </div>
+</div>
+
+<div class="row content-cards">
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card illustration flex-fill card-dashboard">
+            <div class="card-body p-0 d-flex flex-fill">
+                <div class="row g-0 w-100">
+                    <div class="col-6">
+                        <div class="illustration-text p-3 m-1">
+                            <h4 class="illustration-text">Olá, <a href="admin.html#/perfil">Hélder
+                                    Adão</a>!</h4>
+                            <h6 class="illustration-text">Cargo:
+                                <span>Administrador</span>
+                            </h6>
+                            <p class="mb-0"><a href="#!" target="_blank">DeliveryHJ</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-6 align-self-end text-end" style="height: 100%;">
+                        <img loading="lazy" decoding="async" src="../assets/img/avatar/avatar.png"
+                            alt="Customer Support" class="img-fluid illustration-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+            <div class="card flex-fill card-dashboard">
+                <div class="card-body py-4">
+                    <div class="d-flex align-items-start">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-2">
+                                <span id="real-time" class="time-display">--:--:--</span>
+                                <span id="time-period" class="time-period"></span>
+                            </h3>
+                            <p class="mb-2">Hora atual em tempo real</p>
+                            <div class="mb-0">
+                                <span class="text-muted" style="color: rgba(255, 255, 255, 0.699) !important;" id="current-date">
+                                    Carregando data...
+                                </span>
+                            </div>
+                            <div class="mb-0 date-display" id="full-date" style="margin-top: 5px;">
+                                <!-- Data completa será inserida aqui -->
+                            </div>
+                           
+                        </div>
+                        <div class="d-inline-block ms-3">
+                            <div class="stat" style="background-color: white; color: black !important;">
+                                <i class="align-middle text-success fas fa-clock pulse" data-feather="clock"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Pedidos de Hoje <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important;">40</span></h3>
+                        <p class="mb-2">Gerencia os Pedidos de todos os restaurantes da DeliveryHJ.</p>
+                        <div class="mb-0">
+                            <span class="text-muted"><a href="admin.html#/pedidos">Ver detalhes</a></span>
+                        </div>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <a href="management/users/situation-users.html" title="Revê os avisos de utilizadores"><i
+                                    class="align-middle text-info" data-feather="clipboard"
+                                    style="color: black !important;"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">1.500.000kz</h3>
+                        <p class="mb-2">Pagamento total dos Restaurantes</p>
+                        <div class="mb-0">
+                            <span class="text-muted" style="color: rgba(255, 255, 255, 0.699) !important;">
+                                Total de Lucro</span>
+                        </div>
+                        <div class="mb-0" style="margin-top: 10px;">
+                            <span class="text-muted"><a href="admin.html#/financas">Ver
+                                    detalhes</a></span>
+                        </div>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <i class="align-middle text-success" data-feather="dollar-sign"
+                                style="color: black !important;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Pagamentos em Atraso <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important;">90</span></h3>
+                        <p class="mb-2">Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                        <div class="mb-0">
+                            <span class="text-muted"><a href="admin.html#/financas">Ver detalhes</a></span>
+                        </div>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <i class="align-middle text-info" data-feather="alert-triangle"
+                                style="color: black !important;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Restaurantes Ativos <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important;">90</span></h3>
+                        <p class="mb-2">Lorem ipsum dolor sit amet adipisicing elit.
+                            Non, sapiente?</p>
+                        <div class="mb-0">
+                            <span class="text-muted"><a href="admin.html#/todos-restaurantes">Ver detalhes</a></span>
+                        </div>
+                    </div>
+
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <a href="#!" title="Número de utilizadores online"><i class="align-middle text-info"
+                                    data-feather="shopping-bag" style="color: black !important;"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Entregadores Ativos <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important;">90</span></h3>
+                        <p class="mb-2">Lorem ipsum, dolor sit amet consectetur adipisicing.</p>
+                        <div class="mb-0">
+                            <span class="text-muted"><a href="admin.html#/todos-entregadores">Ver detalhes</a></span>
+                        </div>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <a href="#!" title="Número de utilizadores online"><i class="align-middle text-info"
+                                    data-feather="users" style="color: black !important;"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Utilizadores online <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important;">90</span></h3>
+                        <p class="mb-2">Status de utilizadores online em tempo real</p>
+                        <div class="mb-0">
+                            <span class="text-muted"><a href="admin.html#/todos-utilizadores">Ver detalhes</a></span>
+                        </div>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <a href="#!" title="Número de utilizadores online"><i class="align-middle text-info"
+                                    data-feather="users" style="color: black !important;"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Visitantes no DeliveryHJ <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important;">40</span></h3>
+                        <p class="mb-2">Todos os status em cada 30min sobre novos
+                            visitantes no DeliveryHJ</p>
+                        <div class="mb-0">
+                            <span class="text-muted"><a href="admin.html#/visitantes">Ver detalhes</a></span>
+                        </div>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <a href="#" title="Ver todos os visitantes no DeliveryHJ"><i class="align-middle text-info"
+                                    data-feather="eye" style="color: black !important;"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Avaliação Média <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important;">4.5</span></h3>
+                        <p class="mb-2">Baseado em 1.234 avaliações</p>
+                        <div class="mb-0">
+                            <span class="text-muted"><a href="admin.html#/avaliacao">Ver detalhes</a></span>
+                        </div>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <a href="#" title="Revê os avisos de utilizadores"><i class="align-middle text-info"
+                                    data-feather="star" style="color: black !important;"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row">
+        <div class="col-12 col-lg-6 d-flex">
+        <div class="card flex-fill w-100 card-dashboard">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+                <span class="badge float-end" style="background-color: white; color: black !important;">Hoje</span>
+                <h5 class="card-title mb-0" style="color: white;">O que acontendo?</h5>
+            </div>
+            <div class="card-body" style="overflow: hidden scroll; max-height: 350px;">
+                <a href="admin.html#/visualizar-notificacao">
+                    <div class="d-flex align-items-start">
+                        <img src="../assets/img/avatar/avatar.png" width="36" height="36" class="rounded-circle me-2"
+                            alt="Ashley Briggs">
+                        <div class="flex-grow-1">
+                            <small class="float-end">5m ago</small>
+                            <strong style="color: white;">Hélder Adão</strong> baniu o <strong style="color: white;">
+                                José
+                                Mbenga</strong><br />
+                            <small class="text-muted">Hoje 7:51
+                                pm</small><br />
+                        </div>
+                    </div>
+                </a>
+                <hr />
+                <a href="admin.html#/visualizar-notificacao">
+                    <div class="d-flex align-items-start">
+                        <img src="../assets/img/avatar/avatar.png" width="36" height="36" class="rounded-circle me-2"
+                            alt="Chris Wood">
+                        <div class="flex-grow-1">
+                            <small class="float-end">30m ago</small>
+                            <strong>Helder Adão</strong> adicionou um novo
+                            entregador<br />
+                            <small class="text-muted">Hoje 7:51
+                                pm</small><br />
+                        </div>
+                    </div>
+                </a>
+                <hr />
+                <a href="admin.html#/visualizar-notificacao">
+                    <div class="d-flex align-items-start">
+                        <img src="../assets/img/avatar/avatar.png" width="36" height="36" class="rounded-circle me-2"
+                            alt="Stacie Hall">
+                        <div class="flex-grow-1">
+                            <small class="float-end">1h ago</small>
+                            <strong>Hélder Adão</strong> adicionou um novo
+                            Restaurantes
+                            <br />
+
+                            <small class="text-muted">Hoje 6:35 pm</small>
+                        </div>
+                    </div>
+                </a>
+
+                <hr />
+                <a href="admin.html#/visualizar-notificacao">
+
+                    <div class="d-flex align-items-start">
+                        <img src="../assets/img/avatar/avatar.png" width="36" height="36" class="rounded-circle me-2"
+                            alt="Stacie Hall">
+                        <div class="flex-grow-1">
+                            <small class="float-end">1h ago</small>
+                            <strong>Hélder Adão</strong> adicionou um novo
+                            Restaurantes
+                            <br />
+
+                            <small class="text-muted">Hoje 6:35 pm</small>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-12 col-lg-6 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-header d-flex justify-content-between align-items-center"
+                style="background-color: rgba(255, 255, 255, 0.048);">
+
+                <h2 class="card-title mb-0" style="color: white;">Usuários vs Restaurantes</h2>
+                <div>
+                    <label for="filtroAno" class="form-label me-2 mb-0" style="color: white;">Ano:</label>
+                    <select id="filtroAno" class="form-select form-select-sm d-inline-block" style="width: auto;">
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025" selected>2025</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-body">
+                <canvas id="usuariosRestaurantesChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===== GRÁFICO PEDIDOS POR HORA ===== -->
+    <div class="col-12 col-lg-6 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+                <h5 class="card-title mb-0" style="color: white;">Pedidos por Hora</h5>
+            </div>
+
+            <div class="card-body">
+                <canvas id="pedidosHoraChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== GRÁFICO TOP 5 RESTAURANTES ===== -->
+    <div class="col-12 col-lg-6 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+                <h5 class="card-title mb-0" style="color: white;">Top 5 Restaurantes Mais Vendidos</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="top5RestaurantesChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- ===== TABELA RESTAURANTES ATRASADOS ===== -->
+
+  <div class="row mt-3">
+  <div class="col-12 d-flex">
+    <div class="card flex-fill card-dashboard">
+      <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+        <h5 class="card-title mb-0" style="color: white;"> <i class="align-middle text-info"
+            data-feather="alert-triangle" style="color: black !important; margin-top: -6px; margin-right: 5px;"></i>
+          Pagamentos em Atrasos dos Restaurantes</h5>
+      </div>
+      <div class="card-body">
+        <table id="datatables-column-search-select-inputs"  class="table table-borderless my-0 w-100">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Restaurante</th>
+                    <th>Valor (Kz)</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaPagamentos">
+                <tr>
+                    <td>001</td>
+                    <td>Restaurante Kapital</td>
+                    <td>12.500</td>
+                    <td><i class="status naoPago">Não Pago</i></td>
+                </tr>
+                <tr>
+                    <td>002</td>
+                    <td>Burguer House</td>
+                    <td>8.300</td>
+                    <td><i class="status naoPago">Não Pago</i></td>
+                </tr>
+                <tr>
+                    <td>003</td>
+                    <td>Pizza na Pedra</td>
+                    <td>10.200</td>
+                    <td><i class="status naoPago">Não Pago</i></td>
+                </tr>
+                <tr>
+                    <td>004</td>
+                    <td>Food City</td>
+                    <td>9.800</td>
+                    <td><i class="status naoPago">Não Pago</i></td>
+                    <td>—</td>
+
+                </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  </div>
+
+ 
+
+<div class="row">
+    <div class="col-md-12 d-flex">
+        <div class="card flex-fill w-100 card-dashboard">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+                <h4 class="card-title mb-0" style="color: white;">Críticas</h4>
+            </div>
+            <div class="card-body">
+                <ul class="timeline">
+                    <li class="timeline-item">
+                        <strong style="color: white;">João Pessela</strong>
+                        <span class="float-end text-muted text-sm">30m ago</span>
+                        <p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet
+                            nec, imperdiet iaculis, ipsum. Sed aliquam ultrices mauris...</p>
+                    </li>
+
+                    <li class="timeline-item">
+                        <strong style="color: white;">Cristiano Amdaeu</strong>
+                        <span class="float-end text-muted text-sm">2h
+                            ago</span>
+                        <p>Sed aliquam ultrices mauris. Integer ante arcu, accumsan a, consectetuer
+                            eget, posuere ut, mauris. Praesent adipiscing. Phasellus ullamcorper
+                            ipsum rutrum
+                            nunc...</p>
+                    </li>
+                    <li class="timeline-item">
+                        <strong style="color: white;">Helder Adão</strong>
+                        <span class="float-end text-muted text-sm">3h
+                            ago</span>
+                        <p>Curabitur ligula sapien, tincidunt non, euismod vitae, posuere imperdiet,
+                            leo. Maecenas malesuada...</p>
+                    </li>
+                    <li class="timeline-item">
+                        <strong style="color: white;">Black time</strong>
+                        <span class="float-end text-muted text-sm">30m ago</span>
+                        <p>Nam pretium turpis et arcu. Duis arcu tortor, suscipit eget, imperdiet
+                            nec, imperdiet iaculis, ipsum...</p>
+                    </li>
+
+                    <li class="timeline-item">
+                        <strong style="color: white;">Black time</strong>
+                        <span class="float-end text-muted text-sm">30m ago</span>
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Facilis ex
+                            ratione dolorem tempora numquam, alias, libero dolore, rem mollitia
+                            itaque recusandae eum eius architecto amet harum officiis nostrum.
+                            Possimus repellendus vero voluptas totam consectetur eos vel aut eum
+                            voluptatibus suscipit dolores, quas quae laboriosam odio maxime. Placeat
+                            deleniti dicta minima magni labore cumque illo fugiat eum dolorem.
+                            Dignissimos, id blanditiis.</p>
+                    </li>
+                </ul>
+                <div class="d-grid">
+                    <a href="admin.html#/avaliacao" class="btn btn-primary">Ver todas as
+                        críticas</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Area dos Graficos -->
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Gráfico dos Usuários vs Restaurantes  -->
+<script>
+    const ctxUR = document.getElementById('usuariosRestaurantesChart').getContext('2d');
+
+    // Dados fictícios para vários anos (poderá vir do backend futuramente)
+    const dadosPorAno = {
+        2023: {
+            restaurantes: [10, 12, 15, 18, 20, 22, 25, 27, 30, 33, 35, 40],
+            usuarios: [100, 120, 150, 180, 200, 220, 250, 270, 300, 330, 350, 400]
+        },
+        2024: {
+            restaurantes: [15, 18, 20, 22, 26, 30, 32, 36, 40, 42, 45, 48],
+            usuarios: [150, 180, 200, 230, 260, 300, 320, 350, 380, 400, 420, 450]
+        },
+        2025: {
+            restaurantes: [20, 25, 28, 30, 34, 38, 40, 43, 47, 50, 54, 60],
+            usuarios: [200, 220, 250, 280, 310, 340, 370, 400, 430, 460, 490, 520]
+        }
+    };
+
+    const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+
+    // Função que cria o gráfico
+    const criarGrafico = (ano) => {
+        const dataUR = {
+            labels: meses,
+            datasets: [
+                {
+                    label: 'Restaurantes',
+                    data: dadosPorAno[ano].restaurantes,
+                    backgroundColor: '#0d6efd',
+                    borderRadius: 5
+                },
+                {
+                    label: 'Utilizadores',
+                    data: dadosPorAno[ano].usuarios,
+                    backgroundColor: '#198754',
+                    borderRadius: 5
+                }
+            ]
+        };
+
+        return new Chart(ctxUR, {
+            type: 'bar',
+            data: dataUR,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { labels: { color: 'white' } },
+                    tooltip: {
+                        callbacks: {
+                            label: function (context) {
+                                return `${context.dataset.label}: ${context.formattedValue}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: 'white', font: { weight: 'bold' } },
+                        grid: { display: false }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: 'white' },
+                        grid: { color: 'rgba(255,255,255,0.1)' }
+                    }
+                }
+            }
+        });
+    };
+
+    // Cria o gráfico do ano atual (selecionado)
+    let graficoUR = criarGrafico(document.getElementById('filtroAno').value);
+
+    // Atualiza o gráfico ao mudar o ano
+    document.getElementById('filtroAno').addEventListener('change', (e) => {
+        graficoUR.destroy(); // remove o gráfico anterior
+        graficoUR = criarGrafico(e.target.value); // cria o novo gráfico
+    });
+</script>
+
+<!-- Gráfico de pedidos na hora  -->
+<script>
+
+    const ctxPedidosHora = document.getElementById('pedidosHoraChart').getContext('2d');
+    const pedidosHoraChart = new Chart(ctxPedidosHora, {
+        type: 'line',
+        data: {
+            labels: ['0h', '2h', '4h', '6h', '8h', '10h', '12h', '14h', '16h', '18h', '20h', '22h'],
+            datasets: [{
+                label: 'Pedidos',
+                data: [5, 8, 12, 20, 35, 50, 40, 38, 25, 15, 10, 6],
+                borderColor: '#0d6efd',
+                backgroundColor: 'rgba(13, 110, 253, 0.2)',
+                tension: 0.3,
+                fill: true,
+                pointRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { labels: { color: 'white' } } },
+            scales: {
+                x: { ticks: { color: 'white' }, grid: { color: 'rgba(255,255,255,0.1)' } },
+                y: { ticks: { color: 'white' }, grid: { color: 'rgba(255,255,255,0.1)' }, beginAtZero: true }
+            }
+        }
+    });
+
+    // GRÁFICO TOP 5 RESTAURANTES
+    const ctxTop5 = document.getElementById('top5RestaurantesChart').getContext('2d');
+    const top5RestaurantesChart = new Chart(ctxTop5, {
+        type: 'bar',
+        data: {
+            labels: ['Churrasqueira Central', 'Bom Gosto', 'Express Pizza', 'Restaurante XYZ', 'Peixaria Moderna'],
+            datasets: [{
+                label: 'Vendas',
+                data: [120, 100, 95, 80, 70],
+                backgroundColor: '#198754',
+                borderRadius: 5
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                x: { ticks: { color: 'white' }, grid: { display: false } },
+                y: { ticks: { color: 'white' }, grid: { color: 'rgba(255,255,255,0.1)' }, beginAtZero: true }
+            }
+        }
+    });
+</script>
+
+<script>
+// Elementos DOM
+const realTimeElement = document.getElementById('real-time');
+const timePeriodElement = document.getElementById('time-period');
+const currentDateElement = document.getElementById('current-date');
+const fullDateElement = document.getElementById('full-date');
+const timezoneLink = document.getElementById('timezone-link');
+
+// Nomes dos meses e dias em português
+const monthNames = [
+    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+];
+
+const dayNames = [
+    "Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", 
+    "Quinta-feira", "Sexta-feira", "Sábado"
+];
+
+// Função para formatar número com 2 dígitos
+function formatTwoDigits(num) {
+    return num < 10 ? '0' + num : num;
+}
+
+// Atualizar hora e data em tempo real
+function updateTime() {
+    const now = new Date();
+    
+    // Obter horas, minutos e segundos
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let seconds = now.getSeconds();
+    
+    // Formatar para 2 dígitos
+    hours = formatTwoDigits(hours);
+    minutes = formatTwoDigits(minutes);
+    seconds = formatTwoDigits(seconds);
+    
+    // Atualizar elemento de hora
+    if (realTimeElement) {
+        realTimeElement.textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    
+    // Determinar AM/PM
+    const period = now.getHours() >= 12 ? 'AM' : 'PM';
+    if (timePeriodElement) {
+        timePeriodElement.textContent = period;
+    }
+    
+    // Formatar data
+    const dayName = dayNames[now.getDay()];
+    const day = now.getDate();
+    const month = monthNames[now.getMonth()];
+    const year = now.getFullYear();
+    
+    // Atualizar elementos de data
+    if (currentDateElement) {
+        currentDateElement.textContent = `${dayName}, ${day} de ${month}`;
+    }
+    
+    if (fullDateElement) {
+        fullDateElement.textContent = `${day} de ${month} de ${year}`;
+    }
+    
+    // Atualizar fuso horário
+    if (timezoneLink) {
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const gmtOffset = -now.getTimezoneOffset() / 60;
+        const gmtSign = gmtOffset >= 0 ? '+' : '-';
+        const gmtFormatted = `GMT${gmtSign}${Math.abs(gmtOffset)}`;
+        
+        timezoneLink.textContent = `Fuso horário: ${gmtFormatted}`;
+        timezoneLink.title = timezone;
+    }
+    
+    // Adicionar efeito de pulso nos segundos pares
+    if (realTimeElement) {
+        if (now.getSeconds() % 2 === 0) {
+            realTimeElement.classList.add('pulse');
+        } else {
+            realTimeElement.classList.remove('pulse');
+        }
+    }
+}
+
+// Inicialização
+function initTimeCard() {
+    // Verificar se os elementos existem
+    if (!realTimeElement) {
+        console.error('Elemento real-time não encontrado');
+        return;
+    }
+    
+    // Atualizar imediatamente
+    updateTime();
+    
+    // Atualizar a cada segundo
+    setInterval(updateTime, 1000);
+    
+    // Adicionar evento de clique no card de hora
+    const timeCard = document.querySelector('.col-12.col-sm-6.col-xxl-3:nth-child(2) .card');
+    if (timeCard) {
+        timeCard.addEventListener('click', function() {
+            // Efeito visual de clique
+            this.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 150);
+            
+            // Copiar hora atual para a área de transferência
+            const timeText = `Hora: ${realTimeElement.textContent} ${timePeriodElement.textContent}\nData: ${currentDateElement.textContent}`;
+            
+            // Usar API de clipboard se disponível
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(timeText).then(() => {
+                    // Feedback visual
+                    const originalColor = realTimeElement.style.color;
+                    realTimeElement.style.color = '#4d96ff';
+                    setTimeout(() => {
+                        realTimeElement.style.color = originalColor;
+                    }, 500);
+                }).catch(err => {
+                    console.log('Erro ao copiar: ', err);
+                });
+            } else {
+                // Fallback para navegadores mais antigos
+                try {
+                    const textArea = document.createElement('textarea');
+                    textArea.value = timeText;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(textArea);
+                    
+                    // Feedback visual
+                    const originalColor = realTimeElement.style.color;
+                    realTimeElement.style.color = '#4d96ff';
+                    setTimeout(() => {
+                        realTimeElement.style.color = originalColor;
+                    }, 500);
+                } catch (err) {
+                    console.log('Erro ao copiar: ', err);
+                }
+            }
+        });
+    }
+}
+
+// Iniciar quando a página carregar
+document.addEventListener('DOMContentLoaded', initTimeCard);
+
+// Também executar se a página já estiver carregada
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    setTimeout(initTimeCard, 100);
+}
+</script>
+<style>
+    .status {
+        border-radius: 50px;
+        padding: 3px 10px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status.pago {
+        background-color: #198754;
+        color: white;
+    }
+
+    .status.naoPago {
+        background-color: #dc3545;
+        color: white;
+    }
+
+
+    .status.pendente {
+        background-color: #616300;
+        color: white;
+    }
+</style>
+

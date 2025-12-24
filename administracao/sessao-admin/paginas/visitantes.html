@@ -1,0 +1,242 @@
+<div class="row mb-2 mb-xl-3">
+  <div class="content-top col-auto d-sm-block">
+    <h1>Visitantes</h1>
+    <p>Monitoramento de acessos ao Delivery HJ</p>
+  </div>
+</div>
+
+<!-- Tabela -->
+<div class="card flex-fill card-dashboard mt-3">
+  <div class="card-header">
+    <h4 class="card-title mb-0">Lista de Visitantes</h4>
+  </div>
+  <div class="card-body">
+    <table id="datatables-column-search-select-inputs" class="table table-borderless my-0 w-100">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>IP</th>
+          <th>Localização</th>
+          <th>Navegador</th>
+          <th>Sistema</th>
+          <th>Data</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>001</td>
+          <td>102.121.45.89</td>
+          <td>Luanda, Angola</td>
+          <td>Chrome</td>
+          <td>Windows 10</td>
+          <td>20/10/2025 17:34</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<style>
+  .status-select {
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    padding: 3px 8px;
+  }
+
+  .status-select option {
+    color: black;
+  }
+
+  .btn-confirm {
+    background-color: #2ecc71;
+    color: white !important;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 12px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .btn-confirm:hover {
+    background-color: #27ae60;
+  }
+
+  .card-dashboard {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: none;
+    box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  }
+
+  .card-dashboard h3,
+  .card-dashboard p,
+  .card-dashboard a {
+    color: white;
+  }
+
+  .card-dashboard a:hover {
+    text-decoration: underline;
+  }
+
+  table td, table th {
+    vertical-align: middle;
+  }
+
+  .table-borderless tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+
+
+
+</style>
+<style>
+    /* ========== UPLOAD FOTO ========== */
+    .upload-foto {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .foto-preview {
+        width: 120px;
+        height: 120px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid #ccc;
+    }
+
+    /* ======= TEMAS GERAIS ======= */
+    body.dark-mode {
+        background-color: #121212;
+        color: #fff;
+    }
+
+    body.dark-mode .card {
+        background-color: #1e1e1e;
+        color: #fff;
+    }
+
+    body.light-mode {
+        background-color: #f8f9fa;
+        color: #212529;
+    }
+
+    .theme-toggle {
+        border: none;
+        background: none;
+        cursor: pointer;
+        color: inherit;
+    }
+
+    .form-section {
+        margin-bottom: 1.5rem;
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .table img {
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+        object-fit: cover;
+    }
+
+    .card-dashboard {
+        transition: all 0.3s ease;
+    }
+
+    .card-dashboard:hover {
+        transform: translateY(-3px);
+    }
+
+    /* ======= ABAS (NAV TABS) ======= */
+    .nav-tabs {
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .nav-tabs .nav-link {
+        color: #555;
+        border: none;
+        border-bottom: 2px solid transparent;
+        background: none;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .nav-tabs .nav-link:hover {
+        color: #0d6efd;
+        border-bottom: 2px solid #0d6efd;
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+
+    .nav-tabs .nav-link.active {
+        font-weight: bold;
+        color: #0d6efd;
+        border-bottom: 2px solid #0d6efd;
+        background-color: transparent;
+    }
+
+    /* ======= MODO ESCURO PARA TABS ======= */
+    body.dark-mode .nav-tabs {
+        border-bottom-color: #333;
+    }
+
+    body.dark-mode .nav-tabs .nav-link {
+        color: #bbb;
+    }
+
+    body.dark-mode .nav-tabs .nav-link:hover {
+        color: #fff;
+        border-bottom: 2px solid #0d6efd;
+        background-color: rgba(13, 110, 253, 0.1);
+    }
+
+    body.dark-mode .nav-tabs .nav-link.active {
+        color: #0d6efd;
+        border-bottom: 2px solid #0d6efd;
+    }
+
+    /* ======= INPUTS E BOTÕES ======= */
+    body.dark-mode input,
+    body.dark-mode select,
+    body.dark-mode textarea {
+        background-color: #1a1a1a !important;
+        color: #f9f9f9 !important;
+        border: 1px solid #444 !important;
+    }
+
+    body.dark-mode .btn {
+        background-color: #2a2a2a !important;
+        color: #ffffff !important;
+        border-color: #3a3a3a !important;
+    }
+
+    body.dark-mode .btn:hover {
+        background-color: #007bff !important;
+        color: #fff !important;
+    }
+
+    /* ======= CARDS ======= */
+    body.dark-mode .card {
+        background-color: #1e1e1e !important;
+        border-color: #333 !important;
+    }
+
+    body.light-mode .card {
+        background-color: #fff !important;
+        border-color: #ddd !important;
+    }
+
+    /* ======= AJUSTE DAS TABELAS ======= */
+    .table {
+        width: 100%;
+    }
+
+    .table-borderless th,
+    .table-borderless td {
+        vertical-align: middle;
+    }
+</style>

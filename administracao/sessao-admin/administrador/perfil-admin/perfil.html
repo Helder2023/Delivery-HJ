@@ -1,0 +1,142 @@
+<div class="container-fluid p-0">
+
+  <!-- Cabeçalho -->
+  <div class="row mb-3 align-items-center justify-content-between">
+    <div class="col-auto">
+      <h3 class="page-title">Perfil</h3>
+    </div>
+    <div class="col-auto d-flex gap-2">
+      <button class="btn btn-dark shadow-sm">
+        <a href="admin.html#/editar" class="text-white text-decoration-none">
+          <i data-feather="user-check" class="me-1"></i> Editar perfil
+        </a>
+      </button>
+      <button class="btn btn-dark shadow-sm" onclick="window.location.reload();">
+        <i data-feather="refresh-cw" class="text-white"></i>
+      </button>
+     
+    </div>
+  </div>
+
+
+    <!-- Cartão de perfil -->
+    <div class="card flex-fill shadow-sm">
+        <div class="card-header gradient-header">
+            <h5 class="card-title mb-0 text-light">Informações Gerais</h5>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table  align-middle">
+                    <tbody>
+                        <tr>
+                            <td><strong>Foto</strong></td>
+                            <td>
+                                <a href="../assets/img/avatar/avatar.png" target="_blank">
+                                    <img src="../assets/img/avatar/avatar.png"
+                                        class="avatar-lg rounded-circle shadow-sm" alt="Admin Avatar">
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>ID</strong></td>
+                            <td>001</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nome Completo</strong></td>
+                            <td>Helder Gabriel Adão</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sexo</strong></td>
+                            <td>M</td>
+                        </tr>
+                        <tr>
+                            <td><strong>E-mail</strong></td>
+                            <td><a href="mailto:helder@deliveryhj.com" class="link-profile">helder@deliveryhj.com</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Telefone</strong></td>
+                            <td><a href="tel:+244999000111" class="link-profile">+244 999 000 111</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Cargo</strong></td>
+                            <td>Administrador Principal</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Estado</strong></td>
+                            <td><i class="status ativo">Ativo</i></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data de Criação</strong></td>
+                            <td>2024-05-12 09:45</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Última Modificação</strong></td>
+                            <td>2025-10-20 15:22</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+  .status {
+    border-radius: 50px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .status.ativo {
+    background-color: #198754;
+    color: white;
+  }
+
+  .status.inativo {
+    background-color: #dc3545;
+    color: white;
+  }
+
+
+  .status.pendente {
+    background-color: #616300;
+    color: white;
+  }
+
+
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Carrega preferência anterior ou padrão do sistema
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const savedTheme = localStorage.getItem("theme");
+    const currentTheme = savedTheme || (prefersDark ? "dark-mode" : "light-mode");
+
+    document.body.classList.add(currentTheme);
+    updateThemeIcon(currentTheme);
+
+    // Alternar tema ao clicar no botão
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      const isDark = document.body.classList.contains("dark-mode");
+      document.body.classList.toggle("dark-mode", !isDark);
+      document.body.classList.toggle("light-mode", isDark);
+
+      const newTheme = isDark ? "light-mode" : "dark-mode";
+      localStorage.setItem("theme", newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    feather.replace(); // ativa os ícones feather
+  });
+
+  function updateThemeIcon(theme) {
+    const icon = document.querySelector("#themeToggle i");
+    icon.dataset.feather = theme === "dark-mode" ? "sun" : "moon";
+    feather.replace();
+  }
+</script>

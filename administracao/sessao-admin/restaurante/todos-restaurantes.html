@@ -1,0 +1,420 @@
+<div class="container-fluid p-0">
+
+    <div class="row mb-2 mb-xl-3">
+        <div class="col-auto d-sm-block">
+            <h3 style="color: white;">Todos os Restaurantes</h3>
+        </div>
+
+        <div class="col-auto ms-auto text-end mt-n1">
+
+            <button class="btn shadow-sm no-underline" style="background-color: #000;">
+                <i class="align-middle mt-n1">&nbsp;</i> <a class="no-underline"
+                    href="admin.html#/adicionar-restaurante" style="color: white;">
+                    <i data-feather="user-plus"></i> Adcionar novo
+                    restaurante</a>
+            </button>
+
+            <button class="btn shadow-sm" style="background-color: #000;">
+                <i class="align-middle" data-feather="refresh-cw" id="refresh" onclick="window.location.reload();"
+                    style="color: white;">&nbsp;</i>
+            </button>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <!-- Barra de Pesquisa -->
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Pesquisar restaurantes..."
+                style="border: white solid 1px;">
+        </div>
+
+        <!-- Container dos Cards -->
+        <div id="cards-container" class="row g-4">
+            <!-- Cada card -->
+            <div class="col-12 col-md-6 col-lg-4 card-item">
+                <div class="restaurant-card">
+                    <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461" alt="Restaurante Kapital">
+                    <div class="restaurant-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 style="color: white;">Restaurante Kapital</h5>
+                            <i class="status ativo">Ativo</i>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <p>Angolana</p>
+                            <div>
+                                <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
+                                        data-feather="eye"></i></a>
+                                <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-2">
+                            <span class="rating"><i data-feather="star"></i> 4.8</span>
+                            <span>234 pedidos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controles de Paginação -->
+    <div id="pagination-controls" class="d-flex justify-content-center mt-4"></div>
+</div>
+
+
+<div class="row mt-3">
+    <div class="col-12 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+                <h5 class="card-title mb-0" style="color: white;"> <i class="align-middle text-info"
+                        data-feather="alert-triangle"
+                        style="color: black !important; margin-top: -6px; margin-right: 5px;"></i>
+                    Avisos de Restaurantes</h5>
+            </div>
+            <div class="card-body">
+                <table id="datatables-column-search-select-inputs" class="table table-borderless my-0 w-100">
+                    <thead>
+                        <tr>
+                            <th>Logo</th>
+                            <th>Nome do Restaurante</th>
+                            <th>Categoria</th>
+                            <th>Telefone</th>
+                            <th>E-mail</th>
+                            <th>Endereço</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><img src="../assets/img/avatar/avatar.png" alt="Logo" class="logo-table"></td>
+                            <td>Pizzaria Bella Itália</td>
+                            <td>Pizzaria</td>
+                            <td>+244 912 345 678</td>
+                            <td>bella.italia@email.com</td>
+                            <td>Rua 21 de Janeiro, nº 45</td>
+                            <td><i class="status pendente">Pendente</i></td>
+                            <td>
+                                <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
+                                        data-feather="eye"></i></a>
+                                <a href="admin.html#/deletar-restaurante"><i data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><img src="../assets/img/avatar/avatar.png" alt="Logo" class="logo-table"></td>
+                            <td>Hamburgueria King</td>
+                            <td>Hamburgueria</td>
+                            <td>+244 923 456 789</td>
+                            <td>king.burger@email.com</td>
+                            <td>Avenida da Independência, nº 10</td>
+                            <td><i class="status bloqueiado">Bloqueiado</i></td>
+                            <td>
+                                <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
+                                        data-feather="eye"></i></a>
+                                <a href="admin.html#/deletar-restaurante"><i data-feather="trash"></i></a>
+                            </td>
+                        </tr>
+                        <!-- Adicione mais linhas conforme necessário -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    feather.replace();
+
+    (function () {
+        'use strict';
+
+        const cardsPerPage = 6;
+        const cardsContainer = document.getElementById('cards-container');
+        const paginationContainer = document.getElementById('pagination-controls');
+        const searchInput = document.getElementById('searchInput');
+
+        const cards = Array.from(cardsContainer.querySelectorAll('.card-item'));
+        let filteredCards = [...cards];
+        let currentPage = 1;
+
+        function showPage(page) {
+            currentPage = page;
+            const start = (page - 1) * cardsPerPage;
+            const end = start + cardsPerPage;
+
+            filteredCards.forEach((card, index) => {
+                card.style.display = index >= start && index < end ? 'block' : 'none';
+            });
+
+            renderPagination();
+        }
+
+        function renderPagination() {
+            paginationContainer.innerHTML = '';
+            const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
+
+            const prevBtn = document.createElement('button');
+            prevBtn.textContent = '← Anterior';
+            prevBtn.className = 'btn btn-sm mx-1 shadow-sm';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.onclick = () => showPage(currentPage - 1);
+            paginationContainer.appendChild(prevBtn);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i;
+                btn.className = 'btn btn-sm mx-1 shadow-sm ' + (i === currentPage ? 'btn-primary' : 'btn-light');
+                btn.onclick = () => showPage(i);
+                paginationContainer.appendChild(btn);
+            }
+
+            const nextBtn = document.createElement('button');
+            nextBtn.textContent = 'Próximo →';
+            nextBtn.className = 'btn btn-sm mx-1 shadow-sm';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.onclick = () => showPage(currentPage + 1);
+            paginationContainer.appendChild(nextBtn);
+        }
+
+        function filterCards() {
+            const searchValue = searchInput.value.toLowerCase();
+            filteredCards = cards.filter(card => card.textContent.toLowerCase().includes(searchValue));
+            currentPage = 1;
+            showPage(1);
+        }
+
+        searchInput.addEventListener('input', filterCards);
+
+        showPage(1);
+    })();
+</script>
+<!-- === SCRIPT PARA FILTRO === -->
+<script>
+    document.getElementById('searchInput').addEventListener('input', function () {
+        const termo = this.value.toLowerCase().trim();
+        const cards = document.querySelectorAll('#cards-container .restaurant-card');
+
+        cards.forEach(card => {
+            const nome = card.querySelector('h5').textContent.toLowerCase();
+            const descricao = card.querySelector('p').textContent.toLowerCase();
+            const status = card.querySelector('.status').textContent.toLowerCase();
+
+            if (nome.includes(termo) || descricao.includes(termo) || status.includes(termo)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+
+    // Ícones Feather
+    feather.replace();
+</script>
+<style>
+    /* ====== TRANSIÇÃO SUAVE ====== */
+    * {
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+
+    /* ====== BASE ====== */
+    .search-bar input {
+        max-width: 500px;
+        margin-bottom: 20px;
+        position: relative;
+        border-radius: 8px;
+        padding: 12px 40px;
+        outline: none;
+        width: 100%;
+    }
+
+
+    .restaurant-card {
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .restaurant-card:hover {
+        transform: scale(1.03);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .restaurant-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+
+    .restaurant-body {
+        padding: 15px;
+    }
+
+    .restaurant-body h5 {
+        font-weight: 600;
+    }
+
+
+    .status {
+        border-radius: 50px;
+        padding: 3px 10px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status.ativo {
+        background-color: #198754;
+        color: white;
+    }
+
+    .status.bloqueiado {
+        background-color: #dc3545;
+        color: white;
+    }
+
+
+    .status.pendente {
+        background-color: #616300;
+        color: white;
+    }
+
+    #pagination-controls {
+        margin: 30px 0;
+    }
+
+    #pagination-controls button {
+        border: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* ====== MODO ESCURO ====== */
+    body.dark-mode {
+        background-color: #121212 !important;
+        color: #f1f1f1 !important;
+    }
+
+    body.dark-mode h3,
+    body.dark-mode h5,
+    body.dark-mode p,
+    body.dark-mode span {
+        color: #ffffff !important;
+    }
+
+    body.dark-mode .search-bar input {
+        background-color: #1e1e1e !important;
+        color: #fff !important;
+        border: 1px solid #333 !important;
+    }
+
+    body.dark-mode .search-bar input::placeholder {
+        color: #aaa !important;
+    }
+
+    body.dark-mode .restaurant-card {
+        background-color: #1e1e1e !important;
+        border: 1px solid #333 !important;
+    }
+
+    body.dark-mode .restaurant-body p {
+        color: #cfcfcf !important;
+    }
+
+    body.dark-mode .btn {
+        background-color: #2a2a2a !important;
+        color: #ffffff !important;
+        border: 1px solid #3a3a3a !important;
+    }
+
+    body.dark-mode .btn:hover,
+    body.dark-mode .btn:focus {
+        background-color: #007bff !important;
+        color: #fff !important;
+        border-color: #007bff !important;
+    }
+
+    /* Paginação */
+    body.dark-mode #pagination-controls button {
+        background-color: #1e1e1e !important;
+        color: #fff !important;
+    }
+
+    body.dark-mode #pagination-controls button:hover:not(:disabled),
+    body.dark-mode #pagination-controls .btn-primary {
+        background-color: #007bff !important;
+        color: #fff !important;
+    }
+
+    /* ====== MODO CLARO ====== */
+    body.light-mode {
+        background-color: #f9f9f9 !important;
+        color: #000 !important;
+    }
+
+    body.light-mode h3,
+    body.light-mode h5,
+    body.light-mode p,
+    body.light-mode span {
+        color: #000 !important;
+    }
+
+    body.light-mode .search-bar input {
+        background-color: #ffffff !important;
+        color: #000 !important;
+        border: 1px solid #ccc !important;
+    }
+
+    body.light-mode .search-bar input::placeholder {
+        color: #666 !important;
+    }
+
+    body.light-mode .restaurant-card {
+        background-color: #ffffff !important;
+        border: 1px solid #ddd !important;
+    }
+
+    body.light-mode .restaurant-body p {
+        color: #555 !important;
+    }
+
+    body.light-mode .btn {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        border: 1px solid #ccc !important;
+    }
+
+    body.light-mode .btn:hover,
+    body.light-mode .btn:focus {
+        background-color: #007bff !important;
+        color: #ffffff !important;
+        border-color: #007bff !important;
+    }
+
+    /* Paginação */
+    body.light-mode #pagination-controls button {
+        background-color: #f1f1f1 !important;
+        color: #000 !important;
+    }
+
+    body.light-mode #pagination-controls button:hover:not(:disabled),
+    body.light-mode #pagination-controls .btn-primary {
+        background-color: #007bff !important;
+        color: #fff !important;
+    }
+
+    /* ====== ÍCONES FEATHER ====== */
+    body.dark-mode svg.feather {
+        stroke: #fff !important;
+    }
+
+    body.light-mode svg.feather {
+        stroke: #000 !important;
+    }
+</style>
+
+</div>

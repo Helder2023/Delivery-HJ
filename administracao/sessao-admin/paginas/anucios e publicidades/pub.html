@@ -1,0 +1,261 @@
+<div class="container-fluid p-0">
+
+    <!-- TÍTULO -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">Anúncios & Publicidades</h1>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalAnuncio">
+            + Novo Anúncio
+        </button>
+    </div>
+
+    <div class="search-bar mb-3 col-6">
+        <input type="text" id="adsSearchInput" placeholder="Pesquisar anúncios..." class="form-control">
+    </div>
+
+    <!-- CARDS -->
+    <div id="ads-container" class="row g-4">
+
+        <div class="col-md-6 col-xl-4 ad-card-item">
+            <div class="card anuncio-card">
+                <img src="../assets/img/avatar/restaurante.jpg" class="card-img-top" alt="Anúncio">
+                <div class="card-body">
+                    <span class="badge status ativo mb-2">Ativo</span>
+                    <h5 class="card-title">Promoção Restaurante</h5>
+                    <p class="card-text">Descontos exclusivos para pedidos acima de 10.000 Kz.</p>
+
+                    <div class="d-flex justify-content-between">
+                        <small class="text-muted">Até: 30/12/2025</small>
+                        <div>
+                            <a href="admin.html#/editar-pub"><button class="btn btn-sm btn-outline-primary">Editar</button></a>
+                            <button class="btn btn-sm btn-outline-danger">Desativar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-xl-4 ad-card-item">
+            <div class="card anuncio-card anuncio-inativo">
+                <img src="../assets/img/avatar/restaurante.jpg" class="card-img-top" alt="Anúncio">
+                <div class="card-body">
+                    <span class="badge status inativo mb-2">Inativo</span>
+                    <h5 class="card-title">Entrega Grátis</h5>
+                    <p class="card-text">Campanha pausada aguardando renovação.</p>
+
+                    <div class="d-flex justify-content-between">
+                        <small class="text-muted">Expirado</small>
+                        <div>
+                            <button class="btn btn-sm btn-outline-danger">Excluir</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="ads-pagination" class="d-flex justify-content-center mt-4"></div>
+
+
+</div>
+<div class="modal fade" id="modalAnuncio" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastrar Novo Anúncio</h5>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <form id="formAnuncio">
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Título</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Tipo de Anúncio</label>
+                            <select class="form-select">
+                                <option>Restaurante</option>
+                                <option>Entrega</option>
+                                <option>Institucional</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Descrição</label>
+                            <textarea class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Data de início</label>
+                            <input type="date" class="form-control">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Data de término</label>
+                            <input type="date" class="form-control">
+                        </div>
+
+                        <div class="col-12">
+                            <label class="form-label">Imagem do Anúncio</label>
+                            <input type="file" class="form-control">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Status</label>
+                            <select class="form-select">
+                                <option>Ativo</option>
+                                <option>Inativo</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button class="btn btn-primary">Salvar Anúncio</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<style>
+    .status.ativo {
+        background-color: #198754;
+        color: white;
+    }
+
+    .status.inativo {
+        background-color: #dc3545;
+        color: white;
+    }
+
+
+    .status.pendente {
+        background-color: #616300;
+        color: white;
+    }
+
+
+    .anuncio-card {
+        border-radius: 14px;
+        overflow: hidden;
+        transition: all .3s ease;
+    }
+
+    .anuncio-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, .15);
+    }
+
+    .anuncio-card img {
+        height: 180px;
+        object-fit: cover;
+    }
+
+    .anuncio-inativo {
+        opacity: .7;
+    }
+
+    /* Dark mode */
+    [data-theme="dark"] .anuncio-card {
+        background-color: #1e1e1e;
+        color: #eaeaea;
+    }
+
+    [data-theme="dark"] .modal-content {
+        background-color: #1c1c1c;
+        color: #fff;
+    }
+</style>
+
+<script>
+    (function () {
+        'use strict';
+
+        const cardsPerPage = 6;
+
+        const container = document.getElementById('ads-container');
+        const pagination = document.getElementById('ads-pagination');
+        const searchInput = document.getElementById('adsSearchInput');
+
+        if (!container) return;
+
+        const cards = Array.from(container.querySelectorAll('.ad-card-item'));
+        let filteredCards = [...cards];
+        let currentPage = 1;
+
+        function showPage(page) {
+            currentPage = page;
+            const start = (page - 1) * cardsPerPage;
+            const end = start + cardsPerPage;
+
+            cards.forEach(card => card.style.display = 'none');
+
+            filteredCards.slice(start, end).forEach(card => {
+                card.style.display = '';
+            });
+
+            renderPagination();
+        }
+
+        function renderPagination() {
+            pagination.innerHTML = '';
+
+            const totalPages = Math.max(1, Math.ceil(filteredCards.length / cardsPerPage));
+
+            if (filteredCards.length === 0) {
+                pagination.innerHTML = '<span class="text-muted">Nenhum anúncio encontrado.</span>';
+                return;
+            }
+
+            const createBtn = (text, disabled, action, active = false) => {
+                const btn = document.createElement('button');
+                btn.textContent = text;
+                btn.className = `btn btn-sm mx-1 shadow-sm ${active ? 'btn-primary' : 'btn-light'}`;
+                btn.disabled = disabled;
+                btn.onclick = action;
+                return btn;
+            };
+
+            pagination.appendChild(
+                createBtn('←', currentPage === 1, () => showPage(currentPage - 1))
+            );
+
+            for (let i = 1; i <= totalPages; i++) {
+                pagination.appendChild(
+                    createBtn(i, false, () => showPage(i), i === currentPage)
+                );
+            }
+
+            pagination.appendChild(
+                createBtn('→', currentPage === totalPages, () => showPage(currentPage + 1))
+            );
+        }
+
+        function filterCards() {
+            const value = searchInput.value.trim().toLowerCase();
+
+            filteredCards = cards.filter(card => {
+                const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+                const text = card.querySelector('.card-text')?.textContent.toLowerCase() || '';
+                const status = card.querySelector('.status')?.textContent.toLowerCase() || '';
+
+                return title.includes(value) || text.includes(value) || status.includes(value);
+            });
+
+            showPage(1);
+        }
+
+        searchInput.addEventListener('input', filterCards);
+
+        showPage(1);
+    })();
+</script>

@@ -1,0 +1,241 @@
+<div class="row mb-3">
+    <div class="col-12 col-md-8">
+        <h1>Detalhes do Pagamento</h1>
+        <p>Visualize todas as informações do pagamento enviado pelo restaurante.</p>
+    </div>
+    <div class="col-12 col-md-4 text-end">
+        <button class="btn shadow-sm" onclick="window.history.back()">
+            <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+        </button>
+        <button class="btn shadow-sm no-underline" style="background-color: #000;">
+            <a class="no-underline" href="admin.html#/visulizar-restaurante" style="color: white;">
+                <i data-feather="eye"></i></a>
+        </button>
+    </div>
+</div>
+
+<!-- Comprovativo -->
+<div class="col-12 col-md-12">
+    <div class="card card-dashboard flex-fill">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Comprovativo de Pagamento</h5>
+        </div>
+        <div class="card-body text-center">
+
+            <div class="d-flex justify-content-center gap-2">
+                <a href="#" class="btn btn-secondary" download>
+                    <i data-feather="download"></i> Baixar
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Informações do restaurante -->
+<div class="col-12 col-md-12">
+    <div class="card card-dashboard flex-fill">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Informações do Restaurante</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table  align-middle">
+                    <tbody>
+
+                        <tr>
+                            <td><strong>ID</strong></td>
+                            <td>001</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nome</strong></td>
+                            <td>Churrasqueira Central</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Responsável</strong></td>
+                            <td>João Pessela</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data de envio</strong></td>
+                            <td>05/11/2025</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Valor</strong></td>
+                            <td> 1.500.000 Kz</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Status</strong></td>
+                            <td><span class="status pago">Pago</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-12 col-md-12">
+    <div class="card card-dashboard">
+        <div class="card-header">
+            <h5 class="card-title mb-0">Notas Internas</h5>
+        </div>
+        <div class="card-body">
+            <form id="formNotas">
+                <div class="mb-3">
+                    <label for="nota" class="form-label">Adicionar / Atualizar nota</label>
+                    <textarea id="nota" class="form-control" rows="3" placeholder="Escreva uma nota..."></textarea>
+                </div>
+                <input type="hidden" id="editIndex" value="">
+                <button type="submit" class="btn btn-primary">
+                    <i data-feather="plus-circle"></i> Salvar
+                </button>
+            </form>
+            <hr>
+            <ul id="listaNotas" class="list-group list-group-flush mt-2">
+                <li class="list-group-item">Nota 1: Conferir dados do comprovativo <i data-feather="edit"
+                        class="edit-btn"></i></li>
+                <li class="list-group-item">Nota 2: Confirmar com o responsável do restaurante <i data-feather="edit"
+                        class="edit-btn"></i></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+    .status {
+        border-radius: 50px;
+        padding: 3px 10px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status.pago {
+        background-color: #198754;
+        color: white;
+    }
+
+    .status.naoPago {
+        background-color: #dc3545;
+        color: white;
+    }
+
+
+    .status.pendente {
+        background-color: #616300;
+        color: white;
+    }
+
+
+    .timeline {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .timeline-item {
+        margin-bottom: 1rem;
+        border-left: 2px solid #0d6efd;
+        padding-left: 10px;
+    }
+
+    .timeline-item p {
+        margin: 0.25rem 0 0 0;
+    }
+</style>
+
+<style>
+    /* ========== BASE GERAL ========== */
+    * {
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+   
+    /* ========== UPLOAD FOTO ========== */
+    .upload-foto {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .foto-preview {
+        width: 120px;
+        height: 120px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid #ccc;
+    }
+
+    /* ========== AJUSTES ========== */
+    a.no-underline {
+        text-decoration: none !important;
+    }
+</style>
+
+<script>
+    feather.replace();
+
+    const form = document.getElementById('formNotas');
+    const textarea = document.getElementById('nota');
+    const ul = document.getElementById('listaNotas');
+    const editIndexInput = document.getElementById('editIndex');
+
+    // Adicionar ou atualizar nota
+    form.addEventListener('submit', e => {
+        e.preventDefault();
+        const texto = textarea.value.trim();
+        if (!texto) return;
+
+        const editIndex = editIndexInput.value;
+        if (editIndex !== "") {
+            // Atualizar nota existente
+            const li = ul.children[editIndex];
+            li.innerHTML = texto + ' <i data-feather="edit" class="edit-btn"></i>';
+            feather.replace();
+            editIndexInput.value = "";
+        } else {
+            // Adicionar nova nota
+            const li = document.createElement('li');
+            li.classList.add('list-group-item');
+            li.innerHTML = texto + ' <i data-feather="edit" class="edit-btn"></i>';
+            ul.appendChild(li);
+            feather.replace();
+        }
+
+        textarea.value = '';
+    });
+
+    // Editar nota
+    ul.addEventListener('click', e => {
+        if (e.target.classList.contains('edit-btn')) {
+            const li = e.target.closest('li');
+            const index = Array.from(ul.children).indexOf(li);
+            textarea.value = li.textContent.trim();
+            editIndexInput.value = index;
+            textarea.focus();
+        }
+    });
+</script>

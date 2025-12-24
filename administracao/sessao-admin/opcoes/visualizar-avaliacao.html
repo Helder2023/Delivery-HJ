@@ -1,0 +1,282 @@
+<div class="container-fluid p-0">
+
+  <!-- Cabeçalho -->
+  <div class="row mb-3 align-items-center justify-content-between">
+    <div class="col-auto">
+      <h3 class="page-title">Detalhes da Avaliação</h3>
+    </div>
+    <div class="col-auto d-flex gap-2">
+              <button class="btn shadow-sm" onclick="window.history.back()">
+            <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+        </button>
+    </div>
+  </div>
+
+  <!-- Card da Avaliação -->
+  <div class="card flex-fill shadow-sm mb-4">
+    <div class="card-header gradient-header">
+      <h5 class="card-title mb-0 text-light">Avaliação #205 - Restaurante Kapital</h5>
+    </div>
+    <div class="card-body">
+      <p><strong>Data:</strong> 01/11/2025 17:30</p>
+      <p><strong>Usuário:</strong> Ana Silva</p>
+      <p><strong>Nota:</strong> 
+        <span style="color: #f39c12 !important;">★★★★☆</span> (4/5)
+      </p>
+      <p><strong>Comentário:</strong></p>
+      <p>Excelente atendimento e comida saborosa, mas o tempo de espera foi um pouco longo.</p>
+    </div>
+  </div>
+
+  <!-- Área para responder à avaliação -->
+  <div class="card flex-fill shadow-sm mb-4">
+    <div class="card-header gradient-header">
+      <h5 class="card-title mb-0 text-light">Responder Avaliação</h5>
+    </div>
+    <div class="card-body">
+      <form action="responder_avaliacao.php" method="post" class="row g-3 needs-validation" novalidate>
+        <input type="hidden" name="id_avaliacao" value="205">
+
+        <div class="col-12">
+          <label for="resposta" class="form-label">Resposta</label>
+          <textarea id="resposta" name="resposta" class="form-control" rows="3" placeholder="Escreva sua resposta..." required></textarea>
+          <div class="invalid-feedback">Digite uma resposta antes de enviar.</div>
+        </div>
+
+        <div class="col-12">
+          <label for="visivel" class="form-label">Exibir no site</label>
+          <select id="visivel" name="visivel" class="form-control">
+            <option value="sim">Sim</option>
+            <option value="nao">Não</option>
+          </select>
+        </div>
+
+        <div class="col-12 text-left mt-3">
+          <button type="submit" class="btn btn-primary w-25">Salvar Resposta</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tabela de respostas anteriores -->
+  <div class="card flex-fill shadow-sm">
+    <div class="card-header gradient-header">
+      <h5 class="card-title mb-0 text-light">Respostas Anteriores</h5>
+    </div>
+    <div class="card-body table-responsive">
+      <table id="datatables-column-search-select-inputs" class="table table-borderless my-0 w-100">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Data</th>
+            <th>Usuário/Responsável</th>
+            <th>Resposta</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>01/11/2025 18:00</td>
+            <td>Administrador</td>
+            <td>Obrigado pelo feedback! Estamos trabalhando para reduzir o tempo de espera.</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>01/11/2025 18:30</td>
+            <td>Supervisor</td>
+            <td>Agradecemos a avaliação. Esperamos vê-la novamente em breve!</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const savedTheme = localStorage.getItem("theme");
+    const currentTheme = savedTheme || (prefersDark ? "dark-mode" : "light-mode");
+
+    document.body.classList.add(currentTheme);
+    updateThemeIcon(currentTheme);
+
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      const isDark = document.body.classList.contains("dark-mode");
+      document.body.classList.toggle("dark-mode", !isDark);
+      document.body.classList.toggle("light-mode", isDark);
+
+      const newTheme = isDark ? "light-mode" : "dark-mode";
+      localStorage.setItem("theme", newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    feather.replace(); // Ativa ícones
+  });
+
+  function updateThemeIcon(theme) {
+    const icon = document.querySelector("#themeToggle i");
+    icon.dataset.feather = theme === "dark-mode" ? "sun" : "moon";
+    feather.replace();
+  }
+</script>
+
+<style>
+  
+     input {
+        background-color: #1e1e1e !important;
+        color: #fff !important;
+        border: 1px solid #333 !important;
+    }
+</style>
+
+<style>
+    /* ========== UPLOAD FOTO ========== */
+    .upload-foto {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .foto-preview {
+        width: 120px;
+        height: 120px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid #ccc;
+    }
+
+    /* ======= TEMAS GERAIS ======= */
+    body.dark-mode {
+        background-color: #121212;
+        color: #fff;
+    }
+
+    body.dark-mode .card {
+        background-color: #1e1e1e;
+        color: #fff;
+    }
+
+    body.light-mode {
+        background-color: #f8f9fa;
+        color: #212529;
+    }
+
+    .theme-toggle {
+        border: none;
+        background: none;
+        cursor: pointer;
+        color: inherit;
+    }
+
+    .form-section {
+        margin-bottom: 1.5rem;
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .table img {
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+        object-fit: cover;
+    }
+
+    .card-dashboard {
+        transition: all 0.3s ease;
+    }
+
+    .card-dashboard:hover {
+        transform: translateY(-3px);
+    }
+
+    /* ======= ABAS (NAV TABS) ======= */
+    .nav-tabs {
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .nav-tabs .nav-link {
+        color: #555;
+        border: none;
+        border-bottom: 2px solid transparent;
+        background: none;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .nav-tabs .nav-link:hover {
+        color: #0d6efd;
+        border-bottom: 2px solid #0d6efd;
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+
+    .nav-tabs .nav-link.active {
+        font-weight: bold;
+        color: #0d6efd;
+        border-bottom: 2px solid #0d6efd;
+        background-color: transparent;
+    }
+
+    /* ======= MODO ESCURO PARA TABS ======= */
+    body.dark-mode .nav-tabs {
+        border-bottom-color: #333;
+    }
+
+    body.dark-mode .nav-tabs .nav-link {
+        color: #bbb;
+    }
+
+    body.dark-mode .nav-tabs .nav-link:hover {
+        color: #fff;
+        border-bottom: 2px solid #0d6efd;
+        background-color: rgba(13, 110, 253, 0.1);
+    }
+
+    body.dark-mode .nav-tabs .nav-link.active {
+        color: #0d6efd;
+        border-bottom: 2px solid #0d6efd;
+    }
+
+    /* ======= INPUTS E BOTÕES ======= */
+    body.dark-mode input,
+    body.dark-mode select,
+    body.dark-mode textarea {
+        background-color: #1a1a1a !important;
+        color: #f9f9f9 !important;
+        border: 1px solid #444 !important;
+    }
+
+    body.dark-mode .btn {
+        background-color: #2a2a2a !important;
+        color: #ffffff !important;
+        border-color: #3a3a3a !important;
+    }
+
+    body.dark-mode .btn:hover {
+        background-color: #007bff !important;
+        color: #fff !important;
+    }
+
+    /* ======= CARDS ======= */
+    body.dark-mode .card {
+        background-color: #1e1e1e !important;
+        border-color: #333 !important;
+    }
+
+    body.light-mode .card {
+        background-color: #fff !important;
+        border-color: #ddd !important;
+    }
+
+    /* ======= AJUSTE DAS TABELAS ======= */
+    .table {
+        width: 100%;
+    }
+
+    .table-borderless th,
+    .table-borderless td {
+        vertical-align: middle;
+    }
+</style>

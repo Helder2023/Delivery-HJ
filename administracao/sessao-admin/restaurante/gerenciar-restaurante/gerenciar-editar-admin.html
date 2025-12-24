@@ -1,0 +1,199 @@
+<style>
+  * {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .sidebar,
+  .navbar {
+    display: none;
+  }
+
+  /* ========== UPLOAD FOTO ========== */
+  .upload-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .logo-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+  }
+
+  a.no-underline {
+    text-decoration: none !important;
+  }
+</style>
+
+<div class="container-fluid p-3">
+
+  <!-- Cabeçalho -->
+  <div class="row mb-2 align-items-center justify-content-between">
+    <div class="col-auto">
+      <h3>Editar Administrador do Restaurante - Helder Adão</h3>
+    </div>
+    <div class="col-auto d-flex gap-2">
+      <button class="btn shadow-sm" onclick="window.history.back()">
+        <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+      </button>
+    </div>
+  </div>
+
+  <!-- Formulário -->
+  <div class="card flex-fill p-4 shadow-sm">
+    <form action="editar_admin.php" method="post" enctype="multipart/form-data" class="row g-3 needs-validation"
+      novalidate>
+
+      <!-- Upload da Foto -->
+      <div class="upload-logo">
+        <img id="logoPreview" src="../assets/img/avatar/avatar.png" class="logo-preview" alt="Foto do Admin">
+        <input type="file" id="logoUpload" class="form-control w-50" accept="image/*" name="foto_admin">
+      </div>
+
+      <div class="col-md-6">
+        <label for="first_name" class="form-label">Primeiro Nome <span class="text-danger">*</span></label>
+        <input type="text" minlength="3" maxlength="25" class="form-control" id="first_name" name="first_name" required
+          value="Helder">
+        <div class="invalid-feedback">Informe o primeiro nome.</div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="second_name" class="form-label">Segundo Nome</label>
+        <input type="text" maxlength="25" class="form-control" id="second_name" name="second_name" value="Gabriel">
+      </div>
+
+      <div class="col-md-6">
+        <label for="email" class="form-label">E-mail <span class="text-danger">*</span></label>
+        <input type="email" maxlength="60" class="form-control" id="email" name="email" required
+          value="helder@deliveryhj.com">
+        <div class="invalid-feedback">Insira um e-mail válido!</div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="tel" class="form-label">Telefone</label>
+        <input type="tel" maxlength="18" class="form-control" id="tel" name="tel" value="+244 999 000 111">
+      </div>
+
+      <div class="col-md-6">
+        <label for="cargo" class="form-label">Cargo / Papel <span class="text-danger">*</span></label>
+        <select class="form-control" id="cargo" name="cargo" required>
+          <option disabled>Selecione o cargo...</option>
+          <option selected>Administrador</option>
+          <option>Editor</option>
+        </select>
+        <div class="invalid-feedback">Selecione o cargo!</div>
+      </div>
+
+      <div class="col-md-6">
+        <label for="genero" class="form-label">Gênero</label>
+        <select class="form-control" id="genero" name="genero">
+          <option value="">Selecione...</option>
+          <option selected>Masculino</option>
+          <option>Feminino</option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label for="data_nasc" class="form-label">Data de Nascimento</label>
+        <input type="date" id="data_nasc" name="data_nasc" class="form-control" value="1998-06-22">
+      </div>
+
+      <div class="col-md-6">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-control" id="status" name="status">
+          <option selected>Ativo</option>
+          <option>Inativo</option>
+        </select>
+      </div>
+
+      <div class="col-md-6">
+        <label for="password" class="form-label">Nova Senha (gerada automaticamente)</label>
+        <div class="input-group">
+          <input type="text" class="form-control" id="password" name="password" readonly>
+          <button type="button" class="btn btn-outline-secondary" id="btnRegenerate">Gerar</button>
+        </div>
+      </div>
+
+      <div class="col-md-12 text-end mt-4">
+        <button class="btn btn-primary w-25" type="submit">Salvar Alterações</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== SCRIPTS ==================== -->
+<script>
+  // Alternância de tema
+  document.addEventListener("DOMContentLoaded", () => {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const savedTheme = localStorage.getItem("theme");
+    const currentTheme = savedTheme || (prefersDark ? "dark-mode" : "light-mode");
+
+    document.body.classList.add(currentTheme);
+    updateThemeIcon(currentTheme);
+
+    document.getElementById("themeToggle").addEventListener("click", () => {
+      const isDark = document.body.classList.contains("dark-mode");
+      document.body.classList.toggle("dark-mode", !isDark);
+      document.body.classList.toggle("light-mode", isDark);
+      const newTheme = isDark ? "light-mode" : "dark-mode";
+      localStorage.setItem("theme", newTheme);
+      updateThemeIcon(newTheme);
+    });
+
+    feather.replace();
+  });
+
+  function updateThemeIcon(theme) {
+    const icon = document.querySelector("#themeToggle i");
+    icon.dataset.feather = theme === "dark-mode" ? "sun" : "moon";
+    feather.replace();
+  }
+
+  // Preview da imagem
+  document.getElementById('logoUpload').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => document.getElementById('logoPreview').src = e.target.result;
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // Geração automática de senha
+  function gerarSenha(tamanho = 20) {
+    const caracteres = "123456789";
+    let senha = "DeliveryHJ";
+    for (let i = 0; i < tamanho; i++) {
+      senha += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+    }
+    return senha;
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("password").value = gerarSenha();
+  });
+
+  document.getElementById("btnRegenerate").addEventListener("click", () => {
+    document.getElementById("password").value = gerarSenha();
+  });
+
+  // Validação do formulário
+  (() => {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+</script>

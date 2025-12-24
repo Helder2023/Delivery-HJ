@@ -1,0 +1,385 @@
+
+    /* ========== UPLOAD FOTO ========== */
+    /* ========== ALERTS MODO CLARO ========== */
+    
+/* ==================== ALERTS DARK MODE ==================== */
+body.dark-mode .alert {
+    color: #f1f1f1 !important; /* texto claro */
+    border-color: #444; /* borda um pouco mais escura */
+}
+
+/* Alertas de sucesso */
+body.dark-mode .alert-success {
+    background-color: #155724 !important; /* um verde mais escuro */
+    border-color: #1c5234;
+    color: #d4edda;
+}
+
+/* Alertas de aviso / warning */
+body.dark-mode .alert-warning {
+    background-color: #856404 !important; /* amarelo/dourado escuro */
+    border-color: #66520b;
+    color: #fff3cd;
+}
+
+/* Alertas de perigo / danger */
+body.dark-mode .alert-danger {
+    background-color: #721c24 !important; /* vermelho escuro */
+    border-color: #501217;
+    color: #f8d7da;
+}
+
+/* Alertas informativos / info */
+body.dark-mode .alert-info {
+    background-color: #0c5460 !important; /* azul escuro */
+    border-color: #08404c;
+    color: #d1ecf1;
+}
+
+/* Mantém o close button visível */
+body.dark-mode .alert .btn-close {
+    filter: brightness(0.8);
+}
+body.light-mode .alert {
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+/* Sucesso */
+body.light-mode .alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+
+/* Aviso / Warning */
+body.light-mode .alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #ffeeba;
+}
+
+/* Erro / Danger */
+body.light-mode .alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+/* Info */
+body.light-mode .alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border-color: #bee5eb;
+}
+
+/* ========== ALERTS MODO ESCURO ========== */
+body.dark-mode .alert {
+    border: 1px solid transparent;
+    border-radius: 0.375rem;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+/* Sucesso */
+body.dark-mode .alert-success {
+    background-color: #1e3b1e;
+    color: #a8f0a8;
+    border-color: #3a6b3a;
+}
+
+/* Aviso / Warning */
+body.dark-mode .alert-warning {
+    background-color: #3b341e;
+    color: #ffea7f;
+    border-color: #665c3a;
+}
+
+/* Erro / Danger */
+body.dark-mode .alert-danger {
+    background-color: #3b1e1e;
+    color: #ff9999;
+    border-color: #662a2a;
+}
+
+/* Info */
+body.dark-mode .alert-info {
+    background-color: #1e333b;
+    color: #9ad4ff;
+    border-color: #3a6673;
+}
+
+/* Botão de fechar (x) */
+body.dark-mode .alert .btn-close {
+    filter: invert(1);
+}
+
+    .upload-foto {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .foto-preview {
+        width: 120px;
+        height: 120px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid #ccc;
+    }
+
+    /* ======= TEMAS GERAIS ======= */
+    body.dark-mode {
+        background-color: #121212;
+        color: #fff;
+    }
+
+    body.dark-mode .card {
+        background-color: #1e1e1e;
+        color: #fff;
+    }
+
+    body.light-mode {
+        background-color: #f8f9fa;
+        color: #212529;
+    }
+
+    .theme-toggle {
+        border: none;
+        background: none;
+        cursor: pointer;
+        color: inherit;
+    }
+
+    .form-section {
+        margin-bottom: 1.5rem;
+        background-color: rgba(255, 255, 255, 0.05);
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    .table img {
+        width: 40px;
+        height: 40px;
+        border-radius: 6px;
+        object-fit: cover;
+    }
+
+    .card-dashboard {
+        transition: all 0.3s ease;
+    }
+
+    .card-dashboard:hover {
+        transform: translateY(-3px);
+    }
+
+    /* ======= ABAS (NAV TABS) ======= */
+    .nav-tabs {
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .nav-tabs .nav-link {
+        color: #555;
+        border: none;
+        border-bottom: 2px solid transparent;
+        background: none;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .nav-tabs .nav-link:hover {
+        color: #0d6efd;
+        border-bottom: 2px solid #0d6efd;
+        background-color: rgba(13, 110, 253, 0.05);
+    }
+
+    .nav-tabs .nav-link.active {
+        font-weight: bold;
+        color: #0d6efd;
+        border-bottom: 2px solid #0d6efd;
+        background-color: transparent;
+    }
+
+    /* ======= MODO ESCURO PARA TABS ======= */
+    body.dark-mode .nav-tabs {
+        border-bottom-color: #333;
+    }
+
+    body.dark-mode .nav-tabs .nav-link {
+        color: #bbb;
+    }
+
+    body.dark-mode .nav-tabs .nav-link:hover {
+        color: #fff;
+        border-bottom: 2px solid #0d6efd;
+        background-color: rgba(13, 110, 253, 0.1);
+    }
+
+    body.dark-mode .nav-tabs .nav-link.active {
+        color: #0d6efd;
+        border-bottom: 2px solid #0d6efd;
+    }
+
+    /* ======= INPUTS E BOTÕES ======= */
+    body.dark-mode input,
+    body.dark-mode select,
+    body.dark-mode textarea {
+        background-color: #1a1a1a !important;
+        color: #f9f9f9 !important;
+        border: 1px solid #444 !important;
+    }
+
+    body.dark-mode .btn {
+        background-color: #2a2a2a !important;
+        color: #ffffff !important;
+        border-color: #3a3a3a !important;
+    }
+
+    body.dark-mode .btn:hover {
+        background-color: #007bff !important;
+        color: #fff !important;
+    }
+
+    /* ======= CARDS ======= */
+    body.dark-mode .card {
+        background-color: #1e1e1e !important;
+        border-color: #333 !important;
+    }
+
+    body.light-mode .card {
+        background-color: #fff !important;
+        border-color: #ddd !important;
+    }
+
+    /* ======= AJUSTE DAS TABELAS ======= */
+    .table {
+        width: 100%;
+    }
+
+    .table-borderless th,
+    .table-borderless td {
+        vertical-align: middle;
+    }
+
+
+    /* ================= RESPONSIVIDADE DASHBOARD ================= */
+
+/* Garante que o container principal use largura total e padding adequado */
+.row {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Cards flexíveis e responsivos */
+.content-cards .card {
+    min-width: 0;
+    margin-bottom: 15px;
+}
+
+/* Ajusta os textos e títulos para telas pequenas */
+@media (max-width: 767px) {
+    .content-top h1 {
+        font-size: 1.5rem;
+    }
+
+    /* Botões e selects responsivos */
+.form-select, form .btn {
+    width: 100% !important;
+}
+
+    .content-top p {
+        font-size: 0.9rem;
+    }
+
+    /* Botão de refresh centralizado em telas pequenas */
+    .col-auto.ms-auto.text-end.mt-n1 {
+        text-align: center !important;
+        margin-top: 10px !important;
+    }
+
+    /* Cards da dashboard em coluna única */
+    .content-cards > .col-12 {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    /* Ajuste imagens de avatar/ilustração */
+    .illustration-img {
+        max-width: 100px !important;
+        height: auto !important;
+    }
+
+    /* Card de notificações e gráficos */
+    .col-lg-6 {
+        flex: 1 1 100%;
+        max-width: 100%;
+        margin-bottom: 15px;
+    }
+
+    /* Overflow horizontal em tabelas */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .content-cards .col-xxl-3 {
+        flex: 1 1 48%;
+        max-width: 48%;
+        margin-bottom: 15px;
+    }
+
+    .col-lg-6 {
+        flex: 1 1 48%;
+        max-width: 48%;
+        margin-bottom: 15px;
+    }
+
+    .illustration-img {
+        max-width: 120px !important;
+        height: auto !important;
+    }
+}
+
+/* Ajuste geral de gráficos */
+canvas {
+    width: 100% !important;
+}
+
+/* Ajuste para timeline e listas longas */
+
+.timeline-item {
+    word-break: break-word;
+}
+
+/* Cards dashboard: força flex-wrap em telas pequenas */
+.card-dashboard {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Card header e título menor em mobile */
+.card-header h5, .card-header h4, .card-header h2 {
+    font-size: 0.9rem;
+}
+
+
+
+/* Overflow para gráficos e listas longas */
+.card-body {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* Badge indicador responsivo */
+.badge {
+    font-size: 0.75rem;
+    padding: 0.3em 0.5em;
+}
+

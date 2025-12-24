@@ -1,0 +1,185 @@
+<div class="row mb-2 mb-xl-3">
+  <div class="content-top col-auto d-sm-block">
+    <h1>Logs e Notificações do Sistema</h1>
+    <p>Veja todas as ações e eventos registrados no Delivery HJ.</p>
+  </div>
+
+  <div class="col-auto ms-auto text-end mt-n1">
+      <button class="btn shadow-sm" onclick="window.history.back()">
+            <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+        </button>
+    <button class="btn shadow-sm" onclick="window.location.reload()"
+      style="background-color: white; color: black !important;">
+      <i class="align-middle" data-feather="refresh-cw">&nbsp;</i>
+    </button>
+  </div>
+</div>
+
+<!-- Cards de Resumo -->
+<div class="row content-cards">
+  <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+    <div class="card flex-fill card-dashboard">
+      <div class="card-body py-4">
+        <h3 class="mb-2">Total de Logs <span class="badge badge-soft-dark"
+            style="background-color: white; color: black !important;">563</span></h3>
+        <p class="mb-0">Ações registradas desde o lançamento do sistema.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+    <div class="card flex-fill card-dashboard">
+      <div class="card-body py-4">
+        <h3 class="mb-2">Hoje <span class="badge badge-soft-dark"
+            style="background-color: white; color: black !important;">34</span></h3>
+        <p class="mb-0">Ações registradas nas últimas 24h.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+    <div class="card flex-fill card-dashboard">
+      <div class="card-body py-4">
+        <h3 class="mb-2">Alertas <span class="badge badge-soft-dark"
+            style="background-color: white; color: black !important;">7</span></h3>
+        <p class="mb-0">Eventos críticos ou suspeitos detectados.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+    <div class="card flex-fill card-dashboard">
+      <div class="card-body py-4">
+        <h3 class="mb-2">Usuários Ativos <span class="badge badge-soft-dark"
+            style="background-color: white; color: black !important;">12</span></h3>
+        <p class="mb-0">Contas logadas no momento.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tabela de Logs -->
+<div class="card flex-fill card-dashboard mt-4">
+  <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: white;">
+    <h4 class="card-title mb-0">Logs de Ações do Sistema</h4>
+  </div>
+  <div class="card-body">
+    <table id="datatables-column-search-select-inputs" class="table table-borderless my-0 w-100" style="color: white;">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Usuário</th>
+          <th>Ação</th>
+          <th>Tipo</th>
+          <th>IP</th>
+          <th>Data</th>
+          <th>Status</th>
+          <th>Ação</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>001</td>
+          <td>Administrador</td>
+          <td>Login efetuado com sucesso</td>
+          <td>Acesso</td>
+          <td>102.130.44.67</td>
+          <td>20/10/2025 - 14:32</td>
+          <td><i class="status normal">Normal</i></td>
+          <td>
+            <a style="margin-right: 7px;" href="admin.html#/visualizar-notificacao"><i data-feather="eye"></i></a>
+          </td>
+        </tr>
+        <tr>
+          <td>002</td>
+          <td>Restaurante “Sabor Tropical”</td>
+          <td>Atualizou status do pedido #498</td>
+          <td>Atualização</td>
+          <td>102.230.11.95</td>
+          <td>20/10/2025 - 13:08</td>
+          <td><i class="status normal">Normal</i></td>
+          <td>
+            <a style="margin-right: 7px;" href="admin.html#/visualizar-notificacao"><i data-feather="eye"></i></a>
+          </td>
+        </tr>
+        <tr>
+          <td>003</td>
+          <td>Entregador “Carlos L.”</td>
+          <td>Falha ao registrar entrega</td>
+          <td>Erro</td>
+          <td>41.223.8.121</td>
+          <td>20/10/2025 - 11:54</td>
+          <td><i class="status aviso">Aviso</i></td>
+          <td>
+            <a style="margin-right: 7px;" href="admin.html#/visualizar-notificacao"><i data-feather="eye"></i></a>
+          </td>
+        </tr>
+        <tr>
+          <td>004</td>
+          <td>Administrador</td>
+          <td>Removeu restaurante inativo “FastAngo”</td>
+          <td>Admin</td>
+          <td>102.130.44.67</td>
+          <td>19/10/2025 - 20:45</td>
+          <td><i class="status critico">Crítico</i></td>
+          <td>
+            <a style="margin-right: 7px;" href="admin.html#/visualizar-notificacao"><i data-feather="eye"></i></a>
+          </td>
+        </tr>
+        <tr>
+          <td>005</td>
+          <td>Restaurante “Delícia Luanda”</td>
+          <td>Enviou comprovativo de pagamento semanal</td>
+          <td>Financeiro</td>
+          <td>105.173.99.210</td>
+          <td>19/10/2025 - 18:12</td>
+          <td><i class="status normal">Normal</i></td>
+          <td>
+            <a style="margin-right: 7px;" href="admin.html#/visualizar-notificacao"><i data-feather="eye"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<style>
+  .status {
+    border-radius: 50px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .status.normal {
+    background-color: #198754;
+    color: white;
+  }
+
+  .status.critico {
+    background-color: #ff0000;
+    color: white;
+  }
+
+  .status.aviso {
+    background-color: #616300;
+    color: white;
+  }
+
+  input {
+    background-color: #1e1e1e !important;
+    color: #fff !important;
+    border: 1px solid #333 !important;
+  }
+</style>

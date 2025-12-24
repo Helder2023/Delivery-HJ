@@ -1,0 +1,557 @@
+<div class="row mb-2 mb-xl-3">
+  <div class="content-top col-auto d-sm-block">
+    <h1>Avaliações</h1>
+    <p>Gerencie as avaliações dos restaurantes no DeliveryHJ</p>
+  </div>
+
+  <div class="col-auto ms-auto text-end mt-n1">
+      <button class="btn shadow-sm" onclick="window.history.back()">
+            <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+        </button>
+    <button class="btn shadow-sm" onclick="window.location.reload()"
+      style="background-color: white; color: black !important;">
+      <i class="align-middle" data-feather="refresh-cw" id="refresh">&nbsp;</i>
+    </button>
+  </div>
+</div>
+
+<div class="row content-cards">
+
+  <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+    <div class="card flex-fill card-dashboard">
+      <div class="card-body py-4">
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2">Avaliação Média <span class="badge badge-soft-dark indicator"
+                style="background-color: white; color: black !important;">4.5</span></h3>
+            <p class="mb-2">Baseado em 2.340 avaliações totais</p>
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat" style="background-color: white; color: black !important;">
+              <i class="align-middle text-warning" data-feather="star" style="color: black !important;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+    <div class="card flex-fill card-dashboard">
+      <div class="card-body py-4">
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2">Mais Bem Avaliado</h3>
+            <p class="mb-2">Pizzaria Roma — ⭐ 4.9</p>
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat" style="background-color: white; color: black !important;">
+              <i class="align-middle text-success" data-feather="award" style="color: black !important;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+    <div class="card flex-fill card-dashboard">
+      <div class="card-body py-4">
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2">Mais Mal Avaliado</h3>
+            <p class="mb-2">Cantina do Zé — ⭐ 2.3</p>
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat" style="background-color: white; color: black !important;">
+              <i class="align-middle text-danger" data-feather="thumbs-down" style="color: black !important;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+    <div class="card flex-fill card-dashboard">
+      <div class="card-body py-4">
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2">Novas Avaliações</h3>
+            <p class="mb-2">42 nas últimas 24h</p>
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat" style="background-color: white; color: black !important;">
+              <i class="align-middle text-info" data-feather="message-square" style="color: black !important;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Tabela de avaliações -->
+<div class="card flex-fill card-dashboard">
+  <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+    <h4 class="card-title mb-0" style="color: white;">Gerenciamento de Avaliações</h4>
+  </div>
+
+  <div class="card-body">
+    <table id="datatables-column-search-select-inputs" class="table table-borderless my-0 w-100" style="color: white;">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Restaurante</th>
+          <th>Cliente</th>
+          <th>Nota</th>
+          <th>Comentário</th>
+          <th>Data</th>
+          <th>Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>#001</td>
+          <td>Pizzaria Roma</td>
+          <td>João Pessela</td>
+          <td>⭐ 4.5</td>
+          <td>Entrega rápida e pizza deliciosa!</td>
+          <td>18/10/2025</td>
+          <td>
+            <a style="margin-right: 7px;" href="admin.html#/visualizar-avaliacao"><i data-feather="eye"></i></a>
+          </td>
+        </tr>
+
+        <tr>
+          <td>#002</td>
+          <td>Churrasqueira Central</td>
+          <td>Cristiano Amadeu</td>
+          <td>⭐ 2.0</td>
+          <td>Demorou demais, comida fria.</td>
+          <td>17/10/2025</td>
+         <td>
+            <a style="margin-right: 7px;" href="admin.html#/visualizar-avaliacao"><i data-feather="eye"></i></a>
+          </td>
+        </tr>
+
+        <tr>
+          <td>#003</td>
+          <td>Restaurante Luanda Grill</td>
+          <td>Helder Adão</td>
+          <td>⭐ 5.0</td>
+          <td>Excelente serviço, recomendo!</td>
+          <td>16/10/2025</td>
+        <td>
+            <a style="margin-right: 7px;" href="admin.html#/visualizar-avaliacao"><i data-feather="eye"></i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .status-select {
+    background-color: transparent;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    padding: 3px 8px;
+  }
+
+  .status-select option {
+    color: black;
+  }
+
+  .btn-confirm {
+    background-color: #2ecc71;
+    color: white !important;
+    border: none;
+    border-radius: 6px;
+    padding: 5px 12px;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .btn-confirm:hover {
+    background-color: #27ae60;
+  }
+
+  .card-dashboard {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: none;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .card-dashboard h3,
+  .card-dashboard p,
+  .card-dashboard a {
+    color: white;
+  }
+
+  .card-dashboard a:hover {
+    text-decoration: underline;
+  }
+
+  table td,
+  table th {
+    vertical-align: middle;
+  }
+
+  .table-borderless tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+
+
+  /* ========== TRANSIÇÃO SUAVE ========== */
+  * {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* ===================== MODO ESCURO ===================== */
+  body.dark-mode {
+    background-color: #121212 !important;
+    color: #f1f1f1 !important;
+  }
+
+  /* Cards */
+  body.dark-mode .card-dashboard,
+  body.dark-mode .card {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+    border: 1px solid #333 !important;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  }
+
+  body.dark-mode .card-header {
+    background-color: #232323 !important;
+    color: #ffffff !important;
+  }
+
+  /* Textos */
+  body.dark-mode h1,
+  body.dark-mode h2,
+  body.dark-mode h3,
+  body.dark-mode h4,
+  body.dark-mode h5,
+  body.dark-mode h6,
+  body.dark-mode p,
+  body.dark-mode span,
+  body.dark-mode a,
+  body.dark-mode strong,
+  body.dark-mode small {
+    color: #ffffff !important;
+  }
+
+
+  /* Botão de refresh e confirmar */
+  body.dark-mode .btn {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+    border-color: #3a3a3a !important;
+  }
+
+  body.dark-mode .btn:hover,
+  body.dark-mode .btn:focus {
+    background-color: #007bff !important;
+    color: #fff !important;
+    border-color: #007bff !important;
+  }
+
+  body.dark-mode .btn-confirm {
+    background-color: #007bff !important;
+    color: #fff !important;
+    border: none !important;
+  }
+
+  body.dark-mode .btn-confirm:hover {
+    background-color: #007bff56 !important;
+  }
+
+  /* Select de status */
+  body.dark-mode .status-select {
+    background-color: #1a1a1a !important;
+    color: #ffffff !important;
+    border: 1px solid #555 !important;
+    border-radius: 6px;
+    padding: 3px 8px;
+  }
+
+  body.dark-mode .status-select option {
+    color: #000;
+  }
+
+  /* Tabelas */
+  body.dark-mode table td,
+  body.dark-mode table th {
+    color: #ffffff !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  body.dark-mode .table-borderless tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  /* Stat box */
+  body.dark-mode .stat {
+    background-color: #1f1f1f !important;
+    color: #ffffff !important;
+    border-radius: 8px;
+  }
+
+  /* ===================== MODO CLARO ===================== */
+  body.light-mode {
+    background-color: #f9f9f9 !important;
+    color: #000000 !important;
+  }
+
+  /* Cards */
+  body.light-mode .card-dashboard,
+  body.light-mode .card {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #ddd !important;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.08);
+  }
+
+  body.light-mode .card-header {
+    background-color: #f4f4f4 !important;
+    color: #000000 !important;
+  }
+
+  /* Textos */
+  body.light-mode h1,
+  body.light-mode h2,
+  body.light-mode h3,
+  body.light-mode h4,
+  body.light-mode h5,
+  body.light-mode h6,
+  body.light-mode p,
+  body.light-mode span,
+  body.light-mode a,
+  body.light-mode strong,
+  body.light-mode small {
+    color: #000000 !important;
+  }
+
+  /* Links */
+  body.light-mode a:hover {
+    color: #007bff !important;
+    text-decoration: underline;
+  }
+
+  /* Badge / Indicador */
+  body.light-mode .badge,
+  body.light-mode .indicator {
+    background-color: #007bff !important;
+    color: #fff !important;
+  }
+
+  /* Botão refresh e confirmar */
+  body.light-mode .btn {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #ccc !important;
+  }
+
+  body.light-mode .btn:hover,
+  body.light-mode .btn:focus {
+    background-color: #007bff !important;
+    color: #ffffff !important;
+    border-color: #007bff !important;
+  }
+
+  /* Botão confirmar (verde) */
+  body.light-mode .btn-confirm {
+    background-color: #2ecc71 !important;
+    color: #fff !important;
+    border: none !important;
+  }
+
+  body.light-mode .btn-confirm:hover {
+    background-color: #27ae60 !important;
+  }
+
+  /* Select de status */
+  body.light-mode .status-select {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #ccc !important;
+    border-radius: 6px;
+    padding: 3px 8px;
+  }
+
+  body.light-mode .status-select option {
+    color: #000;
+  }
+
+  /* Tabelas */
+  body.light-mode table td,
+  body.light-mode table th {
+    color: #000000 !important;
+    border-color: rgba(0, 0, 0, 0.08) !important;
+  }
+
+  body.light-mode .table-borderless tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  /* Stat box */
+  body.light-mode .stat {
+    background-color: #f2f2f2 !important;
+    color: #000000 !important;
+    border-radius: 8px;
+  }
+</style>
+
+<style>
+  /* ========== UPLOAD FOTO ========== */
+  .upload-foto {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .foto-preview {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+  }
+
+  /* ======= TEMAS GERAIS ======= */
+  body.dark-mode {
+    background-color: #121212;
+    color: #fff;
+  }
+
+  body.dark-mode .card {
+    background-color: #1e1e1e;
+    color: #fff;
+  }
+
+  body.light-mode {
+    background-color: #f8f9fa;
+    color: #212529;
+  }
+
+  .theme-toggle {
+    border: none;
+    background: none;
+    cursor: pointer;
+    color: inherit;
+  }
+
+  .form-section {
+    margin-bottom: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 8px;
+  }
+
+  .table img {
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+
+  .card-dashboard {
+    transition: all 0.3s ease;
+  }
+
+  .card-dashboard:hover {
+    transform: translateY(-3px);
+  }
+
+  /* ======= ABAS (NAV TABS) ======= */
+  .nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+  }
+
+  .nav-tabs .nav-link {
+    color: #555;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: none;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .nav-tabs .nav-link:hover {
+    color: #0d6efd;
+    border-bottom: 2px solid #0d6efd;
+    background-color: rgba(13, 110, 253, 0.05);
+  }
+
+  .nav-tabs .nav-link.active {
+    font-weight: bold;
+    color: #0d6efd;
+    border-bottom: 2px solid #0d6efd;
+    background-color: transparent;
+  }
+
+  /* ======= MODO ESCURO PARA TABS ======= */
+  body.dark-mode .nav-tabs {
+    border-bottom-color: #333;
+  }
+
+  body.dark-mode .nav-tabs .nav-link {
+    color: #bbb;
+  }
+
+  body.dark-mode .nav-tabs .nav-link:hover {
+    color: #fff;
+    border-bottom: 2px solid #0d6efd;
+    background-color: rgba(13, 110, 253, 0.1);
+  }
+
+  body.dark-mode .nav-tabs .nav-link.active {
+    color: #0d6efd;
+    border-bottom: 2px solid #0d6efd;
+  }
+
+  /* ======= INPUTS E BOTÕES ======= */
+  body.dark-mode input,
+  body.dark-mode select,
+  body.dark-mode textarea {
+    background-color: #1a1a1a !important;
+    color: #f9f9f9 !important;
+    border: 1px solid #444 !important;
+  }
+
+  body.dark-mode .btn {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+    border-color: #3a3a3a !important;
+  }
+
+  body.dark-mode .btn:hover {
+    background-color: #007bff !important;
+    color: #fff !important;
+  }
+
+  /* ======= CARDS ======= */
+  body.dark-mode .card {
+    background-color: #1e1e1e !important;
+    border-color: #333 !important;
+  }
+
+  body.light-mode .card {
+    background-color: #fff !important;
+    border-color: #ddd !important;
+  }
+
+  /* ======= AJUSTE DAS TABELAS ======= */
+  .table {
+    width: 100%;
+  }
+
+  .table-borderless th,
+  .table-borderless td {
+    vertical-align: middle;
+  }
+</style>

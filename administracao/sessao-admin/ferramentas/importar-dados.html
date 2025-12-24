@@ -1,0 +1,270 @@
+</head>
+
+<body>
+    <div class="container-fluid p-0">
+
+        <!-- Cabeçalho -->
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-sm-block">
+                <h3>Importar dados</h3>
+            </div>
+
+            <div class="col-auto ms-auto text-end mt-n1">
+                <button class="btn btn-primary shadow-sm" onclick="window.location.reload();">
+                    <i data-feather="refresh-cw"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Importação para Adminstradores -->
+        <div class="card flex-fill">
+            <div class="card-header">
+                <h4>Importação para Adminstradores</h4>
+                <p>Quando clicar no botão <i class="text-primary" data-feather="upload"></i>, o sistema fará upload de
+                    um ficheiro CSV (Excel)
+                    que irá inserir todas as informações actuais no banco de dados.</p>
+                <p>Este ficheiro contém todas as actividades do utilizador: dispositivo usado, IP, álbuns, faixas,
+                    pagamentos, entre outras.</p>
+
+                <div class="alert">
+                    <div><strong>Atenção:</strong> A importação é feita para todos os utilizadores.
+                        Certifique-se de que os dados estão totalmente actualizados antes de importar!
+                        Se tiver dúvidas, leia este artigo na <a href="../../pages/center-help.html"
+                            target="_blank">Central de Ajuda</a>.
+                    </div>
+                </div>
+
+                <form class="row g-3" id="formUtilizadores">
+                    <div class="input-group w-50">
+                        <input type="file" accept=".csv,.xlsx" class="form-control" id="fileUser" required>
+                        <button class="btn btn-outline-primary" type="submit">
+                            <i data-feather="upload" class="upload-icon"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tabela de arquivos importados -->
+        <div class="card flex-fill">
+            <div class="card-header">
+                <h4>Arquivos Importados Recentemente dos Adminstradores</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless my-0 w-100" id="datatables-column-search-select-inputs">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome do Arquivo</th>
+                            <th>Tamanho</th>
+                            <th>Data de Upload</th>
+                            <th>Tipo</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fileTableBody">
+                        <tr>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td class="table-actions text-center">
+                                <i data-feather="eye" title="Visualizar"></i>
+                                <i data-feather="trash-2" title="Eliminar" onclick="removeRow(this)"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Importação para restaurantes -->
+        <div class="card flex-fill">
+            <div class="card-header">
+                <h4>Importação para utilizadores</h4>
+                <p>Quando clicar no botão <i class="text-primary" data-feather="upload"></i>, o sistema fará upload de
+                    um ficheiro CSV (Excel)
+                    que irá inserir todas as informações actuais no banco de dados.</p>
+                <p>Este ficheiro contém todas as actividades do utilizador: dispositivo usado, IP, álbuns, faixas,
+                    pagamentos, entre outras.</p>
+
+                <div class="alert">
+                    <div><strong>Atenção:</strong> A importação é feita para todos os utilizadores.
+                        Certifique-se de que os dados estão totalmente actualizados antes de importar!
+                        Se tiver dúvidas, leia este artigo na <a href="../../pages/center-help.html"
+                            target="_blank">Central de Ajuda</a>.
+                    </div>
+                </div>
+
+                <form class="row g-3" id="formUtilizadores">
+                    <div class="input-group w-50">
+                        <input type="file" accept=".csv,.xlsx" class="form-control" id="fileUser" required>
+                        <button class="btn btn-outline-primary" type="submit">
+                            <i data-feather="upload" class="upload-icon"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tabela de arquivos importados -->
+        <div class="card flex-fill">
+            <div class="card-header">
+                <h4>Arquivos Importados Recentemente dos restaurantes</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless my-0 w-100" id="datatables-column-search-select-inputs">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome do Arquivo</th>
+                            <th>Tamanho</th>
+                            <th>Data de Upload</th>
+                            <th>Tipo</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fileTableBody">
+                        <tr>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td class="table-actions text-center">
+                                <i data-feather="eye" title="Visualizar"></i>
+                                <i data-feather="trash-2" title="Eliminar" onclick="removeRow(this)"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Importação para Entregadores -->
+        <div class="card flex-fill">
+            <div class="card-header">
+                <h4>Importação para funcionários</h4>
+                <p>Quando clicar no botão <i class="text-primary" data-feather="upload"></i>, o sistema fará upload de
+                    um ficheiro CSV (Excel)
+                    que irá inserir todas as informações actuais no banco de dados.</p>
+                <p>Este formato contém todas as actividades do funcionário e informações básicas a avançadas.</p>
+
+                <div class="alert">
+                    <div><strong>Atenção:</strong> A importação é feita para todos os funcionários.
+                        Certifique-se de que os dados estão totalmente actualizados antes de importar!
+                        Se tiver dúvidas, leia este artigo na <a href="../../pages/center-help.html"
+                            target="_blank">Central de Ajuda</a>.
+                    </div>
+                </div>
+
+                <form class="row g-3" id="formFuncionarios">
+                    <div class="input-group w-50">
+                        <input type="file" accept=".csv,.xlsx" class="form-control" id="fileStaff" required>
+                        <button class="btn btn-outline-primary" type="submit">
+                            <i data-feather="upload" class="upload-icon"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tabela de arquivos importados -->
+        <div class="card flex-fill">
+            <div class="card-header">
+                <h4>Arquivos Importados Recentemente dos Entregadores</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless my-0 w-100" id="datatables-column-search-select-inputs">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome do Arquivo</th>
+                            <th>Tamanho</th>
+                            <th>Data de Upload</th>
+                            <th>Tipo</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fileTableBody">
+                        <tr>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td class="table-actions text-center">
+                                <i data-feather="eye" title="Visualizar"></i>
+                                <i data-feather="trash-2" title="Eliminar" onclick="removeRow(this)"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Importação para utilizadores -->
+        <div class="card flex-fill">
+            <div class="card-header">
+                <h4>Importação para utilizadores</h4>
+                <p>Quando clicar no botão <i class="text-primary" data-feather="upload"></i>, o sistema fará upload de
+                    um ficheiro CSV (Excel)
+                    que irá inserir todas as informações actuais no banco de dados.</p>
+                <p>Este ficheiro contém todas as actividades do utilizador: dispositivo usado, IP, álbuns, faixas,
+                    pagamentos, entre outras.</p>
+
+                <div class="alert">
+                    <div><strong>Atenção:</strong> A importação é feita para todos os utilizadores.
+                        Certifique-se de que os dados estão totalmente actualizados antes de importar!
+                        Se tiver dúvidas, leia este artigo na <a href="../../pages/center-help.html"
+                            target="_blank">Central de Ajuda</a>.
+                    </div>
+                </div>
+
+                <form class="row g-3" id="formUtilizadores">
+                    <div class="input-group w-50">
+                        <input type="file" accept=".csv,.xlsx" class="form-control" id="fileUser" required>
+                        <button class="btn btn-outline-primary" type="submit">
+                            <i data-feather="upload" class="upload-icon"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Tabela de arquivos importados -->
+        <div class="card flex-fill">
+            <div class="card-header">
+                <h4>Arquivos Importados Recentemente dos utilizadores</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless my-0 w-100" id="datatables-column-search-select-inputs">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nome do Arquivo</th>
+                            <th>Tamanho</th>
+                            <th>Data de Upload</th>
+                            <th>Tipo</th>
+                            <th class="text-center">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="fileTableBody">
+                        <tr>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td>xxx xxx</td>
+                            <td class="table-actions text-center">
+                                <i data-feather="eye" title="Visualizar"></i>
+                                <i data-feather="trash-2" title="Eliminar" onclick="removeRow(this)"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>

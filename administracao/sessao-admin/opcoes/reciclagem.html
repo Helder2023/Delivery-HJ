@@ -1,0 +1,149 @@
+<div class="row mb-2 mb-xl-3">
+  <div class="content-top col-auto d-sm-block">
+    <h1>Reciclagem</h1>
+    <p>Dados apagados recentemente. Serão eliminados permanentemente em até 30 dias.</p>
+  </div>
+
+  <div class="col-auto ms-auto text-end mt-n1">
+    <button class="btn shadow-sm" onclick="window.history.back()">
+      <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+    </button>
+    <button class="btn shadow-sm" onclick="window.location.reload()"
+      style="background-color: white; color: black !important;">
+      <i class="align-middle" data-feather="refresh-cw"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Cards -->
+<div class="row content-cards">
+
+  <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+    <div class="card flex-fill card-dashboard">
+      <div class="card-body py-4">
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2">Administradores <span class="badge badge-soft-dark indicator"
+                style="background-color: white; color: black !important;">90</span></h3>
+            <p class="mb-2">Contas de Administradores apagadas.</p>
+
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat" style="background-color: white; color: black !important;">
+              <i class="align-middle text-info" data-feather="users" style="color: black !important;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+    <div class="card flex-fill card-dashboard">
+      <div class="card-body py-4">
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2">Restaurantes <span class="badge badge-soft-dark indicator"
+                style="background-color: white; color: black !important;">90</span></h3>
+            <p class="mb-2">Contas de restaurantes apagadas.</p>
+
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat" style="background-color: white; color: black !important;">
+              <i class="align-middle text-info" data-feather="shopping-bag" style="color: black !important;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+    <div class="card flex-fill card-dashboard">
+      <div class="card-body py-4">
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2">Utilizadores <span class="badge badge-soft-dark indicator"
+                style="background-color: white; color: black !important;">90</span></h3>
+            <p class="mb-2">Contas de clientes apagadas.</p>
+
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat" style="background-color: white; color: black !important;">
+              <i class="align-middle text-info" data-feather="users" style="color: black !important;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+    <div class="card flex-fill card-dashboard">
+      <div class="card-body py-4">
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2">Entregadores <span class="badge badge-soft-dark indicator"
+                style="background-color: white; color: black !important;">90</span></h3>
+            <p class="mb-2">Contas de entregadores apagadas.</p>
+
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat" style="background-color: white; color: black !important;">
+              <i class="align-middle text-info" data-feather="users" style="color: black !important;"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela -->
+  <div class="card mt-4">
+    <div class="card-header">
+      <h4 class="card-title mb-0">Itens na Reciclagem</h4>
+    </div>
+    <hr style="margin-top: -2px;">
+    <div class="card-body">
+      <table id="datatables-column-search-select-inputs" class="table table-borderless my-0" style="color: white;">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Tipo</th>
+            <th>Nome / ID</th>
+            <th>Email</th>
+            <th>Tempo Restante</th>
+            <th>Data de Exclusão</th> 
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Exemplo de dados (depois vem do PHP) -->
+          <tr>
+            <td>001</td>
+            <td>Restaurante</td>
+            <td>Pizza do Zé</td>
+            <td>pizzadoze@mail.com</td>
+            <td>01/10/2025</td>
+            <td>2025-10-31</td>
+            <td>
+              <a style="margin-right: 7px;" href="admin.html#/..."><i data-feather="refresh-cw"></i></a>
+              <a href="admin.html#/..."><i data-feather="trash-2"></i></a>
+            </td>
+          </tr>
+          <tr>
+            <td>002</td>
+            <td>Cliente</td>
+            <td>Maria Cândida</td>
+            <td>maria@mail.com</td>
+            <td>03/10/2025</td>
+            <td>2025-10-31</td>
+            <td>
+              <a style="margin-right: 7px;" href="admin.html#/..."><i data-feather="refresh-cw"></i></a>
+              <a href="admin.html#/..."><i data-feather="trash-2"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

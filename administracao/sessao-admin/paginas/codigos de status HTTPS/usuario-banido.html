@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso Restrito - Usuário Banido</title>
+    <style>
+        .sidebar-content, .sidebar, #nav, .footer {
+            display: none;
+        }
+        
+        /* Estilos específicos para página de banimento */
+        .ban-icon {
+            animation: shake 0.5s ease-in-out infinite alternate;
+        }
+        
+        .alert-ban {
+            border-left: 5px solid #dc3545;
+            background: rgba(220, 53, 69, 0.1);
+        }
+        
+        .appeal-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .appeal-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateY(-5px);
+        }
+        
+        .details-list {
+            max-width: 100%;
+            margin: 0 auto;
+            text-align: left;
+        }
+        
+        .reason-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin: 3px;
+            white-space: nowrap;
+        }
+        
+        .severity-critical {
+            background: rgba(220, 53, 69, 0.2);
+            color: #ff6b6b;
+            border: 1px solid #dc3545;
+        }
+        
+        .severity-high {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffd166;
+            border: 1px solid #ffc107;
+        }
+        
+        .timer-container {
+            font-size: 1rem;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            display: inline-block;
+            margin: 10px 0;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .permanent-ban {
+            color: #dc3545;
+            font-weight: bold;
+            animation: pulse-red 2s infinite;
+            font-size: 1rem;
+            word-break: break-word;
+        }
+        
+        @keyframes shake {
+            0% { transform: rotate(-5deg); }
+            100% { transform: rotate(5deg); }
+        }
+        
+        @keyframes pulse-red {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+        
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            background: #6c757d;
+            color: white;
+            border-radius: 50%;
+            margin-right: 8px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        /* Media Queries para responsividade */
+        @media (max-width: 768px) {
+            .card-header {
+                padding: 0.5rem !important;
+            }
+            
+            .display-4 {
+                font-size: 2rem !important;
+            }
+            
+            h1.text-white.mt-0.display-4 {
+                font-size: 1.8rem !important;
+            }
+            
+            h3.text-white.mt-2 {
+                font-size: 1.2rem !important;
+            }
+            
+            .ban-icon i {
+                font-size: 3.5rem !important;
+            }
+            
+            .alert-ban {
+                padding: 0.75rem !important;
+            }
+            
+            .alert-ban .d-flex {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .alert-ban i {
+                margin-bottom: 10px;
+                margin-right: 0 !important;
+                font-size: 1.8rem !important;
+            }
+            
+            .card.bg-dark {
+                margin: 0 -10px;
+                border-radius: 0;
+            }
+            
+            .card.bg-dark .card-header,
+            .card.bg-dark .card-body {
+                padding: 1rem !important;
+            }
+            
+            .appeal-card {
+                padding: 1rem !important;
+                margin: 0 -10px;
+                border-radius: 0;
+            }
+            
+            .appeal-card .row {
+                margin: 0;
+            }
+            
+            .appeal-card .col-md-4 {
+                margin-bottom: 1rem;
+                padding: 0.5rem;
+            }
+            
+            .col-12.text-center.mb-4.mt-5 {
+                padding: 0 10px;
+            }
+            
+            .btn {
+                padding: 0.375rem 0.75rem;
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+                width: 100%;
+                display: block;
+            }
+            
+            .btn.me-3, .btn.ms-md-2 {
+                margin-right: 0 !important;
+                margin-left: 0 !important;
+            }
+            
+            .text-center.mt-4 .btn {
+                display: inline-block;
+                width: auto;
+                margin: 5px;
+            }
+            
+            .timer-container {
+                font-size: 0.9rem;
+                padding: 10px;
+            }
+            
+            .reason-tag {
+                font-size: 0.75rem;
+                padding: 4px 10px;
+                margin: 2px;
+            }
+            
+            .alert.alert-info {
+                margin: 0 -10px;
+                border-radius: 0;
+                padding: 1rem;
+            }
+            
+            ul.mt-2 {
+                padding-left: 1rem;
+            }
+            
+            ul.mt-2 li {
+                margin-bottom: 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .text-muted.small {
+                font-size: 0.8rem;
+                padding: 0 10px;
+            }
+            
+            #appeal-form-container .card-body {
+                padding: 1rem;
+            }
+            
+            #appeal-form-container .form-control {
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container-fluid.p-0 {
+                padding: 0 !important;
+            }
+            
+            .row {
+                margin: 0;
+            }
+            
+            .col-12.col-lg-12.m-auto {
+                padding: 0;
+            }
+            
+            .card.flex-fill {
+                border-radius: 0;
+                border: none;
+            }
+            
+            .card-header {
+                border-radius: 0 !important;
+            }
+            
+            .col-12.col-lg-6.col-xl-8.d-flex.m-auto {
+                padding: 0 5px;
+            }
+            
+            .row.mb-5.aboutme.m-auto.text-center.pb-6 {
+                margin: 0;
+                padding-bottom: 2rem !important;
+            }
+            
+            .col-md-12.mt-5 {
+                margin-top: 1rem !important;
+                padding: 0 5px;
+            }
+            
+            .display-4 {
+                font-size: 1.8rem !important;
+                line-height: 1.2;
+            }
+            
+            h3.text-white.mt-2 {
+                font-size: 1.1rem !important;
+                line-height: 1.3;
+            }
+            
+            .alert.alert-ban {
+                margin: 0 -5px;
+                border-radius: 0;
+            }
+            
+            .details-list .card.bg-dark {
+                margin: 0 -5px;
+            }
+            
+            .card.bg-dark.text-white.mt-4 {
+                margin: 1rem -5px;
+            }
+            
+            .appeal-card {
+                margin: 1rem -5px;
+            }
+            
+            .alert.alert-info.mt-4.fade-in {
+                margin: 1rem -5px;
+            }
+            
+            .col-12.text-center.mb-4.mt-5 {
+                margin-top: 1.5rem !important;
+                margin-bottom: 1rem !important;
+            }
+            
+            .step-number {
+                width: 24px;
+                height: 24px;
+                font-size: 0.8rem;
+            }
+            
+            .appeal-card h5.text-white.mt-2 {
+                font-size: 1rem;
+            }
+            
+            .appeal-card p.text-white-50.small {
+                font-size: 0.8rem;
+            }
+            
+            .timer-container {
+                max-width: 100%;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .reason-tag {
+                font-size: 0.7rem;
+                padding: 3px 8px;
+            }
+            
+            .btn {
+                font-size: 0.85rem;
+                padding: 0.3rem 0.6rem;
+            }
+            
+            .display-4 {
+                font-size: 1.6rem !important;
+            }
+            
+            .ban-icon i {
+                font-size: 3rem !important;
+            }
+        }
+        
+        /* Estilos para telas grandes */
+        @media (min-width: 1200px) {
+            .col-12.col-lg-6.col-xl-8 {
+                max-width: 900px;
+            }
+        }
+        
+        /* Ajustes gerais de espaçamento */
+        body {
+            overflow-x: hidden;
+        }
+        
+        .card-header {
+            padding: 1.5rem;
+        }
+        
+        .mb-5 {
+            margin-bottom: 2rem !important;
+        }
+        
+        .pb-6 {
+            padding-bottom: 3rem !important;
+        }
+        
+        /* Ajuste para formulário em telas pequenas */
+        #appeal-form-container .form-control {
+            font-size: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            #appeal-form-container .form-control {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+</head>
+<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
+
+    <main class="content">
+        <div class="container-fluid p-0">
+            <div class="row">
+                <div class="col-12 col-lg-12 m-auto">
+                    <div class="card flex-fill">
+                        <div class="card-header" style="background: linear-gradient(120deg, #161718 80%, #414345 120%)">
+                            <div class="card-actions float-none">
+                                <div class="col-12 col-lg-6 col-xl-8 d-flex m-auto">
+                                    <div class="row mb-5 aboutme m-auto text-center pb-6">
+                                        <div class="col-md-12 mt-5">
+                                            <!-- Ícone de banimento -->
+                                            <div class="ban-icon mb-4">
+                                                <i class="bi bi-slash-circle display-1" style="font-size: 5rem; color: #dc3545;"></i>
+                                            </div>
+                                            
+                                            <h1 class="text-white mt-0 display-4">Acesso Restrito</h1>
+                                            <h3 class="text-white mt-2">Sua conta foi suspensa do dashboard</h3>
+                                            
+                                            <!-- Alert de banimento -->
+                                            <div class="alert alert-ban text-white mt-4" style="max-width: 100%; margin: 0 auto;">
+                                                <div class="d-flex flex-column flex-md-row align-items-center">
+                                                    <i class="bi bi-exclamation-triangle-fill me-0 me-md-3 mb-2 mb-md-0" style="font-size: 1.5rem;"></i>
+                                                    <div class="text-center text-md-start">
+                                                        <h5 class="alert-heading mb-1">Conta Suspensa</h5>
+                                                        <p class="mb-0">Seu acesso ao dashboard foi revogado devido a violação dos Termos de Serviço.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Detalhes do banimento -->
+                                            <div class="details-list mt-4 fade-in">
+                                                <div class="card bg-dark text-white mb-3">
+                                                    <div class="card-header">
+                                                        <h5 class="mb-0"><i class="bi bi-info-circle me-2"></i>Detalhes da Suspensão</h5>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row">
+                                                            <div class="col-md-6 mb-3">
+                                                                <h6><i class="bi bi-calendar-event me-2"></i>Data do Banimento</h6>
+                                                                <p class="mb-0">15/03/2024 14:30</p>
+                                                            </div>
+                                                            <div class="col-md-6 mb-3">
+                                                                <h6><i class="bi bi-person-check me-2"></i>Administrador Responsável</h6>
+                                                                <p class="mb-0">admin@sistem.com.br</p>
+                                                            </div>
+                                                            <div class="col-12 mb-3">
+                                                                <h6><i class="bi bi-clock-history me-2"></i>Duração da Suspensão</h6>
+                                                                <div class="timer-container">
+                                                                    <span id="ban-duration" class="permanent-ban">BANIMENTO PERMANENTE</span>
+                                                                </div>
+                                                                <p class="text-muted small mt-1">
+                                                                    * Para banimentos temporários, um contador será exibido aqui
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-12">
+                                                                <h6><i class="bi bi-tags me-2"></i>Categoria da Violação</h6>
+                                                                <div class="mt-2 text-center text-md-start">
+                                                                    <span class="reason-tag severity-critical">
+                                                                        <i class="bi bi-shield-exclamation me-1"></i>Uso de Automação
+                                                                    </span>
+                                                                    <span class="reason-tag severity-high">
+                                                                        <i class="bi bi-chat-dots me-1"></i>Spam no Chat
+                                                                    </span>
+                                                                    <span class="reason-tag severity-high">
+                                                                        <i class="bi bi-flag me-1"></i>Conteúdo Improprio
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Motivo detalhado -->
+                                            <div class="card bg-dark text-white mt-4 fade-in" style="animation-delay: 0.2s;">
+                                                <div class="card-header">
+                                                    <h5 class="mb-0"><i class="bi bi-journal-text me-2"></i>Motivo Detalhado</h5>
+                                                </div>
+                                                <div class="card-body">
+                                                    <p class="mb-0">
+                                                        Sua conta foi suspensa por violação múltipla dos Termos de Serviço, especificamente:
+                                                    </p>
+                                                    <ul class="mt-2 ps-3">
+                                                        <li class="mb-2">Uso de bots/automação para ações repetitivas no sistema</li>
+                                                        <li class="mb-2">Envio massivo de mensagens não solicitadas (spam) no chat interno</li>
+                                                        <li class="mb-2">Compartilhamento de conteúdo inadequado e ofensivo</li>
+                                                        <li class="mb-0">Tentativas de burlar restrições do sistema</li>
+                                                    </ul>
+                                                    <div class="alert alert-warning mt-3">
+                                                        <i class="bi bi-lightbulb me-2"></i>
+                                                        <strong>Nota:</strong> Todas as ações são registradas em logs do sistema com data, hora e IP de origem.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Processo de recurso -->
+                                            <div class="appeal-card mt-4 p-4 fade-in" style="animation-delay: 0.4s;">
+                                                <h4 class="text-white mb-4 text-center"><i class="bi bi-life-preserver me-2"></i>Solicitar Revisão do Banimento</h4>
+                                                <p class="text-white-50 mb-4 text-center">
+                                                    Se você acredita que houve um erro ou gostaria de solicitar uma revisão do seu caso, 
+                                                    siga os passos abaixo:
+                                                </p>
+                                                
+                                                <div class="row justify-content-center">
+                                                    <div class="col-12 col-md-4 mb-3">
+                                                        <div class="p-3 h-100 text-center text-md-start">
+                                                            <div class="step-number d-inline-flex d-md-flex">1</div>
+                                                            <h5 class="text-white mt-2">Preencha o Formulário</h5>
+                                                            <p class="text-white-50 small">
+                                                                Forneça informações detalhadas sobre sua situação
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-4 mb-3">
+                                                        <div class="p-3 h-100 text-center text-md-start">
+                                                            <div class="step-number d-inline-flex d-md-flex">2</div>
+                                                            <h5 class="text-white mt-2">Aguarde Análise</h5>
+                                                            <p class="text-white-50 small">
+                                                                Nossa equipe revisará seu caso em até 72 horas
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12 col-md-4 mb-3">
+                                                        <div class="p-3 h-100 text-center text-md-start">
+                                                            <div class="step-number d-inline-flex d-md-flex">3</div>
+                                                            <h5 class="text-white mt-2">Receba Resposta</h5>
+                                                            <p class="text-white-50 small">
+                                                                Você será notificado por email sobre a decisão
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Formulário de recurso (simplificado) -->
+                                                <div class="mt-4" id="appeal-form-container" style="display: none;">
+                                                    <div class="card bg-dark">
+                                                        <div class="card-body">
+                                                            <h5 class="text-white mb-3">Formulário de Recurso</h5>
+                                                            <div class="mb-3">
+                                                                <label class="form-label text-white">Email para contato</label>
+                                                                <input type="email" class="form-control" placeholder="seu@email.com">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label text-white">Motivo do recurso</label>
+                                                                <textarea class="form-control" rows="4" placeholder="Descreva por que acredita que o banimento deve ser revogado..."></textarea>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label class="form-label text-white">Evidências (opcional)</label>
+                                                                <input type="file" class="form-control" multiple>
+                                                                <div class="form-text text-white-50">
+                                                                    Você pode anexar prints ou documentos que apoiem seu recurso
+                                                                </div>
+                                                            </div>
+                                                            <button class="btn btn-outline-primary w-100">
+                                                                <i class="bi bi-send me-2"></i> Enviar Recurso
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Botão para mostrar formulário -->
+                                                <div class="text-center mt-4">
+                                                    <div class="d-flex flex-column flex-md-row justify-content-center gap-2">
+                                                        <button class="btn btn-outline-light" id="show-appeal-btn">
+                                                            <i class="bi bi-pencil-square me-2"></i> Solicitar Revisão
+                                                        </button>
+                                                        <button class="btn btn-secondary" id="cancel-appeal-btn" style="display: none;">
+                                                            <i class="bi bi-x-circle me-2"></i> Cancelar
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Informações importantes -->
+                                            <div class="alert alert-info mt-4 fade-in" style="animation-delay: 0.6s; max-width: 100%; margin: 0 auto;">
+                                                <h5 class="text-center text-md-start"><i class="bi bi-exclamation-octagon me-2"></i>Informações Importantes</h5>
+                                                <ul class="mb-0 mt-2 ps-3">
+                                                    <li class="mb-2">Tentativas de criar novas contas para burlar o banimento resultarão em extensão permanente</li>
+                                                    <li class="mb-2">Recursos fraudulentos ou com informações falsas serão automaticamente rejeitados</li>
+                                                    <li class="mb-2">O processo de recurso é gratuito - desconfie de qualquer pessoa oferecendo "desbanimento" por pagamento</li>
+                                                    <li class="mb-0">Todas as comunicações oficiais serão enviadas apenas para o email registrado na conta</li>
+                                                </ul>
+                                            </div>
+                                            
+                                            <!-- Botões de ação -->
+                                            <div class="col-12 text-center mb-4 mt-5">
+                                                <div class="d-flex flex-column flex-md-row justify-content-center gap-2">
+                                                  
+                                                    <button class="btn btn-outline-light" onclick="window.location='mailto:suporte@sistem.com.br?subject=Recurso de Banimento - Minha Conta';">
+                                                        <i class="bi bi-envelope me-1"></i> Contatar Suporte
+                                                    </button>
+                                                    <button class="btn btn-outline-secondary" onclick="window.location='logout.html';">
+                                                        <i class="bi bi-box-arrow-right me-1"></i> Sair da Conta
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Aviso sobre tentativas de acesso -->
+                                            <div class="mt-4 px-2">
+                                                <p class="text-muted small text-center">
+                                                    <i class="bi bi-shield-lock me-1"></i>
+                                                    Tentativas de acessar o dashboard com esta conta continuarão sendo bloqueadas até que o banimento seja revogado.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Controle do formulário de recurso
+        document.getElementById('show-appeal-btn').addEventListener('click', function() {
+            const formContainer = document.getElementById('appeal-form-container');
+            const cancelBtn = document.getElementById('cancel-appeal-btn');
+            
+            // Mostra o formulário
+            formContainer.style.display = 'block';
+            cancelBtn.style.display = 'inline-block';
+            this.style.display = 'none';
+            
+            // Rola suavemente até o formulário
+            formContainer.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        document.getElementById('cancel-appeal-btn').addEventListener('click', function() {
+            const formContainer = document.getElementById('appeal-form-container');
+            const showBtn = document.getElementById('show-appeal-btn');
+            
+            // Esconde o formulário
+            formContainer.style.display = 'none';
+            this.style.display = 'none';
+            showBtn.style.display = 'inline-block';
+        });
+        
+        // Animações de entrada
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            fadeElements.forEach((element, index) => {
+                element.style.animationDelay = `${index * 0.2}s`;
+            });
+            
+            // Ajusta o layout para dispositivos móveis
+            if (window.innerWidth <= 768) {
+                // Ajusta os botões para layout vertical em telas pequenas
+                const buttonsContainer = document.querySelector('.d-flex.flex-column.flex-md-row.justify-content-center.gap-2');
+                if (buttonsContainer) {
+                    buttonsContainer.classList.add('flex-column');
+                    buttonsContainer.classList.remove('flex-md-row');
+                }
+            }
+        });
+        
+        // Simula envio do formulário de recurso
+        document.addEventListener('click', function(e) {
+            if (e.target && e.target.closest('#appeal-form-container button.btn-outline-primary')) {
+                const btn = e.target.closest('#appeal-form-container button.btn-outline-primary');
+                const originalText = btn.innerHTML;
+                
+                // Mostra estado de carregamento
+                btn.innerHTML = '<i class="bi bi-hourglass-split me-2"></i> Enviando...';
+                btn.disabled = true;
+                
+                // Simula envio
+                setTimeout(() => {
+                    // Restaura o botão
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    
+                    // Mostra mensagem de sucesso
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'alert alert-success alert-dismissible fade show mt-3';
+                    alertDiv.innerHTML = `
+                        <strong><i class="bi bi-check-circle me-1"></i>Recurso enviado com sucesso!</strong>
+                        <p class="mb-0 mt-1">Sua solicitação foi registrada. Você receberá uma resposta em até 72 horas no email fornecido.</p>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    `;
+                    
+                    // Insere o alerta antes dos botões
+                    const buttonsContainer = document.querySelector('.col-12.text-center.mb-4.mt-5');
+                    buttonsContainer.parentNode.insertBefore(alertDiv, buttonsContainer);
+                    
+                    // Esconde o formulário
+                    document.getElementById('appeal-form-container').style.display = 'none';
+                    document.getElementById('cancel-appeal-btn').style.display = 'none';
+                    document.getElementById('show-appeal-btn').style.display = 'inline-block';
+                }, 2000);
+            }
+        });
+        
+        // Ajusta o layout quando a janela é redimensionada
+        window.addEventListener('resize', function() {
+            const buttonsContainer = document.querySelector('.d-flex.flex-column.flex-md-row.justify-content-center.gap-2');
+            if (buttonsContainer) {
+                if (window.innerWidth <= 768) {
+                    buttonsContainer.classList.add('flex-column');
+                    buttonsContainer.classList.remove('flex-md-row');
+                } else {
+                    buttonsContainer.classList.remove('flex-column');
+                    buttonsContainer.classList.add('flex-md-row');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
