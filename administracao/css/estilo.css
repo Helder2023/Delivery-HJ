@@ -1,241 +1,242 @@
+body {
+    background-attachment: fixed;
+    /* 🔥 mantém o fundo fixo */
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* cobre toda a tela */
+}
 
-   body {
-        background-attachment: fixed;
-        /* 🔥 mantém o fundo fixo */
-        background-repeat: no-repeat;
-        background-size: cover;
-        /* cobre toda a tela */
-    }
+.sidebar {
+    background: linear-gradient(120deg, #232526 80%, #414345 100%);
+    border-right: #3f302c85 4px solid;
+}
 
-    .sidebar {
-        background: linear-gradient(120deg, #232526 80%, #414345 100%);
-        border-right: #3f302c85 4px solid;
-    }
+.sidebar-content {
+    background: linear-gradient(120deg, #232526 80%, #414345 100%);
+    width: 267px;
+}
 
-    .sidebar-content {
-        background: linear-gradient(120deg, #232526 80%, #414345 100%);
-        width: 267px;
-    }
+.navbar {
+    background: linear-gradient(120deg, #232526 70%, #414345 100%);
+    color: white !important;
+}
 
-    .navbar {
-        background: linear-gradient(120deg, #232526 70%, #414345 100%);
-        color: white !important;
-    }
+.content-sidebar-top {
+    display: flex;
+    text-align: start;
+    column-gap: 15px;
+    margin-bottom: -30px;
+}
 
-    .content-sidebar-top {
-        display: flex;
-        text-align: start;
-        column-gap: 15px;
-        margin-bottom: -30px;
-    }
+.sidebar-top h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+}
 
-    .sidebar-top h3 {
-        font-size: 18px;
-        font-weight: 600;
-        color: white;
-    }
+.sidebar-top p {
+    font-size: 14px;
+}
 
-    .sidebar-top p {
-        font-size: 14px;
-    }
+.content-top h1 {
+    color: white;
+    font-weight: 700;
+}
 
-    .content-top h1 {
-        color: white;
-        font-weight: 700;
-    }
+.content-top p {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.651);
+}
 
-    .content-top p {
-        font-size: 14px;
-        color: rgba(255, 255, 255, 0.651);
-    }
-
-    .card {
-        background: linear-gradient(120deg, #161718 80%, #414345 120%);
-        color: white;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* animação suave */
+.card {
+    background: linear-gradient(120deg, #161718 80%, #414345 120%);
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* animação suave */
     cursor: pointer;
-    }
+}
 
-    .card:hover {
-    transform: scale(1.01); /* aumenta 5% */
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2); /* sombra mais intensa */
-    }
+.card:hover {
+    transform: scale(1.01);
+    /* aumenta 5% */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    /* sombra mais intensa */
+}
 
-    .card-estatistica {
-        padding: 20px;
-    }
+.card-estatistica {
+    padding: 20px;
+}
 
-    input{
-        color: black !important;
-    }
+input {
+    color: black !important;
+}
 
-    input:focus{
-        color: #000 !important;
-    }
+input:focus {
+    color: #000 !important;
+}
 
-    .zona {
-        margin-bottom: 15px;
-    }
+.zona {
+    margin-bottom: 15px;
+}
 
-    .zona-header {
-        display: flex;
-        justify-content: space-between;
-        font-weight: 600;
-        font-size: 14px;
-        margin-bottom: 5px;
-    }
+.zona-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
 
-    .progress-bar {
-        background-color: #3a2a26;
-        border-radius: 10px;
-        height: 8px;
-        overflow: hidden;
-    }
+.progress-bar {
+    background-color: #3a2a26;
+    border-radius: 10px;
+    height: 8px;
+    overflow: hidden;
+}
 
-    .progress {
-        height: 8px;
-        border-radius: 10px;
-        background-color: rgb(0, 0, 0) !important;
-    }
+.progress {
+    height: 8px;
+    border-radius: 10px;
+    background-color: rgb(0, 0, 0) !important;
+}
 
-    /* Largura das barras de progresso */
-    .talatona .progress {
-        width: 90%;
-    }
+/* Largura das barras de progresso */
+.talatona .progress {
+    width: 90%;
+}
 
-    .miramar .progress {
-        width: 72%;
-    }
+.miramar .progress {
+    width: 72%;
+}
 
-    .maianga .progress {
-        width: 60%;
-    }
+.maianga .progress {
+    width: 60%;
+}
 
-    .viana .progress {
-        width: 50%;
-    }
+.viana .progress {
+    width: 50%;
+}
 
-    th,
-    td {
-        color: white !important;
-    }
+th,
+td {
+    color: white !important;
+}
 
-    /* --- 2. Variáveis de Cores --- */
-    :root {
-        --bg-dark: #1E1A17;
-        --bg-card: #2A2420;
-        --text-light: #FFFFFF;
-        --text-gray: #B3B3B3;
-        --accent-orange: #FF9800;
-        --accent-orange-hover: #E68900;
-        --status-green: #28A745;
-        --status-yellow: #FFC107;
-        --status-red: #FF0000;
-    }
+/* --- 2. Variáveis de Cores --- */
+:root {
+    --bg-dark: #1E1A17;
+    --bg-card: #2A2420;
+    --text-light: #FFFFFF;
+    --text-gray: #B3B3B3;
+    --accent-orange: #FF9800;
+    --accent-orange-hover: #E68900;
+    --status-green: #28A745;
+    --status-yellow: #FFC107;
+    --status-red: #FF0000;
+}
 
-    /* --- 7. Badges / Statuses --- */
-    .badge {
-        display: inline-block;
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 0.8rem;
-        font-weight: 600;
-    }
+/* --- 7. Badges / Statuses --- */
+.badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
 
-    .badge-red {
-        background-color: var(--status-red);
-        color: #FFF;
-    }
+.badge-red {
+    background-color: var(--status-red);
+    color: #FFF;
+}
 
-    .badge-yellow {
-        background-color: var(--status-yellow);
-        color: #000;
-    }
+.badge-yellow {
+    background-color: var(--status-yellow);
+    color: #000;
+}
 
-    .badge-green {
-        background-color: var(--status-green);
-        color: #fff;
-    }
-
-
-
-
+.badge-green {
+    background-color: var(--status-green);
+    color: #fff;
+}
 
 
 
 
-    
-
-    /* ======== DARK MODE ======== */
-    body.dark-mode {
-        background-color: #121212 !important;
-        color: #f1f1f1 !important;
-    }
-
-    body.dark-mode .card,
-    body.dark-mode .card-dashboard {
-        background-color: #1e1e1e !important;
-        color: #ffffff !important;
-    }
-
-    body.dark-mode h1,
-    body.dark-mode h2,
-    body.dark-mode h3,
-    body.dark-mode h4,
-    body.dark-mode h5,
-    body.dark-mode h6,
-    body.dark-mode p,
-    body.dark-mode span,
-    body.dark-mode a,
-    body.dark-mode small,
-    body.dark-mode strong {
-        color: #ffffff !important;
-    }
 
 
-        
 
-    body.dark-mode .btn {
-        background-color: #2a2a2a !important;
-        color: #ffffff !important;
-        border-color: #3a3a3a !important;
-    }
 
-    body.dark-mode .stat {
-        background-color: #ffffff15 !important;
-        color: #ffffff !important;
-    }
 
-    body.dark-mode table {
-        background-color: transparent !important;
-        color: #ffffff !important;
-    }
 
-    /* ======== LIGHT MODE ======== */
-    body.light-mode {
-        background-color: #f9f9f9 !important;
-        color: #222 !important;
-    }
+/* ======== DARK MODE ======== */
+body.dark-mode {
+    background-color: #121212 !important;
+    color: #f1f1f1 !important;
+}
 
-    body.light-mode .card,
-    body.light-mode .card-dashboard {
-        background-color: #ffffff !important;
-        color: #000000 !important;
-    }
+body.dark-mode .card,
+body.dark-mode .card-dashboard {
+    background-color: #1e1e1e !important;
+    color: #ffffff !important;
+}
 
-    body.light-mode .btn {
-        background-color: #ffffff !important;
-        color: #000000 !important;
-    }
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode a,
+body.dark-mode small,
+body.dark-mode strong {
+    color: #ffffff !important;
+}
 
-    body.light-mode .stat {
-        background-color: #e0e0e0 !important;
-        color: #000000 !important;
-    }
 
-    body.light-mode table {
-        background-color: transparent !important;
-        color: #000000 !important;
-    }
 
+
+body.dark-mode .btn {
+    background-color: #2a2a2a !important;
+    color: #ffffff !important;
+    border-color: #3a3a3a !important;
+}
+
+body.dark-mode .stat {
+    background-color: #ffffff15 !important;
+    color: #ffffff !important;
+}
+
+body.dark-mode table {
+    background-color: transparent !important;
+    color: #ffffff !important;
+}
+
+/* ======== LIGHT MODE ======== */
+body.light-mode {
+    background-color: #f9f9f9 !important;
+    color: #222 !important;
+}
+
+body.light-mode .card,
+body.light-mode .card-dashboard {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+body.light-mode .btn {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+}
+
+body.light-mode .stat {
+    background-color: #e0e0e0 !important;
+    color: #000000 !important;
+}
+
+body.light-mode table {
+    background-color: transparent !important;
+    color: #000000 !important;
+}

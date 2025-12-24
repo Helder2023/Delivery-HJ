@@ -1,5 +1,108 @@
 <script src="../js/data-tables.js"></script>
 
+<style>
+/* =========================================== */
+/* TABLE EXPORT - PDF e Excel apenas          */
+/* =========================================== */
+
+.table-export-buttons {
+    display: inline-flex;
+    gap: 8px;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.export-btn {
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.export-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.export-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Botão PDF */
+.btn-pdf {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    border: 1px solid #bd2130;
+}
+
+/* Botão Excel */
+.btn-excel {
+    background: linear-gradient(135deg, #198754 0%, #157347 100%);
+    color: white;
+    border: 1px solid #146c43;
+}
+
+/* Loading state */
+.export-btn .loading {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s linear infinite;
+}
+
+.export-btn.loading .loading {
+    display: inline-block;
+}
+
+.export-btn.loading .btn-text {
+    display: none;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Integração com DataTables */
+.dataTables_wrapper .table-export-buttons {
+    margin-left: 10px;
+    display: inline-flex;
+    vertical-align: middle;
+}
+
+.dt-buttons .table-export-buttons {
+    margin-left: 10px;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .table-export-buttons {
+        flex-direction: column;
+        width: 100%;
+        margin: 10px 0;
+    }
+    
+    .export-btn {
+        width: 100%;
+    }
+}
+</style>
+
+
 
 
 <div class="container-fluid">
@@ -22,7 +125,7 @@
             <h4>Exporta dados de administradores para Excel ou PDF.</h4>
         </div>  
         <div class="card-body">
-            <table id="impressao_excel_pdf" class="table table-borderless my-0 w-100"
+            <table id="tabela_1" class="table table-borderless my-0 w-100"
                 style="color: white;">
                 <thead>
                     <tr>
@@ -190,63 +293,10 @@
     </div>
 </div>
 
+<script src="../js/table-print-fixed.js"></script>
 
-<!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf/dist/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf-autotable"></script>
 
-<script>
-    feather.replace();
 
-    // Função principal de exportação
-    function handleExport(tableClass, prefix) {
-        const type = document.getElementById("exportType").value;
-
-        if (type === "excel") {
-            exportTableExcel(tableClass, prefix);
-        } else {
-            exportTablePDF(tableClass, prefix);
-        }
-    }
-
-    // Exportar Excel
-    function exportTableExcel(tableClass, prefix) {
-        const today = new Date().toISOString().split('T')[0];
-
-        document.querySelectorAll(`.${tableClass}`).forEach((table, index) => {
-            const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
-            XLSX.writeFile(wb, `DeliveryHJ_${prefix}_${today}_${index + 1}.xlsx`);
-        });
-    }
-
-    // Exportar PDF
-    function exportTablePDF(tableClass, prefix) {
-        const today = new Date().toISOString().split('T')[0];
-
-        document.querySelectorAll(`.${tableClass}`).forEach((table, index) => {
-            const doc = new window.jspdf.jsPDF();
-            const data = [];
-
-            for (let row of table.tBodies[0].rows) {
-                data.push([...row.cells].map(cell => cell.innerText));
-            }
-
-            doc.setFontSize(14);
-            doc.text("Delivery HJ", 10, 10);
-            doc.text("Data: " + new Date().toLocaleDateString(), 10, 18);
-
-            doc.autoTable({
-                startY: 25,
-                head: [[...table.tHead.rows[0].cells].map(c => c.innerText)],
-                body: data
-            });
-
-            doc.save(`DeliveryHJ_${prefix}_${today}_${index + 1}.pdf`);
-        });
-    }
-</script>
 <style>
     .status {
         border-radius: 50px;
@@ -275,5 +325,4 @@
         color: white;
     }
 </style>
-
 
