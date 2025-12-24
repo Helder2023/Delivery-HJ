@@ -26,7 +26,7 @@
     <link rel="stylesheet" href="../css/estilo.css">
     <link rel="stylesheet" href="../css-pages/estilo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
 
     <script type="text/javascript">
         window.dataLayer = window.dataLayer || [];
@@ -78,7 +78,8 @@
     body.light-mode * {
         color: #000000 !important;
     }
-    body.dark-mode .sidebar-content .sidebar-dropdown .sidebar-ite .sidebar-link{
+
+    body.dark-mode .sidebar-content .sidebar-dropdown .sidebar-ite .sidebar-link {
         color: #007bff !important;
     }
 
@@ -152,108 +153,107 @@
 
 <div id="global-loader" class="global-loader hidden">
     <div class="spinner"></div>
-  </div>
+</div>
 
 <style>
-/* ==============================
+    /* ==============================
    🔄 LOADER GLOBAL
 ============================== */
 
 
 
-.global-loader {
-  position: fixed;
-  inset: 0;
-  background: rgb(0, 0, 0);
-  backdrop-filter: blur(3px);
-  z-index: 99999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .global-loader {
+        position: fixed;
+        inset: 0;
+        background: rgb(0, 0, 0);
+        backdrop-filter: blur(3px);
+        z-index: 99999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 
-.global-loader.hidden {
-  display: none;
-}
+    .global-loader.hidden {
+        display: none;
+    }
 
-.global-loader .spinner {
-  width: 55px;
-  height: 55px;
-  border: 5px solid rgba(255, 255, 255, 0.3);
-  border-top-color: #ffffff;
-  border-radius: 50%;
-  animation: spin 0.30s linear infinite;
-}
+    .global-loader .spinner {
+        width: 55px;
+        height: 55px;
+        border: 5px solid rgba(255, 255, 255, 0.3);
+        border-top-color: #ffffff;
+        border-radius: 50%;
+        animation: spin 0.30s linear infinite;
+    }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
+    @keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
 
-/* Modo claro */
-body.light-mode .global-loader {
-  background: rgba(255, 255, 255, 0.6);
-}
+    /* Modo claro */
+    body.light-mode .global-loader {
+        background: rgba(255, 255, 255, 0.6);
+    }
 
-body.light-mode .spinner {
-  border: 5px solid rgba(0, 0, 0, 0.15);
-  border-top-color: #000000;
-}
+    body.light-mode .spinner {
+        border: 5px solid rgba(0, 0, 0, 0.15);
+        border-top-color: #000000;
+    }
+</style>
 
-</style>  
 
-    
 <script>
     // ==============================
     // 🔄 Atualizar página após redirecionamento
     // ==============================
-  
+
     (function () {
-      let lastHash = location.hash;
-      const loader = document.getElementById('global-loader');
-  
-      function showLoader() {
-        if (loader) loader.classList.remove('hidden');
-      }
-  
-      function hideLoader() {
-        if (loader) loader.classList.add('hidden');
-      }
-  
-      async function checkHashChange() {
-        if (location.hash !== lastHash) {
-          lastHash = location.hash;
-  
-          showLoader();
-  
-          try {
-            if (typeof loadHash === 'function') {
-              await loadHash();
-            } else {
-              location.reload();
+        let lastHash = location.hash;
+        const loader = document.getElementById('global-loader');
+
+        function showLoader() {
+            if (loader) loader.classList.remove('hidden');
+        }
+
+        function hideLoader() {
+            if (loader) loader.classList.add('hidden');
+        }
+
+        async function checkHashChange() {
+            if (location.hash !== lastHash) {
+                lastHash = location.hash;
+
+                showLoader();
+
+                try {
+                    if (typeof loadHash === 'function') {
+                        await loadHash();
+                    } else {
+                        location.reload();
+                    }
+                } finally {
+                    // pequeno delay para suavizar UX
+                    setTimeout(hideLoader, 1500);
+                }
             }
-          } finally {
-            // pequeno delay para suavizar UX
-            setTimeout(hideLoader, 1500);
-          }
         }
-      }
-  
-      // Verifica mudança de hash
-      setInterval(checkHashChange, 500);
-  
-      // Primeira carga
-      window.addEventListener('DOMContentLoaded', async () => {
-        if (location.hash && typeof loadHash === 'function') {
-          showLoader();
-          await loadHash();
-          setTimeout(hideLoader, 3000);
-        }
-      });
+
+        // Verifica mudança de hash
+        setInterval(checkHashChange, 500);
+
+        // Primeira carga
+        window.addEventListener('DOMContentLoaded', async () => {
+            if (location.hash && typeof loadHash === 'function') {
+                showLoader();
+                await loadHash();
+                setTimeout(hideLoader, 3000);
+            }
+        });
     })();
-  </script>
-  
+</script>
+
 
 <!-- Mensagem para usuários com JS completamente desativado -->
 <noscript>
@@ -273,7 +273,8 @@ body.light-mode .spinner {
 </noscript>
 
 
-<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky" style="background-color: black;">
+<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky"
+    style="background-color: black;">
     <!-- Mensagem de erro JS -->
     <div id="js-error">
         <h1>JavaScript está desativado ou ocorreu um erro!</h1>
@@ -303,8 +304,8 @@ body.light-mode .spinner {
 
                     <li class="sidebar-item active">
                         <a data-bs-target="#dashboards" data-bs-toggle="collapse" class="sidebar-link">
-                            <i class="align-middle" data-feather="home"></i> <span
-                                class="align-middl dash" id="dashx">Dashboards</span>
+                            <i class="align-middle" data-feather="home"></i> <span class="align-middl dash"
+                                id="dashx">Dashboards</span>
                             <span class="badge badge-sidebar-primary"></span>
                         </a>
                         <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
@@ -439,7 +440,7 @@ body.light-mode .spinner {
 
                     </li>
 
-                     <li class="sidebar-item">
+                    <li class="sidebar-item">
                         <a href="admin.html#/pub" class="sidebar-link">
                             <i class="align-middle" data-feather="alert-circle" style="color: white;"></i> <span
                                 class="align-middle">Anuncios e Publicidades <span class="badge badge-sidebar-primary"
@@ -475,15 +476,15 @@ body.light-mode .spinner {
                                 <span class="badge badge-sidebar-primary"
                                     style="background-color: white; color: black;">56</span></span>
                         </a>
-                    </li>   
-  <!--  
+                    </li>
+                    <!--  
                     <li class="sidebar-item">
                         <a class='sidebar-link' href='admin.html#/calendario'>
                             <i class="align-middle" data-feather="calendar" style="color: white;"></i> <span
                                 class="align-middle">Calendário</span>
                         </a>
                     </li>
---> 
+-->
                     <li class="sidebar-item">
                         <a class='sidebar-link' href='admin.html#/avaliacao'>
                             <i class="align-middle" data-feather="bookmark" style="color: white;"></i> <span
@@ -730,8 +731,7 @@ body.light-mode .spinner {
                                     <a class="text-muted" href="admin.html#/suporte " target="_blank">Suporte</a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a class="text-muted" href="admin.html#/privacidade"
-                                        target="_blank">Privacidade</a>
+                                    <a class="text-muted" href="admin.html#/privacidade" target="_blank">Privacidade</a>
                                 </li>
                                 <li class="list-inline-item">
                                     <a class="text-muted" href="admin.html#/termosDeUso" target="_blank">Termos de
@@ -754,63 +754,63 @@ body.light-mode .spinner {
 
 
 
-<!-- Modal logout fim -->
-<style>
-    /* ========== MODAL LIGHT/DARK MODE FIX ========== */
+    <!-- Modal logout fim -->
+    <style>
+        /* ========== MODAL LIGHT/DARK MODE FIX ========== */
 
-    /* Base comum */
-    .custom-modal {
-        border-radius: 0.75rem;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
+        /* Base comum */
+        .custom-modal {
+            border-radius: 0.75rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-    /* --- BACKDROP fixo (evita transparência no fundo escuro) --- */
-    .modal-backdrop.show {
-        opacity: 0.8 !important;
-        /* controla o fundo escuro ao redor */
-        background-color: rgba(0, 0, 0, 0.75) !important;
-    }
+        /* --- BACKDROP fixo (evita transparência no fundo escuro) --- */
+        .modal-backdrop.show {
+            opacity: 0.8 !important;
+            /* controla o fundo escuro ao redor */
+            background-color: rgba(0, 0, 0, 0.75) !important;
+        }
 
-    /* ====== MODO CLARO ====== */
-    body[data-bs-theme="light"] .custom-modal {
-        background-color: #ffffff !important;
-        color: #212529 !important;
-        border: 1px solid #dee2e6;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-    }
+        /* ====== MODO CLARO ====== */
+        body[data-bs-theme="light"] .custom-modal {
+            background-color: #ffffff !important;
+            color: #212529 !important;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+        }
 
-    body[data-bs-theme="light"] .custom-modal .modal-header,
-    body[data-bs-theme="light"] .custom-modal .modal-footer {
-        background-color: #f8f9fa !important;
-        border-color: #dee2e6;
-    }
+        body[data-bs-theme="light"] .custom-modal .modal-header,
+        body[data-bs-theme="light"] .custom-modal .modal-footer {
+            background-color: #f8f9fa !important;
+            border-color: #dee2e6;
+        }
 
-    /* ====== MODO ESCURO ====== */
-    body[data-bs-theme="dark"] .custom-modal {
-        background-color: black !important;
-        /* cor sólida */
-        color: #f1f1f1 !important;
-        border: 1px solid #333 !important;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
-    }
+        /* ====== MODO ESCURO ====== */
+        body[data-bs-theme="dark"] .custom-modal {
+            background-color: black !important;
+            /* cor sólida */
+            color: #f1f1f1 !important;
+            border: 1px solid #333 !important;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+        }
 
-    body[data-bs-theme="dark"] .custom-modal .modal-header,
-    body[data-bs-theme="dark"] .custom-modal .modal-footer {
-        background-color: black !important;
-        /* evita transparência */
-        border-color: #444 !important;
-    }
+        body[data-bs-theme="dark"] .custom-modal .modal-header,
+        body[data-bs-theme="dark"] .custom-modal .modal-footer {
+            background-color: black !important;
+            /* evita transparência */
+            border-color: #444 !important;
+        }
 
-    body[data-bs-theme="dark"] .custom-modal .btn-close {
-        filter: invert(1) grayscale(100%) brightness(200%);
-    }
+        body[data-bs-theme="dark"] .custom-modal .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
 
-    /* ====== Transição suave ====== */
-    body,
-    .custom-modal {
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-</style>
+        /* ====== Transição suave ====== */
+        body,
+        .custom-modal {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+    </style>
     <!-- Modal logout -->
     <div class="modal fade" id="logoutwasomupfy" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="logoutwasomupfyLabel" aria-hidden="true">
@@ -936,7 +936,7 @@ body.light-mode .spinner {
             window.location = 'admin.html#/login';
         }
     </script>
-    
+
     <script>
     </script>
     <script src="../js/navegation/navegation.js"></script>
@@ -955,9 +955,9 @@ body.light-mode .spinner {
     <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
     <script src="../js/app.js"></script>
     <script src="../js/dark-light.js"></script>
-  
 
-    
+
+
 </body>
 
 
