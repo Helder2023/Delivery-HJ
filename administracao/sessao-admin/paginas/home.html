@@ -47,7 +47,6 @@
                     <div class="flex-grow-1">
                         <h3 class="mb-2">
                             <span id="real-time" class="time-display">--:--:--</span>
-                            <span id="time-period" class="time-period"></span>
                         </h3>
                         <p class="mb-2">Hora atual em tempo real</p>
                         <div class="mb-0">
@@ -693,12 +692,6 @@
         // Atualizar elemento de hora
         if (realTimeElement) {
             realTimeElement.textContent = `${hours}:${minutes}:${seconds}`;
-        }
-
-        // Determinar AM/PM
-        const period = now.getHours() >= 12 ? 'AM' : 'PM';
-        if (timePeriodElement) {
-            timePeriodElement.textContent = period;
         }
 
         // Formatar data
