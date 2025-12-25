@@ -1,0 +1,759 @@
+    
+<style>
+    .sidebar-content,
+    .sidebar,
+    #nav, 
+    .footer {
+        display: none;
+    }
+</style>
+
+
+<div class="row mb-2 mb-xl-3">
+    <div class="content-top col-auto d-sm-block">
+        <h1>Dashboard do Parceiro</h1>
+        <p>Bem-vindo ao painel de parceiros do DeliveryHJ</p>
+    </div>
+
+    <div class="col-auto ms-auto text-end mt-n1">
+        <button class="btn shadow-sm" onclick="window.location.reload()"
+            style="background-color: white; color: black !important;">
+            <i class="align-middle" data-feather="refresh-cw" id="refresh">&nbsp;</i>
+        </button>
+    </div>
+</div>
+
+<div class="row content-cards">
+
+    <!-- CARD 1: BOAS-VINDAS DO PARCEIRO -->
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card illustration flex-fill card-dashboard">
+            <div class="card-body p-0 d-flex flex-fill">
+                <div class="row g-0 w-100">
+                    <div class="col-6">
+                        <div class="illustration-text p-3 m-1">
+                            <h4 class="illustration-text">Olá, <a href="admin.html#/perfil">Ana Costa</a>!</h4>
+                            <h6 class="illustration-text">Categoria:
+                                <span>Influencer</span>
+                            </h6>
+                            <p class="mb-0"><a href="#!" target="_blank">DeliveryHJ Parceiros</a></p>
+                        </div>
+                    </div>
+                    <div class="col-6 align-self-end text-end">
+                        <img loading="lazy" decoding="async" src="../assets/img/avatar/avatar-partner.png"
+                            alt="Parceiro" class="illustration-img">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 2: COMISSÃO DO MÊS -->
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">$2,840 
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important;">+12%</span>
+                        </h3>
+                        <p class="mb-2">Comissão deste mês</p>
+                        <div class="mb-0">
+                            <span class="text-muted" style="color: rgba(255, 255, 255, 0.699) !important;">
+                                Taxa: 12% por pedido</span>
+                        </div>
+                        <div class="mb-0 date-display" id="full-date" style="margin-top: 5px;">
+                            <!-- Data completa será inserida aqui -->
+                        </div>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <i class="align-middle text-success fas fa-percentage pulse" data-feather="percent"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 3: PEDIDOS GERADOS -->
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Pedidos Gerados 
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important;">1,240</span>
+                        </h3>
+                        <p class="mb-2">Através dos seus links e códigos</p>
+                        <div class="mb-0">
+                            <span class="text-muted"><a href="admin.html#/parceiro-pedidos">Ver detalhes</a></span>
+                        </div>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <a href="admin.html#/parceiro-pedidos" title="Ver pedidos gerados">
+                                <i class="align-middle text-info" data-feather="shopping-cart"
+                                    style="color: black !important;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 4: PRÓXIMO PAGAMENTO -->
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">05/Março</h3>
+                        <p class="mb-2">Próximo pagamento</p>
+                        <div class="mb-0">
+                            <span class="text-muted" style="color: rgba(255, 255, 255, 0.699) !important;">
+                                Disponível em: 5 dias</span>
+                        </div>
+                        <div class="mb-0" style="margin-top: 10px;">
+                            <span class="text-muted"><a href="admin.html#/parceiro-financas">Solicitar adiantamento</a></span>
+                        </div>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <i class="align-middle text-success" data-feather="dollar-sign"
+                                style="color: black !important;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 5: ENGAGEMENT RATE -->
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">4.8% Engagement 
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important;">+24%</span>
+                        </h3>
+                        <p class="mb-2">Taxa média das publicações</p>
+                        <div class="mb-0">
+                            <span class="text-muted"><a href="admin.html#/parceiro-metricas">Ver métricas</a></span>
+                        </div>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <i class="align-middle text-info" data-feather="trending-up"
+                                style="color: black !important;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 6: PLATAFORMAS ATIVAS -->
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">3 Plataformas 
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important;">Ativas</span>
+                        </h3>
+                        <p class="mb-2">Instagram, TikTok, YouTube</p>
+                        <div class="mb-0">
+                            <span class="text-muted"><a href="admin.html#/parceiro-plataformas">Gerenciar plataformas</a></span>
+                        </div>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <a href="#!" title="Plataformas ativas">
+                                <i class="align-middle text-info" data-feather="share-2"
+                                    style="color: black !important;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 7: PUBLICAÇÕES DO MÊS -->
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">34 Publicações 
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important;">68%</span>
+                        </h3>
+                        <p class="mb-2">Meta: 50 publicações mensais</p>
+                        <div class="mb-0">
+                            <span class="text-muted"><a href="admin.html#/parceiro-publicacoes">Ver todas</a></span>
+                        </div>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <a href="#!" title="Número de publicações">
+                                <i class="align-middle text-info" data-feather="camera"
+                                    style="color: black !important;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CARD 8: CONVERSÃO -->
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">8.5% Conversão 
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important;">Alta</span>
+                        </h3>
+                        <p class="mb-2">Cliques para pedidos</p>
+                        <div class="mb-0">
+                            <span class="text-muted"><a href="admin.html#/parceiro-conversao">Ver análise</a></span>
+                        </div>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat" style="background-color: white; color: black !important;">
+                            <a href="#!" title="Taxa de conversão">
+                                <i class="align-middle text-info" data-feather="bar-chart-2"
+                                    style="color: black !important;"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- FILTROS DE PERÍODO -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card card-dashboard">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-4 mb-3 mb-md-0">
+                        <h6 class="mb-2">Filtrar por Período</h6>
+                        <div class="d-flex gap-2">
+                            <select class="form-select form-select-sm" style="width: auto;">
+                                <option>Janeiro 2024</option>
+                                <option selected>Fevereiro 2024</option>
+                                <option>Março 2024</option>
+                                <option>Abril 2024</option>
+                            </select>
+                            <select class="form-select form-select-sm" style="width: auto;">
+                                <option>2023</option>
+                                <option selected>2024</option>
+                                <option>2025</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-8 text-md-end">
+                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#novaPublicacaoModal">
+                            <i class="fas fa-plus-circle me-1"></i> Nova Publicação
+                        </button>
+                        <button class="btn btn-outline-light btn-sm ms-2">
+                            <i class="fas fa-download me-1"></i> Exportar Relatório
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- GRÁFICOS -->
+<div class="row">
+    <!-- GRÁFICO COMISSÃO MENSAL -->
+    <div class="col-12 col-lg-6 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-header d-flex justify-content-between align-items-center"
+                style="background-color: rgba(255, 255, 255, 0.048);">
+                <h5 class="card-title mb-0" style="color: white;">Comissão Mensal (USD)</h5>
+                <div>
+                    <label for="filtroAnoComissao" class="form-label me-2 mb-0" style="color: white;">Ano:</label>
+                    <select id="filtroAnoComissao" class="form-select form-select-sm d-inline-block" style="width: auto;">
+                        <option value="2023">2023</option>
+                        <option value="2024" selected>2024</option>
+                        <option value="2025">2025</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-body">
+                <canvas id="comissaoMensalChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- GRÁFICO PEDIDOS POR PLATAFORMA -->
+    <div class="col-12 col-lg-6 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+                <h5 class="card-title mb-0" style="color: white;">Pedidos por Plataforma</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="pedidosPlataformaChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- GRÁFICO PERFORMANCE -->
+    <div class="col-12 col-lg-6 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+                <h5 class="card-title mb-0" style="color: white;">Performance de Conteúdo</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="performanceConteudoChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- GRÁFICO METAS -->
+    <div class="col-12 col-lg-6 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+                <h5 class="card-title mb-0" style="color: white;">Progresso das Metas</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="metasProgressoChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TABELA DE PEDIDOS E COMISSÕES -->
+<div class="row mt-3">
+    <div class="col-12 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+                <h5 class="card-title mb-0" style="color: white;">
+                    <i class="align-middle text-info" data-feather="dollar-sign"
+                        style="color: black !important; margin-top: -6px; margin-right: 5px;"></i>
+                    Histórico de Pedidos e Comissões
+                </h5>
+            </div>
+            <div class="card-body">
+                <table id="tabelaComissoes" class="table table-borderless my-0 w-100">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>ID do Pedido</th>
+                            <th>Cliente</th>
+                            <th>Valor (USD)</th>
+                            <th>Sua Comissão (12%)</th>
+                            <th>Plataforma</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>25/02/2024</td>
+                            <td>#DHJ-7842</td>
+                            <td>Maria Silva</td>
+                            <td>$89.90</td>
+                            <td><span class="status pago">$10.79</span></td>
+                            <td><span class="badge" style="background: #E4405F; color: white;">Instagram</span></td>
+                            <td><span class="status pago">Pago</span></td>
+                        </tr>
+                        <tr>
+                            <td>24/02/2024</td>
+                            <td>#DHJ-7815</td>
+                            <td>João Santos</td>
+                            <td>$152.50</td>
+                            <td><span class="status pago">$18.30</span></td>
+                            <td><span class="badge bg-dark">TikTok</span></td>
+                            <td><span class="status pago">Pago</span></td>
+                        </tr>
+                        <tr>
+                            <td>23/02/2024</td>
+                            <td>#DHJ-7798</td>
+                            <td>Ana Oliveira</td>
+                            <td>$67.80</td>
+                            <td><span class="status pendente">$8.14</span></td>
+                            <td><span class="badge bg-danger">YouTube</span></td>
+                            <td><span class="status pendente">Processando</span></td>
+                        </tr>
+                        <tr>
+                            <td>22/02/2024</td>
+                            <td>#DHJ-7765</td>
+                            <td>Pedro Costa</td>
+                            <td>$210.00</td>
+                            <td><span class="status pago">$25.20</span></td>
+                            <td><span class="badge bg-info">Twitter</span></td>
+                            <td><span class="status pago">Pago</span></td>
+                        </tr>
+                        <tr>
+                            <td>21/02/2024</td>
+                            <td>#DHJ-7732</td>
+                            <td>Carla Mendes</td>
+                            <td>$45.90</td>
+                            <td><span class="status pago">$5.51</span></td>
+                            <td><span class="badge" style="background: #E4405F; color: white;">Instagram</span></td>
+                            <td><span class="status pago">Pago</span></td>
+                        </tr>
+                        <tr>
+                            <td>20/02/2024</td>
+                            <td>#DHJ-7701</td>
+                            <td>Ricardo Lima</td>
+                            <td>$98.75</td>
+                            <td><span class="status pendente">$11.85</span></td>
+                            <td><span class="badge bg-dark">TikTok</span></td>
+                            <td><span class="status pendente">Processando</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- TIMELINE DE PUBLICAÇÕES -->
+<div class="row mt-3">
+    <div class="col-12 d-flex">
+        <div class="card flex-fill w-100 card-dashboard">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+                <span class="badge float-end" style="background-color: white; color: black !important;">Hoje</span>
+                <h5 class="card-title mb-0" style="color: white;">Últimas Publicações</h5>
+            </div>
+            <div class="card-body" style="overflow: hidden scroll; max-height: 400px;">
+                <a href="admin.html#/visualizar-publicacao">
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="me-3">
+                            <span class="badge" style="background: #E4405F; color: white;">
+                                <i class="fab fa-instagram"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1">
+                            <small class="float-end">2 horas atrás</small>
+                            <strong style="color: white;">Reels Delivery Experience</strong><br />
+                            <small class="text-muted">Mostrando minha experiência com pedidos do DeliveryHJ. O burrito estava incrível! 🎬🌯</small><br />
+                            <small class="text-muted">
+                                <i class="fas fa-heart text-danger me-1"></i>2.4k • 
+                                <i class="fas fa-comment me-1"></i>187 • 
+                                <i class="fas fa-share me-1"></i>42 • 
+                                <i class="fas fa-link me-1"></i>124 cliques
+                            </small>
+                        </div>
+                    </div>
+                </a>
+                <hr />
+                <a href="admin.html#/visualizar-publicacao">
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="me-3">
+                            <span class="badge bg-danger">
+                                <i class="fab fa-youtube"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1">
+                            <small class="float-end">1 dia atrás</small>
+                            <strong style="color: white;">Unboxing Premium</strong><br />
+                            <small class="text-muted">Vídeo completo mostrando o pacote premium do DeliveryHJ com todos os benefícios exclusivos! 📦✨</small><br />
+                            <small class="text-muted">
+                                <i class="fas fa-thumbs-up text-primary me-1"></i>3.1k • 
+                                <i class="fas fa-eye me-1"></i>15.8k views • 
+                                <i class="fas fa-link me-1"></i>89 cliques
+                            </small>
+                        </div>
+                    </div>
+                </a>
+                <hr />
+                <a href="admin.html#/visualizar-publicacao">
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="me-3">
+                            <span class="badge bg-dark">
+                                <i class="fab fa-tiktok"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1">
+                            <small class="float-end">2 dias atrás</small>
+                            <strong style="color: white;">TikTok Challenge</strong><br />
+                            <small class="text-muted">Participando do desafio #DeliveryHJChallenge com a coreografia da entrega mais rápida! 💃📦</small><br />
+                            <small class="text-muted">
+                                <i class="fas fa-heart text-danger me-1"></i>18.5k • 
+                                <i class="fas fa-comment me-1"></i>942 • 
+                                <i class="fas fa-link me-1"></i>312 cliques
+                            </small>
+                        </div>
+                    </div>
+                </a>
+                <hr />
+                <a href="admin.html#/visualizar-publicacao">
+                    <div class="d-flex align-items-start mb-3">
+                        <div class="me-3">
+                            <span class="badge bg-info">
+                                <i class="fab fa-twitter"></i>
+                            </span>
+                        </div>
+                        <div class="flex-grow-1">
+                            <small class="float-end">3 dias atrás</small>
+                            <strong style="color: white;">Review Especial</strong><br />
+                            <small class="text-muted">Thread sobre minha experiência completa com o programa de parceiros do DeliveryHJ.</small><br />
+                            <small class="text-muted">
+                                <i class="fas fa-retweet text-success me-1"></i>245 • 
+                                <i class="fas fa-heart text-danger me-1"></i>1.2k • 
+                                <i class="fas fa-link me-1"></i>67 cliques
+                            </small>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="card-footer">
+                <div class="d-grid">
+                    <a href="admin.html#/parceiro-publicacoes" class="btn btn-primary">Ver todas as publicações</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- METAS E RECOMPENSAS -->
+<div class="row mt-3">
+    <div class="col-12 d-flex">
+        <div class="card flex-fill w-100 card-dashboard">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+                <h4 class="card-title mb-0" style="color: white;">Metas e Recompensas</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-dark border-light">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Meta: $10k</h5>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar bg-success" style="width: 84%">84%</div>
+                                </div>
+                                <p class="card-text small">Alcance $10,000 em comissões para desbloquear bônus especial</p>
+                                <small class="text-muted">$8,450 / $10,000</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-dark border-light">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Meta: 1,500 Pedidos</h5>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar bg-info" style="width: 83%">83%</div>
+                                </div>
+                                <p class="card-text small">Gerar 1,500 pedidos através dos seus links</p>
+                                <small class="text-muted">1,240 / 1,500</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="card bg-dark border-light">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">Meta: 50 Publicações</h5>
+                                <div class="progress mb-3">
+                                    <div class="progress-bar bg-warning" style="width: 68%">68%</div>
+                                </div>
+                                <p class="card-text small">Publicar 50 conteúdos sobre o DeliveryHJ</p>
+                                <small class="text-muted">34 / 50</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="alert alert-success">
+                    <i class="fas fa-gift me-2"></i>
+                    <strong>Recompensa Desbloqueada:</strong> Bônus de $500 + Badge "Top Performer" por alcançar 1,000 pedidos!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MODAL NOVA PUBLICAÇÃO -->
+<div class="modal fade" id="novaPublicacaoModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nova Publicação</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label class="form-label">Plataforma</label>
+                        <div class="row g-2">
+                            <div class="col-3">
+                                <input type="radio" class="btn-check" name="platform" id="instagram" checked>
+                                <label class="btn btn-outline-dark w-100" for="instagram">
+                                    <i class="fab fa-instagram me-2"></i>Instagram
+                                </label>
+                            </div>
+                            <div class="col-3">
+                                <input type="radio" class="btn-check" name="platform" id="tiktok">
+                                <label class="btn btn-outline-dark w-100" for="tiktok">
+                                    <i class="fab fa-tiktok me-2"></i>TikTok
+                                </label>
+                            </div>
+                            <div class="col-3">
+                                <input type="radio" class="btn-check" name="platform" id="youtube">
+                                <label class="btn btn-outline-dark w-100" for="youtube">
+                                    <i class="fab fa-youtube me-2"></i>YouTube
+                                </label>
+                            </div>
+                            <div class="col-3">
+                                <input type="radio" class="btn-check" name="platform" id="twitter">
+                                <label class="btn btn-outline-dark w-100" for="twitter">
+                                    <i class="fab fa-twitter me-2"></i>Twitter
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Título</label>
+                        <input type="text" class="form-control" 
+                               placeholder="Ex: Minha experiência incrível com o DeliveryHJ">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Conteúdo</label>
+                        <textarea class="form-control" rows="4"
+                                  placeholder="Descreva o conteúdo da sua publicação..."></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Link de Acompanhamento (Opcional)</label>
+                        <input type="url" class="form-control" 
+                               placeholder="https://deliveryhj.com/parceiro/seu-link">
+                        <div class="form-text">Este link será rastreado para atribuição de comissões</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Data de Publicação</label>
+                        <div class="row g-2">
+                            <div class="col-6">
+                                <input type="date" class="form-control" value="2024-02-28">
+                            </div>
+                            <div class="col-6">
+                                <input type="time" class="form-control" value="18:00">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="notificarAdmin" checked>
+                        <label class="form-check-label" for="notificarAdmin">
+                            Notificar administradores para aprovação
+                        </label>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary">Agendar Publicação</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Gráfico Comissão Mensal
+    const ctxComissao = document.getElementById('comissaoMensalChart').getContext('2d');
+    const dadosComissao = {
+        2023: [1250, 1840, 2100, 1950, 2450, 3120, 2850, 3240, 2980, 4150, 3800, 4200],
+        2024: [1450, 2040, 1840, 2150, 2650, 2840, 2450, 2840, 3150, 2840, 0, 0],
+        2025: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    };
+    
+    const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+    
+    function criarGraficoComissao(ano) {
+        const data = {
+            labels: meses,
+            datasets: [{
+                label: 'Comissão (USD)',
+                data: dadosComissao[ano],
+                backgroundColor: '#0d6efd',
+                borderRadius: 5
+            }]
+        };
+        
+        return new Chart(ctxComissao, {
+            type: 'bar',
+            data: data,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { labels: { color: 'white' } }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: 'white' },
+                        grid: { display: false }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: { 
+                            color: 'white',
+                            callback: function(value) {
+                                return '$' + value;
+                            }
+                        },
+                        grid: { color: 'rgba(255,255,255,0.1)' }
+                    }
+                }
+            }
+        });
+    }
+    
+    let graficoComissao = criarGraficoComissao('2024');
+    document.getElementById('filtroAnoComissao').addEventListener('change', (e) => {
+        graficoComissao.destroy();
+        graficoComissao = criarGraficoComissao(e.target.value);
+    });
+    
+    // Gráfico Pedidos por Plataforma
+    const ctxPlataforma = document.getElementById('pedidosPlataformaChart').getContext('2d');
+    new Chart(ctxPlataforma, {
+        type: 'doughnut',
+        data: {
+            labels: ['Instagram', 'TikTok', 'YouTube', 'Twitter', 'Outros'],
+            datasets: [{
+                data: [42, 28, 18, 8, 4],
+                backgroundColor: [
+                    '#E4405F',
+                    '#000000',
+                    '#FF0000',
+                    '#1DA1F2',
+                    '#7289DA'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { 
+                    labels: { color: 'white' },
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+    
+    // Gráfico Performance
+    const ctxPerformance = document.getElementById('performanceConteudoChart').getContext('2d');
+   

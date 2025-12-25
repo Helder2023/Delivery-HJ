@@ -2,7 +2,8 @@
   'use strict';
 
   // --- caminhos base ---
-  const AUTH = '../sessao-admin/paginas/authentic/';
+  const AUTH = '../sessao-admin/paginas/authentic/admins/';
+  const AUTENTICACAO_PARCEIRO = '../sessao-admin/paginas/authentic/autenticacao-parceiro/';
   const PAGINA = '../sessao-admin/paginas/';
   const CODIGOS_HTTPS = '../sessao-admin/paginas/codigos de status HTTPS/';
   const PERFIL = '../sessao-admin/administrador/perfil-admin/';
@@ -21,6 +22,7 @@
   const ANUNCIOS = '../sessao-admin/paginas/anucios e publicidades/';
   const FOOTER = '../sessao-admin/paginas/footer/';
   const PARCEIRO = '../sessao-admin/parceiro/';
+  const DASHBOARD_PARCEIRO = '../sessao-admin/parceiro/dashboard/';
 
 
   // --- rotas ---
@@ -32,6 +34,11 @@
     '/-cadastro-adminFinanceiro-': { title: 'Cadastrar Novo Administrador', file: AUTH + 'cadastro-adminFinanceiro.html' },
     '/-cadastro-editor-': { title: 'Cadastrar Novo Administrador', file: AUTH + 'cadastro-editor.html' },
 
+    '/login-parceiro': { title: 'Login', file: AUTENTICACAO_PARCEIRO + 'login.html' },
+    '/esqueceu-senha-parceiro': { title: 'Esqueceu Senha', file: AUTENTICACAO_PARCEIRO + 'forget-password.html' },
+    '/nova-senha-parceiro': { title: 'Nova Senha', file: AUTH + 'new-password.html' },
+    '/-cadastro-parceiro-': { title: 'Cadastrar Novo Administrador', file: AUTENTICACAO_PARCEIRO + 'cadastro-parceiro.html' },
+    
     '/pub': { title: 'Anucios e Publicidades', file: ANUNCIOS + 'pub.html' },
     '/editar-pub': { title: 'Editando Anucio / Publicidade', file: ANUNCIOS + 'editar-pub.html' },
 
@@ -108,6 +115,8 @@
     '/visualizar-parceiro': { title: 'Visualizar Administrador', file: PARCEIRO + 'visualizar-parceiro.html' },
     '/editar-parceiro': { title: 'Editar Administrador', file: PARCEIRO + 'editar-parceiro.html' },
     '/deletar-parceiro': { title: 'Editar Administrador', file: PARCEIRO + 'deletar-parceiro.html' },
+    
+    '/home-parceiro': { title: 'Dashboard para o parceiro', file: DASHBOARD_PARCEIRO + 'dashboard-parceiro.html' },
   };
 
 
