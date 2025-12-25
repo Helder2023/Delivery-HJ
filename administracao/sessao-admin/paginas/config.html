@@ -17,7 +17,7 @@
           <h5 class="card-title mb-0">Painel de Configurações</h5>
         </div>
         <div class="list-group list-group-flush" role="tablist">
-         
+
           <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#seguranca" role="tab">
             Segurança
           </a>
@@ -34,13 +34,17 @@
           <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#suporte" role="tab">
             Suporte e Manual do Utilizador
           </a>
+
+          <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#contratos" role="tab">
+            Contratos
+          </a>
         </div>
       </div>
     </div>
 
     <div class="col-md-8 col-xl-9">
       <div class="tab-content">
-        
+
         <!-- Segurança -->
         <div class="tab-pane fade show active" id="seguranca" role="tabpanel">
           <div class="card">
@@ -362,6 +366,524 @@
 
             </div>
           </div>
+        </div>
+
+        <!-- contratos -->
+        <div class="card tab-pane fade overflow-auto" id="contratos" role="tabpanel" style="height: 530px;">
+
+          <div>
+            <div class="card-header">
+              <h5 class="card-title mb-0">Todos os Contratos</h5>
+            </div>
+
+            <div class="card-body">
+
+              <div class="card card-dashboard p-3" id="cardFinancas" style="cursor: pointer;">
+                <h4 class="d-flex align-items-center gap-2">
+                  <i data-feather="file"></i>
+                  Contato para os Administradores
+                </h4>
+
+
+                <!-- Botões de ação -->
+                <div class="document-actions">
+                  <a href="../sessao-admin/paginas/contratos/adminstradores/Exercício de Portugol - Lista 03 (2).pdf" target="_blank"
+                    class="btn btn-primary">
+                    <i class="fas fa-eye"></i> Visualizar Completo
+                  </a>
+
+                  <a href="../sessao-admin/paginas/contratos/adminstradores/Exercício de Portugol - Lista 03 (2).pdf" download="documento.pdf" class="btn btn-success">
+                    <i class="fas fa-download"></i> Baixar PDF
+                  </a>
+                </div>
+              </div>
+
+              <div class="card card-dashboard p-3" id="cardFinancas" style="cursor: pointer;">
+                <h4 class="d-flex align-items-center gap-2">
+                  <i data-feather="file"></i>
+                  Contato para os restaurantes
+                </h4>
+                <!-- Botões de ação -->
+                <div class="document-actions">
+                  <a href="../sessao-admin/paginas/contratos/restaurantes/Exercício de Portugol - Lista 03 (2).pdf" target="_blank"
+                    class="btn btn-primary">
+                    <i class="fas fa-eye"></i> Visualizar Completo
+                  </a>
+
+                  <a href="../sessao-admin/paginas/contratos/restaurantes/Exercício de Portugol - Lista 03 (2).pdf" download="documento.pdf" class="btn btn-success">
+                    <i class="fas fa-download"></i> Baixar PDF
+                  </a>
+                </div>
+              </div>
+
+              <div class="card card-dashboard p-3" id="cardFinancas" style="cursor: pointer;">
+                <h4 class="d-flex align-items-center gap-2">
+                  <i data-feather="file"></i>
+                  Contato para os Parceiros
+                </h4>
+                 <!-- Botões de ação -->
+                <div class="document-actions">
+                  <a href="../sessao-admin/paginas/contratos/parceiros/Exercício de Portugol - Lista 03 (2).pdf" target="_blank"
+                    class="btn btn-primary">
+                    <i class="fas fa-eye"></i> Visualizar Completo
+                  </a>
+
+                  <a href="../sessao-admin/paginas/contratos/parceiros/Exercício de Portugol - Lista 03 (2).pdf" download="documento.pdf" class="btn btn-success">
+                    <i class="fas fa-download"></i> Baixar PDF
+                  </a>
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+
+      
+
+          <script>
+            // Sistema de preview e download de documentos
+            class DocumentViewer {
+              constructor() {
+                this.supportedFormats = {
+                  pdf: ['application/pdf'],
+                  image: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
+                  document: ['application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],
+                  excel: ['application/vnd.ms-excel', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'],
+                  text: ['text/plain', 'text/html']
+                };
+              }
+
+              // Gera preview baseado no tipo de arquivo
+              generatePreview(fileUrl, fileName) {
+                const extension = this.getFileExtension(fileName);
+                const mimeType = this.getMimeType(extension);
+
+                let previewHTML = '';
+
+                switch (extension) {
+                  case 'pdf':
+                    previewHTML = this.generatePDFPreview(fileUrl);
+                    break;
+                  case 'jpg':
+                  case 'jpeg':
+                  case 'png':
+                  case 'gif':
+                  case 'webp':
+                    previewHTML = this.generateImagePreview(fileUrl);
+                    break;
+                  case 'doc':
+                  case 'docx':
+                  case 'xls':
+                  case 'xlsx':
+                    previewHTML = this.generateOfficePreview(fileUrl);
+                    break;
+                  default:
+                    previewHTML = this.generateGenericPreview(fileUrl, fileName);
+                }
+
+                return {
+                  preview: previewHTML,
+                  actions: this.generateActionButtons(fileUrl, fileName, mimeType)
+                };
+              }
+
+              // Preview para PDF usando Google Docs Viewer
+              generatePDFPreview(url) {
+                return `
+            <div class="pdf-preview">
+                <iframe 
+                    src="https://docs.google.com/viewer?url=${encodeURIComponent(url)}&embedded=true"
+                    width="100%" 
+                    height="500"
+                    frameborder="0"
+                    loading="lazy"
+                    title="Visualizador de PDF">
+                </iframe>
+                <div class="pdf-info">
+                    <p>📄 Documento PDF - Pode demorar alguns segundos para carregar</p>
+                </div>
+            </div>
+        `;
+              }
+
+              // Preview para imagens
+              generateImagePreview(url) {
+                return `
+            <div class="image-preview">
+                <img src="${url}" 
+                     alt="Preview da imagem" 
+                     style="max-width: 100%; max-height: 500px; object-fit: contain;"
+                     loading="lazy">
+                <div class="image-zoom-controls">
+                    <button class="btn-zoom-in" onclick="zoomImage(this, 'in')">+</button>
+                    <button class="btn-zoom-out" onclick="zoomImage(this, 'out')">-</button>
+                    <button class="btn-zoom-reset" onclick="zoomImage(this, 'reset')">⟲</button>
+                </div>
+            </div>
+        `;
+              }
+
+              // Preview para documentos do Office
+              generateOfficePreview(url) {
+                return `
+            <div class="office-preview">
+                <iframe 
+                    src="https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(url)}"
+                    width="100%" 
+                    height="500"
+                    frameborder="0"
+                    title="Visualizador de Documento">
+                </iframe>
+                <div class="office-info">
+                    <p>📝 Documento do Office - Visualização online</p>
+                </div>
+            </div>
+        `;
+              }
+
+              // Preview genérico
+              generateGenericPreview(url, fileName) {
+                const icon = this.getFileIcon(fileName);
+                return `
+            <div class="generic-preview">
+                <div class="file-icon">${icon}</div>
+                <div class="file-info">
+                    <h5>${fileName}</h5>
+                    <p>Tipo de arquivo: ${this.getFileExtension(fileName).toUpperCase()}</p>
+                    <p>Tamanho: <span class="file-size">Calculando...</span></p>
+                </div>
+            </div>
+        `;
+              }
+
+              // Botões de ação
+              generateActionButtons(url, fileName, mimeType) {
+                return `
+            <div class="document-actions">
+                <a href="${url}" 
+                   target="_blank" 
+                   class="btn-view"
+                   title="Abrir em nova aba">
+                   <i class="fas fa-external-link-alt"></i> Abrir
+                </a>
+                
+                <a href="${url}" 
+                   download="${fileName}" 
+                   class="btn-download"
+                   title="Baixar arquivo">
+                   <i class="fas fa-download"></i> Baixar
+                </a>
+                
+                <button onclick="printDocument('${url}')" 
+                        class="btn-print"
+                        title="Imprimir documento">
+                   <i class="fas fa-print"></i> Imprimir
+                </button>
+                
+                <button onclick="shareDocument('${url}', '${fileName}')" 
+                        class="btn-share"
+                        title="Compartilhar">
+                   <i class="fas fa-share-alt"></i> Compartilhar
+                </button>
+            </div>
+        `;
+              }
+
+              // Utilitários
+              getFileExtension(filename) {
+                return filename.split('.').pop().toLowerCase();
+              }
+
+              getMimeType(extension) {
+                const mimeMap = {
+                  'pdf': 'application/pdf',
+                  'jpg': 'image/jpeg',
+                  'jpeg': 'image/jpeg',
+                  'png': 'image/png',
+                  'gif': 'image/gif',
+                  'doc': 'application/msword',
+                  'docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                  'xls': 'application/vnd.ms-excel',
+                  'xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                  'txt': 'text/plain',
+                  'zip': 'application/zip'
+                };
+                return mimeMap[extension] || 'application/octet-stream';
+              }
+
+              getFileIcon(filename) {
+                const ext = this.getFileExtension(filename);
+                const icons = {
+                  'pdf': '📄',
+                  'doc': '📝', 'docx': '📝',
+                  'xls': '📊', 'xlsx': '📊',
+                  'jpg': '🖼️', 'jpeg': '🖼️', 'png': '🖼️', 'gif': '🖼️',
+                  'zip': '🗜️', 'rar': '🗜️',
+                  'mp3': '🎵', 'mp4': '🎬',
+                  'txt': '📃'
+                };
+                return icons[ext] || '📁';
+              }
+            }
+
+            // Inicialização automática
+            document.addEventListener('DOMContentLoaded', function () {
+              const viewer = new DocumentViewer();
+
+              // Detecta links para documentos e adiciona preview
+              document.querySelectorAll('a[href*="."]').forEach(link => {
+                const href = link.getAttribute('href');
+                const fileName = href.split('/').pop();
+
+                // Verifica se é um arquivo (tem extensão)
+                if (fileName.includes('.') && !href.includes('#')) {
+                  const extension = fileName.split('.').pop().toLowerCase();
+                  const documentExtensions = ['pdf', 'doc', 'docx', 'xls', 'xlsx', 'jpg', 'jpeg', 'png', 'gif', 'txt'];
+
+                  if (documentExtensions.includes(extension)) {
+                    link.classList.add('document-link');
+                    link.setAttribute('data-document-url', href);
+                    link.setAttribute('data-document-name', fileName);
+
+                    // Adiciona ícone
+                    if (!link.querySelector('.document-icon')) {
+                      const icon = viewer.getFileIcon(fileName);
+                      link.innerHTML = `${icon} ${link.innerHTML}`;
+                    }
+
+                    // Previne clique padrão para abrir o preview
+                    link.addEventListener('click', function (e) {
+                      if (!e.ctrlKey && !e.metaKey) {
+                        e.preventDefault();
+                        showDocumentPreview(this);
+                      }
+                    });
+                  }
+                }
+              });
+
+              // Função para mostrar preview
+              function showDocumentPreview(link) {
+                const url = link.getAttribute('data-document-url');
+                const fileName = link.getAttribute('data-document-name');
+
+                const preview = viewer.generatePreview(url, fileName);
+
+                // Cria modal de preview
+                const modalHTML = `
+            <div class="document-modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5>${fileName}</h5>
+                        <button class="close-modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        ${preview.preview}
+                    </div>
+                    <div class="modal-footer">
+                        ${preview.actions}
+                    </div>
+                </div>
+            </div>
+        `;
+
+                // Adiciona ao DOM
+                const modalContainer = document.createElement('div');
+                modalContainer.innerHTML = modalHTML;
+                document.body.appendChild(modalContainer);
+
+                // Adiciona eventos
+                modalContainer.querySelector('.close-modal').addEventListener('click', () => {
+                  document.body.removeChild(modalContainer);
+                });
+
+                // Fecha ao clicar fora
+                modalContainer.querySelector('.document-modal').addEventListener('click', (e) => {
+                  if (e.target.classList.contains('document-modal')) {
+                    document.body.removeChild(modalContainer);
+                  }
+                });
+              }
+
+              // Funções auxiliares globais
+              window.zoomImage = function (btn, action) {
+                const img = btn.closest('.image-preview').querySelector('img');
+                let currentZoom = parseFloat(img.style.transform.replace('scale(', '').replace(')', '')) || 1;
+
+                if (action === 'in') currentZoom += 0.1;
+                else if (action === 'out') currentZoom = Math.max(0.1, currentZoom - 0.1);
+                else if (action === 'reset') currentZoom = 1;
+
+                img.style.transform = `scale(${currentZoom})`;
+                img.style.transformOrigin = 'center center';
+              };
+
+              window.printDocument = function (url) {
+                const printWindow = window.open(url, '_blank');
+                printWindow.onload = function () {
+                  printWindow.print();
+                };
+              };
+
+              window.shareDocument = function (url, fileName) {
+                if (navigator.share) {
+                  navigator.share({
+                    title: fileName,
+                    text: 'Confira este documento:',
+                    url: url
+                  });
+                } else {
+                  // Fallback para copiar link
+                  navigator.clipboard.writeText(url).then(() => {
+                    alert('Link copiado para a área de transferência!');
+                  });
+                }
+              };
+            });
+
+            // CSS necessário
+            const documentStyles = `
+    <style>
+        .document-link {
+            cursor: pointer;
+            text-decoration: none;
+            color: #0066cc;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        .document-link:hover {
+            background: #f0f7ff;
+            text-decoration: underline;
+        }
+        
+        .document-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow: auto;
+        }
+        
+        .modal-header {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .modal-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .document-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .document-actions a, 
+        .document-actions button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+        }
+        
+        .btn-view {
+            background: #4a6cf7;
+            color: white;
+        }
+        
+        .btn-download {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-print {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .btn-share {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .image-zoom-controls {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 4px;
+            padding: 5px;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .image-zoom-controls button {
+            background: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .generic-preview {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .file-icon {
+            font-size: 60px;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #666;
+        }
+    </style>
+`;
+
+            // Adiciona CSS ao documento
+            document.head.insertAdjacentHTML('beforeend', documentStyles);
+          </script>
         </div>
 
 

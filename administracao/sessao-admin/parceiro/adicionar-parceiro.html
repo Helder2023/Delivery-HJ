@@ -1,0 +1,181 @@
+<style>
+   
+
+    /* ========== UPLOAD LOGO ========== */
+    .upload-logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .logo-preview {
+        width: 120px;
+        height: 120px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid #ccc;
+
+    }
+
+
+</style>
+<body class="light-mode">
+
+    <div class="container-fluid p-3">
+
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-sm-block">
+                <h3>Adicionar novo parceiro</h3>
+            </div>
+
+            <div class="col-auto ms-auto text-end mt-n1">
+                <button class="btn shadow-sm" style="background-color: #000;">
+                    <a class="no-underline" href="admin.html#/todos-parceiros" style="color: white;">
+                        <i data-feather="users"></i> Todos os parceiros
+                    </a>
+                </button>
+            </div>
+        </div>
+
+        <div class="card flex-fill p-4">
+
+            <form action="processa_admin.php" method="post" enctype="multipart/form-data"
+                class="row g-3 needs-validation" novalidate>
+
+                <!-- Upload da Logo -->
+                <div class="upload-logo">
+                    <img id="logoPreview" src="../assets/img/avatar/avatar.png" class="logo-preview" alt="Logo Preview">
+                    <input type="file" id="logoUpload" class="form-control w-50" accept="image/*" name="foto_admin">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="name_user" class="form-label">Primeiro nome <span class="text-danger">*</span></label>
+                    <input type="text" minlength="3" maxlength="25" placeholder="Insira o primeiro nome"
+                        class="form-control" id="name_user" name="first_name" required>
+                    <div class="invalid-feedback">Qual é o primeiro nome?</div>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="name_user_nickname" class="form-label">Segundo nome (opcional)</label>
+                    <input type="text" maxlength="25" placeholder="Insira o segundo nome" class="form-control"
+                        id="name_user_nickname" name="second_name">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="tel_user" class="form-label">Número de Telefone (WhatsApp)</label>
+                    <input type="tel" maxlength="18" placeholder="Insira o número de telefone" class="form-control"
+                        id="tel_user" name="tel">
+                </div>
+
+                <div class="col-md-6">
+                    <label for="genero" class="form-label">Gênero</label>
+                    <select class="form-control" id="genero" name="genero">
+                        <option value="">Selecione...</option>
+                        <option>Masculino</option>
+                        <option>Feminino</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="tipo_parcerias" class="form-label">Categorias</label>
+                    <select class="form-control" id="tipo_parcerias" name="tipo_parcerias">
+                        <option value="">Selecione...</option>
+                        <option>Influencer / Criador de Conteúdo</option>
+                        <option>Gestor de Tráfego (Pago / Orgânico)</option>
+                        <option>Parceiro Comercial (promoções e acordos locais)</option>
+                        <option>Parceiro Corporativo / Institucional</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="data_mp" class="form-label">Data de Nascimento</label>
+                    <input type="date" name="data_mp" id="data_mp" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label class="form-label">Status</label>
+                    <select class="form-control">
+                        <option>Ativo</option>
+                        <option>Inativo</option>
+                        <option>Bloquiado</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="password" class="form-label">Senha gerada automaticamente</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="password" name="password" readonly>
+                        <button type="button" class="btn btn-outline-secondary" id="btnRegenerate">Gerar senha</button>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <label for="email_employees" class="form-label">E-mail <span class="text-danger">*</span></label>
+                    <input type="email" maxlength="60" placeholder="usuario@exemplo.com" class="form-control"
+                        id="email_employees" name="email" required>
+                    <div class="invalid-feedback">Insira um e-mail válido!</div>
+                </div>
+
+                 <div class="form-check col-md-12">
+                    <input class="form-check-input" type="checkbox" name="send_user_notification"
+                        id="send_user_notification" checked>
+                    <label class="form-check-label" for="send_user_notification">
+                        Enviar e-mail de boas-vindas ao novo parceiro
+                    </label>
+                </div>
+
+                <div class="col-12 text-left mt-4">
+                    <button class="btn btn-primary w-25" type="submit">Adicionar parceiro</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Preview da logo
+        document.getElementById('logoUpload').addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = e => document.getElementById('logoPreview').src = e.target.result;
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Geração automática de senha segura
+        function gerarSenha(tamanho = 15) {
+            const caracteres = "0123456789";
+            let senha = "Delivery_HJ_" + "";
+            for (let i = 0; i < tamanho; i++) {
+                senha += caracteres.charAt(Math.floor(Math.random() * caracteres.length));
+            }
+            return senha;
+        }
+
+        // Exibir senha ao carregar a página
+        window.addEventListener("DOMContentLoaded", () => {
+            const inputSenha = document.getElementById("password");
+            inputSenha.value = gerarSenha();
+        });
+
+        // Regenerar senha ao clicar no botão
+        document.getElementById("btnRegenerate").addEventListener("click", () => {
+            document.getElementById("password").value = gerarSenha();
+        });
+
+        // Validação do formulário
+        (() => {
+            'use strict';
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>

@@ -20,6 +20,7 @@
   const FERRAMENTAS = '../sessao-admin/ferramentas/';
   const ANUNCIOS = '../sessao-admin/paginas/anucios e publicidades/';
   const FOOTER = '../sessao-admin/paginas/footer/';
+  const PARCEIRO = '../sessao-admin/parceiro/';
 
 
   // --- rotas ---
@@ -101,7 +102,12 @@
     '/privacidade': { title: 'Pulíticas de Privacidade', file: FOOTER + 'privacidade.html' },
     '/termosDeUso': { title: 'Termos de Uso do Serviço', file: FOOTER + 'termos_uso.html' },
     '/suporte': { title: 'Caso tivier uma dúvica é só nos contar', file: FOOTER + 'suporte.html' },
-
+    
+    '/todos-parceiros': { title: 'Todos os administradores', file: PARCEIRO + 'todos-parceiro.html' },
+    '/adicionar-parceiro': { title: 'Adicionar Administrador', file: PARCEIRO + 'adicionar-parceiro.html' },
+    '/visualizar-parceiro': { title: 'Visualizar Administrador', file: PARCEIRO + 'visualizar-parceiro.html' },
+    '/editar-parceiro': { title: 'Editar Administrador', file: PARCEIRO + 'editar-parceiro.html' },
+    '/deletar-parceiro': { title: 'Editar Administrador', file: PARCEIRO + 'deletar-parceiro.html' },
   };
 
 

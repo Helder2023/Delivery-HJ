@@ -1,0 +1,713 @@
+<div class="container-fluid p-0">
+
+    <!-- Cabeçalho -->
+    <div class="row mb-3 align-items-center justify-content-between">
+        <div class="col-auto">
+            <h3 class="page-title">Perfil do parceiro - Helder Adão</h3>
+        </div>
+        <div class="col-auto d-flex gap-2">
+            <button class="btn btn-dark shadow-sm">
+                <a href="admin.html#/editar-parceiro" class="text-white text-decoration-none">
+                    <i data-feather="user-check" class="me-1"></i> Editar perfil
+                </a>
+            </button>
+
+        </div>
+    </div>
+    <script src="../js/preview-link.js"></script>
+    <!-- Cartão de perfil -->
+    <div class="card flex-fill shadow-sm">
+        <div class="card-header gradient-header">
+            <h5 class="card-title mb-0 text-light">Informações Gerais</h5>
+        </div>
+
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table  align-middle">
+                    <tbody>
+                        <tr>
+                            <td><strong>Foto</strong></td>
+                            <td>
+                                <a href="../assets/img/avatar/avatar.png" target="_blank">
+                                    <img src="../assets/img/avatar/avatar.png"
+                                        class="avatar-lg rounded-circle shadow-sm" alt="Admin Avatar">
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>ID</strong></td>
+                            <td>001</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nome Completo</strong></td>
+                            <td>Helder Gabriel Adão</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sexo</strong></td>
+                            <td>M</td>
+                        </tr>
+                        <tr>
+                            <td><strong>E-mail</strong></td>
+                            <td><a href="mailto:helder@deliveryhj.com" class="link-profile">helder@deliveryhj.com</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Telefone</strong></td>
+                            <td><a href="tel:+244999000111" class="link-profile">+244 999 000 111</a></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Categoria</strong></td>
+                            <td>Influencer / Criador de Conteúdo</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Estado</strong></td>
+                            <td><i class="status ativo">Ativo</i></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Data de Criação</strong></td>
+                            <td>2024-05-12 09:45</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Última Modificação</strong></td>
+                            <td>2025-10-20 15:22</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Motivo do bloquio em</strong></td>
+                            <td>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas totam facilis dicta.
+                                <br> Pariatur in nostrum nihil ullam veritatis quis beatae?
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><strong>Contrato Assinado</strong></td>
+                            <td>
+                                <div class="document-actions">
+                                    <a href="../sessao-admin/parceiro/assets/contratos assinados/parceiro-1/"
+                                        target="_blank" class="btn btn-primary">
+                                        <i class="fas fa-eye"></i> Visualizar Completo
+                                    </a>
+
+                                    <a href="../sessao-admin/parceiro/assets/contratos assinados/parceiro-1/"
+                                        download="documento.pdf" class="btn btn-success">
+                                        <i class="fas fa-download"></i> Baixar PDF
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+ <script src="../js/preview-arquivo.js"></script>
+  <hr>
+  <form action="">
+    <div class="col-md-12" style="margin-top: -7px;">
+      <div class="file-upload-container">
+        <div class="upload-area">
+          <div class="upload-icon">
+            <i class="fas fa-cloud-upload-alt"></i>
+          </div>
+          <h3>Adicionar / Atualizar Contrato</h3>
+          <p>Clica ou clique para selecionar</p>
+          <small>Apenas PDF, JPG, PNG, GIF (Máx. 10MB)</small>
+
+          <input type="file" id="fileInput" class="file-input"
+            accept=".pdf,.jpg,.jpeg,.png,.gif,.webp,.bmp,.tiff,.svg,image/*" multiple>
+        </div>
+
+        <div class="preview-container" id="previewContainer" style="margin-top: 20px;">
+          <!-- Os previews serão inseridos aqui -->
+        </div>
+
+        <div class="validation-message" id="validationMessage"></div>
+      </div>
+    </div>
+
+    <div class="col-md-12 text-start mt-4" style="margin-bottom: 20px;">
+      <button class="btn btn-primary w-25" type="submit">Salvar Alterações</button>
+    </div>
+  </form>
+  <style>
+    .file-upload-container {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 30px;
+      text-align: center;
+      background: #f8f9fa;
+      transition: all 0.3s;
+      position: relative;
+      margin: 20px 0;
+    }
+
+    .file-upload-container.drag-over {
+      border-color: #4a6cf7;
+      background: rgba(74, 108, 247, 0.1);
+    }
+
+    .upload-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      color: #666;
+      transition: color 0.3s;
+    }
+
+    .upload-label:hover {
+      color: #4a6cf7;
+    }
+
+    .upload-label i {
+      font-size: 48px;
+      margin-bottom: 15px;
+      color: #4a6cf7;
+    }
+
+    .upload-label span {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .upload-label small {
+      font-size: 14px;
+      color: #999;
+    }
+
+    .file-input {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .file-preview-container {
+      margin-top: 20px;
+    }
+
+    .preview-item {
+      background: white;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .preview-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 15px;
+      background: #f8f9fa;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .file-name {
+      flex: 1;
+      font-weight: 500;
+      font-size: 14px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      margin-right: 10px;
+    }
+
+    .file-size {
+      font-size: 12px;
+      color: #666;
+      margin-right: 15px;
+    }
+
+    .remove-file {
+      background: #ff4757;
+      color: white;
+      border: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      line-height: 1;
+      transition: background 0.3s;
+    }
+
+    .remove-file:hover {
+      background: #ff3742;
+    }
+
+    .preview-content {
+      padding: 15px;
+    }
+
+    .image-preview {
+      max-width: 100%;
+      max-height: 200px;
+      display: block;
+      margin: 0 auto 10px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .image-info {
+      text-align: center;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .pdf-preview {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .pdf-icon {
+      font-size: 48px;
+      color: #ff4757;
+    }
+
+    .pdf-info {
+      flex: 1;
+    }
+
+    .pdf-pages,
+    .pdf-security {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    .validation-message {
+      margin-top: 15px;
+      padding: 10px 15px;
+      border-radius: 6px;
+      font-size: 14px;
+      display: none;
+    }
+
+    .validation-message.success {
+      display: block;
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .validation-message.error {
+      display: block;
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .validation-message.info {
+      display: block;
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+    }
+
+    /* Responsivo */
+    @media (max-width: 768px) {
+      .file-upload-container {
+        padding: 20px;
+      }
+
+      .upload-label i {
+        font-size: 36px;
+      }
+
+      .upload-label span {
+        font-size: 16px;
+      }
+
+      .preview-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+      }
+
+      .file-name,
+      .file-size {
+        width: 100%;
+        margin-right: 0;
+      }
+    }
+  </style>
+    <div class="container-fluid p-0">
+
+        <!-- TÍTULO -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="h3">Publicações</h1>
+        </div>
+
+        <div class="search-bar mb-3 col-6">
+            <input type="text" id="adsSearchInput" placeholder="Pesquisar publicações..." class="form-control">
+        </div>
+
+        <!-- CARDS -->
+        <div id="ads-container" class="row g-4">
+
+            <div class="col-md-6 col-xl-4 ad-card-item">
+                <div class="card anuncio-card">
+                    <!-- Preview será exibida aqui -->
+                    <div class="preview-container">
+                        <div class="preview-loading" style="display: none;">
+                            <div class="spinner"></div>
+                            <span class="ms-2">Gerando preview...</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Promoção Restaurante</h5>
+                        <p class="card-text">Descontos exclusivos para pedidos acima de 10.000 Kz.</p>
+                        <p class="card-text" style="margin-top: -10px;">
+                            Link da Publicação:
+                        <div class="link-input-container">
+                            <input type="url" class="link-input" readonly
+                                placeholder="Cole o link aqui... (ex: https://exemplo.com)"
+                                value="https://www.linkedin.com/posts/luciola-coelho-agencia-de-ia_ganhe-em-d%C3%B3lar-com-a-ia-activity-7409944760997785600-akQL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEGbuCcBtDAv4OkfbEUvCOLGlAhYc1L9oCQ">
+                            <div class="spinner" style="position: absolute; right: 10px; top: 8px;"></div>
+                        </div>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="preview-link"
+                            style="color: rgb(67, 67, 255) !important; display: block; margin-top: 10px;">
+                            Clique para abrir o link
+                        </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+          <div class="col-md-6 col-xl-4 ad-card-item">
+                <div class="card anuncio-card">
+                    <!-- Preview será exibida aqui -->
+                    <div class="preview-container">
+                        <div class="preview-loading" style="display: none;">
+                            <div class="spinner"></div>
+                            <span class="ms-2">Gerando preview...</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Promoção Restaurante</h5>
+                        <p class="card-text">Descontos exclusivos para pedidos acima de 10.000 Kz.</p>
+                        <p class="card-text" style="margin-top: -10px;">
+                            Link da Publicação:
+                        <div class="link-input-container">
+                            <input type="url" class="link-input" readonly
+                                placeholder="Cole o link aqui... (ex: https://exemplo.com)"
+                                value="https://www.linkedin.com/posts/luciola-coelho-agencia-de-ia_ganhe-em-d%C3%B3lar-com-a-ia-activity-7409944760997785600-akQL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEGbuCcBtDAv4OkfbEUvCOLGlAhYc1L9oCQ">
+                            <div class="spinner" style="position: absolute; right: 10px; top: 8px;"></div>
+                        </div>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="preview-link"
+                            style="color: rgb(67, 67, 255) !important; display: block; margin-top: 10px;">
+                            Clique para abrir o link
+                        </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xl-4 ad-card-item">
+                <div class="card anuncio-card">
+                    <!-- Preview será exibida aqui -->
+                    <div class="preview-container">
+                        <div class="preview-loading" style="display: none;">
+                            <div class="spinner"></div>
+                            <span class="ms-2">Gerando preview...</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">Promoção Restaurante</h5>
+                        <p class="card-text">Descontos exclusivos para pedidos acima de 10.000 Kz.</p>
+                        <p class="card-text" style="margin-top: -10px;">
+                            Link da Publicação:
+                        <div class="link-input-container">
+                            <input type="url" class="link-input" readonly
+                                placeholder="Cole o link aqui... (ex: https://exemplo.com)"
+                                value="https://youtu.be/yjCo3cNyrqk?si=APeZGzxy_Zml87HH">
+                            <div class="spinner" style="position: absolute; right: 10px; top: 8px;"></div>
+                        </div>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="preview-link"
+                            style="color: rgb(67, 67, 255) !important; display: block; margin-top: 10px;">
+                            Clique para abrir o link
+                        </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div id="ads-pagination" class="d-flex justify-content-center mt-4"></div>
+
+
+        </div>
+
+        <style>
+            .status.ativo {
+                background-color: #198754;
+                color: white;
+            }
+
+            .status.inativo {
+                background-color: #dc3545;
+                color: white;
+            }
+
+
+            .status.pendente {
+                background-color: #616300;
+                color: white;
+            }
+
+
+            .anuncio-card {
+                margin-bottom: 20px;
+                transition: all 0.3s ease;
+            }
+
+            .preview-loading {
+                background: #f8f9fa;
+                min-height: 100px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .preview-image {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            .preview-content {
+                padding: 15px;
+            }
+
+            .preview-title {
+                font-size: 16px;
+                font-weight: bold;
+                margin-bottom: 5px;
+                color: #333;
+            }
+
+            .preview-description {
+                font-size: 14px;
+                color: #666;
+                line-height: 1.4;
+            }
+
+            .preview-url {
+                font-size: 12px;
+                color: #888;
+                margin-top: 5px;
+                word-break: break-all;
+            }
+
+            .link-input-container {
+                position: relative;
+                margin: 10px 0;
+            }
+
+            .link-input {
+                width: 100%;
+                padding: 8px 12px;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+                font-size: 14px;
+                transition: border-color 0.3s;
+            }
+
+            .link-input:focus {
+                outline: none;
+                border-color: #4285f4;
+                box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+            }
+
+            .preview-error {
+                background: #fff3cd;
+                border: 1px solid #ffeaa7;
+                color: #856404;
+                padding: 10px;
+                border-radius: 4px;
+                margin: 10px 0;
+                font-size: 14px;
+            }
+
+            .spinner {
+                width: 20px;
+                height: 20px;
+                border: 3px solid #f3f3f3;
+                border-top: 3px solid #4285f4;
+                border-radius: 50%;
+                animation: spin 1s linear infinite;
+                display: none;
+            }
+
+            @keyframes spin {
+                0% {
+                    transform: rotate(0deg);
+                }
+
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+
+        <script>
+            (function () {
+                'use strict';
+
+                const cardsPerPage = 6;
+
+                const container = document.getElementById('ads-container');
+                const pagination = document.getElementById('ads-pagination');
+                const searchInput = document.getElementById('adsSearchInput');
+
+                if (!container) return;
+
+                const cards = Array.from(container.querySelectorAll('.ad-card-item'));
+                let filteredCards = [...cards];
+                let currentPage = 1;
+
+                function showPage(page) {
+                    currentPage = page;
+                    const start = (page - 1) * cardsPerPage;
+                    const end = start + cardsPerPage;
+
+                    cards.forEach(card => card.style.display = 'none');
+
+                    filteredCards.slice(start, end).forEach(card => {
+                        card.style.display = '';
+                    });
+
+                    renderPagination();
+                }
+
+                function renderPagination() {
+                    pagination.innerHTML = '';
+
+                    const totalPages = Math.max(1, Math.ceil(filteredCards.length / cardsPerPage));
+
+                    if (filteredCards.length === 0) {
+                        pagination.innerHTML = '<span class="text-muted">Nenhum anúncio encontrado.</span>';
+                        return;
+                    }
+
+                    const createBtn = (text, disabled, action, active = false) => {
+                        const btn = document.createElement('button');
+                        btn.textContent = text;
+                        btn.className = `btn btn-sm mx-1 shadow-sm ${active ? 'btn-primary' : 'btn-light'}`;
+                        btn.disabled = disabled;
+                        btn.onclick = action;
+                        return btn;
+                    };
+
+                    pagination.appendChild(
+                        createBtn('←', currentPage === 1, () => showPage(currentPage - 1))
+                    );
+
+                    for (let i = 1; i <= totalPages; i++) {
+                        pagination.appendChild(
+                            createBtn(i, false, () => showPage(i), i === currentPage)
+                        );
+                    }
+
+                    pagination.appendChild(
+                        createBtn('→', currentPage === totalPages, () => showPage(currentPage + 1))
+                    );
+                }
+
+                function filterCards() {
+                    const value = searchInput.value.trim().toLowerCase();
+
+                    filteredCards = cards.filter(card => {
+                        const title = card.querySelector('.card-title')?.textContent.toLowerCase() || '';
+                        const text = card.querySelector('.card-text')?.textContent.toLowerCase() || '';
+                        const status = card.querySelector('.status')?.textContent.toLowerCase() || '';
+
+                        return title.includes(value) || text.includes(value) || status.includes(value);
+                    });
+
+                    showPage(1);
+                }
+
+                searchInput.addEventListener('input', filterCards);
+
+                showPage(1);
+            })();
+        </script>
+
+    </div>
+
+
+
+
+
+
+
+<style>
+    .status {
+        border-radius: 50px;
+        padding: 3px 10px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status.ativo {
+        background-color: #198754;
+        color: white;
+    }
+
+    .status.inativo {
+        background-color: #dc3545;
+        color: white;
+    }
+
+
+    .status.pendente {
+        background-color: #616300;
+        color: white;
+    }
+</style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            const savedTheme = localStorage.getItem("theme");
+            const currentTheme = savedTheme || (prefersDark ? "dark-mode" : "light-mode");
+
+            document.body.classList.add(currentTheme);
+            updateThemeIcon(currentTheme);
+
+            document.getElementById("themeToggle").addEventListener("click", () => {
+                const isDark = document.body.classList.contains("dark-mode");
+                document.body.classList.toggle("dark-mode", !isDark);
+                document.body.classList.toggle("light-mode", isDark);
+                const newTheme = isDark ? "light-mode" : "dark-mode";
+                localStorage.setItem("theme", newTheme);
+                updateThemeIcon(newTheme);
+            });
+
+            feather.replace();
+        });
+
+        function updateThemeIcon(theme) {
+            const icon = document.querySelector("#themeToggle i");
+            icon.dataset.feather = theme === "dark-mode" ? "sun" : "moon";
+            feather.replace();
+        }
+    </script>
