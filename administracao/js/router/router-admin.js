@@ -110,11 +110,11 @@
     '/termosDeUso': { title: 'Termos de Uso do Serviço', file: FOOTER + 'termos_uso.html' },
     '/suporte': { title: 'Caso tivier uma dúvica é só nos contar', file: FOOTER + 'suporte.html' },
     
-    '/todos-parceiros': { title: 'Todos os administradores', file: PARCEIRO + 'todos-parceiro.html' },
-    '/adicionar-parceiro': { title: 'Adicionar Administrador', file: PARCEIRO + 'adicionar-parceiro.html' },
-    '/visualizar-parceiro': { title: 'Visualizar Administrador', file: PARCEIRO + 'visualizar-parceiro.html' },
-    '/editar-parceiro': { title: 'Editar Administrador', file: PARCEIRO + 'editar-parceiro.html' },
-    '/deletar-parceiro': { title: 'Editar Administrador', file: PARCEIRO + 'deletar-parceiro.html' },
+    '/todos-parceiros': { title: 'Todos os parceiros', file: PARCEIRO + 'todos-parceiro.html' },
+    '/adicionar-parceiro': { title: 'Adicionar parceiro', file: PARCEIRO + 'adicionar-parceiro.html' },
+    '/visualizar-parceiro': { title: 'Visualizar parceiro', file: PARCEIRO + 'visualizar-parceiro.html' },
+    '/editar-parceiro': { title: 'Editar parceiro', file: PARCEIRO + 'editar-parceiro.html' },
+    '/deletar-parceiro': { title: 'deletar parceiro', file: PARCEIRO + 'deletar-parceiro.html' },
     
     '/home-parceiro': { title: 'Dashboard para o parceiro', file: DASHBOARD_PARCEIRO + 'dashboard-parceiro.html' },
   };
