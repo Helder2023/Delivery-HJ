@@ -1,127 +1,122 @@
 // ====================================================
-// 🔗 PREVIEW DE LINKS - VERSÃO PRODUÇÃO SEGURA
+// 🔗 PREVIEW DE LINKS - VERSÃO PRODUÇÃO REVISADA
 // ====================================================
 
 (function() {
     'use strict';
     
-    // CONFIGURAÇÕES PARA PRODUÇÃO
+    // CONFIGURAÇÕES SEGURAS PARA PRODUÇÃO
     const CONFIG = {
-        // ⚠️ NÃO USE PROXIES PÚBLICOS EM PRODUÇÃO
-        // Use seu próprio backend ou serviço pago
-        apiEndpoint: '/api/link-preview', // SEU ENDPOINT BACKEND
-        fallbackMode: true, // Modo fallback quando API falha
-        debounceTime: 1000,
-        minUrlLength: 10,
-        timeout: 5000, // 5 segundos máximo
-        maxCacheAge: 24 * 60 * 60 * 1000, // 24 horas
-        maxCacheItems: 50,
-        useServiceWorker: 'serviceWorker' in navigator,
-        offlineSupport: true
+        // Endpoints com fallback
+        apiEndpoints: [
+            '/api/link-preview',
+            '/api/preview/link',
+            'https://api.microlink.io?url=' // Serviço externo como último recurso
+        ],
+        fallbackMode: true,
+        debounceTime: 1200,
+        minUrlLength: 8,
+        timeout: 4000,
+        maxCacheAge: 12 * 60 * 60 * 1000, // 12 horas
+        maxCacheItems: 30,
+        maxConcurrentRequests: 3,
+        offlineSupport: true,
+        enableCorsProxy: false, // Desativado por padrão por segurança
+        debug: false
     };
     
-    // Estado da aplicação
+    // Estado gerenciado
     const STATE = {
         isOnline: navigator.onLine,
         isInitialized: false,
-        activeRequests: new Set(),
-        cache: new Map()
+        activeRequests: new Map(),
+        requestQueue: [],
+        concurrentCount: 0
     };
     
-    // Sistema de logging para produção
+    // Logger seguro (não vaza em produção)
     const logger = {
-        log: (msg, data) => console.log(`[LinkPreview] ${msg}`, data || ''),
-        warn: (msg, data) => console.warn(`[LinkPreview] ⚠️ ${msg}`, data || ''),
-        error: (msg, data) => console.error(`[LinkPreview] 🔴 ${msg}`, data || ''),
-        debug: (msg, data) => {
-            if (window.location.hostname === 'localhost' || 
-                window.location.hostname === '127.0.0.1') {
-                console.debug(`[LinkPreview] ${msg}`, data || '');
+        log: (msg, data) => {
+            if (CONFIG.debug && window.location.hostname === 'localhost') {
+                console.log(`[LinkPreview] ${msg}`, data || '');
             }
-        }
+        },
+        warn: (msg, data) => console.warn(`[LinkPreview] ⚠️ ${msg}`, data || ''),
+        error: (msg, data) => console.error(`[LinkPreview] 🔴 ${msg}`, data || '')
     };
     
     // ====================================================
-    // 1. SISTEMA DE CACHE SEGURO
+    // 1. SISTEMA DE CACHE REVISADO
     // ====================================================
-    class SafeCache {
+    class SecureCache {
         constructor() {
+            this.prefix = 'lp_';
             this.init();
         }
         
         init() {
-            // Verifica se localStorage está disponível
-            this.storageAvailable = this.checkLocalStorage();
-            
+            this.storageAvailable = this.testStorage();
             if (this.storageAvailable) {
-                this.cleanupOldCache();
+                this.cleanup();
             }
         }
         
-        checkLocalStorage() {
+        testStorage() {
             try {
-                const testKey = 'linkpreview_test';
-                localStorage.setItem(testKey, 'test');
-                localStorage.removeItem(testKey);
+                const test = '__storage_test__';
+                localStorage.setItem(test, test);
+                localStorage.removeItem(test);
                 return true;
-            } catch (error) {
-                logger.warn('localStorage não disponível:', error.message);
+            } catch (e) {
                 return false;
             }
         }
         
-        generateKey(url) {
-            // URL segura para usar como chave
+        createKey(url) {
             try {
-                // Usa hash em vez de btoa para suportar Unicode
-                return 'lp_' + this.hashString(url.toLowerCase());
-            } catch (error) {
-                // Fallback simples
-                return 'lp_' + encodeURIComponent(url).substring(0, 100);
+                // Hash mais robusto
+                let hash = 0;
+                const str = url.toLowerCase();
+                for (let i = 0; i < str.length; i++) {
+                    const char = str.charCodeAt(i);
+                    hash = ((hash << 5) - hash) + char;
+                    hash = hash & 0xFFFFFFFF; // 32-bit
+                }
+                return this.prefix + Math.abs(hash).toString(36);
+            } catch {
+                // Fallback seguro
+                return this.prefix + btoa(encodeURIComponent(url)).substring(0, 20).replace(/[^a-zA-Z0-9]/g, '');
             }
-        }
-        
-        hashString(str) {
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                const char = str.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash = hash & hash; // Converte para 32-bit
-            }
-            return Math.abs(hash).toString(36);
         }
         
         get(url) {
-            const key = this.generateKey(url);
+            const key = this.createKey(url);
             
-            // 1. Cache em memória
-            if (STATE.cache.has(key)) {
-                const cached = STATE.cache.get(key);
-                if (Date.now() - cached.timestamp < CONFIG.maxCacheAge) {
-                    logger.debug('Cache memória hit:', url);
-                    return cached.data;
+            // Memória primeiro
+            if (STATE.cache && STATE.cache[key]) {
+                const cached = STATE.cache[key];
+                if (Date.now() - cached.t < CONFIG.maxCacheAge) {
+                    return cached.d;
                 }
-                STATE.cache.delete(key);
+                delete STATE.cache[key];
             }
             
-            // 2. Cache em localStorage
+            // LocalStorage
             if (this.storageAvailable) {
                 try {
                     const item = localStorage.getItem(key);
                     if (item) {
                         const cached = JSON.parse(item);
-                        if (Date.now() - cached.timestamp < CONFIG.maxCacheAge) {
-                            logger.debug('Cache localStorage hit:', url);
-                            // Atualiza cache em memória
-                            STATE.cache.set(key, cached);
-                            return cached.data;
-                        } else {
-                            // Remove item expirado
-                            localStorage.removeItem(key);
+                        if (Date.now() - cached.t < CONFIG.maxCacheAge) {
+                            // Atualiza memória
+                            if (!STATE.cache) STATE.cache = {};
+                            STATE.cache[key] = cached;
+                            return cached.d;
                         }
+                        localStorage.removeItem(key);
                     }
-                } catch (error) {
-                    logger.warn('Erro ao ler cache:', error.message);
+                } catch (e) {
+                    logger.warn('Cache read error', e.message);
                 }
             }
             
@@ -129,247 +124,353 @@
         }
         
         set(url, data) {
-            const key = this.generateKey(url);
+            const key = this.createKey(url);
             const cacheItem = {
-                data: data,
-                timestamp: Date.now(),
-                url: url
+                d: data,
+                t: Date.now(),
+                u: url.substring(0, 100)
             };
             
-            // 1. Cache em memória
-            STATE.cache.set(key, cacheItem);
+            // Memória
+            if (!STATE.cache) STATE.cache = {};
+            STATE.cache[key] = cacheItem;
             
-            // 2. Cache em localStorage (com limite)
+            // LocalStorage com limite
             if (this.storageAvailable) {
                 try {
                     localStorage.setItem(key, JSON.stringify(cacheItem));
-                    this.enforceCacheLimit();
-                } catch (error) {
-                    logger.warn('Erro ao salvar cache:', error.message);
-                    this.handleStorageFull();
+                    this.enforceLimits();
+                } catch (e) {
+                    if (e.name === 'QuotaExceededError') {
+                        this.clearOldest(5);
+                    }
                 }
             }
         }
         
-        enforceCacheLimit() {
+        enforceLimits() {
+            if (!this.storageAvailable) return;
+            
             try {
-                const keys = Object.keys(localStorage).filter(k => k.startsWith('lp_'));
+                const keys = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith(this.prefix)) {
+                        keys.push(key);
+                    }
+                }
                 
                 if (keys.length > CONFIG.maxCacheItems) {
-                    // Ordena por timestamp (mais antigo primeiro)
-                    const items = keys.map(key => ({
-                        key,
-                        timestamp: JSON.parse(localStorage.getItem(key)).timestamp
-                    })).sort((a, b) => a.timestamp - b.timestamp);
-                    
                     // Remove os mais antigos
+                    const items = keys.map(k => ({
+                        k,
+                        t: JSON.parse(localStorage.getItem(k)).t
+                    })).sort((a, b) => a.t - b.t);
+                    
                     const toRemove = items.slice(0, items.length - CONFIG.maxCacheItems);
                     toRemove.forEach(item => {
-                        localStorage.removeItem(item.key);
-                        STATE.cache.delete(item.key);
-                    });
-                    
-                    logger.debug(`Cache limpo: ${toRemove.length} itens removidos`);
-                }
-            } catch (error) {
-                logger.warn('Erro ao limitar cache:', error);
-            }
-        }
-        
-        handleStorageFull() {
-            try {
-                // Tenta limpar 20% dos itens mais antigos
-                const keys = Object.keys(localStorage).filter(k => k.startsWith('lp_'));
-                const items = keys.map(key => ({
-                    key,
-                    timestamp: JSON.parse(localStorage.getItem(key)).timestamp
-                })).sort((a, b) => a.timestamp - b.timestamp);
-                
-                const toRemove = Math.ceil(items.length * 0.2);
-                items.slice(0, toRemove).forEach(item => {
-                    localStorage.removeItem(item.key);
-                });
-                
-                logger.warn(`Storage limpo: ${toRemove} itens removidos por falta de espaço`);
-            } catch (error) {
-                logger.error('Falha crítica no storage:', error);
-            }
-        }
-        
-        cleanupOldCache() {
-            try {
-                const keys = Object.keys(localStorage).filter(k => k.startsWith('lp_'));
-                const now = Date.now();
-                
-                keys.forEach(key => {
-                    try {
-                        const item = JSON.parse(localStorage.getItem(key));
-                        if (now - item.timestamp > CONFIG.maxCacheAge * 2) { // Itens muito antigos
-                            localStorage.removeItem(key);
+                        localStorage.removeItem(item.k);
+                        if (STATE.cache && STATE.cache[item.k]) {
+                            delete STATE.cache[item.k];
                         }
-                    } catch (e) {
-                        localStorage.removeItem(key);
+                    });
+                }
+            } catch (e) {
+                logger.warn('Limit enforcement failed', e.message);
+            }
+        }
+        
+        clearOldest(count) {
+            if (!this.storageAvailable) return;
+            
+            try {
+                const items = [];
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith(this.prefix)) {
+                        const item = localStorage.getItem(key);
+                        if (item) {
+                            items.push({
+                                k: key,
+                                t: JSON.parse(item).t
+                            });
+                        }
                     }
+                }
+                
+                items.sort((a, b) => a.t - b.t);
+                items.slice(0, count).forEach(item => {
+                    localStorage.removeItem(item.k);
                 });
-            } catch (error) {
-                logger.warn('Erro ao limpar cache antigo:', error);
+            } catch (e) {
+                // Silencioso
+            }
+        }
+        
+        cleanup() {
+            if (!this.storageAvailable) return;
+            
+            try {
+                const now = Date.now();
+                const toRemove = [];
+                
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith(this.prefix)) {
+                        const item = localStorage.getItem(key);
+                        if (item) {
+                            const cached = JSON.parse(item);
+                            if (now - cached.t > CONFIG.maxCacheAge * 2) {
+                                toRemove.push(key);
+                            }
+                        }
+                    }
+                }
+                
+                toRemove.forEach(key => localStorage.removeItem(key));
+            } catch (e) {
+                logger.warn('Cache cleanup failed', e.message);
             }
         }
         
         clear() {
-            STATE.cache.clear();
+            if (STATE.cache) {
+                STATE.cache = {};
+            }
             
             if (this.storageAvailable) {
                 try {
-                    const keys = Object.keys(localStorage).filter(k => k.startsWith('lp_'));
-                    keys.forEach(key => localStorage.removeItem(key));
-                } catch (error) {
-                    logger.warn('Erro ao limpar cache:', error);
+                    const toRemove = [];
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const key = localStorage.key(i);
+                        if (key.startsWith(this.prefix)) {
+                            toRemove.push(key);
+                        }
+                    }
+                    toRemove.forEach(key => localStorage.removeItem(key));
+                } catch (e) {
+                    logger.warn('Cache clear failed', e.message);
                 }
             }
         }
     }
     
     // ====================================================
-    // 2. VALIDAÇÃO E SANITIZAÇÃO
+    // 2. VALIDAÇÃO E SANITIZAÇÃO MELHORADA
     // ====================================================
-    class ValidationService {
+    class SecurityService {
+        // Verificação de URL robusta
         static isValidUrl(url) {
-            if (!url || typeof url !== 'string') return false;
-            if (url.length < CONFIG.minUrlLength) return false;
+            if (typeof url !== 'string' || url.length < CONFIG.minUrlLength) {
+                return false;
+            }
             
-            // Verificação rápida
-            const urlPattern = /^(https?:\/\/)?([\w\-]+\.)+[\w\-]{2,}(\/\S*)?$/i;
-            if (!urlPattern.test(url)) return false;
+            // Remover espaços
+            url = url.trim();
             
-            // Verificação completa
+            // Padrão mais flexível
+            const urlPattern = /^(https?:\/\/)?([a-z0-9-]+\.)+[a-z]{2,}(:\d+)?(\/[\w~\-\.%]*)*(\?[&\w=~\-\.%]*)?(#[\w\-\.%]*)?$/i;
+            if (!urlPattern.test(url)) {
+                return false;
+            }
+            
+            // Verificação com URL API
             try {
                 const urlObj = new URL(url);
-                return urlObj.protocol === 'http:' || urlObj.protocol === 'https:';
+                const protocol = urlObj.protocol;
+                const hostname = urlObj.hostname;
+                
+                // Protocolos permitidos
+                if (!['http:', 'https:'].includes(protocol)) {
+                    return false;
+                }
+                
+                // Hostname não pode ser IP privado
+                if (/^(10\.|172\.(1[6-9]|2[0-9]|3[0-1])\.|192\.168\.|127\.|169\.254\.|::1|fc00::|fe80::)/.test(hostname)) {
+                    return false;
+                }
+                
+                return true;
             } catch {
                 return false;
             }
         }
         
-        static sanitizeHtml(html) {
-            if (typeof html !== 'string') return '';
+        // Sanitização completa de texto
+        static sanitizeText(text, maxLength = 200) {
+            if (text == null) return '';
             
-            // Remove tags script, style, iframe, etc
-            return html
-                .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
-                .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
-                .replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '')
-                .replace(/on\w+="[^"]*"/gi, '')
-                .replace(/on\w+='[^']*'/gi, '')
-                .replace(/javascript:/gi, '')
-                .substring(0, 100000); // Limite de tamanho
-        }
-        
-        static sanitizeText(text) {
-            if (!text) return '';
+            const str = String(text);
             
-            return String(text)
-                .replace(/[<>]/g, '') // Remove < e >
+            // Remove tags HTML
+            let sanitized = str.replace(/<[^>]*>/g, '');
+            
+            // Codifica caracteres especiais
+            sanitized = sanitized
                 .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
                 .replace(/"/g, '&quot;')
                 .replace(/'/g, '&#x27;')
-                .substring(0, 200); // Limite de caracteres
+                .replace(/\//g, '&#x2F;');
+            
+            // Remove caracteres de controle
+            sanitized = sanitized.replace(/[\x00-\x1F\x7F]/g, '');
+            
+            // Limita tamanho
+            if (sanitized.length > maxLength) {
+                sanitized = sanitized.substring(0, maxLength - 3) + '...';
+            }
+            
+            return sanitized;
         }
         
+        // Sanitização de URL
         static sanitizeUrl(url) {
+            if (!url) return '';
+            
             try {
                 const urlObj = new URL(url);
                 
-                // Remove credenciais da URL
+                // Remove credenciais
                 urlObj.username = '';
                 urlObj.password = '';
                 
+                // Força HTTPS se possível
+                if (urlObj.protocol === 'http:' && 
+                    !urlObj.hostname.includes('localhost') &&
+                    !urlObj.hostname.includes('127.0.0.1')) {
+                    urlObj.protocol = 'https:';
+                }
+                
                 return urlObj.toString();
             } catch {
-                return '';
+                // Fallback: remove caracteres perigosos
+                return url.replace(/[\x00-\x1F\x7F"'<>\\^`{|}]/g, '');
             }
         }
         
-        static getDomainFromUrl(url) {
+        // Extrai domínio de forma segura
+        static getDomain(url) {
             try {
-                const domain = new URL(url).hostname.replace('www.', '');
-                return domain.substring(0, 50);
+                const urlObj = new URL(url);
+                let domain = urlObj.hostname;
+                
+                // Remove subdomínio www
+                if (domain.startsWith('www.')) {
+                    domain = domain.substring(4);
+                }
+                
+                // Limita tamanho
+                return domain.substring(0, 30);
             } catch {
                 return 'link';
             }
         }
         
-        static isImageUrl(url) {
-            if (!url) return false;
-            return /\.(jpg|jpeg|png|gif|webp|bmp|svg)(\?.*)?$/i.test(url);
-        }
-        
-        static isVideoUrl(url) {
-            if (!url) return false;
-            return /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(url) ||
-                   url.includes('youtube.com') ||
-                   url.includes('youtu.be') ||
-                   url.includes('vimeo.com');
+        // Verifica tipo de mídia
+        static getMediaType(url) {
+            if (!url) return 'unknown';
+            
+            const imageExt = /\.(jpg|jpeg|png|gif|webp|bmp|svg|ico)(\?.*)?$/i;
+            const videoExt = /\.(mp4|webm|ogg|mov|avi|wmv|flv)(\?.*)?$/i;
+            const audioExt = /\.(mp3|wav|ogg|m4a)(\?.*)?$/i;
+            
+            if (imageExt.test(url)) return 'image';
+            if (videoExt.test(url)) return 'video';
+            if (audioExt.test(url)) return 'audio';
+            if (url.includes('youtube.com') || url.includes('youtu.be')) return 'youtube';
+            if (url.includes('vimeo.com')) return 'vimeo';
+            
+            return 'website';
         }
     }
     
     // ====================================================
-    // 3. API SERVICE (COMUNICAÇÃO COM BACKEND)
+    // 3. API SERVICE COM FALLBACKS
     // ====================================================
-    class ApiService {
+    class PreviewService {
         constructor() {
-            this.cache = new SafeCache();
+            this.cache = new SecureCache();
+            this.requestQueue = [];
         }
         
-        async fetchPreview(url) {
-            const sanitizedUrl = ValidationService.sanitizeUrl(url);
+        async getPreview(url) {
+            const sanitizedUrl = SecurityService.sanitizeUrl(url);
             
-            if (!sanitizedUrl) {
-                throw new Error('URL inválida');
+            if (!SecurityService.isValidUrl(sanitizedUrl)) {
+                throw new Error('URL inválida ou não segura');
             }
             
-            // Verifica cache primeiro
+            // Cache primeiro
             const cached = this.cache.get(sanitizedUrl);
             if (cached) {
-                logger.debug('Retornando do cache:', sanitizedUrl);
                 return cached;
             }
             
-            // Verifica se é imagem/vídeo direto
-            if (ValidationService.isImageUrl(sanitizedUrl)) {
-                return this.getImageMetadata(sanitizedUrl);
+            // Tipo de mídia direta
+            const mediaType = SecurityService.getMediaType(sanitizedUrl);
+            if (mediaType !== 'website') {
+                return this.getMediaMetadata(sanitizedUrl, mediaType);
             }
             
-            if (ValidationService.isVideoUrl(sanitizedUrl)) {
-                return this.getVideoMetadata(sanitizedUrl);
-            }
-            
-            // Tenta API backend
-            try {
-                const metadata = await this.fetchFromBackend(sanitizedUrl);
-                this.cache.set(sanitizedUrl, metadata);
-                return metadata;
-            } catch (error) {
-                logger.warn('API falhou, usando fallback:', error.message);
-                return this.getFallbackMetadata(sanitizedUrl);
-            }
+            // Tenta endpoints em sequência
+            return this.fetchWithFallbacks(sanitizedUrl);
         }
         
-        async fetchFromBackend(url) {
+        async fetchWithFallbacks(url) {
+            let lastError;
+            
+            for (const endpoint of CONFIG.apiEndpoints) {
+                try {
+                    const metadata = await this.fetchFromEndpoint(endpoint, url);
+                    this.cache.set(url, metadata);
+                    return metadata;
+                } catch (error) {
+                    lastError = error;
+                    logger.warn(`Endpoint ${endpoint} falhou:`, error.message);
+                    // Continua para próximo endpoint
+                }
+            }
+            
+            // Todos falharam, usa fallback
+            logger.warn('Todos endpoints falharam, usando fallback');
+            return this.getFallbackMetadata(url);
+        }
+        
+        async fetchFromEndpoint(endpoint, url) {
             const controller = new AbortController();
             const timeoutId = setTimeout(() => controller.abort(), CONFIG.timeout);
             
             try {
-                const response = await fetch(CONFIG.apiEndpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({ url }),
-                    signal: controller.signal
-                });
+                let requestUrl, options;
                 
+                if (endpoint.startsWith('http')) {
+                    // Serviço externo
+                    requestUrl = endpoint + encodeURIComponent(url);
+                    options = {
+                        signal: controller.signal,
+                        headers: {
+                            'Accept': 'application/json',
+                            'User-Agent': 'LinkPreview/1.0'
+                        }
+                    };
+                } else {
+                    // Seu backend
+                    requestUrl = endpoint;
+                    options = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify({ url }),
+                        signal: controller.signal,
+                        credentials: 'same-origin'
+                    };
+                }
+                
+                const response = await fetch(requestUrl, options);
                 clearTimeout(timeoutId);
                 
                 if (!response.ok) {
@@ -378,17 +479,18 @@
                 
                 const data = await response.json();
                 
-                if (!data.success) {
-                    throw new Error(data.message || 'API error');
+                // Valida resposta
+                if (!data || typeof data !== 'object') {
+                    throw new Error('Resposta inválida');
                 }
                 
                 return {
-                    title: ValidationService.sanitizeText(data.title),
-                    description: ValidationService.sanitizeText(data.description),
-                    image: ValidationService.sanitizeUrl(data.image),
-                    url: ValidationService.sanitizeUrl(url),
-                    domain: ValidationService.getDomainFromUrl(url),
-                    type: data.type || 'website'
+                    title: SecurityService.sanitizeText(data.title || ''),
+                    description: SecurityService.sanitizeText(data.description || ''),
+                    image: SecurityService.sanitizeUrl(data.image || ''),
+                    url: SecurityService.sanitizeUrl(url),
+                    domain: SecurityService.getDomain(url),
+                    type: SecurityService.getMediaType(url)
                 };
                 
             } catch (error) {
@@ -397,370 +499,676 @@
             }
         }
         
-        getImageMetadata(url) {
-            return {
-                title: 'Imagem',
+        getMediaMetadata(url, type) {
+            const metadata = {
+                title: type.charAt(0).toUpperCase() + type.slice(1),
                 description: '',
-                image: ValidationService.sanitizeUrl(url),
-                url: ValidationService.sanitizeUrl(url),
-                domain: ValidationService.getDomainFromUrl(url),
-                type: 'image'
+                image: '',
+                url: SecurityService.sanitizeUrl(url),
+                domain: SecurityService.getDomain(url),
+                type: type
             };
+            
+            if (type === 'youtube') {
+                const videoId = this.extractYouTubeId(url);
+                if (videoId) {
+                    metadata.image = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+                    metadata.title = 'Vídeo do YouTube';
+                }
+            } else if (type === 'vimeo') {
+                const videoId = this.extractVimeoId(url);
+                if (videoId) {
+                    metadata.image = `https://vumbnail.com/${videoId}.jpg`;
+                    metadata.title = 'Vídeo do Vimeo';
+                }
+            } else if (type === 'image') {
+                metadata.image = SecurityService.sanitizeUrl(url);
+            }
+            
+            this.cache.set(url, metadata);
+            return metadata;
         }
         
-        getVideoMetadata(url) {
-            let thumbnail = '';
+        extractYouTubeId(url) {
+            const patterns = [
+                /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?|shorts)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i,
+                /youtube\.com\/watch\?v=([^&]+)/i,
+                /youtu\.be\/([^?]+)/i
+            ];
             
-            // YouTube
-            const ytMatch = url.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?|shorts)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
-            if (ytMatch && ytMatch[1]) {
-                thumbnail = `https://img.youtube.com/vi/${ytMatch[1]}/hqdefault.jpg`;
-            }
-            // Vimeo
-            else if (url.includes('vimeo.com')) {
-                const vimeoMatch = url.match(/vimeo\.com\/(\d+)/i);
-                if (vimeoMatch && vimeoMatch[1]) {
-                    thumbnail = `https://vumbnail.com/${vimeoMatch[1]}.jpg`;
+            for (const pattern of patterns) {
+                const match = url.match(pattern);
+                if (match && match[1]) {
+                    return match[1];
                 }
             }
             
-            return {
-                title: 'Vídeo',
-                description: '',
-                image: thumbnail,
-                url: ValidationService.sanitizeUrl(url),
-                domain: ValidationService.getDomainFromUrl(url),
-                type: 'video'
-            };
+            return null;
+        }
+        
+        extractVimeoId(url) {
+            const match = url.match(/vimeo\.com\/(\d+)/i);
+            return match ? match[1] : null;
         }
         
         getFallbackMetadata(url) {
-            const domain = ValidationService.getDomainFromUrl(url);
+            const domain = SecurityService.getDomain(url);
             
-            return {
+            const metadata = {
                 title: domain,
-                description: 'Clique para visitar',
-                image: `https://www.google.com/s2/favicons?domain=${domain}&sz=128`,
-                url: ValidationService.sanitizeUrl(url),
+                description: 'Clique para visitar este site',
+                image: this.getFaviconUrl(domain),
+                url: SecurityService.sanitizeUrl(url),
                 domain: domain,
                 type: 'website'
             };
+            
+            this.cache.set(url, metadata);
+            return metadata;
+        }
+        
+        getFaviconUrl(domain) {
+            // Tenta várias fontes de favicon
+            const sources = [
+                `https://www.google.com/s2/favicons?domain=${domain}&sz=64`,
+                `https://favicon.yandex.net/favicon/${domain}`,
+                `https://icons.duckduckgo.com/ip3/${domain}.ico`
+            ];
+            
+            return sources[0]; // Retorna primeiro, o onerror tentará outros
         }
     }
     
     // ====================================================
-    // 4. RENDERIZAÇÃO SEGURA
+    // 4. RENDERIZAÇÃO SEGURA COM TEMPLATES
     // ====================================================
     class RenderService {
-        static createPreviewElement(metadata) {
-            const container = document.createElement('div');
-            container.className = 'link-preview-container';
-            container.style.cssText = `
-                position: relative;
-                border-radius: 6px;
-                overflow: hidden;
-                background: var(--preview-bg, #f8f9fa);
-                border: 1px solid var(--preview-border, #e9ecef);
-                margin-bottom: 12px;
-                transition: transform 0.2s ease;
-            `;
+        static createElement(tag, attributes = {}, children = []) {
+            const element = document.createElement(tag);
             
-            container.innerHTML = this.generateSafeHtml(metadata);
+            // Atributos seguros
+            Object.entries(attributes).forEach(([key, value]) => {
+                if (key.startsWith('on')) return; // Remove handlers inline
+                element.setAttribute(key, value);
+            });
             
-            // Evento de clique abre a URL
-            container.addEventListener('click', (e) => {
-                if (e.target.tagName !== 'A') {
-                    window.open(metadata.url, '_blank', 'noopener noreferrer');
+            // Adiciona children
+            children.forEach(child => {
+                if (typeof child === 'string') {
+                    element.appendChild(document.createTextNode(child));
+                } else if (child instanceof Node) {
+                    element.appendChild(child);
                 }
             });
+            
+            return element;
+        }
+        
+        static createPreview(metadata) {
+            const container = this.createElement('div', {
+                'class': 'link-preview',
+                'data-type': metadata.type,
+                'data-domain': metadata.domain
+            });
+            
+            // Estilos inline (escapados)
+            container.style.cssText = `
+                border: 1px solid var(--border-color, #e0e0e0);
+                border-radius: 8px;
+                overflow: hidden;
+                background: var(--bg-color, #ffffff);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                cursor: pointer;
+                position: relative;
+            `;
+            
+            // Conteúdo baseado no tipo
+            if (metadata.image && metadata.type !== 'website') {
+                container.appendChild(this.createImagePreview(metadata));
+            } else {
+                container.appendChild(this.createTextPreview(metadata));
+            }
+            
+            // Event listener seguro
+            container.addEventListener('click', (e) => {
+                if (e.defaultPrevented) return;
+                e.preventDefault();
+                
+                // Abre em nova janela apenas se for clique primário
+                if (e.button === 0 && !e.ctrlKey && !e.metaKey && !e.shiftKey) {
+                    const newWindow = window.open(metadata.url, '_blank', 'noopener,noreferrer');
+                    if (!newWindow) {
+                        // Popup bloqueado, redireciona na mesma aba
+                        window.location.href = metadata.url;
+                    }
+                }
+            }, { passive: false });
             
             return container;
         }
         
-        static generateSafeHtml(metadata) {
-            const title = ValidationService.sanitizeText(metadata.title);
-            const domain = ValidationService.sanitizeText(metadata.domain);
+        static createImagePreview(metadata) {
+            const wrapper = this.createElement('div', {
+                'class': 'preview-image-wrapper'
+            });
             
-            if (metadata.image) {
-                return `
-                    <div style="position: relative; height: 160px; overflow: hidden;">
-                        <img 
-                            src="${ValidationService.sanitizeUrl(metadata.image)}" 
-                            alt="${title}"
-                            style="width: 100%; height: 100%; object-fit: cover;"
-                            loading="lazy"
-                            onerror="this.onerror=null; this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 300 160%22><rect width=%22300%22 height=%22160%22 fill=%22%23f8f9fa%22/><text x=%22150%22 y=%2280%22 font-family=%22Arial%22 font-size=%2214%22 text-anchor=%22middle%22 fill=%22%23666%22>${domain}</text></svg>';"
-                        >
-                        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.7)); color: white; padding: 8px 12px;">
-                            <div style="font-size: 12px; font-weight: 600; margin-bottom: 2px;">${title}</div>
-                            <div style="font-size: 10px; opacity: 0.8;">${domain}</div>
-                        </div>
-                    </div>
-                `;
-            } else {
-                return `
-                    <div style="padding: 16px; min-height: 120px; display: flex; flex-direction: column; justify-content: center;">
-                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
-                            <div style="width: 24px; height: 24px; border-radius: 4px; background: var(--primary, #4a6cf7); color: white; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; margin-right: 8px;">
-                                ${domain.charAt(0).toUpperCase()}
-                            </div>
-                            <span style="font-size: 12px; color: var(--text-muted, #666);">${domain}</span>
-                        </div>
-                        <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px; color: var(--text-color, #333);">${title}</div>
-                        ${metadata.description ? `<div style="font-size: 12px; color: var(--text-muted, #666); line-height: 1.4;">${metadata.description}</div>` : ''}
-                    </div>
-                `;
-            }
+            wrapper.style.cssText = `
+                position: relative;
+                height: 180px;
+                overflow: hidden;
+            `;
+            
+            const img = this.createElement('img', {
+                'src': metadata.image,
+                'alt': SecurityService.sanitizeText(metadata.title),
+                'loading': 'lazy',
+                'class': 'preview-image'
+            });
+            
+            img.style.cssText = `
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            `;
+            
+            // Fallback para imagem quebrada
+            img.onerror = () => {
+                img.style.display = 'none';
+                wrapper.appendChild(this.createFallbackContent(metadata));
+            };
+            
+            const overlay = this.createElement('div', {
+                'class': 'preview-overlay'
+            });
+            
+            overlay.style.cssText = `
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: linear-gradient(transparent, rgba(0,0,0,0.7));
+                color: white;
+                padding: 12px;
+            `;
+            
+            const title = this.createElement('div', {
+                'class': 'preview-title'
+            }, [metadata.title]);
+            
+            title.style.cssText = `
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 4px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            `;
+            
+            const domain = this.createElement('div', {
+                'class': 'preview-domain'
+            }, [metadata.domain]);
+            
+            domain.style.cssText = `
+                font-size: 12px;
+                opacity: 0.9;
+            `;
+            
+            overlay.appendChild(title);
+            overlay.appendChild(domain);
+            
+            wrapper.appendChild(img);
+            wrapper.appendChild(overlay);
+            
+            return wrapper;
         }
         
-        static createLoadingElement() {
-            const div = document.createElement('div');
-            div.className = 'link-preview-loading';
-            div.style.cssText = `
-                height: 160px;
+        static createTextPreview(metadata) {
+            const content = this.createElement('div', {
+                'class': 'preview-text-content'
+            });
+            
+            content.style.cssText = `
+                padding: 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            `;
+            
+            const header = this.createElement('div', {
+                'class': 'preview-header'
+            });
+            
+            header.style.cssText = `
                 display: flex;
                 align-items: center;
-                justify-content: center;
-                background: var(--preview-bg, #f8f9fa);
-                border-radius: 6px;
-                border: 1px dashed var(--preview-border, #e9ecef);
+                gap: 8px;
             `;
             
-            div.innerHTML = `
-                <div style="text-align: center;">
-                    <div class="spinner-border spinner-border-sm text-primary" role="status" style="width: 1rem; height: 1rem;">
-                        <span class="visually-hidden">Carregando...</span>
-                    </div>
-                    <div style="font-size: 12px; color: var(--text-muted, #666); margin-top: 8px;">Gerando preview...</div>
-                </div>
+            const favicon = this.createElement('img', {
+                'src': metadata.image || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="%23666"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>',
+                'alt': '',
+                'class': 'preview-favicon'
+            });
+            
+            favicon.style.cssText = `
+                width: 16px;
+                height: 16px;
+                border-radius: 2px;
             `;
             
-            return div;
+            favicon.onerror = () => {
+                favicon.style.display = 'none';
+            };
+            
+            const domainText = this.createElement('span', {
+                'class': 'preview-domain'
+            }, [metadata.domain]);
+            
+            domainText.style.cssText = `
+                font-size: 12px;
+                color: var(--text-muted, #666);
+            `;
+            
+            header.appendChild(favicon);
+            header.appendChild(domainText);
+            
+            const title = this.createElement('div', {
+                'class': 'preview-title'
+            }, [metadata.title]);
+            
+            title.style.cssText = `
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--text-color, #333);
+                line-height: 1.3;
+            `;
+            
+            if (metadata.description) {
+                const desc = this.createElement('div', {
+                    'class': 'preview-description'
+                }, [metadata.description]);
+                
+                desc.style.cssText = `
+                    font-size: 12px;
+                    color: var(--text-muted, #666);
+                    line-height: 1.4;
+                `;
+                
+                content.appendChild(header);
+                content.appendChild(title);
+                content.appendChild(desc);
+            } else {
+                content.appendChild(header);
+                content.appendChild(title);
+            }
+            
+            return content;
         }
         
-        static createErrorElement(message) {
-            const div = document.createElement('div');
-            div.className = 'link-preview-error';
-            div.style.cssText = `
-                padding: 12px;
-                background: var(--danger-light, #f8d7da);
-                border: 1px solid var(--danger-border, #f5c6cb);
-                border-radius: 6px;
-                color: var(--danger, #721c24);
-                font-size: 12px;
+        static createFallbackContent(metadata) {
+            const fallback = this.createElement('div', {
+                'class': 'preview-fallback'
+            });
+            
+            fallback.style.cssText = `
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                background: var(--bg-secondary, #f5f5f5);
+                color: var(--text-muted, #666);
+                padding: 20px;
                 text-align: center;
             `;
             
-            div.innerHTML = `
-                <i class="fas fa-exclamation-triangle me-1"></i>
-                ${ValidationService.sanitizeText(message)}
+            const icon = this.createElement('div', {
+                'class': 'preview-fallback-icon'
+            }, ['🔗']);
+            
+            icon.style.cssText = `
+                font-size: 24px;
+                margin-bottom: 8px;
             `;
             
-            return div;
+            const title = this.createElement('div', {
+                'class': 'preview-fallback-title'
+            }, [metadata.title]);
+            
+            title.style.cssText = `
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 4px;
+            `;
+            
+            const domain = this.createElement('div', {
+                'class': 'preview-fallback-domain'
+            }, [metadata.domain]);
+            
+            domain.style.cssText = `
+                font-size: 12px;
+            `;
+            
+            fallback.appendChild(icon);
+            fallback.appendChild(title);
+            fallback.appendChild(domain);
+            
+            return fallback;
+        }
+        
+        static createLoading() {
+            const loading = this.createElement('div', {
+                'class': 'link-preview-loading'
+            });
+            
+            loading.style.cssText = `
+                height: 180px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: var(--bg-secondary, #f5f5f5);
+                border-radius: 8px;
+                border: 2px dashed var(--border-color, #e0e0e0);
+            `;
+            
+            const spinner = this.createElement('div', {
+                'class': 'preview-spinner'
+            });
+            
+            spinner.style.cssText = `
+                width: 24px;
+                height: 24px;
+                border: 3px solid var(--border-color, #e0e0e0);
+                border-top-color: var(--primary-color, #0066cc);
+                border-radius: 50%;
+                animation: preview-spin 1s linear infinite;
+            `;
+            
+            const text = this.createElement('div', {
+                'class': 'preview-loading-text'
+            }, ['Carregando...']);
+            
+            text.style.cssText = `
+                margin-left: 12px;
+                font-size: 14px;
+                color: var(--text-muted, #666);
+            `;
+            
+            const content = this.createElement('div', {
+                'class': 'preview-loading-content'
+            });
+            
+            content.style.cssText = `
+                display: flex;
+                align-items: center;
+            `;
+            
+            content.appendChild(spinner);
+            content.appendChild(text);
+            loading.appendChild(content);
+            
+            return loading;
+        }
+        
+        static createError(message) {
+            const error = this.createElement('div', {
+                'class': 'link-preview-error'
+            });
+            
+            error.style.cssText = `
+                padding: 12px;
+                background: var(--error-bg, #fee);
+                border: 1px solid var(--error-border, #fcc);
+                border-radius: 6px;
+                color: var(--error-text, #c00);
+                font-size: 13px;
+                text-align: center;
+            `;
+            
+            const icon = this.createElement('span', {
+                'class': 'preview-error-icon'
+            }, ['⚠️']);
+            
+            icon.style.cssText = `
+                margin-right: 6px;
+            `;
+            
+            const text = this.createElement('span', {
+                'class': 'preview-error-text'
+            }, [SecurityService.sanitizeText(message)]);
+            
+            error.appendChild(icon);
+            error.appendChild(text);
+            
+            return error;
         }
     }
     
     // ====================================================
-    // 5. GERENCIADOR PRINCIPAL
+    // 5. GERENCIADOR PRINCIPAL OTIMIZADO
     // ====================================================
-    class LinkPreviewManager {
+    class PreviewManager {
         constructor() {
-            this.api = new ApiService();
-            this.activeProcesses = new Map();
-            this.debounceTimers = new Map();
-            
+            this.service = new PreviewService();
+            this.activeRequests = new WeakMap();
+            this.observer = null;
             this.init();
         }
         
         init() {
-            logger.log('Inicializando Link Preview Manager');
+            logger.log('Inicializando Preview Manager');
             
-            // Monitora conectividade
-            window.addEventListener('online', () => {
-                STATE.isOnline = true;
-                logger.log('Online - retomando operações');
-            });
+            // Conectividade
+            window.addEventListener('online', this.handleOnline.bind(this));
+            window.addEventListener('offline', this.handleOffline.bind(this));
             
-            window.addEventListener('offline', () => {
-                STATE.isOnline = false;
-                logger.warn('Offline - usando cache apenas');
-            });
+            // Processa existentes
+            this.processCards();
             
-            // Configura observador para novos cards
+            // Observador para novos cards
             this.setupObserver();
             
-            // Processa cards existentes
-            this.processExistingCards();
-            
-            STATE.isInitialized = true;
+            // Adiciona estilos
+            this.addStyles();
+        }
+        
+        handleOnline() {
+            STATE.isOnline = true;
+            logger.log('Conectado - retomando operações');
+        }
+        
+        handleOffline() {
+            STATE.isOnline = false;
+            logger.warn('Desconectado - modo offline ativado');
         }
         
         setupObserver() {
-            if (!('MutationObserver' in window)) return;
+            if (!window.MutationObserver) return;
             
-            const observer = new MutationObserver((mutations) => {
+            this.observer = new MutationObserver((mutations) => {
                 for (const mutation of mutations) {
                     if (mutation.type === 'childList') {
-                        for (const node of mutation.addedNodes) {
-                            if (node.nodeType === 1) { // Element node
-                                const cards = node.querySelectorAll?.('.anuncio-card') || [];
+                        mutation.addedNodes.forEach(node => {
+                            if (node.nodeType === Node.ELEMENT_NODE) {
+                                const cards = node.querySelectorAll ? node.querySelectorAll('.anuncio-card, [data-preview]') : [];
                                 cards.forEach(card => this.setupCard(card));
                                 
-                                // Se o próprio node for um card
-                                if (node.matches?.('.anuncio-card')) {
+                                if (node.matches('.anuncio-card, [data-preview]')) {
                                     this.setupCard(node);
                                 }
                             }
-                        }
+                        });
                     }
                 }
             });
             
-            observer.observe(document.body, {
-                childList: true,
-                subtree: true
+            // Observa apenas containers específicos
+            const containers = document.querySelectorAll('.cards-container, #ads-container, .anuncios-grid');
+            containers.forEach(container => {
+                this.observer.observe(container, {
+                    childList: true,
+                    subtree: true
+                });
             });
         }
         
-        processExistingCards() {
-            const cards = document.querySelectorAll('.anuncio-card');
-            logger.debug(`Encontrados ${cards.length} cards existentes`);
+        processCards() {
+            const cards = document.querySelectorAll('.anuncio-card, [data-preview]');
             
             cards.forEach((card, index) => {
-                // Delay escalonado para não sobrecarregar
-                setTimeout(() => this.setupCard(card), index * 300);
+                // Delay escalonado
+                setTimeout(() => this.setupCard(card), index * 200);
             });
         }
         
         setupCard(card) {
-            // Verifica se já foi processado
-            if (card.dataset.previewInitialized === 'true') return;
+            if (card.dataset.previewSetup === 'true') return;
             
-            const input = card.querySelector('.link-input');
-            const previewContainer = card.querySelector('.preview-container');
+            const input = card.querySelector('.link-input, input[type="url"]');
+            const container = card.querySelector('.preview-container, [data-preview-container]');
             
-            if (!input || !previewContainer) {
-                logger.debug('Card sem input ou container');
+            if (!input || !container) {
                 return;
             }
             
-            // Marca como inicializado
-            card.dataset.previewInitialized = 'true';
+            card.dataset.previewSetup = 'true';
             
             // Configura eventos
-            this.setupInputEvents(input, previewContainer);
+            this.setupInputEvents(input, container);
             
-            // Processa URL existente
-            if (input.value && ValidationService.isValidUrl(input.value)) {
+            // Processa valor existente
+            if (input.value && SecurityService.isValidUrl(input.value)) {
                 setTimeout(() => {
-                    this.processLink(input.value, previewContainer);
-                }, 500);
+                    this.processUrl(input.value, container);
+                }, 300);
             }
         }
         
         setupInputEvents(input, container) {
-            let debounceTimer;
+            let timeout;
             
-            const process = () => {
-                const url = input.value.trim();
+            const handler = () => {
+                clearTimeout(timeout);
                 
-                // Limpa processamentos anteriores
-                if (this.activeProcesses.has(container)) {
-                    // Opcional: cancelar fetch se possível
-                    this.activeProcesses.delete(container);
-                }
-                
-                // Limpa container se URL vazia
-                if (!url) {
-                    container.innerHTML = '';
-                    return;
-                }
-                
-                // Valida URL
-                if (!ValidationService.isValidUrl(url)) {
-                    if (url.length > 5) {
-                        container.innerHTML = '';
-                        container.appendChild(RenderService.createErrorElement(
-                            'URL inválida. Use https://exemplo.com'
-                        ));
-                    }
-                    return;
-                }
-                
-                // Mostra loading
-                container.innerHTML = '';
-                container.appendChild(RenderService.createLoadingElement());
-                
-                // Processa a URL
-                this.processLink(url, container);
+                timeout = setTimeout(() => {
+                    const url = input.value.trim();
+                    this.processUrl(url, container);
+                }, CONFIG.debounceTime);
             };
             
-            // Debounce otimizado
-            input.addEventListener('input', () => {
-                clearTimeout(debounceTimer);
-                debounceTimer = setTimeout(process, CONFIG.debounceTime);
+            input.addEventListener('input', handler);
+            input.addEventListener('blur', () => {
+                clearTimeout(timeout);
+                const url = input.value.trim();
+                this.processUrl(url, container);
             });
-            
-            // Processa também em blur (quando o usuário sai do campo)
-            input.addEventListener('blur', process);
         }
         
-        async processLink(url, container) {
-            const requestId = Date.now() + Math.random();
-            this.activeProcesses.set(container, requestId);
+        async processUrl(url, container) {
+            // Limpa container se URL vazia
+            if (!url) {
+                container.innerHTML = '';
+                return;
+            }
+            
+            // Valida URL
+            if (!SecurityService.isValidUrl(url)) {
+                if (url.length > 5) {
+                    container.innerHTML = '';
+                    container.appendChild(RenderService.createError(
+                        'URL inválida. Use formato: https://exemplo.com'
+                    ));
+                }
+                return;
+            }
+            
+            // Cancela request anterior para este container
+            const previousRequest = this.activeRequests.get(container);
+            if (previousRequest && typeof previousRequest.abort === 'function') {
+                previousRequest.abort();
+            }
+            
+            // Mostra loading
+            container.innerHTML = '';
+            container.appendChild(RenderService.createLoading());
             
             try {
-                // Verifica conectividade
-                if (!STATE.isOnline && CONFIG.offlineSupport) {
-                    const cached = this.api.cache.get(url);
-                    if (cached) {
-                        this.renderPreview(cached, container);
-                        return;
-                    }
-                    throw new Error('Sem conexão e cache não disponível');
-                }
+                const metadata = await this.service.getPreview(url);
                 
-                // Busca preview
-                const metadata = await this.api.fetchPreview(url);
-                
-                // Verifica se ainda é a request atual
-                if (this.activeProcesses.get(container) === requestId) {
-                    this.renderPreview(metadata, container);
+                // Verifica se ainda é o container atual
+                if (container.parentNode) {
+                    container.innerHTML = '';
+                    container.appendChild(RenderService.createPreview(metadata));
                 }
                 
             } catch (error) {
-                // Verifica se ainda é a request atual
-                if (this.activeProcesses.get(container) === requestId) {
-                    logger.warn('Erro ao processar link:', error.message);
-                    
-                    container.innerHTML = '';
-                    container.appendChild(RenderService.createErrorElement(
-                        STATE.isOnline ? 'Erro ao carregar preview' : 'Sem conexão'
-                    ));
+                if (error.name === 'AbortError') {
+                    // Request cancelado, ignora
+                    return;
                 }
-            } finally {
-                // Limpa a referência
-                if (this.activeProcesses.get(container) === requestId) {
-                    this.activeProcesses.delete(container);
+                
+                logger.warn('Erro ao processar URL:', error.message);
+                
+                if (container.parentNode) {
+                    container.innerHTML = '';
+                    
+                    const errorMessage = STATE.isOnline 
+                        ? 'Não foi possível carregar o preview' 
+                        : 'Sem conexão. Usando cache...';
+                    
+                    container.appendChild(RenderService.createError(errorMessage));
                 }
             }
         }
         
-        renderPreview(metadata, container) {
-            container.innerHTML = '';
-            container.appendChild(RenderService.createPreviewElement(metadata));
-            
-            // Animação de entrada
-            requestAnimationFrame(() => {
-                container.style.opacity = '0';
-                container.style.transform = 'translateY(10px)';
+        addStyles() {
+            const styles = `
+                @keyframes preview-spin {
+                    to { transform: rotate(360deg); }
+                }
                 
-                requestAnimationFrame(() => {
-                    container.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                    container.style.opacity = '1';
-                    container.style.transform = 'translateY(0)';
-                });
-            });
+                .link-preview:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+                }
+                
+                .dark-mode .link-preview {
+                    background: #2a2a2a;
+                    border-color: #444;
+                }
+                
+                .dark-mode .link-preview-loading {
+                    background: #2a2a2a;
+                    border-color: #444;
+                }
+                
+                .dark-mode .link-preview-error {
+                    background: rgba(255, 0, 0, 0.1);
+                    border-color: rgba(255, 0, 0, 0.3);
+                    color: #ff6b6b;
+                }
+                
+                @media (max-width: 768px) {
+                    .link-preview {
+                        margin-bottom: 8px;
+                    }
+                }
+            `;
+            
+            const styleEl = document.createElement('style');
+            styleEl.textContent = styles;
+            document.head.appendChild(styleEl);
+        }
+        
+        destroy() {
+            if (this.observer) {
+                this.observer.disconnect();
+            }
+            
+            this.activeRequests.clear();
+            
+            window.removeEventListener('online', this.handleOnline);
+            window.removeEventListener('offline', this.handleOffline);
         }
     }
     
@@ -768,97 +1176,45 @@
     // 6. INICIALIZAÇÃO
     // ====================================================
     function initialize() {
-        // Verifica dependências
-        if (!('fetch' in window)) {
-            logger.error('Fetch API não suportada');
+        // Verifica requisitos
+        if (!window.fetch || !window.URL) {
+            logger.error('APIs necessárias não suportadas');
             return;
         }
         
-        if (!('URL' in window)) {
-            logger.error('URL API não suportada');
-            return;
-        }
-        
-        // Inicializa o manager
+        // Inicializa com delay para garantir DOM
         setTimeout(() => {
             try {
-                window.linkPreviewManager = new LinkPreviewManager();
-                logger.log('✅ Link Preview inicializado com sucesso');
+                window.previewManager = new PreviewManager();
+                logger.log('Preview Manager inicializado');
             } catch (error) {
-                logger.error('❌ Falha ao inicializar Link Preview:', error);
+                logger.error('Falha na inicialização:', error);
             }
         }, 100);
     }
     
-    // Inicializa quando seguro
+    // Auto-inicialização
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initialize);
     } else {
-        // DOM já carregado, inicializa com delay
-        setTimeout(initialize, 0);
+        initialize();
     }
     
-    // API pública
+    // API pública simplificada
     window.LinkPreview = {
-        processUrl: async (url) => {
-            const api = new ApiService();
-            return await api.fetchPreview(url);
+        get: async (url) => {
+            const service = new PreviewService();
+            return await service.getPreview(url);
         },
         clearCache: () => {
-            const cache = new SafeCache();
+            const cache = new SecureCache();
             cache.clear();
         },
-        isOnline: () => STATE.isOnline,
-        destroy: () => {
-            if (window.linkPreviewManager) {
-                window.linkPreviewManager.activeProcesses.clear();
+        refresh: () => {
+            if (window.previewManager) {
+                window.previewManager.processCards();
             }
         }
     };
     
-})();
-
-// ====================================================
-// 7. CSS NECESSÁRIO (adicione ao seu arquivo CSS)
-// ====================================================
-const linkPreviewStyles = `
-    .link-preview-container {
-        cursor: pointer;
-    }
-    
-    .link-preview-container:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    
-    .link-preview-container img {
-        transition: transform 0.3s ease;
-    }
-    
-    .link-preview-container:hover img {
-        transform: scale(1.05);
-    }
-    
-    .dark-mode .link-preview-container {
-        background: #2d2d2d;
-        border-color: #444;
-    }
-    
-    .dark-mode .link-preview-loading {
-        background: #2d2d2d;
-        border-color: #444;
-    }
-    
-    @media (max-width: 768px) {
-        .link-preview-container {
-            margin-bottom: 8px;
-        }
-    }
-`;
-
-// Adiciona estilos dinamicamente
-(function() {
-    const style = document.createElement('style');
-    style.textContent = linkPreviewStyles;
-    document.head.appendChild(style);
 })();
