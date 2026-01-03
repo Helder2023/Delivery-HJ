@@ -85,6 +85,8 @@
 
     '/financas': { title: 'Finanças', file: FINANCAS + 'financas.html' },
     '/analisando': { title: 'Analisando', file: FINANCAS + 'analisando.html' },
+    '/despesas': { title: 'Despesas', file: FINANCAS + 'despesas.html' },
+    '/contas-bancarias': { title: 'Contas Bancárias dos funcionários', file: FINANCAS + 'contas-bancarias.html' },
 
     '/todos-entregadores': { title: 'Todos os entregadores', file: ENTREGADOR + 'todos-entregadores.html' },
     '/adicionar-entregador': { title: 'Adicionar entregador', file: ENTREGADOR + 'adicionar-entregador.html' },
