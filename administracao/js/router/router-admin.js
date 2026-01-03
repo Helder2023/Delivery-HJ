@@ -65,7 +65,6 @@
     '/notificacao': { title: 'Todas as notificação', file: NOTIFICACOES + 'notificacao.html' },
     '/visualizar-notificacao': { title: 'Visualizar Notificação', file: NOTIFICACOES + 'visualizar-notificacao.html' },
 
-
     '/pedidos': { title: 'Gerencia todos os pedidos dos retaurantes', file: PEDIDOS + 'pedidos.html' },
     '/visualizar-pedido': { title: 'Visualizando o pedido', file: PEDIDOS + 'visualizar-pedido.html' },
 
