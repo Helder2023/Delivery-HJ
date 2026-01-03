@@ -220,3 +220,49 @@
     feather.replace();
   }
 </script>
+<script>
+  // Preview da foto
+  document.getElementById('fotoUpload').addEventListener('change', function (event) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = e => document.getElementById('fotoPreview').src = e.target.result;
+      reader.readAsDataURL(file);
+    }
+  });
+
+  // Geração automática de senha personalizada
+  function gerarSenha(tamanho = 15) {
+    const numeros = "0123456789";
+    let senha = "Delivery_HJ_";
+    for (let i = 0; i < tamanho; i++) {
+      senha += numeros.charAt(Math.floor(Math.random() * numeros.length));
+    }
+    return senha;
+  }
+
+  // Exibir senha ao carregar a página
+  window.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("password").value = gerarSenha();
+  });
+
+  // Regenerar senha manualmente
+  document.getElementById("btnRegenerate").addEventListener("click", () => {
+    document.getElementById("password").value = gerarSenha();
+  });
+
+  // Validação do formulário
+  (() => {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+</script>

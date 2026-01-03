@@ -1,0 +1,70 @@
+<style>
+    
+    .sidebar-content,
+    .sidebar,
+    #nav,
+    .footer {
+        display: none;
+    }
+</style>
+
+<div class="row mb-2 mb-xl-3">
+    <div class="content-top col-auto d-sm-block">
+        <h3 class="page-title">Editando a publicação <h3>
+    </div>
+
+    <div class="col-auto ms-auto text-end mt-n1">
+          <button class="btn shadow-sm" onclick="window.history.back()">
+            <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: black;">
+
+                <!-- TÍTULO -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="content-top col-auto d-sm-block">
+                        <h5 class="card-title mb-0">Editar publicação</h5>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="card-body">
+                <div class="col-md-12">
+                    <form action="" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+
+                        <div class="col-md-12">
+                            <label for="nome" class="form-label">Título</label>
+                            <input type="text" minlength="3" maxlength="50" placeholder="Insira o título da publicação"
+                                class="form-control" id="nome" name="nome" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="nome_entregador" class="form-label">Descrição breve da Publicação</label>
+                            <textarea name="" id="" class="form-control"
+                                placeholder="Descreve brevemente sobre a publicação"></textarea>
+                        </div>
+
+
+                        <div class="col-md-12">
+                            <label for="nome_entregador" class="form-label">Link</label>
+                            <input type="search" placeholder="Insira o link da publicação" class="form-control"
+                                name="nome" required>
+                        </div>
+
+
+
+                        <div class="col-12 text-left mt-4">
+                            <button class="btn btn-primary w-25" type="submit">Editar publicação</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -117,6 +117,9 @@
     '/deletar-parceiro': { title: 'deletar parceiro', file: PARCEIRO + 'deletar-parceiro.html' },
     
     '/home-parceiro': { title: 'Dashboard para o parceiro', file: DASHBOARD_PARCEIRO + 'dashboard-parceiro.html' },
+    '/visualizar-perfil-parceiro': { title: 'Visualizando o seu perfil', file: DASHBOARD_PARCEIRO + 'dashboard-perfil-parceiro.html' },
+    '/editar-perfil-parceiro': { title: 'Editando o seu perfil', file: DASHBOARD_PARCEIRO + 'dashboard-editar-parceiro.html' },
+    '/editar-publicidade-parceiro': { title: 'Editando a publlicação', file: DASHBOARD_PARCEIRO + 'dashboard-editar-publicidade.html' },
   };
 
 

@@ -38,6 +38,12 @@
     </div>
 
     <div class="col-auto ms-auto text-end mt-n1">
+        <button class="btn shadow-sm" style="background-color: #000;">
+            <a class="no-underline" href="admin.html#/visualizar-perfil-parceiro" style="color: white;">
+                <i data-feather="eye"> </i> Perfil
+            </a>
+        </button>
+
         <button class="btn shadow-sm" onclick="window.location.reload()"
             style="background-color: white; color: black !important;">
             <i class="align-middle" data-feather="refresh-cw" id="refresh">&nbsp;</i>
@@ -53,7 +59,8 @@
                 <div class="row g-0 w-100">
                     <div class="col-6">
                         <div class="illustration-text p-3 m-1">
-                            <h4 class="illustration-text">Olá, <a href="admin.html#/perfil">Jesse Madalena</a>!</h4>
+                            <h4 class="illustration-text">Olá, <a href="admin.html#/visualizar-perfil-parceiro">Jesse
+                                    Madalena</a>!</h4>
                             <h6 class="illustration-text">Categoria:
                                 <span>Influencer</span>
                             </h6>
@@ -202,7 +209,7 @@
                             <th>Sua Comissão (12%)</th>
                             <th>Codigo de </th>
                             <th>Data</th>
-                             <th>Status</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -247,32 +254,33 @@
             </div>
             <div class="card-body">
                 <div class="col-md-12">
-                        <form action="" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+                    <form action="" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
 
-                            <div class="col-md-12">
-                                <label for="nome" class="form-label">Título</label>
-                                <input type="text" minlength="3" maxlength="50" placeholder="Insira o título da publicação"
-                                    class="form-control" id="nome" name="nome" required>
-                            </div>
+                        <div class="col-md-12">
+                            <label for="nome" class="form-label">Título</label>
+                            <input type="text" minlength="3" maxlength="50" placeholder="Insira o título da publicação"
+                                class="form-control" id="nome" name="nome" required>
+                        </div>
 
-                             <div class="col-md-12">
-                                <label for="nome_entregador" class="form-label">Descrição breve da Publicação</label>   
-                                    <textarea name="" id="" class="form-control" placeholder="Descreve brevemente sobre a publicação"></textarea>
-                            </div>
+                        <div class="col-md-12">
+                            <label for="nome_entregador" class="form-label">Descrição breve da Publicação</label>
+                            <textarea name="" id="" class="form-control"
+                                placeholder="Descreve brevemente sobre a publicação"></textarea>
+                        </div>
 
 
-                            <div class="col-md-12">
-                                <label for="nome_entregador" class="form-label">Link</label>
-                                <input type="search" placeholder="Insira o link da publicação" class="form-control"
-                                    name="nome" required>
-                            </div>
+                        <div class="col-md-12">
+                            <label for="nome_entregador" class="form-label">Link</label>
+                            <input type="search" placeholder="Insira o link da publicação" class="form-control"
+                                name="nome" required>
+                        </div>
 
-                            
 
-                            <div class="col-12 text-left mt-4">
-                                <button class="btn btn-primary w-25" type="submit">Cadastrar publicação</button>
-                            </div>
-                        </form>
+
+                        <div class="col-12 text-left mt-4">
+                            <button class="btn btn-primary w-25" type="submit">Cadastrar publicação</button>
+                        </div>
+                    </form>
 
                 </div>
             </div>
@@ -320,15 +328,30 @@
                                 <div class="link-input-container">
                                     <input type="url" class="link-input" readonly
                                         placeholder="Cole o link aqui... (ex: https://exemplo.com)"
-                                        value="https://www.linkedin.com/posts/luciola-coelho-agencia-de-ia_ganhe-em-d%C3%B3lar-com-a-ia-activity-7409944760997785600-akQL?utm_source=share&utm_medium=member_desktop&rcm=ACoAAEGbuCcBtDAv4OkfbEUvCOLGlAhYc1L9oCQ">
+                                        value="https://youtu.be/-1ywJ8sFwvo?si=F-S1LN2kMxx9oMmA">
                                     <div class="spinner" style="position: absolute; right: 10px; top: 8px;"></div>
                                 </div>
-                                <a href="#" target="_blank" rel="noopener noreferrer" class="preview-link"
+                                <a href="https://youtu.be/-1ywJ8sFwvo?si=F-S1LN2kMxx9oMmA" target="_blank" rel="noopener noreferrer" class="preview-link"
                                     style="color: rgb(67, 67, 255) !important; display: block; margin-top: 10px;">
                                     Clique para abrir o link
                                 </a>
                                 </p>
+
+                                <div class="col-auto ms-auto text-start mt-n1">
+                                    <button class="btn shadow-sm" style="background-color: #000;">
+                                        <a class="no-underline" href="admin.html#/editar-publicidade-parceiro"
+                                            style="color: white;">
+                                            <i data-feather="edit"> </i>
+                                        </a>
+                                    </button>
+
+                                    <button class="btn shadow-sm"
+                                        style="background-color: white; color: black !important;">
+                                        <i class="align-middle" data-feather="trash-2" id="refresh"></i>
+                                    </button>
+                                </div>
                             </div>
+
                         </div>
                     </div>
 
@@ -357,6 +380,21 @@
                                     Clique para abrir o link
                                 </a>
                                 </p>
+
+                                
+                                <div class="col-auto ms-auto text-start mt-n1">
+                                    <button class="btn shadow-sm" style="background-color: #000;">
+                                        <a class="no-underline" href="admin.html#/editar-publicidade-parceiro"
+                                            style="color: white;">
+                                            <i data-feather="edit"> </i>
+                                        </a>
+                                    </button>
+
+                                    <button class="btn shadow-sm"
+                                        style="background-color: white; color: black !important;">
+                                        <i class="align-middle" data-feather="trash-2" id="refresh"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -386,6 +424,21 @@
                                     Clique para abrir o link
                                 </a>
                                 </p>
+
+                                
+                                <div class="col-auto ms-auto text-start mt-n1">
+                                    <button class="btn shadow-sm" style="background-color: #000;">
+                                        <a class="no-underline" href="admin.html#/editar-publicidade-parceiro"
+                                            style="color: white;">
+                                            <i data-feather="edit"> </i>
+                                        </a>
+                                    </button>
+
+                                    <button class="btn shadow-sm"
+                                        style="background-color: white; color: black !important;">
+                                        <i class="align-middle" data-feather="trash-2" id="refresh"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -415,6 +468,21 @@
                                     Clique para abrir o link
                                 </a>
                                 </p>
+
+                                
+                                <div class="col-auto ms-auto text-start mt-n1">
+                                    <button class="btn shadow-sm" style="background-color: #000;">
+                                        <a class="no-underline" href="admin.html#/editar-publicidade-parceiro"
+                                            style="color: white;">
+                                            <i data-feather="edit"> </i>
+                                        </a>
+                                    </button>
+
+                                    <button class="btn shadow-sm"
+                                        style="background-color: white; color: black !important;">
+                                        <i class="align-middle" data-feather="trash-2" id="refresh"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -444,6 +512,21 @@
                                     Clique para abrir o link
                                 </a>
                                 </p>
+
+                                
+                                <div class="col-auto ms-auto text-start mt-n1">
+                                    <button class="btn shadow-sm" style="background-color: #000;">
+                                        <a class="no-underline" href="admin.html#/editar-publicidade-parceiro"
+                                            style="color: white;">
+                                            <i data-feather="edit"> </i>
+                                        </a>
+                                    </button>
+
+                                    <button class="btn shadow-sm"
+                                        style="background-color: white; color: black !important;">
+                                        <i class="align-middle" data-feather="trash-2" id="refresh"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -473,6 +556,20 @@
                                     Clique para abrir o link
                                 </a>
                                 </p>
+                                
+                                <div class="col-auto ms-auto text-start mt-n1">
+                                    <button class="btn shadow-sm" style="background-color: #000;">
+                                        <a class="no-underline" href="admin.html#/editar-publicidade-parceiro"
+                                            style="color: white;">
+                                            <i data-feather="edit"> </i>
+                                        </a>
+                                    </button>
+
+                                    <button class="btn shadow-sm"
+                                        style="background-color: white; color: black !important;">
+                                        <i class="align-middle" data-feather="trash-2" id="refresh"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

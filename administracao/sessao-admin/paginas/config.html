@@ -31,10 +31,6 @@
             Notificações & Automações
           </a>
 
-          <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#suporte" role="tab">
-            Suporte e Manual do Utilizador
-          </a>
-
           <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#contratos" role="tab">
             Contratos
           </a>
@@ -175,199 +171,6 @@
           </div>
         </div>
 
-        <!-- Suporte e Ajuda -->
-        <div class="card tab-pane fade overflow-auto" id="suporte" role="tabpanel" style="height: 530px;">
-
-          <div>
-            <div class="card-header">
-              <h5 class="card-title mb-0">Suporte e Manual do Utilizador</h5>
-            </div>
-
-            <div class="card-body">
-
-              <h4 class="mb-3">📘 Manual do Sistema Delivery HJ</h4>
-              <p class="text-muted">
-                Bem-vindo ao manual oficial do sistema <strong>Delivery HJ – Administração</strong>.
-                Aqui encontras explicações detalhadas sobre todas as páginas, funcionalidades e operações disponíveis
-                para administradores, supervisores e operadores.
-              </p>
-
-              <hr>
-
-              <!-- =========================== MENU INTERNO =========================== -->
-              <h5>📑 Secções do Manual</h5>
-
-              <ul class="list-group mb-4">
-                <li class="list-group-item"><a href="#m-visao-geral">1. Visão Geral do Sistema</a></li>
-                <li class="list-group-item"><a href="#m-dashboard">2. Dashboard Principal</a></li>
-                <li class="list-group-item"><a href="#m-restaurantes">3. Gestão de Restaurantes</a></li>
-                <li class="list-group-item"><a href="#m-pedidos">4. Gestão de Pedidos</a></li>
-                <li class="list-group-item"><a href="#m-financeiro">5. Módulo Financeiro</a></li>
-                <li class="list-group-item"><a href="#m-utilizadores">6. Gestão de Utilizadores</a></li>
-                <li class="list-group-item"><a href="#m-chat">7. Chat e Comunicação</a></li>
-                <li class="list-group-item"><a href="#m-config">8. Configurações do Sistema</a></li>
-                <li class="list-group-item"><a href="#m-suporte">9. Como Pedir Suporte</a></li>
-              </ul>
-
-              <hr>
-
-              <!-- =========================== 1. VISÃO GERAL =========================== -->
-              <h4 id="m-visao-geral">1. Visão Geral do Sistema</h4>
-              <p>
-                O painel administrativo do Delivery HJ permite controlar restaurantes, pedidos, pagamentos, utilizadores
-                e todo o ecossistema da plataforma.
-                Ele funciona com navegação por <strong>sidebar</strong> e páginas carregadas dinamicamente usando o
-                sistema de rotas <code>#</code>.
-              </p>
-
-              <hr>
-
-              <!-- =========================== 2. DASHBOARD =========================== -->
-              <h4 id="m-dashboard">2. Dashboard Principal</h4>
-              <p>O dashboard apresenta um resumo geral das operações:</p>
-
-              <ul>
-                <li><strong>Total de pedidos do dia</strong></li>
-                <li><strong>Top 5 restaurantes</strong></li>
-                <li><strong>Crescimento semanal/mensal</strong></li>
-                <li><strong>Pedidos pendentes / concluídos</strong></li>
-                <li><strong>Mapa de calor das zonas</strong></li>
-                <li><strong>Status dos restaurantes</strong> – online, offline, atrasado</li>
-              </ul>
-
-              <p>
-                Os gráficos são atualizados automaticamente a partir dos dados enviados pela API interna.
-              </p>
-
-              <hr>
-
-              <!-- =========================== 3. RESTAURANTES =========================== -->
-              <h4 id="m-restaurantes">3. Gestão de Restaurantes</h4>
-              <p>Nesta área podem-se gerir todos os restaurantes parceiros:</p>
-
-              <ul>
-                <li>Registar novos restaurantes</li>
-                <li>Ver documentos enviados (alvará, logotipo, etc.)</li>
-                <li>Alterar estado (ativo, suspenso, pendente, atrasado)</li>
-                <li>Acompanhar desempenho mensal</li>
-                <li>Consultar histórico de pagamentos</li>
-                <li>Avaliações dos clientes</li>
-              </ul>
-
-              <p>
-                Também podes entrar no perfil de um restaurante para ver gráficos
-                detalhados de rendimento por semana, mês ou ano.
-              </p>
-
-              <hr>
-
-              <!-- =========================== 4. PEDIDOS =========================== -->
-              <h4 id="m-pedidos">4. Gestão de Pedidos</h4>
-              <p>Permite acompanhar pedidos em tempo real:</p>
-
-              <ul>
-                <li>Ver todos os pedidos abertos, concluídos ou cancelados</li>
-                <li>Filtro por data, restaurante ou estado</li>
-                <li>Linha do tempo (timeline) do pedido</li>
-                <li>Botão para contactar restaurante</li>
-                <li>Relatórios de pedidos perdidos</li>
-              </ul>
-
-              <hr>
-
-              <!-- =========================== 5. FINANCEIRO =========================== -->
-              <h4 id="m-financeiro">5. Módulo Financeiro</h4>
-              <p>Responsável por toda a gestão monetária:</p>
-
-              <h6>5.1 Pagamentos dos Restaurantes</h6>
-              <ul>
-                <li>Ver restaurantes pagos, atrasados e pendentes</li>
-                <li>Validar comprovativos enviados</li>
-                <li>Alertas automáticos de atraso</li>
-              </ul>
-
-              <h6>5.2 Faturação</h6>
-              <ul>
-                <li>Gerar faturas automáticas</li>
-                <li>Consultar histórico por restaurante</li>
-              </ul>
-
-              <h6>5.3 Comissão</h6>
-              <ul>
-                <li>Configurar percentuais por restaurante</li>
-                <li>Cálculo automático do valor devido</li>
-              </ul>
-
-              <hr>
-
-              <!-- =========================== 6. UTILIZADORES =========================== -->
-              <h4 id="m-utilizadores">6. Gestão de Utilizadores</h4>
-              <p>Aqui administra-se acesso e permissões:</p>
-
-              <ul>
-                <li>Super Admin</li>
-                <li>Financeiro</li>
-                <li>Suporte</li>
-                <li>Operador de Restaurantes</li>
-              </ul>
-
-              <p>
-                Cada utilizador tem permissões diferentes conforme o papel.
-              </p>
-
-              <hr>
-
-              <!-- =========================== 7. CHAT =========================== -->
-              <h4 id="m-chat">7. WhatsApp, Email e Comunicação</h4>
-              <p>Inclui:</p>
-
-              <ul>
-                <li>Número oficial WhatsApp</li>
-                <li>Link do WhatsApp API</li>
-                <li>E-mail oficial do suporte</li>
-                <li>Comunicação direta com restaurantes</li>
-              </ul>
-
-              <hr>
-
-              <!-- =========================== 8. CONFIG =========================== -->
-              <h4 id="m-config">8. Configurações do Sistema</h4>
-              <p>Podes editar:</p>
-
-              <ul>
-                <li>Nome da empresa</li>
-                <li>Taxa de comissão</li>
-                <li>Dias de pagamento</li>
-                <li>Ativar / desativar automações</li>
-                <li>Modo claro ou escuro</li>
-              </ul>
-
-              <hr>
-
-              <!-- =========================== 9. SUPORTE =========================== -->
-              <h4 id="m-suporte">9. Como Pedir Suporte</h4>
-
-              <p>Se tiveres dúvidas, problemas ou sugestões:</p>
-
-              <ul>
-                <li>📲 Contacta via WhatsApp: <strong>+244 XXX XXX XXX</strong></li>
-                <li>📧 Email oficial: <strong>suporte@deliveryhj.com</strong></li>
-                <li>🔧 Reportar erros diretamente no sistema</li>
-              </ul>
-
-              <p class="text-muted small">
-                O suporte está disponível das <strong>08h às 20h</strong>, de segunda a sábado.
-              </p>
-
-              <hr>
-
-              <h5>Obrigado por usar o Delivery HJ!</h5>
-              <p class="text-muted">Estamos sempre a melhorar para oferecer a melhor experiência possível.</p>
-
-            </div>
-          </div>
-        </div>
-
         <!-- contratos -->
         <div class="card tab-pane fade overflow-auto" id="contratos" role="tabpanel" style="height: 530px;">
 
@@ -387,15 +190,39 @@
 
                 <!-- Botões de ação -->
                 <div class="document-actions">
-                  <a href="../sessao-admin/paginas/contratos/adminstradores/Exercício de Portugol - Lista 03 (2).pdf" target="_blank"
-                    class="btn btn-primary">
+                  <a href="../sessao-admin/paginas/contratos/adminstradores/Exercício de Portugol - Lista 03 (2).pdf"
+                    target="_blank" class="btn btn-primary">
                     <i class="fas fa-eye"></i> Visualizar Completo
                   </a>
 
-                  <a href="../sessao-admin/paginas/contratos/adminstradores/Exercício de Portugol - Lista 03 (2).pdf" download="documento.pdf" class="btn btn-success">
+                  <a href="../sessao-admin/paginas/contratos/adminstradores/Exercício de Portugol - Lista 03 (2).pdf"
+                    download="documento.pdf" class="btn btn-success">
                     <i class="fas fa-download"></i> Baixar PDF
                   </a>
+
+                  <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample"> <i class="fas fa-file"></i> Inseerir /
+                    Atualizar
+                    Contratos
+                  </button>
+
+                  <div class="collapse" id="collapseExample">
+                    <hr>
+                    <form action="" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+
+                      <div class="col-md-12">
+                        <label for="file" class="form-label">Inserir Contrato</label>
+                        <input type="file" class="form-control" id="file" name="file" required>
+                      </div>
+
+                      <div class="col-12 text-left">
+                        <button class="btn btn-primary" type="submit">Cadastrar Contrato</button>
+                      </div>
+                    </form>
+                  </div>
+
                 </div>
+
               </div>
 
               <div class="card card-dashboard p-3" id="cardFinancas" style="cursor: pointer;">
@@ -405,32 +232,115 @@
                 </h4>
                 <!-- Botões de ação -->
                 <div class="document-actions">
-                  <a href="../sessao-admin/paginas/contratos/restaurantes/Exercício de Portugol - Lista 03 (2).pdf" target="_blank"
-                    class="btn btn-primary">
+                  <a href="../sessao-admin/paginas/contratos/restaurantes/Exercício de Portugol - Lista 03 (2).pdf"
+                    target="_blank" class="btn btn-primary">
                     <i class="fas fa-eye"></i> Visualizar Completo
                   </a>
 
-                  <a href="../sessao-admin/paginas/contratos/restaurantes/Exercício de Portugol - Lista 03 (2).pdf" download="documento.pdf" class="btn btn-success">
+                  <a href="../sessao-admin/paginas/contratos/restaurantes/Exercício de Portugol - Lista 03 (2).pdf"
+                    download="documento.pdf" class="btn btn-success">
                     <i class="fas fa-download"></i> Baixar PDF
                   </a>
+
+                  <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#collapseExample2"
+                    aria-expanded="false" aria-controls="collapseExample"> <i class="fas fa-file"></i> Inseerir /
+                    Atualizar
+                    Contratos
+                  </button>
+
+                  <div class="collapse" id="collapseExample2">
+                    <hr>
+                    <form action="" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+
+                      <div class="col-md-12">
+                        <label for="file" class="form-label">Inserir Contrato</label>
+                        <input type="file" class="form-control" id="file" name="file" required>
+                      </div>
+
+                      <div class="col-12 text-left">
+                        <button class="btn btn-primary" type="submit">Cadastrar Contrato</button>
+                      </div>
+                    </form>
+                  </div>
+
                 </div>
               </div>
 
               <div class="card card-dashboard p-3" id="cardFinancas" style="cursor: pointer;">
                 <h4 class="d-flex align-items-center gap-2">
                   <i data-feather="file"></i>
-                  Contato para os Parceiros
+                  Contato para o Parceiro - Gestor de Tráfego
                 </h4>
-                 <!-- Botões de ação -->
+                <!-- Botões de ação -->
                 <div class="document-actions">
-                  <a href="../sessao-admin/paginas/contratos/parceiros/Exercício de Portugol - Lista 03 (2).pdf" target="_blank"
-                    class="btn btn-primary">
+                  <a href="../sessao-admin/paginas/contratos/parceiros/Exercício de Portugol - Lista 03 (2).pdf"
+                    target="_blank" class="btn btn-primary">
                     <i class="fas fa-eye"></i> Visualizar Completo
                   </a>
 
-                  <a href="../sessao-admin/paginas/contratos/parceiros/Exercício de Portugol - Lista 03 (2).pdf" download="documento.pdf" class="btn btn-success">
+                  <a href="../sessao-admin/paginas/contratos/parceiros/Exercício de Portugol - Lista 03 (2).pdf"
+                    download="documento.pdf" class="btn btn-success">
                     <i class="fas fa-download"></i> Baixar PDF
                   </a>
+                   <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#collapseExample3"
+                    aria-expanded="false" aria-controls="collapseExample"> <i class="fas fa-file"></i> Inseerir /
+                    Atualizar
+                    Contratos
+                  </button>
+
+                  <div class="collapse" id="collapseExample3">
+                    <hr>
+                    <form action="" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+
+                      <div class="col-md-12">
+                        <label for="file" class="form-label">Inserir Contrato</label>
+                        <input type="file" class="form-control" id="file" name="file" required>
+                      </div>
+
+                      <div class="col-12 text-left">
+                        <button class="btn btn-primary" type="submit">Cadastrar Contrato</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card card-dashboard p-3" id="cardFinancas" style="cursor: pointer;">
+                <h4 class="d-flex align-items-center gap-2">
+                  <i data-feather="file"></i>
+                  Contato para o Parceiro - Influencer / Criador de Conteúdo
+                </h4>
+                <!-- Botões de ação -->
+                <div class="document-actions">
+                  <a href="../sessao-admin/paginas/contratos/parceiros/Exercício de Portugol - Lista 03 (2).pdf"
+                    target="_blank" class="btn btn-primary">
+                    <i class="fas fa-eye"></i> Visualizar Completo
+                  </a>
+
+                  <a href="../sessao-admin/paginas/contratos/parceiros/Exercício de Portugol - Lista 03 (2).pdf"
+                    download="documento.pdf" class="btn btn-success">
+                    <i class="fas fa-download"></i> Baixar PDF
+                  </a>
+                   <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#collapseExample4"
+                    aria-expanded="false" aria-controls="collapseExample"> <i class="fas fa-file"></i> Inseerir /
+                    Atualizar
+                    Contratos
+                  </button>
+
+                  <div class="collapse" id="collapseExample4">
+                    <hr>
+                    <form action="" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+
+                      <div class="col-md-12">
+                        <label for="file" class="form-label">Inserir Contrato</label>
+                        <input type="file" class="form-control" id="file" name="file" required>
+                      </div>
+
+                      <div class="col-12 text-left">
+                        <button class="btn btn-primary" type="submit">Cadastrar Contrato</button>
+                      </div>
+                    </form>
+                  </div>
                 </div>
               </div>
 
@@ -439,7 +349,7 @@
 
           </div>
 
-      
+
 
           <script>
             // Sistema de preview e download de documentos
