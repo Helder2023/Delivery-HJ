@@ -13,13 +13,19 @@
     </div>
 </div>
 
-<div class="card">
-    <h2>Adicionar Nota</h2>
+<div class="card">  
     <form>
-        <label for="nota">Escreva sua nota:</label>
-        <textarea id="nota" rows="4" placeholder="Digite aqui a nota..." required></textarea>
-        <button class="btn btn-confirm btn-sm" type="submit"> <i class="align-middle" data-feather="plus">&nbsp;</i>
-            Adicionar Nota</button>
+        <div class="col-md-12">
+            <label for="arquivo" class="form-label">Arquivo <span class="text-danger">(Opcinal)</span></label>
+           <input class="form-control" type="file" name="" id="" style="margin-bottom: 10px;">
+        </div>
+
+        <div class="col-md-12">
+            <label for="nota" class="form-label">Escreva sua nota</label>
+            <textarea class="form-control" id="nota" rows="4" placeholder="Digite aqui a nota..." required></textarea>   
+        </div>
+
+        <button class="btn btn-confirm btn-sm" type="submit">Adicionar Nota</button>
     </form>
 </div>
 
@@ -40,7 +46,7 @@
                 <td>Comprar mantimentos para a semana.</td>
                 <td>2025-11-23</td>
                 <td>
-                    <a style="margin-right: 7px;" href="admin.html#/notas"><i data-feather="eye"></i></a>
+                    <a style="margin-right: 7px;" href="admin.html#/editar-nota"><i data-feather="edit"></i></a>
                     <a href="admin.html#/notas"><i data-feather="trash"></i></a>
                 </td>
             </tr>
@@ -49,7 +55,7 @@
                 <td>Revisar relatórios financeiros do mês.</td>
                 <td>2025-11-22</td>
                 <td>
-                    <a style="margin-right: 7px;" href="admin.html#/notas"><i data-feather="eye"></i></a>
+                    <a style="margin-right: 7px;" href="admin.html#/editar-nota"><i data-feather="edit"></i></a>
                     <a href="admin.html#/notas"><i data-feather="trash"></i></a>
                 </td>
             </tr>
@@ -58,7 +64,7 @@
                 <td>Agendar reunião com a equipe de marketing.</td>
                 <td>2025-11-21</td>
                 <td>
-                    <a style="margin-right: 7px;" href="admin.html#/notas"><i data-feather="eye"></i></a>
+                    <a style="margin-right: 7px;" href="admin.html#/editar-nota"><i data-feather="edit"></i></a>
                     <a href="admin.html#/notas"><i data-feather="trash"></i></a>
                 </td>
             </tr>

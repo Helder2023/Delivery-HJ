@@ -1,0 +1,43 @@
+<div class="row mb-2 mb-xl-3">
+    <div class="content-top col-auto d-sm-block">
+        <h3>Editar Despesas</h3>
+    </div>
+
+    <div class="col-auto ms-auto text-end mt-n1">
+
+        <div class="col-auto d-flex gap-2">
+            <button class="btn shadow-sm" onclick="window.history.back()">
+                <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+            </button>
+
+        </div>
+    </div>
+</div>
+
+<!-- ===== FORMULÁRIO DE CADASTRO DE DESPESAS ===== -->
+<div class="card mb-4 card-dashboard">
+    <div class="card-header">
+        <h5 class="card-title mb-0" style="color: white;">Editar Despesa</h5>
+    </div>
+    <div class="card-body">
+        <form id="formDespesa" class="row g-3">
+            <div class="col-md-6">
+                <label for="descricaoDespesa" class="form-label">Descrição da Despesa</label>
+                <input type="text" class="form-control" id="descricaoDespesa" value="Compra de embalagens">
+            </div>
+            <div class="col-md-3">
+                <label for="valorDespesa" class="form-label">Valor (Kz)</label>
+                <input type="number" class="form-control" id="valorDespesa" value="1.500.00">
+            </div>
+            <div class="col-md-3">
+                <label for="dataDespesa" class="form-label">Data</label>
+                <input type="date" class="form-control" id="dataDespesa">
+            </div>
+            <div class="col-12 text-end">
+                <button type="submit" class="btn btn-primary">
+                     Editar Despesa
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

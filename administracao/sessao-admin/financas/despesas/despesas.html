@@ -1,0 +1,100 @@
+<div class="row mb-2 mb-xl-3">
+    <div class="content-top col-auto d-sm-block">
+        <h3>Despesas</h3>
+    </div>
+
+    <div class="col-auto ms-auto text-end mt-n1">
+
+        <div class="col-auto d-flex gap-2">
+            <button class="btn shadow-sm" onclick="window.history.back()">
+                <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+            </button>
+
+        </div>
+    </div>
+</div>
+
+<!-- ===== FORMULÁRIO DE CADASTRO DE DESPESAS ===== -->
+<div class="card mb-4 card-dashboard">
+    <div class="card-header">
+        <h5 class="card-title mb-0" style="color: white;">Cadastrar Despesa</h5>
+    </div>
+    <div class="card-body">
+        <form id="formDespesa" class="row g-3">
+            <div class="col-md-6">
+                <label for="descricaoDespesa" class="form-label">Descrição da Despesa</label>
+                <input type="text" class="form-control" id="descricaoDespesa" placeholder="Ex: Compra de embalagens">
+            </div>
+            <div class="col-md-3">
+                <label for="valorDespesa" class="form-label">Valor (Kz)</label>
+                <input type="number" class="form-control" id="valorDespesa" placeholder="Ex: 5000">
+            </div>
+            <div class="col-md-3">
+                <label for="dataDespesa" class="form-label">Data</label>
+                <input type="date" class="form-control" id="dataDespesa">
+            </div>
+            <div class="col-12 text-end">
+                <button type="submit" class="btn btn-primary">
+                    Adicionar Despesa
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="../js/data-tables.js"></script>
+
+<!-- ===== TABELA DE DESPESAS ===== -->
+<div class="card card-dashboard">
+    <div class="card-header">
+        <h5 class="card-title mb-0" style="color: white;">Despesas Registradas</h5>
+    </div>
+     <div class="card-body table-responsive">
+        <table id="tabela_1" class="table table-borderless my-0 w-100">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descrição</th>
+                    <th>Valor (Kz)</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dados fictícios -->
+                <tr>
+                    <td>1</td>
+                    <td>Compra de embalagens</td>
+                    <td>5.000</td>
+                    <td>01/11/2025</td>
+                    <td>
+                        <a href="admin.html#/editar-despesa" class="text-info" title="Editar"><i
+                                data-feather="edit"></i></a>
+                        <a href="#" class="text-danger" title="Excluir"><i data-feather="trash-2"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Pagamento de internet</td>
+                    <td>10.000</td>
+                    <td>02/11/2025</td>
+                    <td>
+                        <a href="admin.html#/editar-despesa" class="text-info" title="Editar"><i data-feather="edit"></i></a>
+                        <a href="#" class="text-danger" title="Excluir"><i data-feather="trash-2"></i></a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Manutenção da moto</td>
+                    <td>7.500</td>
+                    <td>03/11/2025</td>
+                    <td>
+                        <a href="admin.html#/editar-despesa" class="text-info" title="Editar"><i data-feather="edit"></i></a>
+                        <a href="#" class="text-danger" title="Excluir"><i data-feather="trash-2"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+c

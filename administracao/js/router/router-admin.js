@@ -5,12 +5,14 @@
   const AUTH = '../sessao-admin/paginas/authentic/admins/';
   const AUTENTICACAO_PARCEIRO = '../sessao-admin/paginas/authentic/autenticacao-parceiro/';
   const PAGINA = '../sessao-admin/paginas/';
+  const BLOCO_NOTAS = '../sessao-admin/paginas/bloco de notas/';
   const CODIGOS_HTTPS = '../sessao-admin/paginas/codigos de status HTTPS/';
   const PERFIL = '../sessao-admin/administrador/perfil-admin/';
   const PEDIDOS = '../sessao-admin/paginas/pedidos/';
   const ADIMINISTRADOR = '../sessao-admin/administrador/';
   const UTILIZADOR = '../sessao-admin/utilizador/';
   const FINANCAS = '../sessao-admin/financas/';
+  const DESPESAS = '../sessao-admin/financas/despesas/';
   const RESTAURANTE = '../sessao-admin/restaurante/';
   const GERENCIAR_RESTAURANTE = '../sessao-admin/restaurante/gerenciar-restaurante/';
   const ENTREGADOR = '../sessao-admin/entregador/';
@@ -45,8 +47,11 @@
     '/home': { title: 'Home', file: PAGINA + 'home.html' },
     '/config': { title: 'Configuracao', file: PAGINA + 'config.html' },
     '/visitantes': { title: 'visitantes', file: PAGINA + 'visitantes.html' },
-    '/notas': { title: 'Bloco de notas', file: PAGINA + 'bloco-notas.html' },
     '/-controlo-admin-': { title: 'Controlando os status do sistema completo', file: PAGINA + 'controlo.html' },
+
+    '/notas': { title: 'Bloco de notas', file: BLOCO_NOTAS + 'bloco-notas.html' },
+    '/editar-nota': { title: 'Editando nota', file: BLOCO_NOTAS + 'editar-nota.html' },
+
 
     '/404': { title: 'Erro 404', file: CODIGOS_HTTPS + '404.html' },
     '/manutencao': { title: 'Dashboard em manuntenção', file: CODIGOS_HTTPS + 'manutencao.html' },
@@ -85,8 +90,11 @@
 
     '/financas': { title: 'Finanças', file: FINANCAS + 'financas.html' },
     '/analisando': { title: 'Analisando', file: FINANCAS + 'analisando.html' },
-    '/despesas': { title: 'Despesas', file: FINANCAS + 'despesas.html' },
     '/contas-bancarias': { title: 'Contas Bancárias dos funcionários', file: FINANCAS + 'contas-bancarias.html' },
+
+    '/despesas': { title: 'Despesas', file: DESPESAS + 'despesas.html' },
+    '/editar-despesa': { title: 'Despesas', file: DESPESAS + 'editar-despesa.html' },
+
 
     '/todos-entregadores': { title: 'Todos os entregadores', file: ENTREGADOR + 'todos-entregadores.html' },
     '/adicionar-entregador': { title: 'Adicionar entregador', file: ENTREGADOR + 'adicionar-entregador.html' },
