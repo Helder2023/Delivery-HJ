@@ -7,7 +7,7 @@
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
             <h2 class="mb-0">Gestão Geral do Restaurante - Lorem, ipsum dolor.</h2>
-            <small class="text-muted">DeliveryHJ — Administração Completa</small>
+            <small class="text-muted">CraveNow — Administração Completa</small>
         </div>
         <div>
             <button class="btn shadow-sm" onclick="window.history.back()">
@@ -241,7 +241,7 @@
                         <tbody>
                             <tr>
                                 <td>Hélder Adão</td>
-                                <td>helder@deliveryhj.com</td>
+                                <td>helder@CraveNow.com</td>
                                 <td>+244 923 123 456</td>
                                 <td>Super Admin</td>
                                 <td>Masculino</td>
@@ -255,7 +255,7 @@
                             </tr>
                             <tr>
                                 <td>Carla Sousa</td>
-                                <td>carla@deliveryhj.com</td>
+                                <td>carla@CraveNow.com</td>
                                 <td>+244 922 987 654</td>
                                 <td>Admin Geral</td>
                                 <td>Feminino</td>
@@ -269,7 +269,7 @@
                             </tr>
                             <tr>
                                 <td>Ricardo Martins</td>
-                                <td>ricardo@deliveryhj.com</td>
+                                <td>ricardo@CraveNow.com</td>
                                 <td>+244 923 555 321</td>
                                 <td>Editor</td>
                                 <td>Masculino</td>
@@ -283,7 +283,7 @@
                             </tr>
                             <tr>
                                 <td>Marta Lopes</td>
-                                <td>marta@deliveryhj.com</td>
+                                <td>marta@CraveNow.com</td>
                                 <td>+244 922 654 987</td>
                                 <td>Admin Geral</td>
                                 <td>Feminino</td>
@@ -297,7 +297,7 @@
                             </tr>
                             <tr>
                                 <td>António Gomes</td>
-                                <td>antonio@deliveryhj.com</td>
+                                <td>antonio@CraveNow.com</td>
                                 <td>+244 923 111 222</td>
                                 <td>Super Admin</td>
                                 <td>Masculino</td>
@@ -311,7 +311,7 @@
                             </tr>
                             <tr>
                                 <td>Helena Costa</td>
-                                <td>helena@deliveryhj.com</td>
+                                <td>helena@CraveNow.com</td>
                                 <td>+244 922 333 444</td>
                                 <td>Editor</td>
                                 <td>Feminino</td>
@@ -325,7 +325,7 @@
                             </tr>
                             <tr>
                                 <td>João Pedro</td>
-                                <td>joao@deliveryhj.com</td>
+                                <td>joao@CraveNow.com</td>
                                 <td>+244 923 777 888</td>
                                 <td>Admin Geral</td>
                                 <td>Masculino</td>
@@ -343,527 +343,548 @@
             </div>
         </div>
 
-    <!-- Entregadores -->
-    <div class="tab-pane fade" id="entregadores">
-        <h5 class="mb-3">Cadastrar Entregador</h5>
-        <div class="card flex-fill p-4">
-
-            <form action="processa_entregador.php" method="post" enctype="multipart/form-data"
-                class="row g-3 needs-validation" novalidate>
-
-                <!-- Upload da Foto -->
-                <div class="upload-foto">
-                    <img id="fotoPreview2" src="../assets/img/avatar/avatar.png" class="foto-preview"
-                        alt="Foto Preview">
-                    <input type="file" id="fotoUpload2" class="form-control w-50" accept="image/*"
-                        name="foto_entregador">
-                </div>
-
-                <div class="col-md-6">
-                    <label for="nome_entregador" class="form-label">Nome completo <span
-                            class="text-danger">*</span></label>
-                    <input type="text" minlength="3" maxlength="50" placeholder="Insira o nome completo"
-                        class="form-control" id="nome_entregador" name="nome" required>
-                    <div class="invalid-feedback">Por favor insira o nome do entregador.</div>
-                </div>
-
-                <div class="col-md-6">
-                    <label for="telefone" class="form-label">Número de Telefone</label>
-                    <input type="tel" maxlength="18" placeholder="+244 900 000 000" class="form-control" id="telefone"
-                        name="telefone">
-                </div>
-
-                <div class="col-md-6">
-                    <label for="email" class="form-label">E-mail <span class="text-danger">*</span></label>
-                    <input type="email" maxlength="60" placeholder="entregador@exemplo.com" class="form-control"
-                        id="email" name="email" required>
-                    <div class="invalid-feedback">Insira um e-mail válido!</div>
-                </div>
-
-                <div class="col-md-6">
-                    <label for="data_nasc" class="form-label">Data de Nascimento</label>
-                    <input type="date" name="data_nasc" id="data_nasc" class="form-control">
-                </div>
-
-                <div class="col-md-6">
-                    <label for="genero" class="form-label">Gênero</label>
-                    <select class="form-control" id="genero" name="genero">
-                        <option value="">Selecione...</option>
-                        <option>Masculino</option>
-                        <option>Feminino</option>
-                    </select>
-                </div>
-
-                <div class="col-md-6">
-                    <label class="form-label">Status</label>
-                    <select class="form-control" name="status">
-                        <option>Ativo</option>
-                        <option>Inativo</option>
-                        <option>Em avaliação</option>
-                    </select>
-                </div>
-
-                <div class="col-md-6">
-                    <label class="form-label">Tipo de Veículo</label>
-                    <select class="form-control" name="tipo_veiculo">
-                        <option value="">Selecione...</option>
-                        <option>Motocicleta</option>
-                        <option>Carro</option>
-                        <option>Bicicleta</option>
-                        <option>Outro</option>
-                    </select>
-                </div>
-
-                <div class="col-md-6">
-                    <label for="matricula" class="form-label">Matrícula / Placa</label>
-                    <input type="text" maxlength="15" placeholder="ABC-1234" class="form-control" id="matricula"
-                        name="matricula">
-                </div>
-
-                <div class="col-md-6">
-                    <label for="endereco" class="form-label">Endereço</label>
-                    <textarea id="endereco" name="endereco" class="form-control" rows="2"
-                        placeholder="Ex: Rua Principal, Bairro, Cidade"></textarea>
-                </div>
-
-                <div class="col-md-6">
-                    <label for="password2" class="form-label">Senha gerada automaticamente</label>
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="password2" name="password" readonly>
-                        <button type="button" class="btn btn-outline-secondary" id="btnRegenerate2">Gerar
-                            senha</button>
-                    </div>
-                </div>
-
-                <div class="col-md-12 form-check">
-                    <input class="form-check-input" type="checkbox" name="notificar" id="notificar" checked>
-                    <label class="form-check-label" for="notificar">
-                        Enviar e-mail com dados de acesso ao entregador
-                    </label>
-                </div>
-
-                <div class="col-12 text-left mt-4">
-                    <button class="btn btn-primary w-25" type="submit">Cadastrar Entregador</button>
-                </div>
-            </form>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <table id="tabela_2" class="table table-borderless my-0 w-100">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Veículo</th>
-                            <th>Matrícula / Placa</th>
-                            <th>Status</th>
-                            <th>Contato</th>
-                            <th>Endereço</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Pedro Lima</td>
-                            <td>Motocicleta Yamaha</td>
-                            <td>ABC-1234</td>
-                            <td>Ativo</td>
-                            <td>+244 999 123 456 | pedro.lima@email.com</td>
-                            <td>Rua 1, Bairro Central, Luanda</td>
-                            <td>
-                                <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
-                                        data-feather="edit"></i></a>
-                                <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>André Pinto</td>
-                            <td>Carro Toyota Corolla</td>
-                            <td>XYZ-5678</td>
-                            <td>Inativo</td>
-                            <td>+244 922 999 111 | andre.pinto@email.com</td>
-                            <td>Av. da Independência, Talatona</td>
-                            <td>
-                                <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
-                                        data-feather="edit"></i></a>
-                                <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Marta Silva</td>
-                            <td>Bicicleta</td>
-                            <td>-</td>
-                            <td>Em avaliação</td>
-                            <td>+244 923 456 789 | marta.silva@email.com</td>
-                            <td>Bairro Benfica, Luanda</td>
-                            <td>
-                                <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
-                                        data-feather="edit"></i></a>
-                                <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Carlos Bento</td>
-                            <td>Motocicleta Honda</td>
-                            <td>DEF-2345</td>
-                            <td>Ativo</td>
-                            <td>+244 944 123 789 | carlos.bento@email.com</td>
-                            <td>Rua do Sol, Viana</td>
-                            <td>
-                                <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
-                                        data-feather="edit"></i></a>
-                                <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>António Gomes</td>
-                            <td>Carro Ford Ranger</td>
-                            <td>GHI-3456</td>
-                            <td>Ativo</td>
-                            <td>+244 933 987 654 | antonio.gomes@email.com</td>
-                            <td>Bairro Nova Vida, Luanda</td>
-                            <td>
-                                <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
-                                        data-feather="edit"></i></a>
-                                <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Helena Lopes</td>
-                            <td>Outro (Patinete Elétrico)</td>
-                            <td>-</td>
-                            <td>Inativo</td>
-                            <td>+244 922 555 666 | helena.lopes@email.com</td>
-                            <td>Av. do Futuro, Talatona</td>
-                            <td>
-                                <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
-                                        data-feather="edit"></i></a>
-                                <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-
-    </div>
-
-    <!-- Cardápios -->
-    <div class="tab-pane fade" id="cardapios">
-        <h5 class="mb-3">Cadastrar Cardápio</h5>
-        <div>
-
+        <!-- Entregadores -->
+        <div class="tab-pane fade" id="entregadores">
+            <h5 class="mb-3">Cadastrar Entregador</h5>
             <div class="card flex-fill p-4">
 
-                <form action="processa_prato.php" method="post" enctype="multipart/form-data"
+                <form action="processa_entregador.php" method="post" enctype="multipart/form-data"
                     class="row g-3 needs-validation" novalidate>
 
                     <!-- Upload da Foto -->
                     <div class="upload-foto">
-                        <img id="fotoPreview3" src="../assets/img/avatar/food.png" class="foto-preview"
-                            alt="Foto do Prato">
-                        <input type="file" id="fotoUpload3" class="form-control w-50" accept="image/*" name="foto_prato"
-                            required>
+                        <img id="fotoPreview2" src="../assets/img/avatar/avatar.png" class="foto-preview"
+                            alt="Foto Preview">
+                        <input type="file" id="fotoUpload2" class="form-control w-50" accept="image/*"
+                            name="foto_entregador">
                     </div>
 
                     <div class="col-md-6">
-                        <label for="nome_prato" class="form-label">Nome do Prato <span
+                        <label for="nome_entregador" class="form-label">Nome completo <span
                                 class="text-danger">*</span></label>
-                        <input type="text" minlength="2" maxlength="60"
-                            placeholder="Ex: Moamba de Galinha, Pizza Margherita" class="form-control" id="nome_prato"
-                            name="nome_prato" required>
-                        <div class="invalid-feedback">Informe o nome do prato.</div>
+                        <input type="text" minlength="3" maxlength="50" placeholder="Insira o nome completo"
+                            class="form-control" id="nome_entregador" name="nome" required>
+                        <div class="invalid-feedback">Por favor insira o nome do entregador.</div>
                     </div>
 
                     <div class="col-md-6">
-                        <label for="restaurante" class="form-label">Restaurante <span
-                                class="text-danger">*</span></label>
-                        <select class="form-control" id="restaurante" name="restaurante" required>
-                            <option value="">Selecione o restaurante...</option>
-                            <option>Restaurante Kapital</option>
-                            <option>Pizza na Pedra</option>
-                            <option>Muamba</option>
-                            <option>Burguer House</option>
-                            <option>Pastelaria Doce Vida</option>
-                        </select>
-                        <div class="invalid-feedback">Selecione o restaurante responsável.</div>
+                        <label for="telefone" class="form-label">Número de Telefone</label>
+                        <input type="tel" maxlength="18" placeholder="+244 900 000 000" class="form-control"
+                            id="telefone" name="telefone">
                     </div>
 
-                    <div class="col-md-12">
-                        <label for="descricao" class="form-label">Descrição / Ingredientes</label>
-                        <textarea id="descricao" name="descricao" class="form-control" rows="3"
-                            placeholder="Ex: Frango, dendê, gindungo, óleo de palma, alho..."></textarea>
+                    <div class="col-md-6">
+                        <label for="email" class="form-label">E-mail <span class="text-danger">*</span></label>
+                        <input type="email" maxlength="60" placeholder="entregador@exemplo.com" class="form-control"
+                            id="email" name="email" required>
+                        <div class="invalid-feedback">Insira um e-mail válido!</div>
                     </div>
 
-                    <div class="col-md-4">
-                        <label for="categoria" class="form-label">Categoria</label>
-                        <select class="form-control" id="categoria" name="categoria">
+                    <div class="col-md-6">
+                        <label for="data_nasc" class="form-label">Data de Nascimento</label>
+                        <input type="date" name="data_nasc" id="data_nasc" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="genero" class="form-label">Gênero</label>
+                        <select class="form-control" id="genero" name="genero">
                             <option value="">Selecione...</option>
-                            <option>Tradicional</option>
-                            <option>Italiana</option>
-                            <option>Confeitaria</option>
-                            <option>Fast Food</option>
-                            <option>Brasileira</option>
-                            <option>Angolana</option>
+                            <option>Masculino</option>
+                            <option>Feminino</option>
                         </select>
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="tempo_preparo" class="form-label">Tempo de Preparo (min)</label>
-                        <input type="number" min="1" max="240" placeholder="Ex: 45" class="form-control"
-                            id="tempo_preparo" name="tempo_preparo">
-                    </div>
-
-                    <div class="col-md-4">
-                        <label for="preco" class="form-label">Preço (Kz) <span class="text-danger">*</span></label>
-                        <input type="number" min="0" step="0.01" placeholder="Ex: 3500" class="form-control" id="preco"
-                            name="preco" required>
-                        <div class="invalid-feedback">Informe o preço do prato.</div>
                     </div>
 
                     <div class="col-md-6">
                         <label class="form-label">Status</label>
                         <select class="form-control" name="status">
-                            <option>Disponível</option>
-                            <option>Indisponível</option>
+                            <option>Ativo</option>
+                            <option>Inativo</option>
+                            <option>Em avaliação</option>
                         </select>
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label">Destaque</label>
-                        <select class="form-control" name="destaque">
-                            <option>Sim</option>
-                            <option>Não</option>
+                        <label class="form-label">Tipo de Veículo</label>
+                        <select class="form-control" name="tipo_veiculo">
+                            <option value="">Selecione...</option>
+                            <option>Motocicleta</option>
+                            <option>Carro</option>
+                            <option>Bicicleta</option>
+                            <option>Outro</option>
                         </select>
                     </div>
 
+                    <div class="col-md-6">
+                        <label for="matricula" class="form-label">Matrícula / Placa</label>
+                        <input type="text" maxlength="15" placeholder="ABC-1234" class="form-control" id="matricula"
+                            name="matricula">
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="endereco" class="form-label">Endereço</label>
+                        <textarea id="endereco" name="endereco" class="form-control" rows="2"
+                            placeholder="Ex: Rua Principal, Bairro, Cidade"></textarea>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="password2" class="form-label">Senha gerada automaticamente</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="password2" name="password" readonly>
+                            <button type="button" class="btn btn-outline-secondary" id="btnRegenerate2">Gerar
+                                senha</button>
+                        </div>
+                    </div>
+
                     <div class="col-md-12 form-check">
-                        <input class="form-check-input" type="checkbox" name="notificar" id="notificar">
+                        <input class="form-check-input" type="checkbox" name="notificar" id="notificar" checked>
                         <label class="form-check-label" for="notificar">
-                            Enviar notificação aos clientes sobre o novo prato
+                            Enviar e-mail com dados de acesso ao entregador
                         </label>
                     </div>
 
                     <div class="col-12 text-left mt-4">
-                        <button class="btn btn-primary w-25" type="submit">Cadastrar Prato</button>
+                        <button class="btn btn-primary w-25" type="submit">Cadastrar Entregador</button>
                     </div>
                 </form>
             </div>
+            <div class="card">
+                <div class="card-body">
+                    <table id="tabela_2" class="table table-borderless my-0 w-100">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Veículo</th>
+                                <th>Matrícula / Placa</th>
+                                <th>Status</th>
+                                <th>Contato</th>
+                                <th>Endereço</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Pedro Lima</td>
+                                <td>Motocicleta Yamaha</td>
+                                <td>ABC-1234</td>
+                                <td>Ativo</td>
+                                <td>+244 999 123 456 | pedro.lima@email.com</td>
+                                <td>Rua 1, Bairro Central, Luanda</td>
+                                <td>
+                                    <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
+                                            data-feather="edit"></i></a>
+                                    <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>André Pinto</td>
+                                <td>Carro Toyota Corolla</td>
+                                <td>XYZ-5678</td>
+                                <td>Inativo</td>
+                                <td>+244 922 999 111 | andre.pinto@email.com</td>
+                                <td>Av. da Independência, Talatona</td>
+                                <td>
+                                    <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
+                                            data-feather="edit"></i></a>
+                                    <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Marta Silva</td>
+                                <td>Bicicleta</td>
+                                <td>-</td>
+                                <td>Em avaliação</td>
+                                <td>+244 923 456 789 | marta.silva@email.com</td>
+                                <td>Bairro Benfica, Luanda</td>
+                                <td>
+                                    <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
+                                            data-feather="edit"></i></a>
+                                    <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Carlos Bento</td>
+                                <td>Motocicleta Honda</td>
+                                <td>DEF-2345</td>
+                                <td>Ativo</td>
+                                <td>+244 944 123 789 | carlos.bento@email.com</td>
+                                <td>Rua do Sol, Viana</td>
+                                <td>
+                                    <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
+                                            data-feather="edit"></i></a>
+                                    <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>António Gomes</td>
+                                <td>Carro Ford Ranger</td>
+                                <td>GHI-3456</td>
+                                <td>Ativo</td>
+                                <td>+244 933 987 654 | antonio.gomes@email.com</td>
+                                <td>Bairro Nova Vida, Luanda</td>
+                                <td>
+                                    <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
+                                            data-feather="edit"></i></a>
+                                    <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Helena Lopes</td>
+                                <td>Outro (Patinete Elétrico)</td>
+                                <td>-</td>
+                                <td>Inativo</td>
+                                <td>+244 922 555 666 | helena.lopes@email.com</td>
+                                <td>Av. do Futuro, Talatona</td>
+                                <td>
+                                    <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
+                                            data-feather="edit"></i></a>
+                                    <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
         </div>
 
-        <!-- Cabeçalho -->
-        <div class="row mb-3">
-            <div class="col-auto d-sm-block">
-                <h3 class="text-light">Todos os Cardápios</h3>
+        <!-- Cardápios -->
+        <div class="tab-pane fade" id="cardapios">
+            <h5 class="mb-3">Cadastrar Cardápio</h5>
+            <div>
+
+                <div class="card flex-fill p-4">
+
+                    <form action="processa_prato.php" method="post" enctype="multipart/form-data"
+                        class="row g-3 needs-validation" novalidate>
+
+                        <!-- Upload da Foto -->
+                        <div class="upload-foto">
+                            <img id="fotoPreview3" src="../assets/img/avatar/food.png" class="foto-preview"
+                                alt="Foto do Prato">
+                            <input type="file" id="fotoUpload3" class="form-control w-50" accept="image/*"
+                                name="foto_prato" required>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="nome_prato" class="form-label">Nome do Prato <span
+                                    class="text-danger">*</span></label>
+                            <input type="text" minlength="2" maxlength="60"
+                                placeholder="Ex: Moamba de Galinha, Pizza Margherita" class="form-control"
+                                id="nome_prato" name="nome_prato" required>
+                            <div class="invalid-feedback">Informe o nome do prato.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="restaurante" class="form-label">Restaurante <span
+                                    class="text-danger">*</span></label>
+                            <select class="form-control" id="restaurante" name="restaurante" required>
+                                <option value="">Selecione o restaurante...</option>
+                                <option>Restaurante Kapital</option>
+                                <option>Pizza na Pedra</option>
+                                <option>Muamba</option>
+                                <option>Burguer House</option>
+                                <option>Pastelaria Doce Vida</option>
+                            </select>
+                            <div class="invalid-feedback">Selecione o restaurante responsável.</div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label for="descricao" class="form-label">Descrição / Ingredientes</label>
+                            <textarea id="descricao" name="descricao" class="form-control" rows="3"
+                                placeholder="Ex: Frango, dendê, gindungo, óleo de palma, alho..."></textarea>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="categoria" class="form-label">Categoria</label>
+                            <select class="form-control" id="categoria" name="categoria">
+                                <option value="">Selecione...</option>
+                                <option>Tradicional</option>
+                                <option>Italiana</option>
+                                <option>Confeitaria</option>
+                                <option>Fast Food</option>
+                                <option>Brasileira</option>
+                                <option>Angolana</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="tempo_preparo" class="form-label">Tempo de Preparo (min)</label>
+                            <input type="number" min="1" max="240" placeholder="Ex: 45" class="form-control"
+                                id="tempo_preparo" name="tempo_preparo">
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="preco" class="form-label">Preço (Kz) <span class="text-danger">*</span></label>
+                            <input type="number" min="0" step="0.01" placeholder="Ex: 3500" class="form-control"
+                                id="preco" name="preco" required>
+                            <div class="invalid-feedback">Informe o preço do prato.</div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Status</label>
+                            <select class="form-control" name="status">
+                                <option>Disponível</option>
+                                <option>Indisponível</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Destaque</label>
+                            <select class="form-control" name="destaque">
+                                <option>Sim</option>
+                                <option>Não</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12 form-check">
+                            <input class="form-check-input" type="checkbox" name="notificar" id="notificar">
+                            <label class="form-check-label" for="notificar">
+                                Enviar notificação aos clientes sobre o novo prato
+                            </label>
+                        </div>
+
+                        <div class="col-12 text-left mt-4">
+                            <button class="btn btn-primary w-25" type="submit">Cadastrar Prato</button>
+                        </div>
+                    </form>
+                </div>
             </div>
 
-        </div>
+            <!-- Cabeçalho -->
+            <div class="row mb-3">
+                <div class="col-auto d-sm-block">
+                    <h3 class="text-light">Todos os Cardápios</h3>
+                </div>
 
-        <div>
-            <!-- Barra de Pesquisa -->
-            <div class="search-bar mb-3">
-                <input type="text" id="searchInput" placeholder="Pesquisar pratos..."
-                    style="border: white solid 1px; padding: 8px; width: 100%; border-radius: 6px;">
             </div>
 
-            <!-- Container dos Cards -->
-            <div id="cards-container" class="row g-4">
-                <!-- Card de exemplo -->
-                <!-- Card 1 -->
-                <div class="col-12 col-md-6 col-lg-4 card-item">
-                    <div class="restaurant-card p-3"
-                        style="border:1px solid #ccc; border-radius:12px; background-color:#2b2b2c; color:white;">
-                        <img src="../assets/img/avatar/food.png" alt="Frango Grelhado"
-                            style="width:100%; border-radius:12px;">
-                        <div class="restaurant-body mt-2">
-                            <div class="d-flex justify-content-between align-items-center mb-1">
-                                <h5>Frango Grelhado</h5>
-                                <i class="status disponivel">Disponível</i>
-                            </div>
-                            <p>Restaurante: Muamba</p>
-                            <p>Preço: 3.500 Kz</p>
-                            <p>Categoria: Tradicional</p>
-                            <p>Tempo de preparo: 45 min</p>
-                            <p>Destaque: Sim</p>
-                            <p>Ingredientes: Frango, alho, óleo de palma, gindungo, sal</p>
-                            <div class="d-flex justify-content-between mt-2">
-                                <a href="admin.html#/gerenciar-restaurante"><i data-feather="trash-2"></i></a>
+            <div>
+                <!-- Barra de Pesquisa -->
+                <div class="search-bar mb-3">
+                    <input type="text" id="searchInput" placeholder="Pesquisar pratos..."
+                        style="border: white solid 1px; padding: 8px; width: 100%; border-radius: 6px;">
+                </div>
+
+                <!-- Container dos Cards -->
+                <div id="cards-container" class="row g-4">
+                    <!-- Card de exemplo -->
+                    <!-- Card 1 -->
+                    <div class="col-12 col-md-6 col-lg-4 card-item">
+                        <div class="restaurant-card p-3"
+                            style="border:1px solid #ccc; border-radius:12px; background-color:#2b2b2c; color:white;">
+                            <img src="../assets/img/avatar/food.png" alt="Frango Grelhado"
+                                style="width:100%; border-radius:12px;">
+                            <div class="restaurant-body mt-2">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <h5>Frango Grelhado</h5>
+                                    <i class="status disponivel">Disponível</i>
+                                </div>
+                                <p>Restaurante: Muamba</p>
+                                <p>Preço: 3.500 Kz</p>
+                                <p>Categoria: Tradicional</p>
+                                <p>Tempo de preparo: 45 min</p>
+                                <p>Destaque: Sim</p>
+                                <p>Ingredientes: Frango, alho, óleo de palma, gindungo, sal</p>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <a href="admin.html#/gerenciar-restaurante"><i data-feather="trash-2"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Card 2 -->
-                <div class="col-12 col-md-6 col-lg-4 card-item">
-                    <div class="restaurant-card p-3"
-                        style="border:1px solid #ccc; border-radius:12px; background-color:#2b2b2c; color:white;">
-                        <img src="../assets/img/avatar/food.png" alt="Pizza Calabresa"
-                            style="width:100%; border-radius:12px;">
-                        <div class="restaurant-body mt-2">
-                            <div class="d-flex justify-content-between align-items-center mb-1">
-                                <h5>Pizza Calabresa</h5>
-                                <span class="status ativo"
-                                    style="background-color:#198754; padding:3px 8px; border-radius:50px;">Disponível</span>
-                            </div>
-                            <p>Restaurante: Pizza na Pedra</p>
-                            <p>Preço: 4.000 Kz</p>
-                            <p>Categoria: Italiana</p>
-                            <p>Tempo de preparo: 30 min</p>
-                            <p>Destaque: Não</p>
-                            <p>Ingredientes: Massa, molho de tomate, queijo, calabresa, orégano</p>
-                            <div class="d-flex justify-content-between mt-2">
-                                <a href="admin.html#/gerenciar-restaurante"><i data-feather="trash-2"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Card 3 -->
-                <div class="col-12 col-md-6 col-lg-4 card-item">
-                    <div class="restaurant-card p-3"
-                        style="border:1px solid #ccc; border-radius:12px; background-color:#2b2b2c; color:white;">
-                        <img src="../assets/img/avatar/food.png" alt="Hambúrguer Duplo"
-                            style="width:100%; border-radius:12px;">
-                        <div class="restaurant-body mt-2">
-                            <div class="d-flex justify-content-between align-items-center mb-1">
-                                <h5>Hambúrguer Duplo</h5>
-                                <i class="status indisponivel">Indisponível</i>
-
-                            </div>
-                            <p>Restaurante: Burguer House</p>
-                            <p>Preço: 2.800 Kz</p>
-                            <p>Categoria: Fast Food</p>
-                            <p>Tempo de preparo: 20 min</p>
-                            <p>Destaque: Sim</p>
-                            <p>Ingredientes: Pão, carne bovina, queijo, alface, tomate, molho especial</p>
-                            <div class="d-flex justify-content-between mt-2">
-                                <a href="admin.html#/gerenciar-restaurante"><i data-feather="trash-2"></i></a>
+                    <!-- Card 2 -->
+                    <div class="col-12 col-md-6 col-lg-4 card-item">
+                        <div class="restaurant-card p-3"
+                            style="border:1px solid #ccc; border-radius:12px; background-color:#2b2b2c; color:white;">
+                            <img src="../assets/img/avatar/food.png" alt="Pizza Calabresa"
+                                style="width:100%; border-radius:12px;">
+                            <div class="restaurant-body mt-2">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <h5>Pizza Calabresa</h5>
+                                    <span class="status ativo"
+                                        style="background-color:#198754; padding:3px 8px; border-radius:50px;">Disponível</span>
+                                </div>
+                                <p>Restaurante: Pizza na Pedra</p>
+                                <p>Preço: 4.000 Kz</p>
+                                <p>Categoria: Italiana</p>
+                                <p>Tempo de preparo: 30 min</p>
+                                <p>Destaque: Não</p>
+                                <p>Ingredientes: Massa, molho de tomate, queijo, calabresa, orégano</p>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <a href="admin.html#/gerenciar-restaurante"><i data-feather="trash-2"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Card 3 -->
+                    <div class="col-12 col-md-6 col-lg-4 card-item">
+                        <div class="restaurant-card p-3"
+                            style="border:1px solid #ccc; border-radius:12px; background-color:#2b2b2c; color:white;">
+                            <img src="../assets/img/avatar/food.png" alt="Hambúrguer Duplo"
+                                style="width:100%; border-radius:12px;">
+                            <div class="restaurant-body mt-2">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <h5>Hambúrguer Duplo</h5>
+                                    <i class="status indisponivel">Indisponível</i>
+
+                                </div>
+                                <p>Restaurante: Burguer House</p>
+                                <p>Preço: 2.800 Kz</p>
+                                <p>Categoria: Fast Food</p>
+                                <p>Tempo de preparo: 20 min</p>
+                                <p>Destaque: Sim</p>
+                                <p>Ingredientes: Pão, carne bovina, queijo, alface, tomate, molho especial</p>
+                                <div class="d-flex justify-content-between mt-2">
+                                    <a href="admin.html#/gerenciar-restaurante"><i data-feather="trash-2"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Adicione mais pratos fictícios conforme necessário -->
                 </div>
 
 
-                <!-- Adicione mais pratos fictícios conforme necessário -->
-            </div>
 
+                <!-- Paginação -->
+                <div id="pagination-controls" class="d-flex justify-content-center mt-4"></div>
+                <script>
+                    feather.replace();
 
+                    (function () {
+                        'use strict';
 
-            <!-- Paginação -->
-            <div id="pagination-controls" class="d-flex justify-content-center mt-4"></div>
-            <script>
-                feather.replace();
+                        const cardsPerPage = 6;
+                        const cardsContainer = document.getElementById('cards-container');
+                        const paginationContainer = document.getElementById('pagination-controls');
+                        const searchInput = document.getElementById('searchInput');
 
-                (function () {
-                    'use strict';
+                        const cards = Array.from(cardsContainer.querySelectorAll('.card-item'));
+                        let filteredCards = [...cards];
+                        let currentPage = 1;
 
-                    const cardsPerPage = 6;
-                    const cardsContainer = document.getElementById('cards-container');
-                    const paginationContainer = document.getElementById('pagination-controls');
-                    const searchInput = document.getElementById('searchInput');
+                        function showPage(page) {
+                            currentPage = page;
+                            const start = (page - 1) * cardsPerPage;
+                            const end = start + cardsPerPage;
 
-                    const cards = Array.from(cardsContainer.querySelectorAll('.card-item'));
-                    let filteredCards = [...cards];
-                    let currentPage = 1;
+                            // 1) Esconde todas as cartas primeiro
+                            cards.forEach(card => {
+                                card.style.display = 'none';
+                            });
 
-                    function showPage(page) {
-                        currentPage = page;
-                        const start = (page - 1) * cardsPerPage;
-                        const end = start + cardsPerPage;
+                            // 2) Mostra apenas o subset da página atual em filteredCards
+                            const pageSlice = filteredCards.slice(start, end);
+                            pageSlice.forEach(card => {
+                                // '' deixa o CSS/Bootstrap decidir (mantém col- classes)
+                                card.style.display = '';
+                            });
 
-                        // 1) Esconde todas as cartas primeiro
-                        cards.forEach(card => {
-                            card.style.display = 'none';
-                        });
-
-                        // 2) Mostra apenas o subset da página atual em filteredCards
-                        const pageSlice = filteredCards.slice(start, end);
-                        pageSlice.forEach(card => {
-                            // '' deixa o CSS/Bootstrap decidir (mantém col- classes)
-                            card.style.display = '';
-                        });
-
-                        renderPagination();
-                    }
-
-                    function renderPagination() {
-                        paginationContainer.innerHTML = '';
-                        const totalPages = Math.max(1, Math.ceil(filteredCards.length / cardsPerPage));
-
-                        // Se não houver nenhuma carta, mostra mensagem simples
-                        if (filteredCards.length === 0) {
-                            const info = document.createElement('div');
-                            info.className = 'text-muted';
-                            info.textContent = 'Nenhum prato encontrado.';
-                            paginationContainer.appendChild(info);
-                            return;
+                            renderPagination();
                         }
 
-                        const prevBtn = document.createElement('button');
-                        prevBtn.textContent = '← Anterior';
-                        prevBtn.className = 'btn btn-sm mx-1 shadow-sm';
-                        prevBtn.disabled = currentPage === 1;
-                        prevBtn.onclick = () => showPage(Math.max(1, currentPage - 1));
-                        paginationContainer.appendChild(prevBtn);
+                        function renderPagination() {
+                            paginationContainer.innerHTML = '';
+                            const totalPages = Math.max(1, Math.ceil(filteredCards.length / cardsPerPage));
 
-                        for (let i = 1; i <= totalPages; i++) {
-                            const btn = document.createElement('button');
-                            btn.textContent = i;
-                            btn.className = 'btn btn-sm mx-1 shadow-sm ' + (i === currentPage ? 'btn-primary' : 'btn-light');
-                            btn.onclick = () => showPage(i);
-                            paginationContainer.appendChild(btn);
+                            // Se não houver nenhuma carta, mostra mensagem simples
+                            if (filteredCards.length === 0) {
+                                const info = document.createElement('div');
+                                info.className = 'text-muted';
+                                info.textContent = 'Nenhum prato encontrado.';
+                                paginationContainer.appendChild(info);
+                                return;
+                            }
+
+                            const prevBtn = document.createElement('button');
+                            prevBtn.textContent = '← Anterior';
+                            prevBtn.className = 'btn btn-sm mx-1 shadow-sm';
+                            prevBtn.disabled = currentPage === 1;
+                            prevBtn.onclick = () => showPage(Math.max(1, currentPage - 1));
+                            paginationContainer.appendChild(prevBtn);
+
+                            for (let i = 1; i <= totalPages; i++) {
+                                const btn = document.createElement('button');
+                                btn.textContent = i;
+                                btn.className = 'btn btn-sm mx-1 shadow-sm ' + (i === currentPage ? 'btn-primary' : 'btn-light');
+                                btn.onclick = () => showPage(i);
+                                paginationContainer.appendChild(btn);
+                            }
+
+                            const nextBtn = document.createElement('button');
+                            nextBtn.textContent = 'Próximo →';
+                            nextBtn.className = 'btn btn-sm mx-1 shadow-sm';
+                            nextBtn.disabled = currentPage === totalPages;
+                            nextBtn.onclick = () => showPage(Math.min(totalPages, currentPage + 1));
+                            paginationContainer.appendChild(nextBtn);
                         }
 
-                        const nextBtn = document.createElement('button');
-                        nextBtn.textContent = 'Próximo →';
-                        nextBtn.className = 'btn btn-sm mx-1 shadow-sm';
-                        nextBtn.disabled = currentPage === totalPages;
-                        nextBtn.onclick = () => showPage(Math.min(totalPages, currentPage + 1));
-                        paginationContainer.appendChild(nextBtn);
-                    }
-
-                    function filterCards() {
-                        const searchValue = (searchInput.value || '').trim().toLowerCase();
-                        if (searchValue === '') {
-                            filteredCards = [...cards];
-                        } else {
-                            filteredCards = cards.filter(card =>
-                                card.textContent.toLowerCase().includes(searchValue)
-                            );
+                        function filterCards() {
+                            const searchValue = (searchInput.value || '').trim().toLowerCase();
+                            if (searchValue === '') {
+                                filteredCards = [...cards];
+                            } else {
+                                filteredCards = cards.filter(card =>
+                                    card.textContent.toLowerCase().includes(searchValue)
+                                );
+                            }
+                            currentPage = 1;
+                            showPage(1);
                         }
-                        currentPage = 1;
+
+                        // eventos
+                        searchInput.addEventListener('input', filterCards);
+
+                        // inicializa
                         showPage(1);
-                    }
 
-                    // eventos
-                    searchInput.addEventListener('input', filterCards);
-
-                    // inicializa
-                    showPage(1);
-
-                })();
-            </script>
+                    })();
+                </script>
 
 
+            </div>
         </div>
-    </div>
 
-    <!-- Financas -->
-    <div class="tab-pane fade" id="financas">
-        <div class="row g-3">
-            <div class="col-12 col-sm-6 col-xxl-3 d-flex">
-                <div class="card flex-fill card-dashboard">
-                    <div class="card-body py-4">
-                        <div class="d-flex align-items-start">
-                            <div class="flex-grow-1">
-                                <h3 class="mb-2">Receita Semana <span class="badge badge-soft-dark indicator"
-                                        style="background-color: white; color: black !important;">3.200
-                                        Kz</span></h3>
-                                <p class="mb-2">Valor recebido nesta semana.</p>
+        <!-- Financas -->
+        <div class="tab-pane fade" id="financas">
+            <div class="row g-3">
+                <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+                    <div class="card flex-fill card-dashboard">
+                        <div class="card-body py-4">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-grow-1">
+                                    <h3 class="mb-2">Receita Semana <span class="badge badge-soft-dark indicator"
+                                            style="background-color: white; color: black !important;">3.200
+                                            Kz</span></h3>
+                                    <p class="mb-2">Valor recebido nesta semana.</p>
+                                </div>
+                                <div class="d-inline-block ms-3">
+                                    <div class="stat">
+                                        <i data-feather="dollar-sign" class="align-middle text-info"></i>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="d-inline-block ms-3">
-                                <div class="stat">
-                                    <i data-feather="dollar-sign" class="align-middle text-info"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+                    <div class="card flex-fill card-dashboard">
+                        <div class="card-body py-4">
+                            <div class="d-flex align-items-start">
+                                <div class="flex-grow-1">
+                                    <h3 class="mb-2">Pendentes Semana <span class="badge badge-soft-dark indicator"
+                                            style="background-color: white; color: black !important;">0
+                                            Kz</span></h3>
+                                    <p class="mb-2">Pagamentos ainda não confirmados.</p>
+                                </div>
+                                <div class="d-inline-block ms-3">
+                                    <div class="stat">
+                                        <i data-feather="clock" class="align-middle text-warning"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -871,139 +892,118 @@
                 </div>
             </div>
 
-            <div class="col-12 col-sm-6 col-xxl-3 d-flex">
-                <div class="card flex-fill card-dashboard">
-                    <div class="card-body py-4">
-                        <div class="d-flex align-items-start">
-                            <div class="flex-grow-1">
-                                <h3 class="mb-2">Pendentes Semana <span class="badge badge-soft-dark indicator"
-                                        style="background-color: white; color: black !important;">0
-                                        Kz</span></h3>
-                                <p class="mb-2">Pagamentos ainda não confirmados.</p>
-                            </div>
-                            <div class="d-inline-block ms-3">
-                                <div class="stat">
-                                    <i data-feather="clock" class="align-middle text-warning"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+            <!-- CARD DO TOTAL DE COMISSÕES -->
+            <div class="card card-dashboard p-3 mt-3" id="cardComissoes">
+                <h4>Total de Comissões</h4>
+                <h2 id="totalComissoes" class="fw-bold">0 AKZ</h2>
+            </div>
+
+            <div class="card mb-3 card-dashboard">
+                <div class="card-body d-flex align-items-center gap-3 flex-wrap">
+
+                    <!-- Ano -->
+                    <label for="selectAno" class="mb-0">Ano:</label>
+                    <select id="selectAno" class="form-select w-auto">
+                        <option value="">Todos</option>
+                    </select>
+
+                    <!-- Mês -->
+                    <label for="selectMes" class="mb-0">Mês:</label>
+                    <select id="selectMes" class="form-select w-auto">
+                        <option value="">Todos</option>
+                        <option value="1">Jan</option>
+                        <option value="2">Fev</option>
+                        <option value="3">Mar</option>
+                        <option value="4">Abr</option>
+                        <option value="5">Mai</option>
+                        <option value="6">Jun</option>
+                        <option value="7">Jul</option>
+                        <option value="8">Ago</option>
+                        <option value="9">Set</option>
+                        <option value="10">Out</option>
+                        <option value="11">Nov</option>
+                        <option value="12">Dez</option>
+                    </select>
+
+                    <!-- Semana -->
+                    <label for="selectSemana" class="mb-0">Semana:</label>
+                    <select id="selectSemana" class="form-select w-auto">
+                        <option value="">Todas</option>
+                        <option value="1">Semana 1</option>
+                        <option value="2">Semana 2</option>
+                        <option value="3">Semana 3</option>
+                        <option value="4">Semana 4</option>
+                    </select>
+
+                    <!-- Botão Atualizar -->
+                    <button id="btnAtualizar" class="btn btn-primary">
+                        <i data-feather="refresh-cw"></i> Atualizar
+                    </button>
                 </div>
             </div>
-        </div>
+            <div class="card">
+                <div class="card-body">
+                    <table id="tabela_4" class="pedidos table table-borderless my-0 w-100">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Pedido</th>
+                                <th>Nome</th> <!-- ADICIONADO -->
+                                <th>Preço (AKZ)</th> <!-- ADICIONADO -->
+                                <th>Quantidade</th> <!-- ADICIONADO -->
+                                <th>Data</th>
+                                <th>Valor (AKZ)</th>
+                                <th>Comissão 15%</th>
+                                <th>Valor Final</th>
+                            </tr>
+                        </thead>
 
+                        <tbody>
 
-        <!-- CARD DO TOTAL DE COMISSÕES -->
-        <div class="card card-dashboard p-3 mt-3" id="cardComissoes">
-            <h4>Total de Comissões</h4>
-            <h2 id="totalComissoes" class="fw-bold">0 AKZ</h2>
-        </div>
+                            <tr data-ano="2025" data-mes="1" data-semana="1">
+                                <td>#001</td>
+                                <td>Pedido 1</td>
+                                <td>Pizza Média</td> <!-- ADICIONADO -->
+                                <td class="preco">3500</td> <!-- ADICIONADO -->
+                                <td class="quantidade">2</td> <!-- ADICIONADO -->
+                                <td>2025-01-05</td>
+                                <td class="valor"></td> <!-- calculado -->
+                                <td class="comissao"></td> <!-- calculado -->
+                                <td class="final"></td> <!-- calculado -->
+                            </tr>
 
-        <div class="card mb-3 card-dashboard">
-            <div class="card-body d-flex align-items-center gap-3 flex-wrap">
+                            <tr data-ano="2025" data-mes="2" data-semana="2">
+                                <td>#002</td>
+                                <td>Pedido 2</td>
+                                <td>Hambúrguer Duplo</td> <!-- ADICIONADO -->
+                                <td class="preco">4000</td> <!-- ADICIONADO -->
+                                <td class="quantidade">2</td> <!-- ADICIONADO -->
+                                <td>2025-02-14</td>
+                                <td class="valor"></td>
+                                <td class="comissao"></td>
+                                <td class="final"></td>
+                            </tr>
 
-                <!-- Ano -->
-                <label for="selectAno" class="mb-0">Ano:</label>
-                <select id="selectAno" class="form-select w-auto">
-                    <option value="">Todos</option>
-                </select>
+                            <tr data-ano="2024" data-mes="12" data-semana="4">
+                                <td>#003</td>
+                                <td>Pedido 3</td>
+                                <td>Frango Assado</td> <!-- ADICIONADO -->
+                                <td class="preco">5000</td> <!-- ADICIONADO -->
+                                <td class="quantidade">1</td> <!-- ADICIONADO -->
+                                <td>2023-11-22</td>
+                                <td class="valor"></td>
+                                <td class="comissao"></td>
+                                <td class="final"></td>
+                            </tr>
 
-                <!-- Mês -->
-                <label for="selectMes" class="mb-0">Mês:</label>
-                <select id="selectMes" class="form-select w-auto">
-                    <option value="">Todos</option>
-                    <option value="1">Jan</option>
-                    <option value="2">Fev</option>
-                    <option value="3">Mar</option>
-                    <option value="4">Abr</option>
-                    <option value="5">Mai</option>
-                    <option value="6">Jun</option>
-                    <option value="7">Jul</option>
-                    <option value="8">Ago</option>
-                    <option value="9">Set</option>
-                    <option value="10">Out</option>
-                    <option value="11">Nov</option>
-                    <option value="12">Dez</option>
-                </select>
-
-                <!-- Semana -->
-                <label for="selectSemana" class="mb-0">Semana:</label>
-                <select id="selectSemana" class="form-select w-auto">
-                    <option value="">Todas</option>
-                    <option value="1">Semana 1</option>
-                    <option value="2">Semana 2</option>
-                    <option value="3">Semana 3</option>
-                    <option value="4">Semana 4</option>
-                </select>
-
-                <!-- Botão Atualizar -->
-                <button id="btnAtualizar" class="btn btn-primary">
-                    <i data-feather="refresh-cw"></i> Atualizar
-                </button>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
         </div>
-        <div class="card">
-            <div class="card-body">
-                <table id="tabela_4" class="pedidos table table-borderless my-0 w-100">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Pedido</th>
-                            <th>Nome</th> <!-- ADICIONADO -->
-                            <th>Preço (AKZ)</th> <!-- ADICIONADO -->
-                            <th>Quantidade</th> <!-- ADICIONADO -->
-                            <th>Data</th>
-                            <th>Valor (AKZ)</th>
-                            <th>Comissão 15%</th>
-                            <th>Valor Final</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        <tr data-ano="2025" data-mes="1" data-semana="1">
-                            <td>#001</td>
-                            <td>Pedido 1</td>
-                            <td>Pizza Média</td> <!-- ADICIONADO -->
-                            <td class="preco">3500</td> <!-- ADICIONADO -->
-                            <td class="quantidade">2</td> <!-- ADICIONADO -->
-                            <td>2025-01-05</td>
-                            <td class="valor"></td> <!-- calculado -->
-                            <td class="comissao"></td> <!-- calculado -->
-                            <td class="final"></td> <!-- calculado -->
-                        </tr>
-
-                        <tr data-ano="2025" data-mes="2" data-semana="2">
-                            <td>#002</td>
-                            <td>Pedido 2</td>
-                            <td>Hambúrguer Duplo</td> <!-- ADICIONADO -->
-                            <td class="preco">4000</td> <!-- ADICIONADO -->
-                            <td class="quantidade">2</td> <!-- ADICIONADO -->
-                            <td>2025-02-14</td>
-                            <td class="valor"></td>
-                            <td class="comissao"></td>
-                            <td class="final"></td>
-                        </tr>
-
-                        <tr data-ano="2024" data-mes="12" data-semana="4">
-                            <td>#003</td>
-                            <td>Pedido 3</td>
-                            <td>Frango Assado</td> <!-- ADICIONADO -->
-                            <td class="preco">5000</td> <!-- ADICIONADO -->
-                            <td class="quantidade">1</td> <!-- ADICIONADO -->
-                            <td>2023-11-22</td>
-                            <td class="valor"></td>
-                            <td class="comissao"></td>
-                            <td class="final"></td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
     </div>
-</div>
 </div>
 
 
@@ -1442,7 +1442,7 @@
     // Geração automática de senha personalizada
     function gerarSenha(tamanho = 15) {
         const numeros = "0123456789";
-        let senha = "Delivery_HJ_";
+        let senha = "CraveNow_HJ_";
         for (let i = 0; i < tamanho; i++) {
             senha += numeros.charAt(Math.floor(Math.random() * numeros.length));
         }
@@ -1474,7 +1474,7 @@
     // Geração automática de senha personalizada
     function gerarSenha(tamanho = 15) {
         const numeros = "0123456789";
-        let senha = "Delivery_HJ_";
+        let senha = "CraveNow_HJ_";
         for (let i = 0; i < tamanho; i++) {
             senha += numeros.charAt(Math.floor(Math.random() * numeros.length));
         }
@@ -1505,7 +1505,7 @@
     // Geração automática de senha personalizada
     function gerarSenha(tamanho = 15) {
         const numeros = "0123456789";
-        let senha = "Delivery_HJ_";
+        let senha = "CraveNow_HJ_";
         for (let i = 0; i < tamanho; i++) {
             senha += numeros.charAt(Math.floor(Math.random() * numeros.length));
         }

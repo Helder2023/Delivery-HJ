@@ -46817,7 +46817,7 @@
                   trash: ["garbage", "delete", "remove", "bin"],
                   "trash-2": ["garbage", "delete", "remove", "bin"],
                   triangle: ["delta"],
-                  truck: ["delivery", "van", "shipping", "transport", "lorry"],
+                  truck: ["CraveNow", "van", "shipping", "transport", "lorry"],
                   tv: ["television", "stream"],
                   twitch: ["logo"],
                   twitter: ["logo", "social"],

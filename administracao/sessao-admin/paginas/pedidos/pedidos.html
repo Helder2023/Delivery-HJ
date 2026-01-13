@@ -1,4 +1,5 @@
 <script src="../js/data-tables.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
 
@@ -9,7 +10,7 @@
     </div>
 
     <div class="col-auto ms-auto text-end mt-n1">
-         <button class="btn shadow-sm" onclick="window.history.back()">
+        <button class="btn shadow-sm" onclick="window.history.back()">
             <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
         </button>
         <button class="btn shadow-sm" onclick="window.location.reload()"
@@ -67,7 +68,7 @@
                                         data-feather="eye"></i></a></td>
                         </tr>
 
-                        
+
                         <tr data-status="entregue">
                             <td>103</td>
                             <td>Express Pizza</td>
@@ -84,251 +85,589 @@
     </div>
 </div>
 
+<!-- Lista de Despesas por Mês -->
+<div class="col-12">
+
+    <h3 class="mb-2" style="color: var(--dark-color);">
+        <i class="bi bi-list-ul me-2"></i>Comissões dos Parceiros
+    </h3>
+
+    <!-- Jesse Madalena -->
+    <div class="card mb-3">
+        <div class="card-header month-header d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" href="#collapseJaneiro">
+            <div class="month-title">
+                <i class="bi bi-calendar-month me-2"></i>Jesse Madalena
+            </div>
+            <div class="d-flex align-items-center">
+                <span class="total-month saldo-negativo me-3">Total: AKZ 2.150,00</span>
+                <i class="bi bi-chevron-down"></i>
+            </div>
+        </div>
+        <div class="collapse" id="collapseJaneiro">
+
+            <table id="tabela_1" class="table table-borderless my-0 w-100">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Sua Comissão (12%)</th>
+                        <th>Codigo de comissão</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>01</td>
+                        <td>Hélder Adão</td>
+                        <td>500 KZ</td>
+                        <td>@jessemadalena2026</td>
+                        <td>12/01/2026</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <!-- GRÁFICOS -->
+            <!-- GRÁFICO COMISSÃO MENSAL -->
+            <!-- Gráfico de Comissão Mensal -->
+            <div class="col-12 col-lg-12 mt-4">
+                <div class="card flex-fill card-dashboard">
+                    <div class="card-header d-flex justify-content-between align-items-center bg-transparent">
+                        <h5 class="card-title mb-0 text-white">Comissão Mensal (USD)</h5>
+                        <div class="d-flex align-items-center">
+                            <label for="filtroAnoComissao" class="form-label me-2 mb-0 text-white">Ano:</label>
+                            <select id="filtroAnoComissao" class="form-select form-select-sm w-auto">
+                                <option value="2023">2023</option>
+                                <option value="2024" selected>2024</option>
+                                <option value="2025">2025</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="card-body p-3">
+                        <div class="chart-container">
+                            <canvas id="comissaoMensalChart" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<script>
+    // ==============================
+    // GRÁFICO DE COMISSÃO MENSAL
+    // ==============================
+
+    (function () {
+        // Configurações iniciais
+        const CHART_ID = 'comissaoMensalChart';
+        const FILTER_ID = 'filtroAnoComissao';
+
+        // Verifica se os elementos necessários existem
+        const chartCanvas = document.getElementById(CHART_ID);
+        const yearFilter = document.getElementById(FILTER_ID);
+
+        if (!chartCanvas || !yearFilter) {
+            console.warn('Elementos do gráfico de comissão não encontrados');
+            return;
+        }
+
+        // Dados estruturados
+        const dadosComissao = {
+            2023: [1250, 1840, 2100, 1950, 2450, 3120, 2850, 3240, 2980, 4150, 3800, 4200],
+            2024: [1450, 2040, 1840, 2150, 2650, 2840, 2450, 2840, 3150, 2840, 0, 0],
+            2025: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        };
+
+        const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+
+        // Configurações do gráfico
+        const chartConfig = {
+            type: 'bar',
+            data: {
+                labels: meses,
+                datasets: []
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'white',
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: '#0d6efd',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function (context) {
+                                return `Comissão: $${context.raw.toLocaleString('en-US')}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: 'white',
+                            font: {
+                                size: 11
+                            }
+                        },
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: 'white',
+                            font: {
+                                size: 11
+                            },
+                            callback: function (value) {
+                                return `$${value.toLocaleString('en-US')}`;
+                            },
+                            stepSize: 1000
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)',
+                            drawBorder: false
+                        }
+                    }
+                },
+                animation: {
+                    duration: 750,
+                    easing: 'easeInOutQuart'
+                }
+            }
+        };
+
+        // Instância do gráfico
+        let graficoComissao = null;
+
+        /**
+         * Cria ou atualiza o gráfico com os dados do ano selecionado
+         * @param {string} ano - Ano selecionado (2023, 2024, 2025)
+         */
+        function criarOuAtualizarGrafico(ano) {
+            const anoSelecionado = ano || yearFilter.value;
+            const dadosAno = dadosComissao[anoSelecionado] || dadosComissao['2024'];
+
+            // Configuração do dataset
+            const datasetConfig = {
+                label: `Comissão ${anoSelecionado} (USD)`,
+                data: dadosAno,
+                backgroundColor: 'rgba(13, 110, 253, 0.8)',
+                borderColor: 'rgba(13, 110, 253, 1)',
+                borderWidth: 1,
+                borderRadius: 6,
+                hoverBackgroundColor: 'rgba(13, 110, 253, 1)',
+                barPercentage: 0.7,
+                categoryPercentage: 0.8
+            };
+
+            if (graficoComissao) {
+                // Atualiza gráfico existente
+                graficoComissao.data.datasets[0] = datasetConfig;
+                graficoComissao.data.datasets[0].label = `Comissão ${anoSelecionado} (USD)`;
+                graficoComissao.update('none'); // Atualiza sem animação
+                setTimeout(() => graficoComissao.update(), 50);
+            } else {
+                // Cria novo gráfico
+                chartConfig.data.datasets = [datasetConfig];
+                graficoComissao = new Chart(chartCanvas.getContext('2d'), chartConfig);
+            }
+
+            // Atualiza título do tooltip
+            graficoComissao.options.plugins.tooltip.callbacks.title = function () {
+                return `Comissão ${anoSelecionado}`;
+            };
+        }
+
+        /**
+         * Inicializa os eventos do gráfico
+         */
+        function inicializarEventos() {
+            // Evento de mudança no filtro de ano
+            yearFilter.addEventListener('change', function (e) {
+                criarOuAtualizarGrafico(e.target.value);
+            });
+
+            // Redimensionamento da janela
+            let resizeTimeout;
+            window.addEventListener('resize', function () {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    if (graficoComissao) {
+                        graficoComissao.resize();
+                    }
+                }, 250);
+            });
+        }
+
+        /**
+         * Adiciona placeholder para meses sem dados no ano atual
+         */
+        function formatarDadosParaExibicao() {
+            const anoAtual = new Date().getFullYear();
+            const mesAtual = new Date().getMonth(); // 0-11
+
+            if (dadosComissao[anoAtual]) {
+                for (let i = mesAtual + 1; i < 12; i++) {
+                    if (dadosComissao[anoAtual][i] === 0) {
+                        dadosComissao[anoAtual][i] = null; // Chart.js mostra como linha tracejada
+                    }
+                }
+            }
+        }
+
+        /**
+         * Inicializa o gráfico
+         */
+        function inicializarGrafico() {
+            try {
+                formatarDadosParaExibicao();
+                criarOuAtualizarGrafico('2024');
+                inicializarEventos();
+
+                console.log('Gráfico de comissão mensal inicializado com sucesso');
+            } catch (error) {
+                console.error('Erro ao inicializar gráfico de comissão:', error);
+                mostrarMensagemErro();
+            }
+        }
+
+        /**
+         * Mostra mensagem de erro se o gráfico falhar
+         */
+        function mostrarMensagemErro() {
+            chartCanvas.parentElement.innerHTML = `
+                <div class="alert alert-warning m-0">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Não foi possível carregar o gráfico de comissões.
+                    <button class="btn btn-sm btn-outline-warning ms-2" onclick="window.location.reload()">
+                        Tentar novamente
+                    </button>
+                </div>
+            `;
+        }
+
+        // Inicializa quando o DOM estiver pronto
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', inicializarGrafico);
+        } else {
+            inicializarGrafico();
+        }
+
+        // Expõe funções públicas para uso externo (opcional)
+        window.comissaoChart = {
+            atualizar: criarOuAtualizarGrafico,
+            obterDados: (ano) => dadosComissao[ano],
+            obterInstancia: () => graficoComissao
+        };
+
+    })();
+</script>
+
+<style>
+    /* Estilos específicos para o gráfico */
+    .chart-container {
+        position: relative;
+        height: 300px;
+        width: 100%;
+    }
+
+    .card-dashboard {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .card-dashboard .card-header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .card-dashboard .card-body {
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Estilização do select */
+    #filtroAnoComissao {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        min-width: 100px;
+    }
+
+    #filtroAnoComissao:focus {
+        background-color: rgba(255, 255, 255, 0.15);
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+
+    #filtroAnoComissao option {
+        background-color: #2d3748;
+        color: white;
+    }
+</style>
+
 <!-- ===== SCRIPT FILTRO ===== -->
 <script>
     // ====================================================
-// 🔍 FILTRO COM SUPORTE DARK/LIGHT
-// ====================================================
+    // 🔍 FILTRO COM SUPORTE DARK/LIGHT
+    // ====================================================
 
-(function() {
-    'use strict';
-    
-    // Configurações
-    const CONFIG = {
-        debug: false,
-        animationDuration: 300,
-        searchDebounceTime: 300,
-        themeObserver: true
-    };
-    
-    // Sistema de logging
-    const logger = {
-        log: (msg, data) => CONFIG.debug && console.log(`[FiltroPedidos] ${msg}`, data || ''),
-        warn: (msg, data) => console.warn(`[FiltroPedidos] ⚠️ ${msg}`, data || ''),
-        error: (msg, data) => console.error(`[FiltroPedidos] 🔴 ${msg}`, data || '')
-    };
-    
-    // Sistema de cores baseado no tema
-    class ThemeManager {
-        static getColors() {
-            const isDark = document.body.classList.contains('dark-mode');
-            
-            if (isDark) {
-                return {
-                    // Cores principais
-                    primary: '#4dabf7',
-                    secondary: '#6c757d',
-                    success: '#51cf66',
-                    danger: '#ff6b6b',
-                    warning: '#ffd43b',
-                    info: '#3bc9db',
-                    
-                    // Cores de fundo
-                    bgPrimary: '#1a1a1a',
-                    bgSecondary: '#2d2d2d',
-                    bgTertiary: '#3d3d3d',
-                    
-                    // Cores de texto
-                    textPrimary: '#f8f9fa',
-                    textSecondary: '#e9ecef',
-                    textMuted: '#adb5bd',
-                    
-                    // Cores de borda
-                    border: '#495057',
-                    borderLight: '#6c757d',
-                    
-                    // Cores específicas para componentes
-                    tableBg: '#2d2d2d',
-                    tableBorder: '#444',
-                    cardBg: '#2d2d2d',
-                    cardBorder: '#444',
-                    inputBg: '#3d3d3d',
-                    inputBorder: '#495057',
-                    inputText: '#f8f9fa',
-                    
-                    
-                };
-            } else {
-                return {
-                    // Cores principais
-                    primary: '#0d6efd',
-                    secondary: '#6c757d',
-                    success: '#198754',
-                    danger: '#dc3545',
-                    warning: '#ffc107',
-                    info: '#0dcaf0',
-                    
-                    // Cores de fundo
-                    bgPrimary: '#ffffff',
-                    bgSecondary: '#f8f9fa',
-                    bgTertiary: '#e9ecef',
-                    
-                    // Cores de texto
-                    textPrimary: '#212529',
-                    textSecondary: '#495057',
-                    textMuted: '#6c757d',
-                    
-                    // Cores de borda
-                    border: '#dee2e6',
-                    borderLight: '#ced4da',
-                    
-                    // Cores específicas para componentes
-                    tableBg: '#ffffff',
-                    tableBorder: '#dee2e6',
-                    cardBg: '#ffffff',
-                    cardBorder: '#dee2e6',
-                    inputBg: '#ffffff',
-                    inputBorder: '#ced4da',
-                    inputText: '#212529',
-                };
+    (function () {
+        'use strict';
+
+        // Configurações
+        const CONFIG = {
+            debug: false,
+            animationDuration: 300,
+            searchDebounceTime: 300,
+            themeObserver: true
+        };
+
+        // Sistema de logging
+        const logger = {
+            log: (msg, data) => CONFIG.debug && console.log(`[FiltroPedidos] ${msg}`, data || ''),
+            warn: (msg, data) => console.warn(`[FiltroPedidos] ⚠️ ${msg}`, data || ''),
+            error: (msg, data) => console.error(`[FiltroPedidos] 🔴 ${msg}`, data || '')
+        };
+
+        // Sistema de cores baseado no tema
+        class ThemeManager {
+            static getColors() {
+                const isDark = document.body.classList.contains('dark-mode');
+
+                if (isDark) {
+                    return {
+                        // Cores principais
+                        primary: '#4dabf7',
+                        secondary: '#6c757d',
+                        success: '#51cf66',
+                        danger: '#ff6b6b',
+                        warning: '#ffd43b',
+                        info: '#3bc9db',
+
+                        // Cores de fundo
+                        bgPrimary: '#1a1a1a',
+                        bgSecondary: '#2d2d2d',
+                        bgTertiary: '#3d3d3d',
+
+                        // Cores de texto
+                        textPrimary: '#f8f9fa',
+                        textSecondary: '#e9ecef',
+                        textMuted: '#adb5bd',
+
+                        // Cores de borda
+                        border: '#495057',
+                        borderLight: '#6c757d',
+
+                        // Cores específicas para componentes
+                        tableBg: '#2d2d2d',
+                        tableBorder: '#444',
+                        cardBg: '#2d2d2d',
+                        cardBorder: '#444',
+                        inputBg: '#3d3d3d',
+                        inputBorder: '#495057',
+                        inputText: '#f8f9fa',
+
+
+                    };
+                } else {
+                    return {
+                        // Cores principais
+                        primary: '#0d6efd',
+                        secondary: '#6c757d',
+                        success: '#198754',
+                        danger: '#dc3545',
+                        warning: '#ffc107',
+                        info: '#0dcaf0',
+
+                        // Cores de fundo
+                        bgPrimary: '#ffffff',
+                        bgSecondary: '#f8f9fa',
+                        bgTertiary: '#e9ecef',
+
+                        // Cores de texto
+                        textPrimary: '#212529',
+                        textSecondary: '#495057',
+                        textMuted: '#6c757d',
+
+                        // Cores de borda
+                        border: '#dee2e6',
+                        borderLight: '#ced4da',
+
+                        // Cores específicas para componentes
+                        tableBg: '#ffffff',
+                        tableBorder: '#dee2e6',
+                        cardBg: '#ffffff',
+                        cardBorder: '#dee2e6',
+                        inputBg: '#ffffff',
+                        inputBorder: '#ced4da',
+                        inputText: '#212529',
+                    };
+                }
+            }
+
+            static updateElementStyles(element, styles) {
+                if (!element || !styles) return;
+
+                Object.keys(styles).forEach(property => {
+                    element.style[property] = styles[property];
+                });
+            }
+
+            static getStatusColor(status, colors) {
+                switch (status) {
+                    case 'em-preparacao':
+                    case 'preparacao':
+                    case 'emPreparacao':
+                        return colors.statusPreparacao;
+                    case 'entregue':
+                        return colors.statusEntregue;
+                    case 'cancelado':
+                        return colors.statusCancelado;
+                    case 'pendente':
+                        return colors.statusPendente;
+                    default:
+                        return colors.secondary;
+                }
             }
         }
-        
-        static updateElementStyles(element, styles) {
-            if (!element || !styles) return;
-            
-            Object.keys(styles).forEach(property => {
-                element.style[property] = styles[property];
-            });
-        }
-        
-        static getStatusColor(status, colors) {
-            switch(status) {
-                case 'em-preparacao':
-                case 'preparacao':
-                case 'emPreparacao':
-                    return colors.statusPreparacao;
-                case 'entregue':
-                    return colors.statusEntregue;
-                case 'cancelado':
-                    return colors.statusCancelado;
-                case 'pendente':
-                    return colors.statusPendente;
-                default:
-                    return colors.secondary;
+
+        class PedidosFilter {
+            constructor() {
+                this.table = null;
+                this.rows = [];
+                this.filterSelect = null;
+                this.searchInput = null;
+                this.currentFilter = 'todos';
+                this.filteredRows = [];
+                this.statusCounts = {};
+                this.colors = ThemeManager.getColors();
+                this.init();
             }
-        }
-    }
-    
-    class PedidosFilter {
-        constructor() {
-            this.table = null;
-            this.rows = [];
-            this.filterSelect = null;
-            this.searchInput = null;
-            this.currentFilter = 'todos';
-            this.filteredRows = [];
-            this.statusCounts = {};
-            this.colors = ThemeManager.getColors();
-            this.init();
-        }
-        
-        init() {
-            logger.log('Inicializando filtro de pedidos...');
-            
-            // Encontra elementos
-            this.findElements();
-            
-            if (!this.validateElements()) {
-                logger.error('Elementos necessários não encontrados');
-                return;
+
+            init() {
+                logger.log('Inicializando filtro de pedidos...');
+
+                // Encontra elementos
+                this.findElements();
+
+                if (!this.validateElements()) {
+                    logger.error('Elementos necessários não encontrados');
+                    return;
+                }
+
+                // Prepara dados
+                this.prepareTableData();
+
+                // Conta pedidos por status
+                this.countStatuses();
+
+                // Aplica estilos baseados no tema
+                this.applyThemeStyles();
+
+                // Atualiza opções do select
+                this.updateFilterOptions();
+
+                // Configura eventos
+                this.setupEventListeners();
+
+                // Configura observador de tema
+                this.setupThemeObserver();
+
+                // Aplica filtro inicial
+                this.applyFilter();
+
+                logger.log('✅ Filtro inicializado com sucesso');
             }
-            
-            // Prepara dados
-            this.prepareTableData();
-            
-            // Conta pedidos por status
-            this.countStatuses();
-            
-            // Aplica estilos baseados no tema
-            this.applyThemeStyles();
-            
-            // Atualiza opções do select
-            this.updateFilterOptions();
-            
-            // Configura eventos
-            this.setupEventListeners();
-            
-            // Configura observador de tema
-            this.setupThemeObserver();
-            
-            // Aplica filtro inicial
-            this.applyFilter();
-            
-            logger.log('✅ Filtro inicializado com sucesso');
-        }
-        
-        findElements() {
-            // Tabela
-            this.table = document.querySelector('#datatables-column-search-select-inputs');
-            
-            // Filtro de status
-            this.filterSelect = document.getElementById('filtroStatus');
-            
-            // Busca geral (se existir)
-            this.searchInput = document.querySelector('input[type="search"], #searchPedidos');
-            
-            // Card container
-            this.card = this.table.closest('.card');
-        }
-        
-        validateElements() {
-            if (!this.table) {
-                logger.warn('Tabela não encontrada');
-                return false;
+
+            findElements() {
+                // Tabela
+                this.table = document.querySelector('#datatables-column-search-select-inputs');
+
+                // Filtro de status
+                this.filterSelect = document.getElementById('filtroStatus');
+
+                // Busca geral (se existir)
+                this.searchInput = document.querySelector('input[type="search"], #searchPedidos');
+
+                // Card container
+                this.card = this.table.closest('.card');
             }
-            
-            if (!this.filterSelect) {
-                logger.warn('Filtro de status não encontrado');
-                return false;
+
+            validateElements() {
+                if (!this.table) {
+                    logger.warn('Tabela não encontrada');
+                    return false;
+                }
+
+                if (!this.filterSelect) {
+                    logger.warn('Filtro de status não encontrado');
+                    return false;
+                }
+
+                return true;
             }
-            
-            return true;
-        }
-        
-        prepareTableData() {
-            const tbody = this.table.querySelector('tbody');
-            if (!tbody) {
-                logger.warn('Tbody não encontrado');
-                return;
-            }
-            
-            this.rows = Array.from(tbody.querySelectorAll('tr'));
-            
-            this.rows.forEach((row, index) => {
-                row.dataset.originalIndex = index;
-                
-                // Extrai texto para busca
-                const cells = Array.from(row.cells);
-                row.dataset.searchText = cells
-                    .map(cell => cell.textContent.toLowerCase().trim())
-                    .join(' ');
-                
-                // Garante que tenha atributo data-status
-                if (!row.dataset.status) {
-                    const statusCell = row.querySelector('.status');
-                    if (statusCell) {
-                        const statusClass = Array.from(statusCell.classList)
-                            .find(cls => cls !== 'status');
-                        if (statusClass) {
-                            row.dataset.status = this.normalizeStatus(statusClass);
+
+            prepareTableData() {
+                const tbody = this.table.querySelector('tbody');
+                if (!tbody) {
+                    logger.warn('Tbody não encontrado');
+                    return;
+                }
+
+                this.rows = Array.from(tbody.querySelectorAll('tr'));
+
+                this.rows.forEach((row, index) => {
+                    row.dataset.originalIndex = index;
+
+                    // Extrai texto para busca
+                    const cells = Array.from(row.cells);
+                    row.dataset.searchText = cells
+                        .map(cell => cell.textContent.toLowerCase().trim())
+                        .join(' ');
+
+                    // Garante que tenha atributo data-status
+                    if (!row.dataset.status) {
+                        const statusCell = row.querySelector('.status');
+                        if (statusCell) {
+                            const statusClass = Array.from(statusCell.classList)
+                                .find(cls => cls !== 'status');
+                            if (statusClass) {
+                                row.dataset.status = this.normalizeStatus(statusClass);
+                            }
                         }
                     }
-                }
-                
-                // Aplica estilos ao status
-                this.styleStatusBadge(row);
-            });
-        }
-        
-        styleStatusBadge(row) {
-            const statusCell = row.querySelector('.status');
-            if (!statusCell) return;
-            
-            const status = row.dataset.status;
-            const color = ThemeManager.getStatusColor(status, this.colors);
-            
-            statusCell.style.cssText = `
+
+                    // Aplica estilos ao status
+                    this.styleStatusBadge(row);
+                });
+            }
+
+            styleStatusBadge(row) {
+                const statusCell = row.querySelector('.status');
+                if (!statusCell) return;
+
+                const status = row.dataset.status;
+                const color = ThemeManager.getStatusColor(status, this.colors);
+
+                statusCell.style.cssText = `
                 display: inline-block;
                 padding: 4px 12px;
                 border-radius: 20px;
@@ -339,293 +678,293 @@
                 border: 1px solid ${color}40;
                 transition: all 0.3s ease;
             `;
-        }
-        
-        normalizeStatus(statusClass) {
-            const statusMap = {
-                'emPreparacao': 'em-preparacao',
-                'em-preparacao': 'em-preparacao',
-                'preparacao': 'em-preparacao',
-                'cancelado': 'cancelado',
-                'entregue': 'entregue',
-                'pendente': 'pendente',
-                'andamento': 'em-andamento'
-            };
-            
-            return statusMap[statusClass] || statusClass;
-        }
-        
-        countStatuses() {
-            this.statusCounts = {
-                'todos': this.rows.length,
-                'em-preparacao': 0,
-                'entregue': 0,
-                'cancelado': 0
-            };
-            
-            this.rows.forEach(row => {
-                const status = row.dataset.status;
-                if (status && this.statusCounts.hasOwnProperty(status)) {
-                    this.statusCounts[status]++;
-                }
-            });
-        }
-        
-        applyThemeStyles() {
-            // Aplica estilos à tabela
-            if (this.table) {
-                this.table.style.backgroundColor = this.colors.tableBg;
-                this.table.style.color = this.colors.textPrimary;
-                this.table.style.borderColor = this.colors.tableBorder;
             }
-            
-            // Aplica estilos ao select
-            if (this.filterSelect) {
-                this.filterSelect.style.backgroundColor = this.colors.inputBg;
-                this.filterSelect.style.color = this.colors.inputText;
-                this.filterSelect.style.borderColor = this.colors.inputBorder;
-                
-                // Estilos para options
+
+            normalizeStatus(statusClass) {
+                const statusMap = {
+                    'emPreparacao': 'em-preparacao',
+                    'em-preparacao': 'em-preparacao',
+                    'preparacao': 'em-preparacao',
+                    'cancelado': 'cancelado',
+                    'entregue': 'entregue',
+                    'pendente': 'pendente',
+                    'andamento': 'em-andamento'
+                };
+
+                return statusMap[statusClass] || statusClass;
+            }
+
+            countStatuses() {
+                this.statusCounts = {
+                    'todos': this.rows.length,
+                    'em-preparacao': 0,
+                    'entregue': 0,
+                    'cancelado': 0
+                };
+
+                this.rows.forEach(row => {
+                    const status = row.dataset.status;
+                    if (status && this.statusCounts.hasOwnProperty(status)) {
+                        this.statusCounts[status]++;
+                    }
+                });
+            }
+
+            applyThemeStyles() {
+                // Aplica estilos à tabela
+                if (this.table) {
+                    this.table.style.backgroundColor = this.colors.tableBg;
+                    this.table.style.color = this.colors.textPrimary;
+                    this.table.style.borderColor = this.colors.tableBorder;
+                }
+
+                // Aplica estilos ao select
+                if (this.filterSelect) {
+                    this.filterSelect.style.backgroundColor = this.colors.inputBg;
+                    this.filterSelect.style.color = this.colors.inputText;
+                    this.filterSelect.style.borderColor = this.colors.inputBorder;
+
+                    // Estilos para options
+                    const options = this.filterSelect.querySelectorAll('option');
+                    options.forEach(option => {
+                        option.style.backgroundColor = this.colors.inputBg;
+                        option.style.color = this.colors.inputText;
+                    });
+                }
+
+                // Aplica estilos ao campo de busca (se existir)
+                if (this.searchInput) {
+                    this.searchInput.style.backgroundColor = this.colors.inputBg;
+                    this.searchInput.style.color = this.colors.inputText;
+                    this.searchInput.style.borderColor = this.colors.inputBorder;
+                }
+
+                // Aplica estilos ao card container
+                if (this.card) {
+                    this.card.style.backgroundColor = this.colors.cardBg;
+                    this.card.style.borderColor = this.colors.cardBorder;
+                    this.card.style.color = this.colors.textPrimary;
+                }
+            }
+
+            updateFilterOptions() {
                 const options = this.filterSelect.querySelectorAll('option');
+
                 options.forEach(option => {
-                    option.style.backgroundColor = this.colors.inputBg;
-                    option.style.color = this.colors.inputText;
+                    const statusValue = option.value;
+
+                    if (statusValue !== 'todos') {
+                        const count = this.statusCounts[statusValue] || 0;
+                        const originalText = option.textContent.replace(/\s*\(\d+\)/, '');
+                        option.textContent = `${originalText} (${count})`;
+                        option.disabled = count === 0;
+
+                        // Estilos para opções desabilitadas
+                        if (option.disabled) {
+                            option.style.color = this.colors.textMuted;
+                            option.style.fontStyle = 'italic';
+                            option.style.opacity = '0.6';
+                        }
+                    }
                 });
             }
-            
-            // Aplica estilos ao campo de busca (se existir)
-            if (this.searchInput) {
-                this.searchInput.style.backgroundColor = this.colors.inputBg;
-                this.searchInput.style.color = this.colors.inputText;
-                this.searchInput.style.borderColor = this.colors.inputBorder;
-            }
-            
-            // Aplica estilos ao card container
-            if (this.card) {
-                this.card.style.backgroundColor = this.colors.cardBg;
-                this.card.style.borderColor = this.colors.cardBorder;
-                this.card.style.color = this.colors.textPrimary;
-            }
-        }
-        
-        updateFilterOptions() {
-            const options = this.filterSelect.querySelectorAll('option');
-            
-            options.forEach(option => {
-                const statusValue = option.value;
-                
-                if (statusValue !== 'todos') {
-                    const count = this.statusCounts[statusValue] || 0;
-                    const originalText = option.textContent.replace(/\s*\(\d+\)/, '');
-                    option.textContent = `${originalText} (${count})`;
-                    option.disabled = count === 0;
-                    
-                    // Estilos para opções desabilitadas
-                    if (option.disabled) {
-                        option.style.color = this.colors.textMuted;
-                        option.style.fontStyle = 'italic';
-                        option.style.opacity = '0.6';
-                    }
-                }
-            });
-        }
-        
-        setupEventListeners() {
-            // Filtro por status
-            if (this.filterSelect) {
-                this.filterSelect.addEventListener('change', (e) => {
-                    const selectedValue = e.target.value;
-                    const selectedOption = e.target.options[e.target.selectedIndex];
-                    
-                    if (selectedOption.disabled) {
-                        e.preventDefault();
-                        e.target.value = this.currentFilter;
-                        this.showNoDataAlert(selectedValue);
-                        return;
-                    }
-                    
-                    this.currentFilter = selectedValue;
-                    this.applyFilter();
-                });
-            }
-            
-            // Busca em tempo real
-            if (this.searchInput) {
-                let debounceTimer;
-                
-                this.searchInput.addEventListener('input', (e) => {
-                    clearTimeout(debounceTimer);
-                    
-                    debounceTimer = setTimeout(() => {
+
+            setupEventListeners() {
+                // Filtro por status
+                if (this.filterSelect) {
+                    this.filterSelect.addEventListener('change', (e) => {
+                        const selectedValue = e.target.value;
+                        const selectedOption = e.target.options[e.target.selectedIndex];
+
+                        if (selectedOption.disabled) {
+                            e.preventDefault();
+                            e.target.value = this.currentFilter;
+                            this.showNoDataAlert(selectedValue);
+                            return;
+                        }
+
+                        this.currentFilter = selectedValue;
                         this.applyFilter();
-                    }, CONFIG.searchDebounceTime);
+                    });
+                }
+
+                // Busca em tempo real
+                if (this.searchInput) {
+                    let debounceTimer;
+
+                    this.searchInput.addEventListener('input', (e) => {
+                        clearTimeout(debounceTimer);
+
+                        debounceTimer = setTimeout(() => {
+                            this.applyFilter();
+                        }, CONFIG.searchDebounceTime);
+                    });
+                }
+            }
+
+            setupThemeObserver() {
+                if (!CONFIG.themeObserver || !('MutationObserver' in window)) return;
+
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach(mutation => {
+                        if (mutation.type === 'attributes' &&
+                            mutation.attributeName === 'class') {
+                            logger.log('Tema alterado, atualizando estilos...');
+                            this.handleThemeChange();
+                        }
+                    });
+                });
+
+                observer.observe(document.body, {
+                    attributes: true,
+                    attributeFilter: ['class']
                 });
             }
-        }
-        
-        setupThemeObserver() {
-            if (!CONFIG.themeObserver || !('MutationObserver' in window)) return;
-            
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach(mutation => {
-                    if (mutation.type === 'attributes' && 
-                        mutation.attributeName === 'class') {
-                        logger.log('Tema alterado, atualizando estilos...');
-                        this.handleThemeChange();
+
+            handleThemeChange() {
+                // Atualiza cores
+                this.colors = ThemeManager.getColors();
+
+                // Reaplica estilos
+                this.applyThemeStyles();
+
+                // Reestiliza badges de status
+                this.rows.forEach(row => this.styleStatusBadge(row));
+
+                // Atualiza mensagens existentes
+                this.updateExistingMessages();
+            }
+
+            updateExistingMessages() {
+                // Atualiza mensagem de "sem resultados"
+                const noResultsRow = document.getElementById('no-results-row');
+                if (noResultsRow) {
+                    this.styleNoResultsMessage(noResultsRow);
+                }
+
+                // Atualiza contador
+                const resultsCounter = document.querySelector('.results-counter');
+                if (resultsCounter) {
+                    this.styleResultsCounter(resultsCounter);
+                }
+            }
+
+            applyFilter() {
+                const searchTerm = this.searchInput ?
+                    this.searchInput.value.toLowerCase().trim() : '';
+
+                // Filtra linhas
+                this.filteredRows = this.rows.filter(row => {
+                    let matches = true;
+
+                    if (this.currentFilter !== 'todos') {
+                        const rowStatus = row.dataset.status || '';
+                        matches = matches && rowStatus === this.currentFilter;
+                    }
+
+                    if (searchTerm) {
+                        const searchText = row.dataset.searchText || '';
+                        matches = matches && searchText.includes(searchTerm);
+                    }
+
+                    return matches;
+                });
+
+                // Atualiza exibição
+                this.updateTableDisplay();
+
+                // Mostra/oculta mensagem de "sem resultados"
+                if (this.filteredRows.length === 0) {
+                    this.showNoResultsMessage();
+                } else {
+                    this.hideNoResultsMessage();
+                }
+
+                // Atualiza contador
+                this.updateResultsCounter();
+            }
+
+            updateTableDisplay() {
+                // Anima transição
+                this.rows.forEach(row => {
+                    if (this.filteredRows.includes(row)) {
+                        row.style.display = '';
+                        row.style.opacity = '1';
+                        row.style.transform = 'translateY(0)';
+                        row.style.transition = `all ${CONFIG.animationDuration}ms ease`;
+                    } else {
+                        row.style.opacity = '0';
+                        row.style.transform = 'translateY(-10px)';
+                        row.style.transition = `all ${CONFIG.animationDuration}ms ease`;
+                        setTimeout(() => {
+                            row.style.display = 'none';
+                        }, CONFIG.animationDuration);
                     }
                 });
-            });
-            
-            observer.observe(document.body, {
-                attributes: true,
-                attributeFilter: ['class']
-            });
-        }
-        
-        handleThemeChange() {
-            // Atualiza cores
-            this.colors = ThemeManager.getColors();
-            
-            // Reaplica estilos
-            this.applyThemeStyles();
-            
-            // Reestiliza badges de status
-            this.rows.forEach(row => this.styleStatusBadge(row));
-            
-            // Atualiza mensagens existentes
-            this.updateExistingMessages();
-        }
-        
-        updateExistingMessages() {
-            // Atualiza mensagem de "sem resultados"
-            const noResultsRow = document.getElementById('no-results-row');
-            if (noResultsRow) {
-                this.styleNoResultsMessage(noResultsRow);
             }
-            
-            // Atualiza contador
-            const resultsCounter = document.querySelector('.results-counter');
-            if (resultsCounter) {
-                this.styleResultsCounter(resultsCounter);
-            }
-        }
-        
-        applyFilter() {
-            const searchTerm = this.searchInput ? 
-                this.searchInput.value.toLowerCase().trim() : '';
-            
-            // Filtra linhas
-            this.filteredRows = this.rows.filter(row => {
-                let matches = true;
-                
-                if (this.currentFilter !== 'todos') {
-                    const rowStatus = row.dataset.status || '';
-                    matches = matches && rowStatus === this.currentFilter;
-                }
-                
-                if (searchTerm) {
-                    const searchText = row.dataset.searchText || '';
-                    matches = matches && searchText.includes(searchTerm);
-                }
-                
-                return matches;
-            });
-            
-            // Atualiza exibição
-            this.updateTableDisplay();
-            
-            // Mostra/oculta mensagem de "sem resultados"
-            if (this.filteredRows.length === 0) {
-                this.showNoResultsMessage();
-            } else {
+
+            showNoResultsMessage() {
+                const tbody = this.table.querySelector('tbody');
+                if (!tbody) return;
+
+                // Remove mensagem anterior
                 this.hideNoResultsMessage();
+
+                // Cria mensagem
+                const messageRow = document.createElement('tr');
+                messageRow.id = 'no-results-row';
+                messageRow.className = 'no-results-message';
+
+                const messageCell = document.createElement('td');
+                messageCell.colSpan = this.getColumnCount();
+                messageCell.className = 'text-center py-5';
+
+                // Conteúdo da mensagem
+                const content = this.createNoResultsContent();
+                messageCell.innerHTML = content;
+
+                messageRow.appendChild(messageCell);
+                tbody.appendChild(messageRow);
+
+                // Aplica estilos
+                this.styleNoResultsMessage(messageRow);
+
+                // Anima entrada
+                setTimeout(() => {
+                    messageRow.style.opacity = '1';
+                    messageRow.style.transform = 'translateY(0)';
+                }, 50);
             }
-            
-            // Atualiza contador
-            this.updateResultsCounter();
-        }
-        
-        updateTableDisplay() {
-            // Anima transição
-            this.rows.forEach(row => {
-                if (this.filteredRows.includes(row)) {
-                    row.style.display = '';
-                    row.style.opacity = '1';
-                    row.style.transform = 'translateY(0)';
-                    row.style.transition = `all ${CONFIG.animationDuration}ms ease`;
-                } else {
-                    row.style.opacity = '0';
-                    row.style.transform = 'translateY(-10px)';
-                    row.style.transition = `all ${CONFIG.animationDuration}ms ease`;
-                    setTimeout(() => {
-                        row.style.display = 'none';
-                    }, CONFIG.animationDuration);
-                }
-            });
-        }
-        
-        showNoResultsMessage() {
-            const tbody = this.table.querySelector('tbody');
-            if (!tbody) return;
-            
-            // Remove mensagem anterior
-            this.hideNoResultsMessage();
-            
-            // Cria mensagem
-            const messageRow = document.createElement('tr');
-            messageRow.id = 'no-results-row';
-            messageRow.className = 'no-results-message';
-            
-            const messageCell = document.createElement('td');
-            messageCell.colSpan = this.getColumnCount();
-            messageCell.className = 'text-center py-5';
-            
-            // Conteúdo da mensagem
-            const content = this.createNoResultsContent();
-            messageCell.innerHTML = content;
-            
-            messageRow.appendChild(messageCell);
-            tbody.appendChild(messageRow);
-            
-            // Aplica estilos
-            this.styleNoResultsMessage(messageRow);
-            
-            // Anima entrada
-            setTimeout(() => {
-                messageRow.style.opacity = '1';
-                messageRow.style.transform = 'translateY(0)';
-            }, 50);
-        }
-        
-        createNoResultsContent() {
-            const filterText = this.getFilterDisplayText();
-            let message = '';
-            let icon = '';
-            let suggestion = '';
-            
-            if (this.currentFilter !== 'todos') {
-                const count = this.statusCounts[this.currentFilter] || 0;
-                
-                if (count === 0) {
-                    message = `Não há pedidos com status "${filterText}"`;
-                    icon = 'fas fa-clipboard-list';
-                    suggestion = 'Este status não possui pedidos registrados.';
+
+            createNoResultsContent() {
+                const filterText = this.getFilterDisplayText();
+                let message = '';
+                let icon = '';
+                let suggestion = '';
+
+                if (this.currentFilter !== 'todos') {
+                    const count = this.statusCounts[this.currentFilter] || 0;
+
+                    if (count === 0) {
+                        message = `Não há pedidos com status "${filterText}"`;
+                        icon = 'fas fa-clipboard-list';
+                        suggestion = 'Este status não possui pedidos registrados.';
+                    } else if (this.searchInput && this.searchInput.value) {
+                        message = `Nenhum pedido "${filterText}" encontrado com "${this.searchInput.value}"`;
+                        icon = 'fas fa-search';
+                        suggestion = 'Tente buscar com termos diferentes.';
+                    }
                 } else if (this.searchInput && this.searchInput.value) {
-                    message = `Nenhum pedido "${filterText}" encontrado com "${this.searchInput.value}"`;
+                    message = `Nenhum pedido encontrado com "${this.searchInput.value}"`;
                     icon = 'fas fa-search';
-                    suggestion = 'Tente buscar com termos diferentes.';
+                    suggestion = 'Tente buscar com outros termos.';
+                } else {
+                    message = 'Nenhum pedido cadastrado';
+                    icon = 'fas fa-inbox';
+                    suggestion = 'Adicione pedidos para visualizá-los aqui.';
                 }
-            } else if (this.searchInput && this.searchInput.value) {
-                message = `Nenhum pedido encontrado com "${this.searchInput.value}"`;
-                icon = 'fas fa-search';
-                suggestion = 'Tente buscar com outros termos.';
-            } else {
-                message = 'Nenhum pedido cadastrado';
-                icon = 'fas fa-inbox';
-                suggestion = 'Adicione pedidos para visualizá-los aqui.';
-            }
-            
-            return `
+
+                return `
                 <div class="no-results-content">
                     <div class="no-results-icon mb-3">
                         <i class="${icon} fa-3x" style="color: ${this.colors.textMuted};"></i>
@@ -637,116 +976,116 @@
                     </div>
                 </div>
             `;
-        }
-        
-        styleNoResultsMessage(messageRow) {
-            messageRow.style.cssText = `
+            }
+
+            styleNoResultsMessage(messageRow) {
+                messageRow.style.cssText = `
                 background: ${this.colors.bgSecondary};
                 border-radius: 8px;
                 transition: all 0.3s ease;
             `;
-        }
-        
-        hideNoResultsMessage() {
-            const existingMessage = document.getElementById('no-results-row');
-            if (existingMessage) {
-                existingMessage.style.opacity = '0';
-                existingMessage.style.transform = 'translateY(-10px)';
-                setTimeout(() => {
-                    existingMessage.remove();
-                }, CONFIG.animationDuration);
             }
-        }
-        
-        getActionButtons() {
-            const btnStyle = `
+
+            hideNoResultsMessage() {
+                const existingMessage = document.getElementById('no-results-row');
+                if (existingMessage) {
+                    existingMessage.style.opacity = '0';
+                    existingMessage.style.transform = 'translateY(-10px)';
+                    setTimeout(() => {
+                        existingMessage.remove();
+                    }, CONFIG.animationDuration);
+                }
+            }
+
+            getActionButtons() {
+                const btnStyle = `
                 background-color: ${this.colors.primary};
                 color: white;
                 border: 1px solid ${this.colors.primary};
             `;
-            
-            const btnOutlineStyle = `
+
+                const btnOutlineStyle = `
                 background-color: transparent;
                 color: ${this.colors.primary};
                 border: 1px solid ${this.colors.primary};
             `;
-            
-            let buttons = '';
-            
-            if (this.searchInput && this.searchInput.value) {
-                buttons += `
+
+                let buttons = '';
+
+                if (this.searchInput && this.searchInput.value) {
+                    buttons += `
                     <button class="btn btn-sm me-2" onclick="this.closest('.no-results-message').remove(); document.querySelector('${this.searchInput.tagName}[type=\"search\"]').value = ''; window.pedidosFilterInstance.applyFilter();" style="${btnOutlineStyle}">
                         <i class="fas fa-backspace me-1"></i> Limpar Busca
                     </button>
                 `;
-            }
-            
-            if (this.currentFilter !== 'todos') {
-                buttons += `
+                }
+
+                if (this.currentFilter !== 'todos') {
+                    buttons += `
                     <button class="btn btn-sm" onclick="document.getElementById('filtroStatus').value = 'todos'; window.pedidosFilterInstance.currentFilter = 'todos'; window.pedidosFilterInstance.applyFilter();" style="${btnStyle}">
                         <i class="fas fa-list me-1"></i> Ver Todos
                     </button>
                 `;
-            }
-            
-            return buttons || `
+                }
+
+                return buttons || `
                 <button class="btn btn-sm" onclick="window.pedidosFilterInstance.resetFilters()" style="${btnStyle}">
                     <i class="fas fa-redo me-1"></i> Recarregar
                 </button>
             `;
-        }
-        
-        getFilterDisplayText() {
-            if (!this.filterSelect) return this.currentFilter;
-            
-            const option = this.filterSelect.querySelector(`option[value="${this.currentFilter}"]`);
-            return option ? option.textContent.replace(/\s*\(\d+\)/, '') : this.currentFilter;
-        }
-        
-        getColumnCount() {
-            const headerRow = this.table.querySelector('thead tr');
-            return headerRow ? headerRow.cells.length : 6;
-        }
-        
-        updateResultsCounter() {
-            // Remove contador anterior
-            const oldCounter = document.querySelector('.results-counter');
-            if (oldCounter) oldCounter.remove();
-            
-            // Cria novo contador
-            const totalRows = this.rows.length;
-            const filteredRows = this.filteredRows.length;
-            
-            if (totalRows > 0) {
-                const counter = document.createElement('div');
-                counter.className = 'results-counter';
-                
-                counter.innerHTML = `
+            }
+
+            getFilterDisplayText() {
+                if (!this.filterSelect) return this.currentFilter;
+
+                const option = this.filterSelect.querySelector(`option[value="${this.currentFilter}"]`);
+                return option ? option.textContent.replace(/\s*\(\d+\)/, '') : this.currentFilter;
+            }
+
+            getColumnCount() {
+                const headerRow = this.table.querySelector('thead tr');
+                return headerRow ? headerRow.cells.length : 6;
+            }
+
+            updateResultsCounter() {
+                // Remove contador anterior
+                const oldCounter = document.querySelector('.results-counter');
+                if (oldCounter) oldCounter.remove();
+
+                // Cria novo contador
+                const totalRows = this.rows.length;
+                const filteredRows = this.filteredRows.length;
+
+                if (totalRows > 0) {
+                    const counter = document.createElement('div');
+                    counter.className = 'results-counter';
+
+                    counter.innerHTML = `
                     <div class="counter-content">
                         <i class="fas fa-filter me-2" style="color: ${this.colors.primary};"></i>
                         <span style="color: ${this.colors.textPrimary};">
                             <strong>${filteredRows}</strong> de <strong>${totalRows}</strong> pedidos
                         </span>
-                        ${filteredRows < totalRows ? 
+                        ${filteredRows < totalRows ?
                             `<button class="btn btn-sm ms-3" onclick="window.pedidosFilterInstance.resetFilters()" style="color: ${this.colors.primary}; border-color: ${this.colors.primary}; background: transparent;">
                                 <i class="fas fa-times me-1"></i> Limpar Filtros
                             </button>` : ''}
                     </div>
                 `;
-                
-                // Aplica estilos
-                this.styleResultsCounter(counter);
-                
-                // Insere após a tabela
-                const tableContainer = this.table.closest('.card-body');
-                if (tableContainer) {
-                    tableContainer.appendChild(counter);
+
+                    // Aplica estilos
+                    this.styleResultsCounter(counter);
+
+                    // Insere após a tabela
+                    const tableContainer = this.table.closest('.card-body');
+                    if (tableContainer) {
+                        tableContainer.appendChild(counter);
+                    }
                 }
             }
-        }
-        
-        styleResultsCounter(counter) {
-            counter.style.cssText = `
+
+            styleResultsCounter(counter) {
+                counter.style.cssText = `
                 padding: 10px 15px;
                 margin-top: 15px;
                 background: ${this.colors.bgSecondary};
@@ -754,24 +1093,24 @@
                 border-radius: 6px;
                 transition: all 0.3s ease;
             `;
-            
-            const content = counter.querySelector('.counter-content');
-            if (content) {
-                content.style.cssText = `
+
+                const content = counter.querySelector('.counter-content');
+                if (content) {
+                    content.style.cssText = `
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                 `;
+                }
             }
-        }
-        
-        showNoDataAlert(statusValue) {
-            const alertDiv = document.createElement('div');
-            alertDiv.className = 'theme-alert alert-dismissible fade show';
-            
-            const statusText = this.getStatusDisplayText(statusValue);
-            
-            alertDiv.innerHTML = `
+
+            showNoDataAlert(statusValue) {
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'theme-alert alert-dismissible fade show';
+
+                const statusText = this.getStatusDisplayText(statusValue);
+
+                alertDiv.innerHTML = `
                 <div class="alert-content">
                     <div class="alert-icon">
                         <i class="fas fa-exclamation-triangle"></i>
@@ -790,23 +1129,23 @@
                     </div>
                 </div>
             `;
-            
-            // Aplica estilos
-            this.styleAlert(alertDiv);
-            
-            document.body.appendChild(alertDiv);
-            
-            // Remove após 8 segundos
-            setTimeout(() => {
-                if (alertDiv.parentNode) {
-                    alertDiv.classList.remove('show');
-                    setTimeout(() => alertDiv.remove(), 300);
-                }
-            }, 8000);
-        }
-        
-        styleAlert(alert) {
-            alert.style.cssText = `
+
+                // Aplica estilos
+                this.styleAlert(alertDiv);
+
+                document.body.appendChild(alertDiv);
+
+                // Remove após 8 segundos
+                setTimeout(() => {
+                    if (alertDiv.parentNode) {
+                        alertDiv.classList.remove('show');
+                        setTimeout(() => alertDiv.remove(), 300);
+                    }
+                }, 8000);
+            }
+
+            styleAlert(alert) {
+                alert.style.cssText = `
                 position: fixed;
                 top: 20px;
                 right: 20px;
@@ -821,55 +1160,55 @@
                 color: ${this.colors.textPrimary};
                 animation: slideInRight 0.3s ease;
             `;
-            
-            const content = alert.querySelector('.alert-content');
-            if (content) {
-                content.style.cssText = `
+
+                const content = alert.querySelector('.alert-content');
+                if (content) {
+                    content.style.cssText = `
                     display: flex;
                     padding: 15px;
                 `;
-            }
-            
-            const icon = alert.querySelector('.alert-icon');
-            if (icon) {
-                icon.style.cssText = `
+                }
+
+                const icon = alert.querySelector('.alert-icon');
+                if (icon) {
+                    icon.style.cssText = `
                     flex-shrink: 0;
                     margin-right: 15px;
                     color: ${this.colors.warning};
                     font-size: 1.5em;
                 `;
-            }
-            
-            const body = alert.querySelector('.alert-body');
-            if (body) {
-                body.style.cssText = `
+                }
+
+                const body = alert.querySelector('.alert-body');
+                if (body) {
+                    body.style.cssText = `
                     flex-grow: 1;
                 `;
-                
-                body.querySelector('h6').style.cssText = `
+
+                    body.querySelector('h6').style.cssText = `
                     margin: 0 0 8px 0;
                     color: ${this.colors.textPrimary};
                     font-weight: 600;
                 `;
-                
-                body.querySelector('p').style.cssText = `
+
+                    body.querySelector('p').style.cssText = `
                     margin: 0 0 15px 0;
                     color: ${this.colors.textSecondary};
                     font-size: 0.9em;
                 `;
-            }
-            
-            const actions = alert.querySelector('.alert-actions');
-            if (actions) {
-                actions.style.cssText = `
+                }
+
+                const actions = alert.querySelector('.alert-actions');
+                if (actions) {
+                    actions.style.cssText = `
                     display: flex;
                     gap: 8px;
                 `;
-                
-                const buttons = actions.querySelectorAll('button');
-                buttons.forEach((btn, index) => {
-                    if (index === 0) {
-                        btn.style.cssText = `
+
+                    const buttons = actions.querySelectorAll('button');
+                    buttons.forEach((btn, index) => {
+                        if (index === 0) {
+                            btn.style.cssText = `
                             background: ${this.colors.primary};
                             color: white;
                             border: 1px solid ${this.colors.primary};
@@ -878,8 +1217,8 @@
                             font-size: 0.85em;
                             cursor: pointer;
                         `;
-                    } else {
-                        btn.style.cssText = `
+                        } else {
+                            btn.style.cssText = `
                             background: transparent;
                             color: ${this.colors.textMuted};
                             border: 1px solid transparent;
@@ -888,73 +1227,73 @@
                             font-size: 0.85em;
                             cursor: pointer;
                         `;
-                    }
-                });
-            }
-        }
-        
-        getStatusDisplayText(statusValue) {
-            const statusMap = {
-                'em-preparacao': 'Em Preparação',
-                'entregue': 'Entregue',
-                'cancelado': 'Cancelado',
-                'pendente': 'Pendente',
-                'todos': 'Todos'
-            };
-            
-            return statusMap[statusValue] || statusValue;
-        }
-        
-        resetFilters() {
-            if (this.filterSelect) {
-                this.filterSelect.value = 'todos';
-                this.currentFilter = 'todos';
-            }
-            
-            if (this.searchInput) {
-                this.searchInput.value = '';
-            }
-            
-            this.applyFilter();
-        }
-    }
-    
-    // ====================================================
-    // INICIALIZAÇÃO
-    // ====================================================
-    
-    function initialize() {
-        // Aguarda a tabela carregar
-        const checkTable = setInterval(() => {
-            const table = document.querySelector('#datatables-column-search-select-inputs');
-            
-            if (table) {
-                clearInterval(checkTable);
-                
-                // Se for DataTable, espera inicialização
-                if (typeof $.fn.DataTable !== 'undefined' && $.fn.dataTable.isDataTable(table)) {
-                    setTimeout(createFilter, 500);
-                } else {
-                    createFilter();
+                        }
+                    });
                 }
             }
-        }, 100);
-        
-        function createFilter() {
-            try {
-                window.pedidosFilterInstance = new PedidosFilter();
-                logger.log('✅ Filtro de pedidos inicializado');
-                
-                // Adiciona estilos globais
-                addGlobalStyles();
-            } catch (error) {
-                logger.error('❌ Erro ao inicializar filtro:', error);
+
+            getStatusDisplayText(statusValue) {
+                const statusMap = {
+                    'em-preparacao': 'Em Preparação',
+                    'entregue': 'Entregue',
+                    'cancelado': 'Cancelado',
+                    'pendente': 'Pendente',
+                    'todos': 'Todos'
+                };
+
+                return statusMap[statusValue] || statusValue;
+            }
+
+            resetFilters() {
+                if (this.filterSelect) {
+                    this.filterSelect.value = 'todos';
+                    this.currentFilter = 'todos';
+                }
+
+                if (this.searchInput) {
+                    this.searchInput.value = '';
+                }
+
+                this.applyFilter();
             }
         }
-    }
-    
-    function addGlobalStyles() {
-        const styles = `
+
+        // ====================================================
+        // INICIALIZAÇÃO
+        // ====================================================
+
+        function initialize() {
+            // Aguarda a tabela carregar
+            const checkTable = setInterval(() => {
+                const table = document.querySelector('#datatables-column-search-select-inputs');
+
+                if (table) {
+                    clearInterval(checkTable);
+
+                    // Se for DataTable, espera inicialização
+                    if (typeof $.fn.DataTable !== 'undefined' && $.fn.dataTable.isDataTable(table)) {
+                        setTimeout(createFilter, 500);
+                    } else {
+                        createFilter();
+                    }
+                }
+            }, 100);
+
+            function createFilter() {
+                try {
+                    window.pedidosFilterInstance = new PedidosFilter();
+                    logger.log('✅ Filtro de pedidos inicializado');
+
+                    // Adiciona estilos globais
+                    addGlobalStyles();
+                } catch (error) {
+                    logger.error('❌ Erro ao inicializar filtro:', error);
+                }
+            }
+        }
+
+        function addGlobalStyles() {
+            const styles = `
             /* Animações */
             @keyframes slideInRight {
                 from {
@@ -1080,68 +1419,69 @@
                 }
             }
         `;
-        
-        const styleSheet = document.createElement('style');
-        styleSheet.textContent = styles;
-        document.head.appendChild(styleSheet);
-    }
-    
-    // Inicia quando o DOM estiver pronto
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initialize);
-    } else {
-        initialize();
-    }
-    
-})();
 
-// ====================================================
-// API PÚBLICA
-// ====================================================
-window.PedidosFilter = {
-    apply: function(status, search) {
-        if (window.pedidosFilterInstance) {
-            if (status) {
-                document.getElementById('filtroStatus').value = status;
-                window.pedidosFilterInstance.currentFilter = status;
+            const styleSheet = document.createElement('style');
+            styleSheet.textContent = styles;
+            document.head.appendChild(styleSheet);
+        }
+
+        // Inicia quando o DOM estiver pronto
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialize);
+        } else {
+            initialize();
+        }
+
+    })();
+
+    // ====================================================
+    // API PÚBLICA
+    // ====================================================
+    window.PedidosFilter = {
+        apply: function (status, search) {
+            if (window.pedidosFilterInstance) {
+                if (status) {
+                    document.getElementById('filtroStatus').value = status;
+                    window.pedidosFilterInstance.currentFilter = status;
+                }
+                if (search && window.pedidosFilterInstance.searchInput) {
+                    window.pedidosFilterInstance.searchInput.value = search;
+                }
+                window.pedidosFilterInstance.applyFilter();
             }
-            if (search && window.pedidosFilterInstance.searchInput) {
-                window.pedidosFilterInstance.searchInput.value = search;
+        },
+
+        reset: function () {
+            if (window.pedidosFilterInstance) {
+                window.pedidosFilterInstance.resetFilters();
             }
-            window.pedidosFilterInstance.applyFilter();
+        },
+
+        getStatus: function () {
+            return window.pedidosFilterInstance ?
+                window.pedidosFilterInstance.currentFilter : null;
+        },
+
+        getCounts: function () {
+            return window.pedidosFilterInstance ?
+                window.pedidosFilterInstance.statusCounts : null;
+        },
+
+        refresh: function () {
+            if (window.pedidosFilterInstance) {
+                window.pedidosFilterInstance.prepareTableData();
+                window.pedidosFilterInstance.countStatuses();
+                window.pedidosFilterInstance.applyThemeStyles();
+                window.pedidosFilterInstance.updateFilterOptions();
+                window.pedidosFilterInstance.applyFilter();
+            }
         }
-    },
-    
-    reset: function() {
-        if (window.pedidosFilterInstance) {
-            window.pedidosFilterInstance.resetFilters();
-        }
-    },
-    
-    getStatus: function() {
-        return window.pedidosFilterInstance ? 
-            window.pedidosFilterInstance.currentFilter : null;
-    },
-    
-    getCounts: function() {
-        return window.pedidosFilterInstance ? 
-            window.pedidosFilterInstance.statusCounts : null;
-    },
-    
-    refresh: function() {
-        if (window.pedidosFilterInstance) {
-            window.pedidosFilterInstance.prepareTableData();
-            window.pedidosFilterInstance.countStatuses();
-            window.pedidosFilterInstance.applyThemeStyles();
-            window.pedidosFilterInstance.updateFilterOptions();
-            window.pedidosFilterInstance.applyFilter();
-        }
-    }
-};
+    };
 </script>
 
 
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
 <style>
     .status {

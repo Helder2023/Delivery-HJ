@@ -246,7 +246,7 @@
             // Título
             doc.setFontSize(18);
             doc.setFont('helvetica', 'bold');
-            doc.text('Relatório - DeliveryHJ', pageWidth / 2, currentY, { align: 'center' });
+            doc.text('Relatório - CraveNow', pageWidth / 2, currentY, { align: 'center' });
             currentY += 10;
             
             // Informações
@@ -315,7 +315,7 @@
             // Rodapé
             doc.setFontSize(10);
             doc.setTextColor(150, 150, 150);
-            doc.text('DeliveryHJ Admin Dashboard', pageWidth / 2, pageHeight - 10, { align: 'center' });
+            doc.text('CraveNow Admin Dashboard', pageWidth / 2, pageHeight - 10, { align: 'center' });
             
             // Número da página
             const pageCount = doc.internal.getNumberOfPages();

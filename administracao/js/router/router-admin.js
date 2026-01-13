@@ -229,7 +229,7 @@
       initColumnSearchSelects();
       await loadPageScript();
 
-      document.title = `DeliveryHJ | ${titleHint || 'Página'}`;
+      document.title = `CraveNow | ${titleHint || 'Página'}`;
       updateActiveLinks(filePath);
       toggleInterface(true);
     }
@@ -384,7 +384,7 @@
 function aplicarTema(tema) {
   document.body.classList.remove('light-mode', 'dark-mode');
   document.body.classList.add(`${tema}-mode`);
-  localStorage.setItem('deliveryhj_tema', tema);
+  localStorage.setItem('CraveNow_tema', tema);
 
   atualizarCoresDeTexto(tema);
   atualizarCoresDosAlerts(tema);
@@ -519,7 +519,7 @@ window.addEventListener('hashchange', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  const temaSalvo = localStorage.getItem('deliveryhj_tema') || 'dark';
+  const temaSalvo = localStorage.getItem('CraveNow_tema') || 'dark';
   aplicarTema(temaSalvo);
   criarBotaoTema();
 

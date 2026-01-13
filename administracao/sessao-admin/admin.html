@@ -12,7 +12,7 @@
     <meta property="og:locale" content="pt_AO" />
     <meta property="og:locale:alternate" content="en_En" />
     <meta property="og:type" content="website" />
-    <title>Dashboard - Delivery-HJ</title>
+    <title>Dashboard - CraveNow</title>
     <link class="js-stylesheet" href="../css/light.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/fonts/icones.css">
     <link rel="stylesheet" href="../css/fonts/@fontawesome.css">
@@ -37,6 +37,8 @@
     </script>
 
 </head>
+
+
 
 <script src="../administracao/js/health-check.js"></script>
 
@@ -206,57 +208,6 @@
 </style>
 
 
-<script>
-    // ==============================
-    // 🔄 Atualizar página após redirecionamento
-    // ==============================
-
-    (function () {
-        let lastHash = location.hash;
-        const loader = document.getElementById('global-loader');
-
-        function showLoader() {
-            if (loader) loader.classList.remove('hidden');
-        }
-
-        function hideLoader() {
-            if (loader) loader.classList.add('hidden');
-        }
-
-        async function checkHashChange() {
-            if (location.hash !== lastHash) {
-                lastHash = location.hash;
-
-                showLoader();
-
-                try {
-                    if (typeof loadHash === 'function') {
-                        await loadHash();
-                    } else {
-                        location.reload();
-                    }
-                } finally {
-                    // pequeno delay para suavizar UX
-                    setTimeout(hideLoader, 1500);
-                }
-            }
-        }
-
-        // Verifica mudança de hash
-        setInterval(checkHashChange, 500);
-
-        // Primeira carga
-        window.addEventListener('DOMContentLoaded', async () => {
-            if (location.hash && typeof loadHash === 'function') {
-                showLoader();
-                await loadHash();
-                setTimeout(hideLoader, 3000);
-            }
-        });
-    })();
-</script>
-
-
 <!-- Mensagem para usuários com JS completamente desativado -->
 <noscript>
     <style>
@@ -274,8 +225,7 @@
     </div>
 </noscript>
 
-<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky"
-    style="background-color: black;">
+<body data-theme="default" data-layout="fluid" data-sidebar-position="left" data-sidebar-behavior="sticky">
     <!-- Mensagem de erro JS -->
     <div id="js-error">
         <h1>JavaScript está desativado ou ocorreu um erro!</h1>
@@ -292,7 +242,7 @@
                             alt="WasomUpfy">
 
                         <div class="sidebar-top">
-                            <h3>DeliveryHJ</h3>
+                            <h3>CraveNow</h3>
                             <p>Admin Dashboard</p>
                         </div>
                     </div>
@@ -312,7 +262,7 @@
                         <ul id="dashboards" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                             <li class="sidebar-item"><a class='sidebar-link' href='admin.html#/home'>Início</a>
                             </li>
-                            <li class="sidebar-item"><a class='sidebar-link' href='#' target="_blank"
+                            <li class="sidebar-item"><a class='sidebar-link' href='https://helder2023.github.io/Delivery-HJ/administracao/sessao-admin/admin.html#/home' target="_blank"
                                     rel="external">Visitar
                                     site</a>
                             </li>
@@ -736,7 +686,7 @@
                         </div>
                         <div class="col-6 text-end">
                             <p class="mb-0">
-                                &copy; 2026 - <a class='text-muted' href='#!'>DeliveryHJ</a>
+                                &copy; 2026 - <a class='text-muted' href='#!'>CraveNow</a>
                             </p>
                         </div>
                     </div>

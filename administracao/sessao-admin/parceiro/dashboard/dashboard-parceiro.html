@@ -13,12 +13,12 @@
         font-weight: 500;
     }
 
-    .status.ativo {
+    .status.pago {
         background-color: #198754;
         color: white;
     }
 
-    .status.inativo {
+    .status.cancelado {
         background-color: #dc3545;
         color: white;
     }
@@ -34,7 +34,7 @@
 <div class="row mb-2 mb-xl-3">
     <div class="content-top col-auto d-sm-block">
         <h1>Dashboard do Parceiro</h1>
-        <p>Bem-vindo ao painel de parceiros do DeliveryHJ</p>
+        <p>Bem-vindo ao painel de parceiros do CraveNow</p>
     </div>
 
     <div class="col-auto ms-auto text-end mt-n1">
@@ -57,17 +57,17 @@
         <div class="card illustration flex-fill card-dashboard">
             <div class="card-body p-0 d-flex flex-fill">
                 <div class="row g-0 w-100">
-                    <div class="col-6">
+                    <div class="col-7">
                         <div class="illustration-text p-3 m-1">
                             <h4 class="illustration-text">Olá, <a href="admin.html#/visualizar-perfil-parceiro">Jesse
                                     Madalena</a>!</h4>
                             <h6 class="illustration-text">Categoria:
                                 <span>Influencer</span>
                             </h6>
-                            <p class="mb-0"><a href="#!" target="_blank">DeliveryHJ - Parceiros</a></p>
+                            <p class="mb-0"><a href="#!" target="_blank">Codigo de Comissão - @jessemadalena2026</a></p>
                         </div>
                     </div>
-                    <div class="col-6 align-self-end text-end">
+                    <div class="col-5 align-self-end text-end">
                         <img loading="lazy" decoding="async" src="../assets/img/avatar/avatar.png" alt="Parceiro"
                             class="illustration-img">
                     </div>
@@ -160,32 +160,26 @@
     </div>
 </div>
 
-
-<!-- GRÁFICOS -->
-<div class="row">
-    <!-- GRÁFICO COMISSÃO MENSAL -->
-    <div class="col-12 col-lg-12 d-flex">
-        <div class="card flex-fill card-dashboard">
-            <div class="card-header d-flex justify-content-between align-items-center"
-                style="background-color: rgba(255, 255, 255, 0.048);">
-                <h5 class="card-title mb-0" style="color: white;">Comissão Mensal (USD)</h5>
-                <div>
-                    <label for="filtroAnoComissao" class="form-label me-2 mb-0" style="color: white;">Ano:</label>
-                    <select id="filtroAnoComissao" class="form-select form-select-sm d-inline-block"
-                        style="width: auto;">
-                        <option value="2023">2023</option>
-                        <option value="2024" selected>2024</option>
-                        <option value="2025">2025</option>
-                    </select>
-                </div>
+<!-- Gráfico de Comissão Mensal -->
+<div class="col-12 col-lg-12 mt-4">
+    <div class="card flex-fill card-dashboard">
+        <div class="card-header d-flex justify-content-between align-items-center bg-transparent">
+            <h5 class="card-title mb-0 text-white">Comissão Mensal (USD)</h5>
+            <div class="d-flex align-items-center">
+                <label for="filtroAnoComissao" class="form-label me-2 mb-0 text-white">Ano:</label>
+                <select id="filtroAnoComissao" class="form-select form-select-sm w-auto">
+                    <option value="2023">2023</option>
+                    <option value="2024" selected>2024</option>
+                    <option value="2025">2025</option>
+                </select>
             </div>
-            <div class="card-body">
-                <canvas id="comissaoMensalChart"></canvas>
+        </div>
+        <div class="card-body p-3">
+            <div class="chart-container">
+                <canvas id="comissaoMensalChart" height="300"></canvas>
             </div>
         </div>
     </div>
-
-
 </div>
 
 <!-- TABELA DE PEDIDOS E COMISSÕES -->
@@ -205,32 +199,21 @@
                         <tr>
                             <th>ID</th>
                             <th>Cliente</th>
-                            <th>Valor</th>
                             <th>Sua Comissão (12%)</th>
-                            <th>Codigo de </th>
+                            <th>Codigo de comissão</th>
                             <th>Data</th>
-                            <th>Status</th>
+                    
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>24/02/2024</td>
-                            <td>#DHJ-7815</td>
-                            <td>João Santos</td>
-                            <td>$152.50</td>
-                            <td><span class="status pago">$18.30</span></td>
-                            <td><span class="badge bg-dark">TikTok</span></td>
-                            <td><span class="status pago">Pago</span></td>
+                            <td>01</td>
+                            <td>Hélder Adão</td>
+                            <td>500 KZ</td>
+                            <td>@jessemadalena2026</td>
+                            <td>12/01/2026</td>
                         </tr>
-                        <tr>
-                            <td>20/02/2024</td>
-                            <td>#DHJ-7701</td>
-                            <td>Ricardo Lima</td>
-                            <td>$98.75</td>
-                            <td><span class="status pendente">$11.85</span></td>
-                            <td><span class="badge bg-dark">TikTok</span></td>
-                            <td><span class="status pendente">Processando</span></td>
-                        </tr>
+                      
                     </tbody>
                 </table>
             </div>
@@ -586,9 +569,276 @@
     </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // ==============================
+    // GRÁFICO DE COMISSÃO MENSAL
+    // ==============================
+
+    (function() {
+        // Configurações iniciais
+        const CHART_ID = 'comissaoMensalChart';
+        const FILTER_ID = 'filtroAnoComissao';
+        
+        // Verifica se os elementos necessários existem
+        const chartCanvas = document.getElementById(CHART_ID);
+        const yearFilter = document.getElementById(FILTER_ID);
+        
+        if (!chartCanvas || !yearFilter) {
+            console.warn('Elementos do gráfico de comissão não encontrados');
+            return;
+        }
+        
+        // Dados estruturados
+        const dadosComissao = {
+            2023: [1250, 1840, 2100, 1950, 2450, 3120, 2850, 3240, 2980, 4150, 3800, 4200],
+            2024: [1450, 2040, 1840, 2150, 2650, 2840, 2450, 2840, 3150, 2840, 0, 0],
+            2025: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        };
+        
+        const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+        
+        // Configurações do gráfico
+        const chartConfig = {
+            type: 'bar',
+            data: {
+                labels: meses,
+                datasets: []
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: 'white',
+                            font: {
+                                size: 12
+                            }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleColor: '#fff',
+                        bodyColor: '#fff',
+                        borderColor: '#0d6efd',
+                        borderWidth: 1,
+                        callbacks: {
+                            label: function(context) {
+                                return `Comissão: $${context.raw.toLocaleString('en-US')}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: {
+                            color: 'white',
+                            font: {
+                                size: 11
+                            }
+                        },
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: 'white',
+                            font: {
+                                size: 11
+                            },
+                            callback: function(value) {
+                                return `$${value.toLocaleString('en-US')}`;
+                            },
+                            stepSize: 1000
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)',
+                            drawBorder: false
+                        }
+                    }
+                },
+                animation: {
+                    duration: 750,
+                    easing: 'easeInOutQuart'
+                }
+            }
+        };
+        
+        // Instância do gráfico
+        let graficoComissao = null;
+        
+        /**
+         * Cria ou atualiza o gráfico com os dados do ano selecionado
+         * @param {string} ano - Ano selecionado (2023, 2024, 2025)
+         */
+        function criarOuAtualizarGrafico(ano) {
+            const anoSelecionado = ano || yearFilter.value;
+            const dadosAno = dadosComissao[anoSelecionado] || dadosComissao['2024'];
+            
+            // Configuração do dataset
+            const datasetConfig = {
+                label: `Comissão ${anoSelecionado} (USD)`,
+                data: dadosAno,
+                backgroundColor: 'rgba(13, 110, 253, 0.8)',
+                borderColor: 'rgba(13, 110, 253, 1)',
+                borderWidth: 1,
+                borderRadius: 6,
+                hoverBackgroundColor: 'rgba(13, 110, 253, 1)',
+                barPercentage: 0.7,
+                categoryPercentage: 0.8
+            };
+            
+            if (graficoComissao) {
+                // Atualiza gráfico existente
+                graficoComissao.data.datasets[0] = datasetConfig;
+                graficoComissao.data.datasets[0].label = `Comissão ${anoSelecionado} (USD)`;
+                graficoComissao.update('none'); // Atualiza sem animação
+                setTimeout(() => graficoComissao.update(), 50);
+            } else {
+                // Cria novo gráfico
+                chartConfig.data.datasets = [datasetConfig];
+                graficoComissao = new Chart(chartCanvas.getContext('2d'), chartConfig);
+            }
+            
+            // Atualiza título do tooltip
+            graficoComissao.options.plugins.tooltip.callbacks.title = function() {
+                return `Comissão ${anoSelecionado}`;
+            };
+        }
+        
+        /**
+         * Inicializa os eventos do gráfico
+         */
+        function inicializarEventos() {
+            // Evento de mudança no filtro de ano
+            yearFilter.addEventListener('change', function(e) {
+                criarOuAtualizarGrafico(e.target.value);
+            });
+            
+            // Redimensionamento da janela
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    if (graficoComissao) {
+                        graficoComissao.resize();
+                    }
+                }, 250);
+            });
+        }
+        
+        /**
+         * Adiciona placeholder para meses sem dados no ano atual
+         */
+        function formatarDadosParaExibicao() {
+            const anoAtual = new Date().getFullYear();
+            const mesAtual = new Date().getMonth(); // 0-11
+            
+            if (dadosComissao[anoAtual]) {
+                for (let i = mesAtual + 1; i < 12; i++) {
+                    if (dadosComissao[anoAtual][i] === 0) {
+                        dadosComissao[anoAtual][i] = null; // Chart.js mostra como linha tracejada
+                    }
+                }
+            }
+        }
+        
+        /**
+         * Inicializa o gráfico
+         */
+        function inicializarGrafico() {
+            try {
+                formatarDadosParaExibicao();
+                criarOuAtualizarGrafico('2024');
+                inicializarEventos();
+                
+                console.log('Gráfico de comissão mensal inicializado com sucesso');
+            } catch (error) {
+                console.error('Erro ao inicializar gráfico de comissão:', error);
+                mostrarMensagemErro();
+            }
+        }
+        
+        /**
+         * Mostra mensagem de erro se o gráfico falhar
+         */
+        function mostrarMensagemErro() {
+            chartCanvas.parentElement.innerHTML = `
+                <div class="alert alert-warning m-0">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Não foi possível carregar o gráfico de comissões.
+                    <button class="btn btn-sm btn-outline-warning ms-2" onclick="window.location.reload()">
+                        Tentar novamente
+                    </button>
+                </div>
+            `;
+        }
+        
+        // Inicializa quando o DOM estiver pronto
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', inicializarGrafico);
+        } else {
+            inicializarGrafico();
+        }
+        
+        // Expõe funções públicas para uso externo (opcional)
+        window.comissaoChart = {
+            atualizar: criarOuAtualizarGrafico,
+            obterDados: (ano) => dadosComissao[ano],
+            obterInstancia: () => graficoComissao
+        };
+        
+    })();
+</script>
+
+<style>
+    /* Estilos específicos para o gráfico */
+    .chart-container {
+        position: relative;
+        height: 300px;
+        width: 100%;
+    }
+    
+    .card-dashboard {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .card-dashboard .card-header {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .card-dashboard .card-body {
+        background: rgba(255, 255, 255, 0.02);
+    }
+    
+    /* Estilização do select */
+    #filtroAnoComissao {
+        background-color: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        min-width: 100px;
+    }
+    
+    #filtroAnoComissao:focus {
+        background-color: rgba(255, 255, 255, 0.15);
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+    }
+    
+    #filtroAnoComissao option {
+        background-color: #2d3748;
+        color: white;
+    }
+</style>
 
 <!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
     .status.ativo {
         background-color: #198754;
@@ -700,63 +950,7 @@
         }
     }
 </style>
-<script>
-    // Gráfico Comissão Mensal
-    const ctxComissao = document.getElementById('comissaoMensalChart').getContext('2d');
-    const dadosComissao = {
-        2023: [1250, 1840, 2100, 1950, 2450, 3120, 2850, 3240, 2980, 4150, 3800, 4200],
-        2024: [1450, 2040, 1840, 2150, 2650, 2840, 2450, 2840, 3150, 2840, 0, 0],
-        2025: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    };
 
-    const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-
-    function criarGraficoComissao(ano) {
-        const data = {
-            labels: meses,
-            datasets: [{
-                label: 'Comissão (USD)',
-                data: dadosComissao[ano],
-                backgroundColor: '#0d6efd',
-                borderRadius: 5
-            }]
-        };
-
-        return new Chart(ctxComissao, {
-            type: 'bar',
-            data: data,
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { labels: { color: 'white' } }
-                },
-                scales: {
-                    x: {
-                        ticks: { color: 'white' },
-                        grid: { display: false }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            color: 'white',
-                            callback: function (value) {
-                                return '$' + value;
-                            }
-                        },
-                        grid: { color: 'rgba(255,255,255,0.1)' }
-                    }
-                }
-            }
-        });
-    }
-
-    let graficoComissao = criarGraficoComissao('2024');
-    document.getElementById('filtroAnoComissao').addEventListener('change', (e) => {
-        graficoComissao.destroy();
-        graficoComissao = criarGraficoComissao(e.target.value);
-    });
-
-</script>
 <script>
     (function () {
         'use strict';
