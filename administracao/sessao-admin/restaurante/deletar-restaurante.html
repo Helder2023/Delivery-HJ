@@ -169,7 +169,29 @@
 
     </div>
 </div>
+<style>
+    @media print {
+            .sidebar-content,
+    .sidebar,
+    #nav,
+    .footer,
+    form,
+    .dados {
+        display: none;
+        
+    }
 
+    *{
+        color: black !important;
+    }
+
+    .container-fluid{
+        margin: 0;
+        padding: 0;
+    }
+
+    }
+</style>
 <script>
     function pdf() {
         document.getElementById("data_processo").innerHTML = dataActual();
