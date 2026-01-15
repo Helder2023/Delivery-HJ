@@ -8,15 +8,14 @@ $(function () {
         "responsive": true, 
         "lengthChange": false, 
         "autoWidth": false,
-        "buttons": ["excel"]
     }).buttons().container().appendTo('#tabela_1_wrapper .col-md-6:eq(0)');
     
     // Para a segunda tabela
-    if ($.fn.DataTable.isDataTable('#example2')) {
-        $('#example2').DataTable().destroy();
+    if ($.fn.DataTable.isDataTable('#example1')) {
+        $('#example1').DataTable().destroy();
     }
     
-    $('#example2').DataTable({
+    $('#example1').DataTable({
         "paging": true,
         "lengthChange": false,
         "searching": false,
@@ -69,11 +68,11 @@ $(function () {
     }).buttons().container().appendTo('#tabela_3_wrapper .col-md-6:eq(0)');
     
     // Repete para a segunda tabela se necessário
-    if ($.fn.dataTable.isDataTable('#example2')) {
-        $('#example2').DataTable().destroy();
+    if ($.fn.dataTable.isDataTable('#example3')) {
+        $('#example3').DataTable().destroy();
     }
     
-    $('#example2').DataTable({
+    $('#example3').DataTable({
         "paging": true,
         "lengthChange": false,
         "searching": false,
@@ -98,11 +97,11 @@ $(function () {
     }).buttons().container().appendTo('#tabela_4_wrapper .col-md-6:eq(0)');
     
     // Repete para a segunda tabela se necessário
-    if ($.fn.dataTable.isDataTable('#example2')) {
-        $('#example2').DataTable().destroy();
+    if ($.fn.dataTable.isDataTable('#example4')) {
+        $('#example4').DataTable().destroy();
     }
     
-    $('#example2').DataTable({
+    $('#example4').DataTable({
         "paging": true,
         "lengthChange": false,
         "searching": false,
@@ -127,11 +126,11 @@ $(function () {
     }).buttons().container().appendTo('#tabela_5_wrapper .col-md-6:eq(0)');
     
     // Repete para a segunda tabela se necessário
-    if ($.fn.dataTable.isDataTable('#example2')) {
-        $('#example2').DataTable().destroy();
+    if ($.fn.dataTable.isDataTable('#example5')) {
+        $('#example5').DataTable().destroy();
     }
     
-    $('#example2').DataTable({
+    $('#example5').DataTable({
         "paging": true,
         "lengthChange": false,
         "searching": false,
@@ -156,11 +155,11 @@ $(function () {
     }).buttons().container().appendTo('#tabela_6_wrapper .col-md-6:eq(0)');
     
     // Repete para a segunda tabela se necessário
-    if ($.fn.dataTable.isDataTable('#example2')) {
-        $('#example2').DataTable().destroy();
+    if ($.fn.dataTable.isDataTable('#example6')) {
+        $('#example6').DataTable().destroy();
     }
     
-    $('#example2').DataTable({
+    $('#example6').DataTable({
         "paging": true,
         "lengthChange": false,
         "searching": false,

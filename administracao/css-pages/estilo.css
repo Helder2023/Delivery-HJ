@@ -2,6 +2,7 @@
 /* SIDEBAR ACTIVE - DESIGN PREMIUM (GitHub Fix) */
 /* =========================================== */
 
+
 /* PRIMEIRO: DEFINIR --bs-primary-rgb MANUALMENTE */
 :root {
   --sidebar-bg: #f8f9fa;
