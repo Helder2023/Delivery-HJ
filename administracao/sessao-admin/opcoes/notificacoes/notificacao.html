@@ -5,9 +5,9 @@
   </div>
 
   <div class="col-auto ms-auto text-end mt-n1">
-      <button class="btn shadow-sm" onclick="window.history.back()">
-            <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
-        </button>
+    <button class="btn shadow-sm" onclick="window.history.back()">
+      <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+    </button>
     <button class="btn shadow-sm" onclick="window.location.reload()"
       style="background-color: white; color: black !important;">
       <i class="align-middle" data-feather="refresh-cw">&nbsp;</i>
@@ -17,12 +17,25 @@
 
 <!-- Cards de Resumo -->
 <div class="row content-cards">
+
   <div class="col-12 col-sm-6 col-xxl-3 d-flex">
     <div class="card flex-fill card-dashboard">
       <div class="card-body py-4">
-        <h3 class="mb-2">Total de Logs <span class="badge badge-soft-dark"
-            style="background-color: white; color: black !important;">563</span></h3>
-        <p class="mb-0">Ações registradas desde o lançamento do sistema.</p>
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2">Total de Logs
+              <span class="badge badge-soft-dark indicator"
+                style="background-color: white; color: black !important; margin-top: -20px !important;">123
+              </span>
+            </h3>
+            <p class="mb-2">Ações registradas desde o lançamento do sistema.</p>
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat">
+              <i data-feather="database" class="align-middle text-info"></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -30,9 +43,21 @@
   <div class="col-12 col-sm-6 col-xxl-3 d-flex">
     <div class="card flex-fill card-dashboard">
       <div class="card-body py-4">
-        <h3 class="mb-2">Hoje <span class="badge badge-soft-dark"
-            style="background-color: white; color: black !important;">34</span></h3>
-        <p class="mb-0">Ações registradas nas últimas 24h.</p>
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2">Hoje
+              <span class="badge badge-soft-dark indicator"
+                style="background-color: white; color: black !important; margin-top: -20px !important;">123
+              </span>
+            </h3>
+            <p class="mb-2">Ações registradas nas últimas 24h.</p>
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat">
+              <i data-feather="calendar" class="align-middle text-info"></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -40,9 +65,21 @@
   <div class="col-12 col-sm-6 col-xxl-3 d-flex">
     <div class="card flex-fill card-dashboard">
       <div class="card-body py-4">
-        <h3 class="mb-2">Alertas <span class="badge badge-soft-dark"
-            style="background-color: white; color: black !important;">7</span></h3>
-        <p class="mb-0">Eventos críticos ou suspeitos detectados.</p>
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2">Alertas
+              <span class="badge badge-soft-dark indicator"
+                style="background-color: white; color: black !important; margin-top: -20px !important;">123
+              </span>
+            </h3>
+            <p class="mb-2">Eventos críticos ou suspeitos detectados.</p>
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat">
+              <i data-feather="alert-triangle" class="align-middle text-info"></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -50,16 +87,41 @@
   <div class="col-12 col-sm-6 col-xxl-3 d-flex">
     <div class="card flex-fill card-dashboard">
       <div class="card-body py-4">
-        <h3 class="mb-2">Usuários Ativos <span class="badge badge-soft-dark"
-            style="background-color: white; color: black !important;">12</span></h3>
-        <p class="mb-0">Contas logadas no momento.</p>
+        <div class="d-flex align-items-start">
+          <div class="flex-grow-1">
+            <h3 class="mb-2">Usuários Ativos
+              <span class="badge badge-soft-dark indicator"
+                style="background-color: white; color: black !important; margin-top: -20px !important;">123
+              </span>
+            </h3>
+            <p class="mb-2">Contas logadas no momento.</p>
+          </div>
+          <div class="d-inline-block ms-3">
+            <div class="stat">
+              <i data-feather="users" class="align-middle text-info"></i>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+</div>
+<!-- ===== FILTRO DE STATUS ===== -->
+<div class="row mb-3">
+    <div class="col-md-3">
+        <label for="filtroStatus" class="form-label">Filtrar por Estado:</label>
+        <select id="filtroStatus" class="form-select">
+            <option value="todos">Todos</option>
+            <option value="normal">Normal</option>
+            <option value="aviso">Aviso</option>
+            <option value="critico">Critico</option>
+        </select>
+    </div>
 </div>
 
 <!-- Tabela de Logs -->
-<div class="card flex-fill card-dashboard mt-4">
+<div class="card flex-fill card-dashboard">
   <div class="card-header" style="background-color: rgba(255, 255, 255, 0.048); color: white;">
     <h4 class="card-title mb-0">Logs de Ações do Sistema</h4>
   </div>
@@ -79,19 +141,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>001</td>
-          <td>Administrador</td>
-          <td>Login efetuado com sucesso</td>
-          <td>Acesso</td>
-          <td>102.130.44.67</td>
-          <td>20/10/2025 - 14:32</td>
-          <td><i class="status normal">Normal</i></td>
-          <td>
-            <a style="margin-right: 7px;" href="admin.html#/visualizar-notificacao"><i data-feather="eye"></i></a>
-          </td>
-        </tr>
-        <tr>
+       
+        <tr data-status="normal">
           <td>002</td>
           <td>Restaurante “Sabor Tropical”</td>
           <td>Atualizou status do pedido #498</td>
@@ -103,7 +154,8 @@
             <a style="margin-right: 7px;" href="admin.html#/visualizar-notificacao"><i data-feather="eye"></i></a>
           </td>
         </tr>
-        <tr>
+
+        <tr data-status="aviso">
           <td>003</td>
           <td>Entregador “Carlos L.”</td>
           <td>Falha ao registrar entrega</td>
@@ -115,7 +167,8 @@
             <a style="margin-right: 7px;" href="admin.html#/visualizar-notificacao"><i data-feather="eye"></i></a>
           </td>
         </tr>
-        <tr>
+
+        <tr data-status="critico">
           <td>004</td>
           <td>Administrador</td>
           <td>Removeu restaurante inativo “FastAngo”</td>
@@ -127,23 +180,1058 @@
             <a style="margin-right: 7px;" href="admin.html#/visualizar-notificacao"><i data-feather="eye"></i></a>
           </td>
         </tr>
-        <tr>
-          <td>005</td>
-          <td>Restaurante “Delícia Luanda”</td>
-          <td>Enviou comprovativo de pagamento semanal</td>
-          <td>Financeiro</td>
-          <td>105.173.99.210</td>
-          <td>19/10/2025 - 18:12</td>
-          <td><i class="status normal">Normal</i></td>
-          <td>
-            <a style="margin-right: 7px;" href="admin.html#/visualizar-notificacao"><i data-feather="eye"></i></a>
-          </td>
-        </tr>
+       
       </tbody>
     </table>
   </div>
 </div>
 
+<script>
+    // ====================================================
+    // 🔍 FILTRO COM SUPORTE DARK/LIGHT
+    // ====================================================
+
+    (function () {
+        'use strict';
+
+        // Configurações
+        const CONFIG = {
+            debug: false,
+            animationDuration: 300,
+            searchDebounceTime: 300,
+            themeObserver: true
+        };
+
+        // Sistema de logging
+        const logger = {
+            log: (msg, data) => CONFIG.debug && console.log(`[FiltroPedidos] ${msg}`, data || ''),
+            warn: (msg, data) => console.warn(`[FiltroPedidos] ⚠️ ${msg}`, data || ''),
+            error: (msg, data) => console.error(`[FiltroPedidos] 🔴 ${msg}`, data || '')
+        };
+
+        // Sistema de cores baseado no tema
+        class ThemeManager {
+            static getColors() {
+                const isDark = document.body.classList.contains('dark-mode');
+
+                if (isDark) {
+                    return {
+                        // Cores principais
+                        primary: '#4dabf7',
+                        secondary: '#6c757d',
+                        success: '#51cf66',
+                        danger: '#ff6b6b',
+                        warning: '#ffd43b',
+                        info: '#3bc9db',
+
+                        // Cores de fundo
+                        bgPrimary: '#1a1a1a',
+                        bgSecondary: '#2d2d2d',
+                        bgTertiary: '#3d3d3d',
+
+                        // Cores de texto
+                        textPrimary: '#f8f9fa',
+                        textSecondary: '#e9ecef',
+                        textMuted: '#adb5bd',
+
+                        // Cores de borda
+                        border: '#495057',
+                        borderLight: '#6c757d',
+
+                        // Cores específicas para componentes
+                        tableBg: '#2d2d2d',
+                        tableBorder: '#444',
+                        cardBg: '#2d2d2d',
+                        cardBorder: '#444',
+                        inputBg: '#3d3d3d',
+                        inputBorder: '#495057',
+                        inputText: '#f8f9fa',
+
+
+                    };
+                } else {
+                    return {
+                        // Cores principais
+                        primary: '#0d6efd',
+                        secondary: '#6c757d',
+                        success: '#198754',
+                        danger: '#dc3545',
+                        warning: '#ffc107',
+                        info: '#0dcaf0',
+
+                        // Cores de fundo
+                        bgPrimary: '#ffffff',
+                        bgSecondary: '#f8f9fa',
+                        bgTertiary: '#e9ecef',
+
+                        // Cores de texto
+                        textPrimary: '#212529',
+                        textSecondary: '#495057',
+                        textMuted: '#6c757d',
+
+                        // Cores de borda
+                        border: '#dee2e6',
+                        borderLight: '#ced4da',
+
+                        // Cores específicas para componentes
+                        tableBg: '#ffffff',
+                        tableBorder: '#dee2e6',
+                        cardBg: '#ffffff',
+                        cardBorder: '#dee2e6',
+                        inputBg: '#ffffff',
+                        inputBorder: '#ced4da',
+                        inputText: '#212529',
+                    };
+                }
+            }
+
+            static updateElementStyles(element, styles) {
+                if (!element || !styles) return;
+
+                Object.keys(styles).forEach(property => {
+                    element.style[property] = styles[property];
+                });
+            }
+
+            static getStatusColor(status, colors) {
+                switch (status) {
+                    case 'normal':
+                        return colors.statusPreparacao;
+                    case 'aviso':
+                        return colors.statusEntregue;
+                    case 'critico':
+                        return colors.statusCancelado;
+                    default:
+                        return colors.secondary;
+                }
+            }
+        }
+
+        class PedidosFilter {
+            constructor() {
+                this.table = null;
+                this.rows = [];
+                this.filterSelect = null;
+                this.searchInput = null;
+                this.currentFilter = 'todos';
+                this.filteredRows = [];
+                this.statusCounts = {};
+                this.colors = ThemeManager.getColors();
+                this.init();
+            }
+
+            init() {
+                logger.log('Inicializando filtro de pedidos...');
+
+                // Encontra elementos
+                this.findElements();
+
+                if (!this.validateElements()) {
+                    logger.error('Elementos necessários não encontrados');
+                    return;
+                }
+
+                // Prepara dados
+                this.prepareTableData();
+
+                // Conta pedidos por status
+                this.countStatuses();
+
+                // Aplica estilos baseados no tema
+                this.applyThemeStyles();
+
+                // Atualiza opções do select
+                this.updateFilterOptions();
+
+                // Configura eventos
+                this.setupEventListeners();
+
+                // Configura observador de tema
+                this.setupThemeObserver();
+
+                // Aplica filtro inicial
+                this.applyFilter();
+
+                logger.log('✅ Filtro inicializado com sucesso');
+            }
+
+            findElements() {
+                // Tabela
+                this.table = document.querySelector('#datatables-column-search-select-inputs');
+
+                // Filtro de status
+                this.filterSelect = document.getElementById('filtroStatus');
+
+                // Busca geral (se existir)
+                this.searchInput = document.querySelector('input[type="search"], #searchPedidos');
+
+                // Card container
+                this.card = this.table.closest('.card');
+            }
+
+            validateElements() {
+                if (!this.table) {
+                    logger.warn('Tabela não encontrada');
+                    return false;
+                }
+
+                if (!this.filterSelect) {
+                    logger.warn('Filtro de status não encontrado');
+                    return false;
+                }
+
+                return true;
+            }
+
+            prepareTableData() {
+                const tbody = this.table.querySelector('tbody');
+                if (!tbody) {
+                    logger.warn('Tbody não encontrado');
+                    return;
+                }
+
+                this.rows = Array.from(tbody.querySelectorAll('tr'));
+
+                this.rows.forEach((row, index) => {
+                    row.dataset.originalIndex = index;
+
+                    // Extrai texto para busca
+                    const cells = Array.from(row.cells);
+                    row.dataset.searchText = cells
+                        .map(cell => cell.textContent.toLowerCase().trim())
+                        .join(' ');
+
+                    // Garante que tenha atributo data-status
+                    if (!row.dataset.status) {
+                        const statusCell = row.querySelector('.status');
+                        if (statusCell) {
+                            const statusClass = Array.from(statusCell.classList)
+                                .find(cls => cls !== 'status');
+                            if (statusClass) {
+                                row.dataset.status = this.normalizeStatus(statusClass);
+                            }
+                        }
+                    }
+
+                    // Aplica estilos ao status
+                    this.styleStatusBadge(row);
+                });
+            }
+
+            styleStatusBadge(row) {
+                const statusCell = row.querySelector('.status');
+                if (!statusCell) return;
+
+                const status = row.dataset.status;
+                const color = ThemeManager.getStatusColor(status, this.colors);
+
+                statusCell.style.cssText = `
+                display: inline-block;
+                padding: 4px 12px;
+                border-radius: 20px;
+                font-size: 0.85em;
+                font-weight: 500;
+                background-color: ${color}20;
+                color: ${color};
+                border: 1px solid ${color}40;
+                transition: all 0.3s ease;
+            `;
+            }
+
+            normalizeStatus(statusClass) {
+                const statusMap = {
+                    'normal': 'normal',
+                    'aviso': 'aviso',
+                    'critico': 'critico'
+                };
+
+                return statusMap[statusClass] || statusClass;
+            }
+
+            countStatuses() {
+                this.statusCounts = {
+                    'todos': this.rows.length,
+                    'normal': 0,
+                    'aviso': 0,
+                    'critico': 0
+                };
+
+                this.rows.forEach(row => {
+                    const status = row.dataset.status;
+                    if (status && this.statusCounts.hasOwnProperty(status)) {
+                        this.statusCounts[status]++;
+                    }
+                });
+            }
+
+            applyThemeStyles() {
+                // Aplica estilos à tabela
+                if (this.table) {
+                    this.table.style.backgroundColor = this.colors.tableBg;
+                    this.table.style.color = this.colors.textPrimary;
+                    this.table.style.borderColor = this.colors.tableBorder;
+                }
+
+                // Aplica estilos ao select
+                if (this.filterSelect) {
+                    this.filterSelect.style.backgroundColor = this.colors.inputBg;
+                    this.filterSelect.style.color = this.colors.inputText;
+                    this.filterSelect.style.borderColor = this.colors.inputBorder;
+
+                    // Estilos para options
+                    const options = this.filterSelect.querySelectorAll('option');
+                    options.forEach(option => {
+                        option.style.backgroundColor = this.colors.inputBg;
+                        option.style.color = this.colors.inputText;
+                    });
+                }
+
+                // Aplica estilos ao campo de busca (se existir)
+                if (this.searchInput) {
+                    this.searchInput.style.backgroundColor = this.colors.inputBg;
+                    this.searchInput.style.color = this.colors.inputText;
+                    this.searchInput.style.borderColor = this.colors.inputBorder;
+                }
+
+                // Aplica estilos ao card container
+                if (this.card) {
+                    this.card.style.backgroundColor = this.colors.cardBg;
+                    this.card.style.borderColor = this.colors.cardBorder;
+                    this.card.style.color = this.colors.textPrimary;
+                }
+            }
+
+            updateFilterOptions() {
+                const options = this.filterSelect.querySelectorAll('option');
+
+                options.forEach(option => {
+                    const statusValue = option.value;
+
+                    if (statusValue !== 'todos') {
+                        const count = this.statusCounts[statusValue] || 0;
+                        const originalText = option.textContent.replace(/\s*\(\d+\)/, '');
+                        option.textContent = `${originalText} (${count})`;
+                        option.disabled = count === 0;
+
+                        // Estilos para opções desabilitadas
+                        if (option.disabled) {
+                            option.style.color = this.colors.textMuted;
+                            option.style.fontStyle = 'italic';
+                            option.style.opacity = '0.6';
+                        }
+                    }
+                });
+            }
+
+            setupEventListeners() {
+                // Filtro por status
+                if (this.filterSelect) {
+                    this.filterSelect.addEventListener('change', (e) => {
+                        const selectedValue = e.target.value;
+                        const selectedOption = e.target.options[e.target.selectedIndex];
+
+                        if (selectedOption.disabled) {
+                            e.preventDefault();
+                            e.target.value = this.currentFilter;
+                            this.showNoDataAlert(selectedValue);
+                            return;
+                        }
+
+                        this.currentFilter = selectedValue;
+                        this.applyFilter();
+                    });
+                }
+
+                // Busca em tempo real
+                if (this.searchInput) {
+                    let debounceTimer;
+
+                    this.searchInput.addEventListener('input', (e) => {
+                        clearTimeout(debounceTimer);
+
+                        debounceTimer = setTimeout(() => {
+                            this.applyFilter();
+                        }, CONFIG.searchDebounceTime);
+                    });
+                }
+            }
+
+            setupThemeObserver() {
+                if (!CONFIG.themeObserver || !('MutationObserver' in window)) return;
+
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach(mutation => {
+                        if (mutation.type === 'attributes' &&
+                            mutation.attributeName === 'class') {
+                            logger.log('Tema alterado, atualizando estilos...');
+                            this.handleThemeChange();
+                        }
+                    });
+                });
+
+                observer.observe(document.body, {
+                    attributes: true,
+                    attributeFilter: ['class']
+                });
+            }
+
+            handleThemeChange() {
+                // Atualiza cores
+                this.colors = ThemeManager.getColors();
+
+                // Reaplica estilos
+                this.applyThemeStyles();
+
+                // Reestiliza badges de status
+                this.rows.forEach(row => this.styleStatusBadge(row));
+
+                // Atualiza mensagens existentes
+                this.updateExistingMessages();
+            }
+
+            updateExistingMessages() {
+                // Atualiza mensagem de "sem resultados"
+                const noResultsRow = document.getElementById('no-results-row');
+                if (noResultsRow) {
+                    this.styleNoResultsMessage(noResultsRow);
+                }
+
+                // Atualiza contador
+                const resultsCounter = document.querySelector('.results-counter');
+                if (resultsCounter) {
+                    this.styleResultsCounter(resultsCounter);
+                }
+            }
+
+            applyFilter() {
+                const searchTerm = this.searchInput ?
+                    this.searchInput.value.toLowerCase().trim() : '';
+
+                // Filtra linhas
+                this.filteredRows = this.rows.filter(row => {
+                    let matches = true;
+
+                    if (this.currentFilter !== 'todos') {
+                        const rowStatus = row.dataset.status || '';
+                        matches = matches && rowStatus === this.currentFilter;
+                    }
+
+                    if (searchTerm) {
+                        const searchText = row.dataset.searchText || '';
+                        matches = matches && searchText.includes(searchTerm);
+                    }
+
+                    return matches;
+                });
+
+                // Atualiza exibição
+                this.updateTableDisplay();
+
+                // Mostra/oculta mensagem de "sem resultados"
+                if (this.filteredRows.length === 0) {
+                    this.showNoResultsMessage();
+                } else {
+                    this.hideNoResultsMessage();
+                }
+
+                // Atualiza contador
+                this.updateResultsCounter();
+            }
+
+            updateTableDisplay() {
+                // Anima transição
+                this.rows.forEach(row => {
+                    if (this.filteredRows.includes(row)) {
+                        row.style.display = '';
+                        row.style.opacity = '1';
+                        row.style.transform = 'translateY(0)';
+                        row.style.transition = `all ${CONFIG.animationDuration}ms ease`;
+                    } else {
+                        row.style.opacity = '0';
+                        row.style.transform = 'translateY(-10px)';
+                        row.style.transition = `all ${CONFIG.animationDuration}ms ease`;
+                        setTimeout(() => {
+                            row.style.display = 'none';
+                        }, CONFIG.animationDuration);
+                    }
+                });
+            }
+
+            showNoResultsMessage() {
+                const tbody = this.table.querySelector('tbody');
+                if (!tbody) return;
+
+                // Remove mensagem anterior
+                this.hideNoResultsMessage();
+
+                // Cria mensagem
+                const messageRow = document.createElement('tr');
+                messageRow.id = 'no-results-row';
+                messageRow.className = 'no-results-message';
+
+                const messageCell = document.createElement('td');
+                messageCell.colSpan = this.getColumnCount();
+                messageCell.className = 'text-center py-5';
+
+                // Conteúdo da mensagem
+                const content = this.createNoResultsContent();
+                messageCell.innerHTML = content;
+
+                messageRow.appendChild(messageCell);
+                tbody.appendChild(messageRow);
+
+                // Aplica estilos
+                this.styleNoResultsMessage(messageRow);
+
+                // Anima entrada
+                setTimeout(() => {
+                    messageRow.style.opacity = '1';
+                    messageRow.style.transform = 'translateY(0)';
+                }, 50);
+            }
+
+            createNoResultsContent() {
+                const filterText = this.getFilterDisplayText();
+                let message = '';
+                let icon = '';
+                let suggestion = '';
+
+                if (this.currentFilter !== 'todos') {
+                    const count = this.statusCounts[this.currentFilter] || 0;
+
+                    if (count === 0) {
+                        message = `Não há pedidos com status "${filterText}"`;
+                        icon = 'fas fa-clipboard-list';
+                        suggestion = 'Este status não possui pedidos registrados.';
+                    } else if (this.searchInput && this.searchInput.value) {
+                        message = `Nenhum pedido "${filterText}" encontrado com "${this.searchInput.value}"`;
+                        icon = 'fas fa-search';
+                        suggestion = 'Tente buscar com termos diferentes.';
+                    }
+                } else if (this.searchInput && this.searchInput.value) {
+                    message = `Nenhum pedido encontrado com "${this.searchInput.value}"`;
+                    icon = 'fas fa-search';
+                    suggestion = 'Tente buscar com outros termos.';
+                } else {
+                    message = 'Nenhum pedido cadastrado';
+                    icon = 'fas fa-inbox';
+                    suggestion = 'Adicione pedidos para visualizá-los aqui.';
+                }
+
+                return `
+                <div class="no-results-content">
+                    <div class="no-results-icon mb-3">
+                        <i class="${icon} fa-3x" style="color: ${this.colors.textMuted};"></i>
+                    </div>
+                    <h4 class="no-results-title mb-2" style="color: ${this.colors.textPrimary};">${message}</h4>
+                    <p class="no-results-subtitle mb-4" style="color: ${this.colors.textMuted};">${suggestion}</p>
+                    <div class="no-results-actions">
+                        ${this.getActionButtons()}
+                    </div>
+                </div>
+            `;
+            }
+
+            styleNoResultsMessage(messageRow) {
+                messageRow.style.cssText = `
+                background: ${this.colors.bgSecondary};
+                border-radius: 8px;
+                transition: all 0.3s ease;
+            `;
+            }
+
+            hideNoResultsMessage() {
+                const existingMessage = document.getElementById('no-results-row');
+                if (existingMessage) {
+                    existingMessage.style.opacity = '0';
+                    existingMessage.style.transform = 'translateY(-10px)';
+                    setTimeout(() => {
+                        existingMessage.remove();
+                    }, CONFIG.animationDuration);
+                }
+            }
+
+            getActionButtons() {
+                const btnStyle = `
+                background-color: ${this.colors.primary};
+                color: white;
+                border: 1px solid ${this.colors.primary};
+            `;
+
+                const btnOutlineStyle = `
+                background-color: transparent;
+                color: ${this.colors.primary};
+                border: 1px solid ${this.colors.primary};
+            `;
+
+                let buttons = '';
+
+                if (this.searchInput && this.searchInput.value) {
+                    buttons += `
+                    <button class="btn btn-sm me-2" onclick="this.closest('.no-results-message').remove(); document.querySelector('${this.searchInput.tagName}[type=\"search\"]').value = ''; window.pedidosFilterInstance.applyFilter();" style="${btnOutlineStyle}">
+                        <i class="fas fa-backspace me-1"></i> Limpar Busca
+                    </button>
+                `;
+                }
+
+                if (this.currentFilter !== 'todos') {
+                    buttons += `
+                    <button class="btn btn-sm" onclick="document.getElementById('filtroStatus').value = 'todos'; window.pedidosFilterInstance.currentFilter = 'todos'; window.pedidosFilterInstance.applyFilter();" style="${btnStyle}">
+                        <i class="fas fa-list me-1"></i> Ver Todos
+                    </button>
+                `;
+                }
+
+                return buttons || `
+                <button class="btn btn-sm" onclick="window.pedidosFilterInstance.resetFilters()" style="${btnStyle}">
+                    <i class="fas fa-redo me-1"></i> Recarregar
+                </button>
+            `;
+            }
+
+            getFilterDisplayText() {
+                if (!this.filterSelect) return this.currentFilter;
+
+                const option = this.filterSelect.querySelector(`option[value="${this.currentFilter}"]`);
+                return option ? option.textContent.replace(/\s*\(\d+\)/, '') : this.currentFilter;
+            }
+
+            getColumnCount() {
+                const headerRow = this.table.querySelector('thead tr');
+                return headerRow ? headerRow.cells.length : 6;
+            }
+
+            updateResultsCounter() {
+                // Remove contador anterior
+                const oldCounter = document.querySelector('.results-counter');
+                if (oldCounter) oldCounter.remove();
+
+                // Cria novo contador
+                const totalRows = this.rows.length;
+                const filteredRows = this.filteredRows.length;
+
+                if (totalRows > 0) {
+                    const counter = document.createElement('div');
+                    counter.className = 'results-counter';
+
+                    counter.innerHTML = `
+                    <div class="counter-content">
+                        <i class="fas fa-filter me-2" style="color: ${this.colors.primary};"></i>
+                        <span style="color: ${this.colors.textPrimary};">
+                            <strong>${filteredRows}</strong> de <strong>${totalRows}</strong> pedidos
+                        </span>
+                        ${filteredRows < totalRows ?
+                            `<button class="btn btn-sm ms-3" onclick="window.pedidosFilterInstance.resetFilters()" style="color: ${this.colors.primary}; border-color: ${this.colors.primary}; background: transparent;">
+                                <i class="fas fa-times me-1"></i> Limpar Filtros
+                            </button>` : ''}
+                    </div>
+                `;
+
+                    // Aplica estilos
+                    this.styleResultsCounter(counter);
+
+                    // Insere após a tabela
+                    const tableContainer = this.table.closest('.card-body');
+                    if (tableContainer) {
+                        tableContainer.appendChild(counter);
+                    }
+                }
+            }
+
+            styleResultsCounter(counter) {
+                counter.style.cssText = `
+                padding: 10px 15px;
+                margin-top: 15px;
+                background: ${this.colors.bgSecondary};
+                border: 1px solid ${this.colors.border};
+                border-radius: 6px;
+                transition: all 0.3s ease;
+            `;
+
+                const content = counter.querySelector('.counter-content');
+                if (content) {
+                    content.style.cssText = `
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                `;
+                }
+            }
+
+            showNoDataAlert(statusValue) {
+                const alertDiv = document.createElement('div');
+                alertDiv.className = 'theme-alert alert-dismissible fade show';
+
+                const statusText = this.getStatusDisplayText(statusValue);
+
+                alertDiv.innerHTML = `
+                <div class="alert-content">
+                    <div class="alert-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="alert-body">
+                        <h6>Status sem dados</h6>
+                        <p>Não há pedidos com status <strong>"${statusText}"</strong>.</p>
+                        <div class="alert-actions">
+                            <button class="btn btn-sm me-2" onclick="document.getElementById('filtroStatus').value = 'todos'; this.closest('.theme-alert').remove(); window.pedidosFilterInstance.applyFilter();">
+                                Ver Todos
+                            </button>
+                            <button class="btn btn-sm btn-text" onclick="this.closest('.theme-alert').remove()">
+                                Fechar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+                // Aplica estilos
+                this.styleAlert(alertDiv);
+
+                document.body.appendChild(alertDiv);
+
+                // Remove após 8 segundos
+                setTimeout(() => {
+                    if (alertDiv.parentNode) {
+                        alertDiv.classList.remove('show');
+                        setTimeout(() => alertDiv.remove(), 300);
+                    }
+                }, 8000);
+            }
+
+            styleAlert(alert) {
+                alert.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                z-index: 9999;
+                min-width: 300px;
+                max-width: 400px;
+                background: ${this.colors.bgSecondary};
+                border: 1px solid ${this.colors.border};
+                border-left: 4px solid ${this.colors.warning};
+                border-radius: 6px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                color: ${this.colors.textPrimary};
+                animation: slideInRight 0.3s ease;
+            `;
+
+                const content = alert.querySelector('.alert-content');
+                if (content) {
+                    content.style.cssText = `
+                    display: flex;
+                    padding: 15px;
+                `;
+                }
+
+                const icon = alert.querySelector('.alert-icon');
+                if (icon) {
+                    icon.style.cssText = `
+                    flex-shrink: 0;
+                    margin-right: 15px;
+                    color: ${this.colors.warning};
+                    font-size: 1.5em;
+                `;
+                }
+
+                const body = alert.querySelector('.alert-body');
+                if (body) {
+                    body.style.cssText = `
+                    flex-grow: 1;
+                `;
+
+                    body.querySelector('h6').style.cssText = `
+                    margin: 0 0 8px 0;
+                    color: ${this.colors.textPrimary};
+                    font-weight: 600;
+                `;
+
+                    body.querySelector('p').style.cssText = `
+                    margin: 0 0 15px 0;
+                    color: ${this.colors.textSecondary};
+                    font-size: 0.9em;
+                `;
+                }
+
+                const actions = alert.querySelector('.alert-actions');
+                if (actions) {
+                    actions.style.cssText = `
+                    display: flex;
+                    gap: 8px;
+                `;
+
+                    const buttons = actions.querySelectorAll('button');
+                    buttons.forEach((btn, index) => {
+                        if (index === 0) {
+                            btn.style.cssText = `
+                            background: ${this.colors.primary};
+                            color: white;
+                            border: 1px solid ${this.colors.primary};
+                            border-radius: 4px;
+                            padding: 5px 12px;
+                            font-size: 0.85em;
+                            cursor: pointer;
+                        `;
+                        } else {
+                            btn.style.cssText = `
+                            background: transparent;
+                            color: ${this.colors.textMuted};
+                            border: 1px solid transparent;
+                            border-radius: 4px;
+                            padding: 5px 12px;
+                            font-size: 0.85em;
+                            cursor: pointer;
+                        `;
+                        }
+                    });
+                }
+            }
+
+            getStatusDisplayText(statusValue) {
+                const statusMap = {
+                    'em-preparacao': 'Em Preparação',
+                    'entregue': 'Entregue',
+                    'cancelado': 'Cancelado',
+                    'pendente': 'Pendente',
+                    'todos': 'Todos'
+                };
+
+                return statusMap[statusValue] || statusValue;
+            }
+
+            resetFilters() {
+                if (this.filterSelect) {
+                    this.filterSelect.value = 'todos';
+                    this.currentFilter = 'todos';
+                }
+
+                if (this.searchInput) {
+                    this.searchInput.value = '';
+                }
+
+                this.applyFilter();
+            }
+        }
+
+        // ====================================================
+        // INICIALIZAÇÃO
+        // ====================================================
+
+        function initialize() {
+            // Aguarda a tabela carregar
+            const checkTable = setInterval(() => {
+                const table = document.querySelector('#datatables-column-search-select-inputs');
+
+                if (table) {
+                    clearInterval(checkTable);
+
+                    // Se for DataTable, espera inicialização
+                    if (typeof $.fn.DataTable !== 'undefined' && $.fn.dataTable.isDataTable(table)) {
+                        setTimeout(createFilter, 500);
+                    } else {
+                        createFilter();
+                    }
+                }
+            }, 100);
+
+            function createFilter() {
+                try {
+                    window.pedidosFilterInstance = new PedidosFilter();
+                    logger.log('✅ Filtro de pedidos inicializado');
+
+                    // Adiciona estilos globais
+                    addGlobalStyles();
+                } catch (error) {
+                    logger.error('❌ Erro ao inicializar filtro:', error);
+                }
+            }
+        }
+
+        function addGlobalStyles() {
+            const styles = `
+            /* Animações */
+            @keyframes slideInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            
+            /* Transições suaves para tema */
+            #datatables-column-search-select-inputs,
+            #datatables-column-search-select-inputs th,
+            #datatables-column-search-select-inputs td,
+            #filtroStatus,
+            .card-dashboard,
+            .results-counter,
+            .no-results-message {
+                transition: background-color 0.3s ease, 
+                            border-color 0.3s ease, 
+                            color 0.3s ease;
+            }
+            
+            /* Ajustes para DataTables (se usado) */
+            .dataTables_wrapper .dataTables_filter input {
+                transition: background-color 0.3s ease, 
+                            border-color 0.3s ease, 
+                            color 0.3s ease !important;
+            }
+            
+            .dataTables_wrapper .dataTables_length select {
+                transition: background-color 0.3s ease, 
+                            border-color 0.3s ease, 
+                            color 0.3s ease !important;
+            }
+            
+            /* Status badges - transição de cores */
+            .status {
+                transition: background-color 0.3s ease, 
+                            color 0.3s ease, 
+                            border-color 0.3s ease !important;
+            }
+            
+            /* Botões com tema */
+            .btn-outline-primary {
+                transition: background-color 0.3s ease, 
+                            color 0.3s ease, 
+                            border-color 0.3s ease;
+            }
+            
+            /* Placeholders com tema */
+            ::placeholder {
+                transition: color 0.3s ease;
+            }
+            
+            /* Scrollbar com tema */
+            .card-dashboard ::-webkit-scrollbar {
+                width: 8px;
+                height: 8px;
+            }
+            
+            .card-dashboard ::-webkit-scrollbar-track {
+                background: var(--scrollbar-track, #f1f1f1);
+                border-radius: 4px;
+            }
+            
+            .dark-mode .card-dashboard ::-webkit-scrollbar-track {
+                background: var(--scrollbar-track-dark, #2d2d2d);
+            }
+            
+            .card-dashboard ::-webkit-scrollbar-thumb {
+                background: var(--scrollbar-thumb, #c1c1c1);
+                border-radius: 4px;
+            }
+            
+            .dark-mode .card-dashboard ::-webkit-scrollbar-thumb {
+                background: var(--scrollbar-thumb-dark, #555);
+            }
+            
+            .card-dashboard ::-webkit-scrollbar-thumb:hover {
+                background: var(--scrollbar-thumb-hover, #a8a8a8);
+            }
+            
+            .dark-mode .card-dashboard ::-webkit-scrollbar-thumb:hover {
+                background: var(--scrollbar-thumb-hover-dark, #666);
+            }
+            
+            /* Responsividade */
+            @media (max-width: 768px) {
+                .theme-alert {
+                    left: 10px;
+                    right: 10px;
+                    min-width: auto;
+                    max-width: none;
+                }
+                
+                .results-counter .counter-content {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 10px;
+                }
+                
+                .results-counter .counter-content button {
+                    align-self: flex-start;
+                }
+                
+                .no-results-actions {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                }
+                
+                .no-results-actions button {
+                    width: 100%;
+                    justify-content: center;
+                }
+            }
+        `;
+
+            const styleSheet = document.createElement('style');
+            styleSheet.textContent = styles;
+            document.head.appendChild(styleSheet);
+        }
+
+        // Inicia quando o DOM estiver pronto
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initialize);
+        } else {
+            initialize();
+        }
+
+    })();
+
+    // ====================================================
+    // API PÚBLICA
+    // ====================================================
+    window.PedidosFilter = {
+        apply: function (status, search) {
+            if (window.pedidosFilterInstance) {
+                if (status) {
+                    document.getElementById('filtroStatus').value = status;
+                    window.pedidosFilterInstance.currentFilter = status;
+                }
+                if (search && window.pedidosFilterInstance.searchInput) {
+                    window.pedidosFilterInstance.searchInput.value = search;
+                }
+                window.pedidosFilterInstance.applyFilter();
+            }
+        },
+
+        reset: function () {
+            if (window.pedidosFilterInstance) {
+                window.pedidosFilterInstance.resetFilters();
+            }
+        },
+
+        getStatus: function () {
+            return window.pedidosFilterInstance ?
+                window.pedidosFilterInstance.currentFilter : null;
+        },
+
+        getCounts: function () {
+            return window.pedidosFilterInstance ?
+                window.pedidosFilterInstance.statusCounts : null;
+        },
+
+        refresh: function () {
+            if (window.pedidosFilterInstance) {
+                window.pedidosFilterInstance.prepareTableData();
+                window.pedidosFilterInstance.countStatuses();
+                window.pedidosFilterInstance.applyThemeStyles();
+                window.pedidosFilterInstance.updateFilterOptions();
+                window.pedidosFilterInstance.applyFilter();
+            }
+        }
+    };
+</script>
 
 
 

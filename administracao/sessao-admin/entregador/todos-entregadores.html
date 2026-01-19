@@ -84,7 +84,7 @@
 
     <div class="col-12 col-md-6 col-lg-4 card-item">
       <div class="admin-card d-flex align-items-center gap-3">
-        <img src="https://randomuser.me/api/portraits/men/40.jpg" class="admin-avatar" alt="Entregador">
+        <img src="../assets/img/avatar/avatar.png" class="admin-avatar" alt="Entregador">
         <div class="flex-grow-1">
           <h6 class="mb-1">Carlos Bento</h6>
           <p class="text-secondary mb-1">Talatona — Restaurante Bella Itália</p>
@@ -102,7 +102,7 @@
 
     <div class="col-12 col-md-6 col-lg-4 card-item">
       <div class="admin-card d-flex align-items-center gap-3">
-        <img src="https://randomuser.me/api/portraits/men/39.jpg" class="admin-avatar" alt="Entregador">
+        <img src="../assets/img/avatar/avatar.png" class="admin-avatar" alt="Entregador">
         <div class="flex-grow-1">
           <h6 class="mb-1">António Gomes</h6>
           <p class="text-secondary mb-1">Benfica — Restaurante Tropical</p>
@@ -120,7 +120,7 @@
 
     <div class="col-12 col-md-6 col-lg-4 card-item">
       <div class="admin-card d-flex align-items-center gap-3">
-        <img src="https://randomuser.me/api/portraits/women/41.jpg" class="admin-avatar" alt="Entregadora">
+        <img src="../assets/img/avatar/avatar.png" class="admin-avatar" alt="Entregadora">
         <div class="flex-grow-1">
           <h6 class="mb-1">Helena Lopes</h6>
           <p class="text-secondary mb-1">Viana — Restaurante King Food</p>
@@ -335,8 +335,7 @@
     stroke: #000 !important;
   }
 </style>
-
-  <style>
+<style>
     .search-bar input {
       max-width: 500px;
       margin-bottom: 20px;
@@ -443,8 +442,8 @@
       background-color: #a71d2a !important;
       color: white !important;
     }
-  </style>
-  <script>
+</style>
+<script>
     feather.replace();
 
     (function () {
@@ -526,10 +525,9 @@
       // --- Inicialização ---
       showPage(1);
     })();
-  </script>
-
+</script>
   <!-- === SCRIPT PARA FILTRO === -->
-  <script>
+<script>
     document.getElementById('searchInput').addEventListener('input', function () {
       const termo = this.value.toLowerCase().trim();
       const cards = document.querySelectorAll('#cards-container .card-item');
@@ -549,4 +547,4 @@
 
     // Ícones Feather
     feather.replace();
-  </script>
+</script>

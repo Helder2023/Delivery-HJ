@@ -5,7 +5,7 @@
     </div>
 
     <div class="col-auto ms-auto text-end mt-n1">
-          <button class="btn shadow-sm" onclick="window.history.back()">
+        <button class="btn shadow-sm" onclick="window.history.back()">
             <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
         </button>
         <button class="btn shadow-sm" onclick="window.location.reload()"
@@ -17,12 +17,25 @@
 
 <!-- Cards de Resumo -->
 <div class="row content-cards">
+
     <div class="col-12 col-sm-6 col-xxl-3 d-flex">
         <div class="card flex-fill card-dashboard">
             <div class="card-body py-4">
-                <h3 class="mb-2">Total de Mensagens <span class="badge badge-soft-dark"
-                        style="background-color: white; color: black !important;">125</span></h3>
-                <p class="mb-0">Mensagens recebidas desde o lançamento.</p>
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Total de Mensagens
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important; margin-top: -20px !important;">123
+                            </span>
+                        </h3>
+                        <p class="mb-2">Mensagens recebidas desde o lançamento.</p>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat">
+                            <i data-feather="message-square" class="align-middle text-info"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -30,9 +43,21 @@
     <div class="col-12 col-sm-6 col-xxl-3 d-flex">
         <div class="card flex-fill card-dashboard">
             <div class="card-body py-4">
-                <h3 class="mb-2">Reclamações dos Utilizadores <span class="badge badge-soft-dark"
-                        style="background-color: white; color: black !important;">12</span></h3>
-                <p class="mb-0">Mensagens recebidas nas últimas 24h.</p>
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Reclamações dos Utilizadores
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important; margin-top: -20px !important;">123
+                            </span>
+                        </h3>
+                        <p class="mb-2">Mensagens recebidas nas últimas 24h.</p>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat">
+                            <i data-feather="frown" class="align-middle text-info"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -40,19 +65,43 @@
     <div class="col-12 col-sm-6 col-xxl-3 d-flex">
         <div class="card flex-fill card-dashboard">
             <div class="card-body py-4">
-                <h3 class="mb-2">Respondidas <span class="badge badge-soft-dark"
-                        style="background-color: white; color: black !important;">98</span></h3>
-                <p class="mb-0">Mensagens já tratadas pela equipe.</p>
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Respondidas
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important; margin-top: -20px !important;">123
+                            </span>
+                        </h3>
+                        <p class="mb-2">Mensagens já tratadas pela equipe.</p>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat">
+                            <i data-feather="check-circle" class="align-middle text-info"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+<div class="col-12 col-sm-6 col-xxl-3 d-flex">
         <div class="card flex-fill card-dashboard">
             <div class="card-body py-4">
-                <h3 class="mb-2">Pendentes <span class="badge badge-soft-dark"
-                        style="background-color: white; color: black !important;">27</span></h3>
-                <p class="mb-0">Aguardando resposta.</p>
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Pendentes
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important; margin-top: -20px !important;">123
+                            </span>
+                        </h3>
+                        <p class="mb-2">Aguardando resposta.</p>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat">
+                            <i data-feather="clock" class="align-middle text-info"></i>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -195,10 +244,8 @@
     </div>
 </div>
 
-
-
 <style>
-        .status {
+    .status {
         border-radius: 50px;
         padding: 3px 10px;
         font-size: 0.75rem;

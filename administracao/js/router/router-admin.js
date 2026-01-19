@@ -13,6 +13,7 @@
   const UTILIZADOR = '../sessao-admin/utilizador/';
   const FINANCAS = '../sessao-admin/financas/';
   const DESPESAS = '../sessao-admin/financas/despesas/';
+  const PAGAMENTO_SALARIO = '../sessao-admin/financas/pagementos/';
   const RESTAURANTE = '../sessao-admin/restaurante/';
   const GERENCIAR_RESTAURANTE = '../sessao-admin/restaurante/gerenciar-restaurante/';
   const ENTREGADOR = '../sessao-admin/entregador/';
@@ -93,8 +94,10 @@
     '/contas-bancarias': { title: 'Contas Bancárias dos funcionários', file: FINANCAS + 'contas-bancarias.html' },
 
     '/despesas': { title: 'Despesas', file: DESPESAS + 'despesas.html' },
-    '/editar-despesa': { title: 'Despesas', file: DESPESAS + 'editar-despesa.html' },
+    '/editar-despesa': { title: 'Editando a Despesa', file: DESPESAS + 'editar-despesa.html' },
 
+    '/pagamentos': { title: 'Pagamento de salário', file: DESPESAS + 'editar-pagamento.html' },
+    '/editar-pagamento': { title: 'Editando Pagamento', file: DESPESAS + 'pagamentos-funcionario.html' },
 
     '/todos-entregadores': { title: 'Todos os entregadores', file: ENTREGADOR + 'todos-entregadores.html' },
     '/adicionar-entregador': { title: 'Adicionar entregador', file: ENTREGADOR + 'adicionar-entregador.html' },

@@ -1,5 +1,12 @@
 <script src="../js/data-tables.js"></script>
 
+<div id="conteudo-importado"></div>
+<script>
+    $(function () {
+        $("#conteudo-importado").load("../js/graficos/financas.html");
+    });
+</script>
+
 <div class="row mb-2 mb-xl-3">
     <div class="content-top col-auto d-sm-block">
         <h1>Dashboard Financeiro</h1>
@@ -110,7 +117,25 @@
 
 </div>
 
-<div class="card card-dashboard p-3 " style="margin-top: -15px;">
+<div class="col-12" style="margin-top: -20px;">
+    <div class="card flex-fill card-dashboard">
+        <div class="card-header d-flex justify-content-between align-items-center"
+            style="background-color: rgba(255, 255, 255, 0.048);">
+            <h2 class="card-title mb-0" style="color: white;">Resumo Financeiro Anual</h2>
+
+            <div>
+                <label for="anoFiltro" class="text-white me-2">Ano:</label>
+                <select id="anoFiltro" class="form-select" style="display:inline-block; width: auto;"></select>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <canvas id="financeiroChart" height="460"></canvas>
+        </div>
+    </div>
+</div>
+
+<div class="card card-dashboard p-3 ">
     <h4>Cadastrar Conta Bancária da CraveNow</h4>
 
     <!-- FORMULÁRIO -->
@@ -262,7 +287,7 @@
         </table>
     </div>
 </div>
-
+<hr>
 <!-- Filtros -->
 <div class="col-12">
     <div class="filter-container">
@@ -303,7 +328,6 @@
     </div>
 </div>
 
-<!-- Lista de Despesas por Mês -->
 <div class="col-12">
     <!-- Informação sobre outros meses -->
     <div class="card mb-3">
@@ -314,99 +338,106 @@
         </div>
     </div>
 
-    <h3 class="mb-2" style="color: var(--dark-color);">
-        <i class="bi bi-list-ul me-2"></i>Pagamentos por Mês
-    </h3>
-
-    <!-- Janeiro -->
     <div class="card mb-3">
         <div class="card-header month-header d-flex justify-content-between align-items-center"
-            data-bs-toggle="collapse" href="#collapseJaneiro">
+            data-bs-toggle="collapse" href="#collapseMes">
             <div class="month-title">
-                <i class="bi bi-calendar-month me-2"></i>Janeiro 2023
-                <span class="badge bg-primary ms-2">6 pagamentos</span>
+                <i class="bi bi-list-ul me-2"></i>Pagamentos por Mês
             </div>
             <div class="d-flex align-items-center">
-                <span class="total-month saldo-negativo me-3">Total: AKZ 2.150,00</span>
+                <span class="total-month saldo-negativo me-3">Ano: 2026</span>
                 <i class="bi bi-chevron-down"></i>
             </div>
         </div>
-        <div class="collapse" id="collapseJaneiro">
-           
-             <table id="tabela_4" class="table table-borderless my-0 w-100">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Restaurante</th>
-                    <th>Status</th>
-                    <th>Data de Pagamento</th>
-                    <th>Valor (Kz)</th>
-                    <th>Comprovativo</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody id="tabelaPagamentos">
-                <tr>
-                    <td>001</td>
-                    <td>Restaurante Kapital</td>
-                    <td><span class="status pago">Pago</span></td>
-                    <td>2025-11-05</td>
-                    <td>12.500</td>
-                    <td>
-                        <a href="admin.html#/analisando" class="text-decoration-none">
-                            <i data-feather="external-link"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
-                                data-feather="eye"></i></a>
-                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
-                    </td>
-                </tr>
+        <div class="collapse" id="collapseMes">
+           <!-- Janeiro -->
+            <div class=" mb-3">
+                <div class="card-header month-header d-flex justify-content-between align-items-center"
+                    data-bs-toggle="collapse" href="#collapseJaneiro">
+                    <div class="month-title">
+                        <i class="bi bi-calendar-month me-2"></i>Janeiro 2023
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span class="total-month saldo-negativo me-3">Total: AKZ 2.150,00</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="collapse" id="collapseJaneiro">
                 
-                <tr>
-                    <td>003</td>
-                    <td>Pizza na Pedra</td>
-                    <td><span class="status pago">Pago</span></td>
-                    <td>2025-11-04</td>
-                    <td>10.200</td>
-                    <td>
-                        <a href="detalhes-pagamento.html?id=003" class="text-decoration-none">
-                            <i data-feather="external-link"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
-                                data-feather="eye"></i></a>
-                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>004</td>
-                    <td>Food City</td>
-                    <td><span class="status pago">Pago</span></td>
-                    <td>—</td>
-                    <td>9.800</td>
-                    <td>
-                        <a href="detalhes-pagamento.html?id=004" class="text-decoration-none">
-                            <i data-feather="external-link"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
-                                data-feather="eye"></i></a>
-                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    <table id="tabela_5" class="table table-borderless my-0 w-100">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Restaurante</th>
+                            <th>Status</th>
+                            <th>Data de Pagamento</th>
+                            <th>Valor (Kz)</th>
+                            <th>Comprovativo</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabelaPagamentos">
+                        <tr>
+                            <td>001</td>
+                            <td>Restaurante Kapital</td>
+                            <td><span class="status pago">Pago</span></td>
+                            <td>2025-11-05</td>
+                            <td>12.500</td>
+                            <td>
+                                <a href="admin.html#/analisando" class="text-decoration-none">
+                                    <i data-feather="external-link"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
+                                        data-feather="eye"></i></a>
+                                <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>003</td>
+                            <td>Pizza na Pedra</td>
+                            <td><span class="status pago">Pago</span></td>
+                            <td>2025-11-04</td>
+                            <td>10.200</td>
+                            <td>
+                                <a href="detalhes-pagamento.html?id=003" class="text-decoration-none">
+                                    <i data-feather="external-link"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
+                                        data-feather="eye"></i></a>
+                                <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>004</td>
+                            <td>Food City</td>
+                            <td><span class="status pago">Pago</span></td>
+                            <td>—</td>
+                            <td>9.800</td>
+                            <td>
+                                <a href="detalhes-pagamento.html?id=004" class="text-decoration-none">
+                                    <i data-feather="external-link"></i>
+                                </a>
+                            </td>
+                            <td>
+                                <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
+                                        data-feather="eye"></i></a>
+                                <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
         </div>
     </div>
-
 </div>
-
-
 <hr>
+
 <div class="content-top col-auto d-sm-block">
     <p>
     <h3>Lista de Restaurantes com os status - <i class="status naoPago">Não Pago</i> </h3>
@@ -494,27 +525,6 @@
     </div>
 </div>
 
-<div class="col-12">
-    <div class="card flex-fill card-dashboard">
-        <div class="card-header d-flex justify-content-between align-items-center"
-            style="background-color: rgba(255, 255, 255, 0.048);">
-            <h2 class="card-title mb-0" style="color: white;">Resumo Financeiro Anual</h2>
-
-            <div>
-                <label for="anoFiltro" class="text-white me-2">Ano:</label>
-                <select id="anoFiltro" class="form-select" style="display:inline-block; width: auto;"></select>
-            </div>
-        </div>
-
-        <div class="card-body">
-            <canvas id="financeiroChart" height="460"></canvas>
-        </div>
-    </div>
-</div>
-
-<!-- Bootstrap Icons -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-
 <style>
     .saldo {
         border-radius: 50px;
@@ -531,6 +541,10 @@
     .saldo.negativo {
         background-color: #dc3545;
         color: white;
+    }
+
+    .badge{
+        color: #198754 !important;
     }
 
     .card {
@@ -566,7 +580,6 @@
         transition: transform 0.3s ease;
         color: var(--primary-color);
     }
-
 
     .filter-container {
         background-color: white;
@@ -692,399 +705,6 @@
         if (linhaNaoEncontradoExistente) linhaNaoEncontradoExistente.remove();
     });
 </script>
-
-<script>
-    // ====================================================
-// 📊 GRÁFICO FINANCEIRO - VERSÃO FUNCIONAL SIMPLIFICADA
-// ====================================================
-
-(function() {
-    'use strict';
-    
-    // Configurações
-    const CONFIG = {
-        debug: true, // Ative para ver logs
-        maxYears: 5,
-        defaultCurrency: 'kz'
-    };
-    
-    // Sistema de logging
-    const logger = {
-        log: (msg, data) => CONFIG.debug && console.log(`[FinanceChart] ${msg}`, data || ''),
-        warn: (msg, data) => console.warn(`[FinanceChart] ⚠️ ${msg}`, data || ''),
-        error: (msg, data) => console.error(`[FinanceChart] 🔴 ${msg}`, data || '')
-    };
-    
-    // VERIFICAÇÃO SIMPLES
-    function checkRequirements() {
-        // 1. Verifica se Chart.js está carregado
-        if (typeof Chart === 'undefined') {
-            logger.error('Chart.js não está carregado!');
-            return false;
-        }
-        
-        // 2. Verifica se o canvas existe
-        const canvas = document.getElementById('financeiroChart');
-        if (!canvas) {
-            logger.error('Canvas #financeiroChart não encontrado!');
-            return false;
-        }
-        
-        // 3. Verifica se o seletor de ano existe
-        const yearSelect = document.getElementById('anoFiltro');
-        if (!yearSelect) {
-            logger.warn('Seletor #anoFiltro não encontrado');
-        }
-        
-        return true;
-    }
-    
-    // DADOS DE EXEMPLO (SIMPLIFICADO)
-    function getFinancialData(year) {
-        const currentYear = new Date().getFullYear();
-        
-        // Dados básicos para demonstração
-        const baseData = {
-            2025: {
-                receitas: [4000, 4300, 4500, 4700, 5000, 5200, 5500, 5800, 6000, 6500, 7000, 7500],
-                despesas: [2000, 2100, 2200, 2500, 2400, 2600, 2700, 2900, 3000, 3100, 3200, 3300]
-            },
-            2024: {
-                receitas: [3500, 3600, 3800, 3900, 4200, 4400, 4700, 4900, 5100, 5300, 5500, 5800],
-                despesas: [1800, 1900, 2000, 2200, 2100, 2300, 2400, 2600, 2700, 2800, 2900, 3000]
-            },
-            2023: {
-                receitas: [3000, 3200, 3400, 3600, 3800, 4000, 4200, 4400, 4600, 4800, 5000, 5200],
-                despesas: [1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600]
-            }
-        };
-        
-        // Retorna dados do ano ou do ano atual
-        return baseData[year] || baseData[currentYear] || baseData[2025];
-    }
-    
-    // CALCULA LUCRO
-    function calcularLucro(receitas, despesas) {
-        return receitas.map((receita, index) => receita - despesas[index]);
-    }
-    
-    // FORMATA MOEDA
-    function formatarMoeda(valor) {
-        return new Intl.NumberFormat('pt-AO', {
-            style: 'currency',
-            currency: 'AOA',
-            minimumFractionDigits: 0
-        }).format(valor).replace('AOA', 'kz');
-    }
-    
-    // INICIALIZAÇÃO SIMPLES E DIRETA
-    function inicializarGrafico() {
-        logger.log('Iniciando inicialização do gráfico...');
-        
-        // Verifica requisitos básicos
-        if (!checkRequirements()) {
-            mostrarErro('Requisitos não atendidos. Verifique o console.');
-            return;
-        }
-        
-        // Elementos
-        const canvas = document.getElementById('financeiroChart');
-        const ctx = canvas.getContext('2d');
-        const anoSelect = document.getElementById('anoFiltro');
-        
-        if (!ctx) {
-            logger.error('Não foi possível obter contexto 2D do canvas');
-            return;
-        }
-        
-        // 1. CONFIGURA SELEÇÃO DE ANO
-        configurarSeletorAno(anoSelect);
-        
-        // 2. OBTÉM ANO ATUAL
-        const anoAtual = anoSelect ? parseInt(anoSelect.value) : new Date().getFullYear();
-        
-        // 3. OBTÉM DADOS
-        const dados = getFinancialData(anoAtual);
-        logger.log('Dados carregados:', { ano: anoAtual, dados });
-        
-        // 4. CALCULA LUCRO
-        const lucro = calcularLucro(dados.receitas, dados.despesas);
-        
-        // 5. CORES DINÂMICAS
-        const isDarkMode = document.body.classList.contains('dark-mode');
-        const cores = {
-            receita: isDarkMode ? '#4dabf7' : '#0d6efd',
-            despesa: isDarkMode ? '#ff6b6b' : '#dc3545',
-            lucro: isDarkMode ? '#51cf66' : '#198754',
-            texto: isDarkMode ? 'rgba(255, 255, 255, 0.9)' : 'rgba(0, 0, 0, 0.9)',
-            grade: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
-        };
-        
-        // 6. CRIA GRÁFICO
-        const grafico = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                datasets: [
-                    {
-                        label: 'Receitas',
-                        data: dados.receitas,
-                        backgroundColor: cores.receita,
-                        borderRadius: 6,
-                        borderWidth: 1,
-                        borderColor: cores.receita + '80',
-                        order: 3
-                    },
-                    {
-                        label: 'Despesas',
-                        data: dados.despesas,
-                        backgroundColor: cores.despesa,
-                        borderRadius: 6,
-                        borderWidth: 1,
-                        borderColor: cores.despesa + '80',
-                        order: 2
-                    },
-                    {
-                        label: 'Lucro',
-                        type: 'line',
-                        data: lucro,
-                        borderColor: cores.lucro,
-                        borderWidth: 3,
-                        tension: 0.4,
-                        pointRadius: 5,
-                        pointBackgroundColor: isDarkMode ? '#2d2d2d' : '#ffffff',
-                        pointBorderColor: cores.lucro,
-                        pointBorderWidth: 2,
-                        order: 1,
-                        fill: false
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        labels: {
-                            color: cores.texto,
-                            font: {
-                                size: 12,
-                                weight: '600'
-                            }
-                        }
-                    },
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                        callbacks: {
-                            label: function(context) {
-                                const valor = context.raw;
-                                const label = context.dataset.label;
-                                return `${label}: ${formatarMoeda(valor)}`;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            color: cores.texto,
-                            font: {
-                                size: 11
-                            }
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: cores.grade
-                        },
-                        ticks: {
-                            color: cores.texto,
-                            font: {
-                                size: 11
-                            },
-                            callback: function(value) {
-                                return formatarMoeda(value);
-                            }
-                        }
-                    }
-                }
-            }
-        });
-        
-        logger.log('Gráfico criado com sucesso!');
-        
-        // 7. ATUALIZA TOTAIS
-        atualizarTotais(dados);
-        
-        // 8. CONFIGURA EVENTO DE MUDANÇA DE ANO
-        if (anoSelect) {
-            anoSelect.addEventListener('change', function() {
-                const novoAno = parseInt(this.value);
-                const novosDados = getFinancialData(novoAno);
-                const novoLucro = calcularLucro(novosDados.receitas, novosDados.despesas);
-                
-                // Atualiza dados do gráfico
-                grafico.data.datasets[0].data = novosDados.receitas;
-                grafico.data.datasets[1].data = novosDados.despesas;
-                grafico.data.datasets[2].data = novoLucro;
-                
-                grafico.update();
-                
-                // Atualiza totais
-                atualizarTotais(novosDados);
-                
-                logger.log(`Gráfico atualizado para ${novoAno}`);
-            });
-        }
-        
-        // 9. CONFIGURA OBSERVADOR DE TEMA
-        configurarObservadorTema(grafico, cores);
-        
-        // Armazena referência global
-        window.graficoFinanceiro = grafico;
-    }
-    
-    // FUNÇÕES AUXILIARES
-    function configurarSeletorAno(selectElement) {
-        if (!selectElement) return;
-        
-        const anoAtual = new Date().getFullYear();
-        
-        // Limpa opções existentes
-        selectElement.innerHTML = '';
-        
-        // Adiciona últimos 5 anos
-        for (let i = 0; i < CONFIG.maxYears; i++) {
-            const ano = anoAtual - i;
-            const option = document.createElement('option');
-            option.value = ano;
-            option.textContent = ano;
-            if (i === 0) option.selected = true;
-            selectElement.appendChild(option);
-        }
-    }
-    
-    function atualizarTotais(dados) {
-        const totalReceitas = dados.receitas.reduce((a, b) => a + b, 0);
-        const totalDespesas = dados.despesas.reduce((a, b) => a + b, 0);
-        const totalLucro = totalReceitas - totalDespesas;
-        
-        // Atualiza elementos se existirem
-        const atualizarElemento = (id, valor) => {
-            const elemento = document.getElementById(id);
-            if (elemento) {
-                elemento.textContent = formatarMoeda(valor);
-            }
-        };
-        
-        atualizarElemento('total-receitas', totalReceitas);
-        atualizarElemento('total-despesas', totalDespesas);
-        atualizarElemento('total-lucro', totalLucro);
-    }
-    
-    function configurarObservadorTema(grafico, coresBase) {
-        const observer = new MutationObserver(function() {
-            const isDarkMode = document.body.classList.contains('dark-mode');
-            const novasCores = {
-                receita: isDarkMode ? '#4dabf7' : '#0d6efd',
-                despesa: isDarkMode ? '#ff6b6b' : '#dc3545',
-                lucro: isDarkMode ? '#51cf66' : '#198754',
-                texto: isDarkMode ? 'rgba(255, 255, 255, 0.9)' : 'rgba(0, 0, 0, 0.9)',
-                grade: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
-            };
-            
-            // Atualiza cores do gráfico
-            if (grafico && grafico.data && grafico.data.datasets) {
-                grafico.data.datasets[0].backgroundColor = novasCores.receita;
-                grafico.data.datasets[0].borderColor = novasCores.receita + '80';
-                grafico.data.datasets[1].backgroundColor = novasCores.despesa;
-                grafico.data.datasets[1].borderColor = novasCores.despesa + '80';
-                grafico.data.datasets[2].borderColor = novasCores.lucro;
-                grafico.data.datasets[2].pointBorderColor = novasCores.lucro;
-                grafico.data.datasets[2].pointBackgroundColor = isDarkMode ? '#2d2d2d' : '#ffffff';
-                
-                // Atualiza opções
-                grafico.options.plugins.legend.labels.color = novasCores.texto;
-                grafico.options.scales.x.ticks.color = novasCores.texto;
-                grafico.options.scales.y.ticks.color = novasCores.texto;
-                grafico.options.scales.y.grid.color = novasCores.grade;
-                
-                grafico.update();
-            }
-        });
-        
-        observer.observe(document.body, {
-            attributes: true,
-            attributeFilter: ['class']
-        });
-    }
-    
-    function mostrarErro(mensagem) {
-        const container = document.getElementById('financeiroChart')?.parentElement;
-        if (container) {
-            container.innerHTML = `
-                <div class="alert alert-danger">
-                    <h6>Erro ao carregar gráfico</h6>
-                    <p class="mb-0">${mensagem}</p>
-                    <button onclick="location.reload()" class="btn btn-sm btn-outline-danger mt-2">
-                        Recarregar página
-                    </button>
-                </div>
-            `;
-        }
-        logger.error(mensagem);
-    }
-    
-    // INICIALIZAÇÃO AUTOMÁTICA
-    function iniciar() {
-        logger.log('Iniciando script do gráfico financeiro...');
-        
-        // Espera o DOM carregar
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', function() {
-                setTimeout(inicializarGrafico, 100);
-            });
-        } else {
-            setTimeout(inicializarGrafico, 100);
-        }
-    }
-    
-    // Inicia o script
-    iniciar();
-    
-})();
-
-// ESTILOS INLINE (opcional - pode mover para CSS)
-(function() {
-    const styles = `
-        .grafico-container {
-            position: relative;
-            height: 400px;
-        }
-        
-        #financeiroChart {
-            width: 100% !important;
-            height: 100% !important;
-        }
-        
-        @media (max-width: 768px) {
-            .grafico-container {
-                height: 300px;
-            }
-        }
-    `;
-    
-    const styleSheet = document.createElement('style');
-    styleSheet.textContent = styles;
-    document.head.appendChild(styleSheet);
-})();
-</script>
-
 <style>
     .status {
         border-radius: 50px;
@@ -1103,7 +723,6 @@
         color: white;
     }
 
-
     .status.pendente {
         background-color: #616300;
         color: white;
@@ -1121,13 +740,11 @@
         color: black !important;
     }
 </style>
-
 <style>
     /* ========== BASE GERAL ========== */
     * {
         transition: background-color 0.3s ease, color 0.3s ease;
     }
-
 
     /* ========== UPLOAD FOTO ========== */
     .upload-foto {
@@ -1150,8 +767,3 @@
         text-decoration: none !important;
     }
 </style>
-
-
-
-<!-- Chart.js -->
-<!-- Cabeçalho -->

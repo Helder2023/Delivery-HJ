@@ -1,34 +1,11 @@
-<style>
-    .sidebar-content,
-    .sidebar,
-    #nav,
-    .footer {
-        display: none;
-    }
+<script src="../js/data-tables.js"></script>
 
-    .status {
-        border-radius: 50px;
-        padding: 3px 10px;
-        font-size: 0.75rem;
-        font-weight: 500;
-    }
-
-    .status.pago {
-        background-color: #198754;
-        color: white;
-    }
-
-    .status.cancelado {
-        background-color: #dc3545;
-        color: white;
-    }
-
-
-    .status.pendente {
-        background-color: #616300;
-        color: white;
-    }
-</style>
+<div id="conteudo-importado"></div>
+<script>
+    $(function () {
+        $("#conteudo-importado").load("../js/graficos/home-parceiro.html");
+    });
+</script>
 
 
 <div class="row mb-2 mb-xl-3">
@@ -181,7 +158,112 @@
         </div>
     </div>
 </div>
+<hr>
+<div class="col-12">
+    <div class="filter-container">
+        <div class="row">
+            <div class="col-md-4">
+                <label for="monthFilter" class="form-label fw-bold">Mês</label>
+                <select class="form-select" id="monthFilter">
+                    <option value="all" selected>Todos os meses</option>
+                    <option value="1">Janeiro</option>
+                    <option value="2">Fevereiro</option>
+                    <option value="3">Março</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Maio</option>
+                    <option value="6">Junho</option>
+                    <option value="7">Julho</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+            </div>
+            <div class="col-md-4 mb-3">
+                <label for="yearFilter" class="form-label fw-bold">Ano</label>
+                <select class="form-select" id="yearFilter">
+                    <option value="2023" selected>2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                </select>
+            </div>
+            <div class="col-md-4 mb-3 d-flex align-items-end">
+                <button class="btn btn-primary w-100 btn-sm">
+                    <i class="bi bi-funnel me-2"></i>Filtrar Despesas
+                </button>
+            </div>
+        </div>
 
+    </div>
+</div>
+
+<div class="col-12">
+    <!-- Informação sobre outros meses -->
+    <div class="card mb-3">
+        <div class="empty-state">
+            <i class="bi bi-calendar3"></i>
+            <h3>Pagamentos Total estimado para o ano de 2023: <span class="fw-bold saldo-negativo">AKZ
+                    25.140,00</span></h3>
+        </div>
+    </div>
+
+    <div class="card mb-3">
+        <div class="card-header month-header d-flex justify-content-between align-items-center"
+            data-bs-toggle="collapse" href="#collapseMes">
+            <div class="month-title">
+                <i class="bi bi-list-ul me-2"></i>Pagamentos por Mês
+            </div>
+            <div class="d-flex align-items-center">
+                <span class="total-month saldo-negativo me-3">Ano: 2026</span>
+                <i class="bi bi-chevron-down"></i>
+            </div>
+        </div>
+        <div class="collapse" id="collapseMes">
+            <!-- Janeiro -->
+            <div class=" mb-3">
+                <div class="card-header month-header d-flex justify-content-between align-items-center"
+                    data-bs-toggle="collapse" href="#collapseJaneiro">
+                    <div class="month-title">
+                        <i class="bi bi-calendar-month me-2"></i>Janeiro
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span class="total-month saldo-negativo me-3">Total: AKZ 2.150,00</span>
+                        <i class="bi bi-chevron-down"></i>
+                    </div>
+                </div>
+                <div class="collapse" id="collapseJaneiro">
+
+                    <table id="tabela_4" class="table table-borderless my-0 w-100">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Valor (KZS)</th>
+                                <th>Data de pagamento</th>
+                                <th>Comprovativo</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelaPagamentos">
+
+                            <tr>
+                                <td>003</td>
+                                <td>10.200</td>
+                                <td>2025-11-04</td>
+                                <td>
+                                    <a href="../sessao-admin/paginas/contratos/adminstradores/Exercício de Portugol - Lista 03 (2).pdf"
+                                        target="_blank" class="btn btn-primary"><i data-feather="eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
 <!-- TABELA DE PEDIDOS E COMISSÕES -->
 <div class="row">
     <div class="col-12 d-flex">
@@ -202,7 +284,7 @@
                             <th>Sua Comissão (12%)</th>
                             <th>Codigo de comissão</th>
                             <th>Data</th>
-                    
+
                         </tr>
                     </thead>
                     <tbody>
@@ -213,7 +295,7 @@
                             <td>@jessemadalena2026</td>
                             <td>12/01/2026</td>
                         </tr>
-                      
+
                     </tbody>
                 </table>
             </div>
@@ -314,7 +396,8 @@
                                         value="https://youtu.be/-1ywJ8sFwvo?si=F-S1LN2kMxx9oMmA">
                                     <div class="spinner" style="position: absolute; right: 10px; top: 8px;"></div>
                                 </div>
-                                <a href="https://youtu.be/-1ywJ8sFwvo?si=F-S1LN2kMxx9oMmA" target="_blank" rel="noopener noreferrer" class="preview-link"
+                                <a href="https://youtu.be/-1ywJ8sFwvo?si=F-S1LN2kMxx9oMmA" target="_blank"
+                                    rel="noopener noreferrer" class="preview-link"
                                     style="color: rgb(67, 67, 255) !important; display: block; margin-top: 10px;">
                                     Clique para abrir o link
                                 </a>
@@ -364,7 +447,7 @@
                                 </a>
                                 </p>
 
-                                
+
                                 <div class="col-auto ms-auto text-start mt-n1">
                                     <button class="btn shadow-sm" style="background-color: #000;">
                                         <a class="no-underline" href="admin.html#/editar-publicidade-parceiro"
@@ -408,7 +491,7 @@
                                 </a>
                                 </p>
 
-                                
+
                                 <div class="col-auto ms-auto text-start mt-n1">
                                     <button class="btn shadow-sm" style="background-color: #000;">
                                         <a class="no-underline" href="admin.html#/editar-publicidade-parceiro"
@@ -452,7 +535,7 @@
                                 </a>
                                 </p>
 
-                                
+
                                 <div class="col-auto ms-auto text-start mt-n1">
                                     <button class="btn shadow-sm" style="background-color: #000;">
                                         <a class="no-underline" href="admin.html#/editar-publicidade-parceiro"
@@ -496,7 +579,7 @@
                                 </a>
                                 </p>
 
-                                
+
                                 <div class="col-auto ms-auto text-start mt-n1">
                                     <button class="btn shadow-sm" style="background-color: #000;">
                                         <a class="no-underline" href="admin.html#/editar-publicidade-parceiro"
@@ -539,7 +622,7 @@
                                     Clique para abrir o link
                                 </a>
                                 </p>
-                                
+
                                 <div class="col-auto ms-auto text-start mt-n1">
                                     <button class="btn shadow-sm" style="background-color: #000;">
                                         <a class="no-underline" href="admin.html#/editar-publicidade-parceiro"
@@ -570,123 +653,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    (() => {
 
-        const ctx = document.getElementById('comissaoMensalChart').getContext('2d');
-        const seletorAno = document.getElementById('filtroAnoComissao');
-
-        const meses = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-
-        const dadosComissao = {
-            2023: [120, 150, 180, 130, 170, 200, 220, 210, 190, 230, 250, 270],
-            2024: [200, 240, 260, 280, 300, 320, 310, 330, 350, 370, 390, 420],
-            2025: [300, 340, 360, 380, 400, 420, 450, 470, 490, 520, 540, 580]
-        };
-
-        function darkModeAtivo() {
-            return document.body.classList.contains("dark");
-        }
-
-        function criarGradiente(ctx, dark) {
-            const g = ctx.createLinearGradient(0, 0, 0, 320);
-            if (dark) {
-                g.addColorStop(0, "rgba(0,184,255,0.7)");
-                g.addColorStop(1, "rgba(0,184,255,0.05)");
-            } else {
-                g.addColorStop(0, "rgba(0,123,255,0.6)");
-                g.addColorStop(1, "rgba(0,123,255,0.03)");
-            }
-            return g;
-        }
-
-        let chart;
-
-        function renderizar(ano) {
-
-            const dark = darkModeAtivo();
-
-            if (chart) chart.destroy();
-
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: meses,
-                    datasets: [{
-                        label: 'Comissão',
-                        data: dadosComissao[ano],
-                        fill: true,
-                        backgroundColor: criarGradiente(ctx, dark),
-                        borderColor: dark ? '#00b8ff' : '#0066ff',
-                        borderWidth: 3,
-                        tension: 0.45,
-                        pointRadius: 5,
-                        pointHoverRadius: 7,
-                        pointBackgroundColor: dark ? '#00b8ff' : '#0066ff',
-                        pointBorderWidth: 0,
-                        shadowOffsetX: 0,
-                        shadowOffsetY: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    animation: {
-                        duration: 1200,
-                        easing: 'easeOutQuart'
-                    },
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            backgroundColor: dark ? '#1e1e2f' : '#ffffff',
-                            titleColor: dark ? '#ffffff' : '#222222',
-                            bodyColor: dark ? '#ffffff' : '#222222',
-                            borderColor: dark ? '#2e2e42' : '#e0e0e0',
-                            borderWidth: 1,
-                            callbacks: {
-                                label: (ctx) => ' AKZ ' + ctx.parsed.y.toLocaleString()
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            ticks: {
-                                color: function () {
-                                    return document.body.classList.contains('dark-mode') ? 'white' : 'black';
-                                }
-                            },
-                            grid: { display: false }
-                        },
-                        y: {
-                            ticks: {
-                                color: function () {
-                                    return document.body.classList.contains('dark-mode') ? 'white' : 'black';
-                                }
-                            },
-                            grid: {
-                                color: dark ? '#2e2e42' : '#e6e6e6'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        seletorAno.addEventListener("change", () => {
-            renderizar(seletorAno.value);
-        });
-
-        // redesenha se mudar tema
-        new MutationObserver(() => renderizar(seletorAno.value))
-            .observe(document.body, { attributes: true, attributeFilter: ['class'] });
-
-        // inicial
-        renderizar(seletorAno.value);
-
-    })();
-</script>
 
 <style>
     /* Estilos específicos para o gráfico */
@@ -695,21 +662,21 @@
         height: 300px;
         width: 100%;
     }
-    
+
     .card-dashboard {
         background: rgba(255, 255, 255, 0.05);
         backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
+
     .card-dashboard .card-header {
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
-    
+
     .card-dashboard .card-body {
         background: rgba(255, 255, 255, 0.02);
     }
-    
+
     /* Estilização do select */
     #filtroAnoComissao {
         background-color: rgba(255, 255, 255, 0.1);
@@ -717,13 +684,13 @@
         color: white;
         min-width: 100px;
     }
-    
+
     #filtroAnoComissao:focus {
         background-color: rgba(255, 255, 255, 0.15);
         border-color: #0d6efd;
         box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
     }
-    
+
     #filtroAnoComissao option {
         background-color: #2d3748;
         color: white;
@@ -926,3 +893,130 @@
         showPage(1);
     })();
 </script>
+
+<style>
+    .sidebar-content,
+    .sidebar,
+    #nav,
+    .footer {
+        display: none;
+    }
+
+    .status {
+        border-radius: 50px;
+        padding: 3px 10px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .status.pago {
+        background-color: #198754;
+        color: white;
+    }
+
+    .status.cancelado {
+        background-color: #dc3545;
+        color: white;
+    }
+
+
+    .status.pendente {
+        background-color: #616300;
+        color: white;
+    }
+</style>
+<style>
+    .saldo {
+        border-radius: 50px;
+        padding: 3px 10px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .saldo.positivo {
+        background-color: #198754;
+        color: white;
+    }
+
+    .saldo.negativo {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .badge {
+        color: #198754 !important;
+    }
+
+    .card {
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        border: none;
+        margin-bottom: 20px;
+    }
+
+    .card-header {
+        background-color: white;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 12px 12px 0 0 !important;
+    }
+
+    .month-header {
+        cursor: pointer;
+        transition: all 0.2s ease;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 5px;
+    }
+
+    .month-header:hover {
+        background-color: rgba(67, 97, 238, 0.05);
+    }
+
+    .month-header.collapsed .bi-chevron-down {
+        transform: rotate(-90deg);
+    }
+
+    .month-header .bi-chevron-down {
+        transition: transform 0.3s ease;
+        color: var(--primary-color);
+    }
+
+    .filter-container {
+        background-color: white;
+        border-radius: 12px;
+        margin-bottom: 25px;
+    }
+
+    .btn-primary {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        padding: 10px 25px;
+        border-radius: 8px;
+    }
+
+    .btn-primary:hover {
+        background-color: #3a56d4;
+        border-color: #3a56d4;
+    }
+
+    .month-title {
+        color: var(--dark-color);
+    }
+
+    .hint-text {
+        color: #6c757d;
+        margin-top: 10px;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #6c757d;
+    }
+
+    .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        color: #dee2e6;
+    }
+</style>

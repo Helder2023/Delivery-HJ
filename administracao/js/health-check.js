@@ -1,9 +1,3 @@
-// ====================================================
-// 🛡️ RESILIÊNCIA TOTAL - PACOTE ANTI-BUGS
-// ====================================================
-// Coloque este arquivo como PRIMEIRO script no seu HTML:
-// <script src="/js/resilience.js" defer></script>
-// ====================================================
 
 (function() {
   'use strict';

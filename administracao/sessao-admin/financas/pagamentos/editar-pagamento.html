@@ -1,0 +1,56 @@
+<div class="row mb-2 mb-xl-3">
+    <div class="content-top col-auto d-sm-block">
+        <h3>Pagamento dos Funcionários</h3>
+    </div>
+
+    <div class="col-auto ms-auto text-end mt-n1">
+
+        <div class="col-auto d-flex gap-2">
+            <button class="btn shadow-sm" onclick="window.history.back()">
+                <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+            </button>
+
+        </div>
+    </div>
+</div>
+
+<!-- ===== FORMULÁRIO DE CADASTRO DE DESPESAS ===== -->
+<div class="card mb-4 card-dashboard">
+    <div class="card-header">
+        <h5 class="card-title mb-0" style="color: white;">Editar Pagemnto</h5>
+    </div>
+    <div class="card-body">
+        <form id="formDespesa" class="row g-3">
+            <div class="col-md-6">
+                <label for="descricaoDespesa" class="form-label">Nome do funcionário (Adminstradores e
+                    parceiros)</label>
+                <input type="text" class="form-control" list="opcoes" id="selecao-busca" placeholder="Digite o nome">
+                <datalist id="opcoes">
+                    <option value="Opção 1">
+                    <option value="Opção 2">
+                    <option value="Opção 3">
+                    <option value="Opção 4">
+                    <option value="Opção 5">
+                </datalist>
+            </div>
+            <div class="col-md-3">
+                <label for="valorDespesa" class="form-label">Valor (Kz)</label>
+                <input type="number" class="form-control" id="valorDespesa" placeholder="Ex: 50000">
+            </div>
+            <div class="col-md-3">
+                <label for="dataDespesa" class="form-label">Data</label>
+                <input type="datetime" class="form-control" id="dataDespesa">
+            </div>
+
+            <div class="col-md-3">
+                <label for="dataDespesa" class="form-label">Comprovativo</label>
+                <input type="file" class="form-control" id="dataDespesa">
+            </div>
+            <div class="col-12 text-end">
+                <button type="submit" class="btn btn-primary">
+                    Editar Pagamento
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

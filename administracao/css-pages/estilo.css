@@ -2,6 +2,11 @@
 /* SIDEBAR ACTIVE - DESIGN PREMIUM (GitHub Fix) */
 /* =========================================== */
 
+ .badge-soft-dark {
+        font-size: 0.85rem !important;
+        background-color: white;
+        color: black !important;
+    }
 
 /* PRIMEIRO: DEFINIR --bs-primary-rgb MANUALMENTE */
 :root {
