@@ -1,6 +1,6 @@
 <div class="row mb-2 mb-xl-3">
     <div class="content-top col-auto d-sm-block">
-        <h3>Pagamento dos Funcionários</h3>
+        <h3>Remuneração do Funcionário / Parceiro</h3>
     </div>
 
     <div class="col-auto ms-auto text-end mt-n1">
@@ -27,7 +27,7 @@
     <div class="card-body">
         <form id="formDespesa" class="row g-3">
             <div class="col-md-6">
-                <label for="descricaoDespesa" class="form-label">Nome do funcionário (Adminstradores e
+                <label for="descricaoDespesa" class="form-label">Nome do funcionário / parceiros (Adminstradores e
                     parceiros)</label>
                 <input type="text" class="form-control" list="opcoes" id="selecao-busca" placeholder="Digite o nome">
                 <datalist id="opcoes">
@@ -38,24 +38,23 @@
                     <option value="Opção 5">
                 </datalist>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <label for="valorDespesa" class="form-label">Valor (Kz)</label>
                 <input type="number" class="form-control" id="valorDespesa" placeholder="Ex: 50000">
             </div>
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <label for="dataDespesa" class="form-label">Data</label>
-                <input type="datetime" class="form-control" id="dataDespesa">
+                <input type="date" class="form-control" id="dataDespesa">
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-6">
                 <label for="dataDespesa" class="form-label">Comprovativo</label>
                 <input type="file" class="form-control" id="dataDespesa">
             </div>
-            <div class="col-12 text-end">
-                <button type="submit" class="btn btn-primary">
-                    Cadastrar Pagamento
-                </button>
-            </div>
+            <div class="col-12 text-left mt-4">
+                    <button class="btn btn-primary w-25" type="submit">Cadastrar Remuneração</button>
+                </div>
+            
         </form>
     </div>
 </div>
@@ -107,7 +106,7 @@
     <div class="card mb-3">
         <div class="empty-state">
             <i class="bi bi-calendar3"></i>
-            <h3>Pagamento Total estimado para o ano de 2023: <span class="fw-bold saldo-negativo">AKZ
+            <h3>Remuneração Total estimado para o ano de 2023: <span class="fw-bold saldo-negativo">AKZ
                     25.140,00</span></h3>
         </div>
     </div>
@@ -116,7 +115,7 @@
         <div class="card-header month-header d-flex justify-content-between align-items-center"
             data-bs-toggle="collapse" href="#collapseMes">
             <div class="month-title">
-                <i class="bi bi-list-ul me-2"></i>Pagamentos por Mês
+                <i class="bi bi-list-ul me-2"></i>Remuneração por Mês
             </div>
             <div class="d-flex align-items-center">
                 <span class="total-month saldo-negativo me-3">Ano: 2026</span>
@@ -144,14 +143,14 @@
                                 <th>ID</th>
                                 <th>Nome</th>
                                 <th>Tipo Funcioánrio</th>
-                                <th>Data de Pagamento</th>
+                                <th>Data de Remuneração</th>
                                 <th>Valor (Kz)</th>
                                 <th>Comprovativo</th>
                                 <th>Status</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody id="tabelaPagamentos">
+                        <tbody id="tabelaRemuneração">
                             <tr>
                                 <td>001</td>
                                 <td>Helder Adão</td>
@@ -165,7 +164,7 @@
                                     </a>
                                 </td>
                                 <td>
-                                    <a href="admin.html#/editar-pagamento-salario" class="text-info" title="Editar"><i
+                                    <a href="admin.html#/editar-Remuneração" class="text-info" title="Editar"><i
                                             data-feather="edit"></i></a>
                                     <a href="#" class="text-danger" title="Excluir"><i data-feather="trash-2"></i></a>
                                 </td>
@@ -182,7 +181,7 @@
 
 <div class="card card-dashboard">
     <div class="card-header">
-        <h5 class="card-title mb-0" style="color: white;">Pagamentos em Atrasos para os Funcionário</h5>
+        <h5 class="card-title mb-0" style="color: white;">Remuneração em Atrasos para os Funcionário / parceiros</h5>
     </div>
     <div class="card-body table-responsive">
         <table id="tabela_2" class="table table-borderless my-0 w-100">
@@ -191,12 +190,12 @@
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Tipo Funcioánrio</th>
-                    <th>Data de Pagamento</th>
+                    <th>Data de Remuneração</th>
                     <th>Valor (Kz)</th>
                     <th>Status</th>
                 </tr>
             </thead>
-            <tbody id="tabelaPagamentos">
+            <tbody id="tabelaRemuneração">
                 <tr>
                     <td>001</td>
                     <td>Helder Adão</td>
@@ -228,5 +227,86 @@
     .status.naoPago {
         background-color: #dc3545;
         color: white;
+    }
+</style>
+
+<style>
+    .saldo {
+        border-radius: 50px;
+        padding: 3px 10px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .saldo.positivo {
+        background-color: #198754;
+        color: white;
+    }
+
+    .saldo.negativo {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    .card {
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        border: none;
+        margin-bottom: 20px;
+    }
+
+    .card-header {
+        background-color: white;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 12px 12px 0 0 !important;
+    }
+
+    .month-header {
+        cursor: pointer;
+        transition: all 0.2s ease;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 5px;
+    }
+
+    .month-header:hover {
+        background-color: rgba(67, 97, 238, 0.05);
+    }
+
+    .month-header.collapsed .bi-chevron-down {
+        transform: rotate(-90deg);
+    }
+
+    .month-header .bi-chevron-down {
+        transition: transform 0.3s ease;
+        color: var(--primary-color);
+    }
+
+
+    .filter-container {
+        background-color: white;
+        border-radius: 12px;
+        margin-bottom: 25px;
+    }
+
+    .month-title {
+        color: var(--dark-color);
+    }
+
+    .hint-text {
+        color: #6c757d;
+        margin-top: 10px;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #6c757d;
+    }
+
+    .empty-state i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+        color: #dee2e6;
     }
 </style>
