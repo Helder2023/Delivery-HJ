@@ -136,7 +136,7 @@
 </div>
 
 <div class="card card-dashboard p-3 ">
-    <h4>Cadastrar Conta Bancária da CraveNow</h4>
+    <h4>Cadastrar / Atulizaar Conta Bancária da CraveNow</h4>
 
     <!-- FORMULÁRIO -->
     <form id="formConta" class="mb-4">
@@ -160,7 +160,7 @@
             <input type="password" id="senha" class="form-control" placeholder="Senha de segurança" required>
         </div>
 
-        <button type="submit" class="btn btn-primary mt-2">Cadastrar</button>
+        <button type="submit" class="btn btn-primary mt-2">Cadastrar / Atulizaar conta</button>
     </form>
     <hr>
 
@@ -188,148 +188,53 @@
         </tbody>
     </table>
 </div>
-<hr>
 
-<div class="content-top col-auto d-sm-block">
-    <p>
-    <h3>Lista de Restaurantes com os status - <i class="status pendente">Pendente</i> 
-    </p>
-</div>
-
-<!-- Tabela de pagamentos de restaurantes -->
-<div class="card card-dashboard">
-    <div class="card-header">
-        <h5 class="card-title mb-0" style="color: white;">Pagamentos pendentes</h5>
-    </div>
-    <div class="card-body table-responsive">
-        <table id="tabela_2" class="table table-borderless my-0 w-100">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Restaurante</th>
-                    <th>Status</th>
-                    <th>Data de Pagamento</th>
-                    <th>Valor (Kz)</th>
-                    <th>Comprovativo</th>
-                    <th>Ações</th>
-                </tr>
-            </thead>
-            <tbody id="tabelaPagamentos">
-                <tr>
-                    <td>001</td>
-                    <td>Restaurante Kapital</td>
-                    <td><span class="status pendente">Pendente</span></td>
-                    <td>2025-11-05</td>
-                    <td>12.500</td>
-                    <td>
-                        <a href="admin.html#/analisando" class="text-decoration-none">
-                            <i data-feather="external-link"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
-                                data-feather="eye"></i></a>
-                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>002</td>
-                    <td>Burguer House</td>
-                    <td><span class="status pendente">Pendente</span></td>
-                    <td>2025-11-05</td>
-                    <td>8.300</td>
-                    <td>
-                        <a href="detalhes-pagamento.html?id=002" class="text-decoration-none">
-                            <i data-feather="external-link"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
-                                data-feather="eye"></i></a>
-                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>003</td>
-                    <td>Pizza na Pedra</td>
-                    <td><span class="status pendente">Pendente</span></td>
-                    <td>2025-11-04</td>
-                    <td>10.200</td>
-                    <td>
-                        <a href="detalhes-pagamento.html?id=003" class="text-decoration-none">
-                            <i data-feather="external-link"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
-                                data-feather="eye"></i></a>
-                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>004</td>
-                    <td>Food City</td>
-                    <td><span class="status pendente">Pendente</span></td>
-                    <td>2025-11-05</td>
-                    <td>9.800</td>
-                    <td>
-                        <a href="detalhes-pagamento.html?id=004" class="text-decoration-none">
-                            <i data-feather="external-link"></i>
-                        </a>
-                    </td>
-                    <td>
-                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
-                                data-feather="eye"></i></a>
-                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
 <hr>
 <!-- Filtros -->
 <div class="col-12">
     <div class="filter-container">
         <div class="row">
-            <div class="col-md-4">
-                <label for="monthFilter" class="form-label fw-bold">Mês</label>
-                <select class="form-select" id="monthFilter">
-                    <option value="all" selected>Todos os meses</option>
-                    <option value="1">Janeiro</option>
-                    <option value="2">Fevereiro</option>
-                    <option value="3">Março</option>
-                    <option value="4">Abril</option>
-                    <option value="5">Maio</option>
-                    <option value="6">Junho</option>
-                    <option value="7">Julho</option>
-                    <option value="8">Agosto</option>
-                    <option value="9">Setembro</option>
-                    <option value="10">Outubro</option>
-                    <option value="11">Novembro</option>
-                    <option value="12">Dezembro</option>
-                </select>
-            </div>
-            <div class="col-md-4 mb-3">
-                <label for="yearFilter" class="form-label fw-bold">Ano</label>
-                <select class="form-select" id="yearFilter">
-                    <option value="2023" selected>2023</option>
-                    <option value="2022">2022</option>
-                    <option value="2021">2021</option>
-                </select>
-            </div>
-            <div class="col-md-4 mb-3 d-flex align-items-end">
-                <button class="btn btn-primary w-100 btn-sm">
-                    <i class="bi bi-funnel me-2"></i>Filtrar Despesas
-                </button>
-            </div>
+            <form action="" class="row">
+                <div class="col-md-4">
+
+                    <label for="monthFilter" class="form-label fw-bold">Mês</label>
+                    <select class="form-select" id="monthFilter">
+                        <option value="all" selected>Todos os meses</option>
+                        <option value="1">Janeiro</option>
+                        <option value="2">Fevereiro</option>
+                        <option value="3">Março</option>
+                        <option value="4">Abril</option>
+                        <option value="5">Maio</option>
+                        <option value="6">Junho</option>
+                        <option value="7">Julho</option>
+                        <option value="8">Agosto</option>
+                        <option value="9">Setembro</option>
+                        <option value="10">Outubro</option>
+                        <option value="11">Novembro</option>
+                        <option value="12">Dezembro</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="yearFilter" class="form-label fw-bold">Ano</label>
+                    <select class="form-select" id="yearFilter">
+                        <option value="2023" selected>2023</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
+                    </select>
+                </div>
+                <div class="col-md-4 mb-3 d-flex align-items-end">
+                    <button class="btn btn-primary w-100 btn-sm">
+                        <i class="bi bi-funnel me-2"></i>Filtrar Despesas
+                    </button>
+                </div>
+            </form>
         </div>
 
     </div>
 </div>
 
 <div class="col-12">
-    <!-- Informação sobre outros meses -->
+    <!-- Informação sobre outros meses 
     <div class="card mb-3">
         <div class="empty-state">
             <i class="bi bi-calendar3"></i>
@@ -337,20 +242,19 @@
                     25.140,00</span></h3>
         </div>
     </div>
+    -->
     <h3 class="p-1">Lista de Restaurantes com os status - <i class="status pago">Pago</i></h3> 
 
     <div class="card mb-3">
-        <div class="card-header month-header d-flex justify-content-between align-items-center"
-            data-bs-toggle="collapse" href="#collapseMes">
+        <div class="card-header month-header d-flex justify-content-between align-items-center">
             <div class="month-title">
                 <i class="bi bi-list-ul me-2"></i>Pagamentos por Mês
             </div>
             <div class="d-flex align-items-center">
                 <span class="total-month saldo-negativo me-3">Ano: 2026</span>
-                <i class="bi bi-chevron-down"></i>
             </div>
         </div>
-        <div class="collapse" id="collapseMes">
+        <div>
            <!-- Janeiro -->
             <div class=" mb-3">
                 <div class="card-header month-header d-flex justify-content-between align-items-center"
@@ -370,66 +274,27 @@
                         <tr>
                             <th>ID</th>
                             <th>Restaurante</th>
-                            <th>Status</th>
                             <th>Data de Pagamento</th>
                             <th>Valor (Kz)</th>
                             <th>Comprovativo</th>
-                            <th>Ações</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody id="tabelaPagamentos">
                         <tr>
                             <td>001</td>
                             <td>Restaurante Kapital</td>
-                            <td><span class="status pago">Pago</span></td>
                             <td>2025-11-05</td>
                             <td>12.500</td>
                             <td>
                                 <a href="admin.html#/analisando" class="text-decoration-none">
-                                    <i data-feather="external-link"></i>
+                                    <i data-feather="eye"></i>
                                 </a>
                             </td>
-                            <td>
-                                <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
-                                        data-feather="eye"></i></a>
-                                <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
-                            </td>
+                                                        <td><span class="status pago">Pago</span></td>
+
                         </tr>
                         
-                        <tr>
-                            <td>003</td>
-                            <td>Pizza na Pedra</td>
-                            <td><span class="status pago">Pago</span></td>
-                            <td>2025-11-04</td>
-                            <td>10.200</td>
-                            <td>
-                                <a href="detalhes-pagamento.html?id=003" class="text-decoration-none">
-                                    <i data-feather="external-link"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
-                                        data-feather="eye"></i></a>
-                                <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>004</td>
-                            <td>Food City</td>
-                            <td><span class="status pago">Pago</span></td>
-                            <td>—</td>
-                            <td>9.800</td>
-                            <td>
-                                <a href="detalhes-pagamento.html?id=004" class="text-decoration-none">
-                                    <i data-feather="external-link"></i>
-                                </a>
-                            </td>
-                            <td>
-                                <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
-                                        data-feather="eye"></i></a>
-                                <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
                 </div>
@@ -439,19 +304,9 @@
 </div>
 <hr>
 
-<div class="content-top col-auto d-sm-block">
-    <p>
-    <h3>Lista de Restaurantes com os status - <i class="status naoPago">Não Pago</i> </h3>
-    </p>
-</div>
 <!-- CARD FINANÇAS -->
-<div class="card card-dashboard p-3 mt-3" id="cardFinancas" style="cursor: pointer;">
-    <h4 class="d-flex align-items-center gap-2">
-        <i data-feather="alert-circle"></i>
-        Restaurantes com Pagamentos Atrasados
-    </h4>
-    <button class="btn btn-confirm">Clique para enviar mensagem automática</button>
-</div>
+    <h3 class="p-1">Lista de Restaurantes com os status - <i class="status naoPago">Não Pago</i></h3> 
+
 <div class="card card-dashboard">
     <div class="card-header">
         <h5 class="card-title mb-0" style="color: white;">Pagamentos em Atrasos dos Restaurantes</h5>
@@ -465,7 +320,6 @@
                     <th>Status</th>
                     <th>Data de Pagamento</th>
                     <th>Valor (Kz)</th>
-                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody id="tabelaPagamentos">
@@ -476,11 +330,7 @@
                     <td>2025-11-05</td>
                     <td>12.500</td>
                     
-                    <td>
-                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
-                                data-feather="eye"></i></a>
-                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
-                    </td>
+                   
                 </tr>
                 <tr>
                     <td>002</td>
@@ -489,11 +339,7 @@
                     <td>—</td>
                     <td>8.300</td>
                     
-                    <td>
-                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
-                                data-feather="eye"></i></a>
-                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
-                    </td>
+                   
                 </tr>
                 <tr>
                     <td>003</td>
@@ -502,11 +348,7 @@
                     <td>2025-11-04</td>
                     <td>10.200</td>
                     
-                    <td>
-                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
-                                data-feather="eye"></i></a>
-                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
-                    </td>
+                   
                 </tr>
                 <tr>
                     <td>004</td>
@@ -514,12 +356,6 @@
                     <td><span class="status naoPago">Não Pago</span></td>
                     <td>—</td>
                     <td>9.800</td>
-                    
-                    <td>
-                        <a style="margin-right: 7px;" href="admin.html#/visulizar-restaurante"><i
-                                data-feather="eye"></i></a>
-                        <a href="admin.html#/gerenciar-restaurante"><i data-feather="settings"></i></a>
-                    </td>
                 </tr>
             </tbody>
         </table>
