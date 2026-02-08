@@ -1,15 +1,15 @@
 <div class="row mb-2 mb-xl-3">
     <div class="content-top col-auto d-sm-block">
-        <h3 id="titulo">Remunerar Funcionários</h3>
+        <h3 id="titulo">Remunerar Entregadores</h3>
     </div>
 
     <div class="col-auto ms-auto text-end mt-n1">
 
         <div class="col-auto d-flex gap-2">
 
-            <button class="btn shadow-sm" style="background-color: #000;">
-                <a class="no-underline" href="admin.html#/pagamentos-entregadores" style="color: white;">
-                    <i data-feather="users"></i> Remunerar Entregadores
+             <button class="btn shadow-sm" style="background-color: hsl(0, 0%, 0%);">
+                <a class="no-underline" href="admin.html#/pagamentos-funcionarios" style="color: white;">
+                    <i data-feather="user"></i> Remunerar Funcionario
                 </a>
             </button>
 
@@ -19,12 +19,19 @@
                 </a>
             </button>
 
+            <button class="btn shadow-sm" style="background-color: #000;">
+                <a class="no-underline" href="admin.html#/pagamentos-funcionarios" style="color: white;">
+                    <i data-feather="users"></i> Remunerar Funcionários
+                </a>
+            </button>
+
             <button class="btn shadow-sm" onclick="window.history.back()">
                 <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
             </button>
         </div>
     </div>
 </div>
+
 
     <div class="card mb-4 card-dashboard">
         <div class="card-header">
@@ -54,7 +61,7 @@
                     <input type="date" class="form-control" id="dataDespesa">
                 </div>
 
-                 <div class="col-md-6">
+                <div class="col-md-6">
                     <label for="valorDespesa" class="form-label">IBAN</label>
                     <input type="name" class="form-control" id="IBAN" value="AO06 1234 5678 9012 3456 7890" readonly>
                 </div>
@@ -125,8 +132,7 @@
     <div class="col-12">
 
         <div class="card mb-3">
-            <div class="card-header month-header d-flex justify-content-between align-items-center"
-                >
+            <div class="card-header month-header d-flex justify-content-between align-items-center">
                 <div class="month-title">
                     <i class="bi bi-list-ul me-2"></i>Remuneração por Mês
                 </div>
@@ -219,7 +225,7 @@
 
 
 <style>
-    #rastaurante{
+    #rastaurante {
         display: none;
     }
 </style>
@@ -327,17 +333,17 @@
 </style>
 
 <style>
-        .conteudo {
-            opacity: 0;
-            max-height: 0;
-            overflow: hidden;
-            transition: all 0.4s ease;
-        }
-        
-        .conteudo.visivel {
-            opacity: 1;
-            max-height: 500px;
-        }
+    .conteudo {
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.4s ease;
+    }
+
+    .conteudo.visivel {
+        opacity: 1;
+        max-height: 500px;
+    }
 </style>
 
 <script>

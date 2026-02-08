@@ -96,7 +96,9 @@
     '/despesas': { title: 'Despesas', file: DESPESAS + 'despesas.html' },
     '/editar-despesa': { title: 'Editando a Despesa', file: DESPESAS + 'editar-despesa.html' },
 
-    '/pagamentos': { title: 'Pagamento de salário', file: PAGAMENTO_SALARIO + 'pagamentos-funcionario.html' },
+    '/pagamentos-funcionarios': { title: 'Pagamento de salário', file: PAGAMENTO_SALARIO + 'pagamentos-funcionario.html' },
+    '/pagamentos-entregadores': { title: 'Pagamento de salário', file: PAGAMENTO_SALARIO + 'pagamentos-entregadores.html' },
+    '/pagamentos-restaurantes': { title: 'Pagamento de salário', file: PAGAMENTO_SALARIO + 'pagamentos-restaurantes.html' },
     '/editar-pagamento': { title: 'Editando Pagamento', file: PAGAMENTO_SALARIO + 'editar-pagamento.html' },
 
     '/todos-entregadores': { title: 'Todos os entregadores', file: ENTREGADOR + 'todos-entregadores.html' },
