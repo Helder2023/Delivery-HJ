@@ -66,13 +66,62 @@
     </table>
 </div>
 
-
-
 <script>
     function copiarIBAN(id) {
         const iban = document.getElementById(id).textContent;
         navigator.clipboard.writeText(iban).then(() => {
             alert("IBAN copiado: " + iban);
+        }).catch(err => {
+            console.error("Erro ao copiar IBAN: ", err);
+        });
+    }
+</script>
+
+<div class="content-top col-auto d-sm-block">
+    <h3>Contas Bancárias dos Entregadores</h3>
+</div>
+
+<div class="card card-dashboard p-3 mt-3">
+
+    <table id="tabela_3" class="table table-borderless my-0 w-100 overflow-x">
+        <thead>
+            <tr>
+                <th>Nome do Entregador</th>
+                <th>IBAN</th>
+                <th>Banco</th>
+                <th>Proprietário da Conta</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>João Silva</td>
+                <td id="iban7" style="width: 200px !important;">AO06 1234 5678 9012 3456 0000</td>
+                <td>Banco Nacional</td>
+                <td>João Silva</td>
+                <td>
+                    <button class="btn btn-sm btn-secondary" onclick="copiarIBANEntregadores('iban7')">Copiar IBAN</button>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Maria Fernandes</td>
+                <td id="iban8">AO88 9876 5432 1098 7654 1111</td>
+                <td>Banco Popular</td>
+                <td>Maria Fernandes</td>
+                <td>
+                    <button class="btn btn-sm btn-secondary" onclick="copiarIBANEntregadores('iban8')">Copiar IBAN</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    function copiarIBANEntregadores(id) {
+        const ibanEntregadores = document.getElementById(id).textContent;
+        navigator.clipboard.writeText(ibanEntregadores).then(() => {
+            alert("IBAN copiado: " + ibanEntregadores);
         }).catch(err => {
             console.error("Erro ao copiar IBAN: ", err);
         });

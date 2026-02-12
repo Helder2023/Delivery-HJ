@@ -57,8 +57,8 @@
                                                         name="first_name" required>
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label class="form-label">Segundo nome (opcional)</label>
-                                                    <input type="text" class="form-control" placeholder="Segundo nome"
+                                                    <label class="form-label">Último nome (opcional)</label>
+                                                    <input type="text" class="form-control" placeholder="Último nome"
                                                         name="second_name">
                                                 </div>
                                                 <div class="mb-3">
@@ -205,21 +205,67 @@
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         feather.replace();
+        initFormValidation();
         updateStepIndicator(1);
+        updateProgressBar(1);
+        initBioCounter();
+        initImagePreview();
+        initFormSubmit();
     });
 
     let currentStep = 1;
     const totalSteps = 3;
 
+    // Inicializa validação em tempo real
+    function initFormValidation() {
+        const form = document.getElementById("wizard-form");
+        if (form) {
+            form.classList.add("was-validated");
+        }
+        
+        // Validação para o campo de confirmação de senha
+        const password = document.getElementById("password");
+        const confirmPassword = document.getElementById("confirm_password");
+        
+        if (password && confirmPassword) {
+            password.addEventListener("input", validatePasswordMatch);
+            confirmPassword.addEventListener("input", validatePasswordMatch);
+        }
+    }
+
+    function validatePasswordMatch() {
+        const pass = document.getElementById("password").value;
+        const confirm = document.getElementById("confirm_password").value;
+        const confirmField = document.getElementById("confirm_password");
+        
+        if (pass !== confirm) {
+            confirmField.setCustomValidity("As senhas não coincidem");
+            confirmField.classList.add("is-invalid");
+            return false;
+        } else {
+            confirmField.setCustomValidity("");
+            confirmField.classList.remove("is-invalid");
+            return true;
+        }
+    }
+
     function nextStep() {
-        if (!validateStep(currentStep)) return;
-        currentStep++;
-        showStep(currentStep);
+        if (!validateStep(currentStep)) {
+            return false;
+        }
+        
+        if (currentStep < totalSteps) {
+            currentStep++;
+            showStep(currentStep);
+        }
+        return true;
     }
 
     function prevStep() {
-        currentStep--;
-        showStep(currentStep);
+        if (currentStep > 1) {
+            currentStep--;
+            showStep(currentStep);
+        }
     }
 
     function showStep(step) {
@@ -230,11 +276,18 @@
         });
 
         const current = document.getElementById(`step-${step}`);
-        current.classList.remove("d-none");
-        current.classList.add("fade-in");
+        if (current) {
+            current.classList.remove("d-none");
+            current.classList.add("fade-in");
+        }
 
         updateStepIndicator(step);
         updateProgressBar(step);
+        
+        const form = document.getElementById("wizard-form");
+        if (form) {
+            form.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
     }
 
     function updateStepIndicator(step) {
@@ -242,87 +295,282 @@
         links.forEach(link => {
             const linkStep = parseInt(link.dataset.step);
             link.classList.remove("active");
-            link.classList.add("disabled");
+            
             if (linkStep === step) {
                 link.classList.add("active");
                 link.classList.remove("disabled");
+            } else if (linkStep < step) {
+                link.classList.remove("disabled");
+                link.classList.remove("active");
+            } else {
+                link.classList.add("disabled");
             }
         });
     }
 
     function updateProgressBar(step) {
         const bar = document.getElementById("progress-bar");
-        const width = (step / totalSteps) * 100;
-        bar.style.width = width + "%";
+        if (bar) {
+            const width = ((step - 1) / (totalSteps - 1)) * 100;
+            bar.style.width = Math.round(width) + "%";
+        }
     }
 
     function validateStep(step) {
         const current = document.getElementById(`step-${step}`);
+        if (!current) return false;
+        
         const inputs = current.querySelectorAll("input, textarea, select");
         let valid = true;
 
         inputs.forEach(input => {
-            if (!input.checkValidity()) {
-                input.classList.add("is-invalid");
-                valid = false;
-            } else {
-                input.classList.remove("is-invalid");
+            input.classList.remove("is-invalid");
+            
+            if (input.hasAttribute("required")) {
+                if (input.type === 'file') {
+                    if (!input.files || input.files.length === 0) {
+                        input.classList.add("is-invalid");
+                        valid = false;
+                    }
+                } else {
+                    if (!input.value.trim()) {
+                        input.classList.add("is-invalid");
+                        valid = false;
+                    }
+                }
+            }
+            
+            if (input.type === "email" && input.value.trim()) {
+                if (!isValidEmail(input.value)) {
+                    input.classList.add("is-invalid");
+                    valid = false;
+                }
+            }
+            
+            if (input.type === "password" && input.id === "password") {
+                if (input.value.length < 8) {
+                    input.classList.add("is-invalid");
+                    valid = false;
+                }
+            }
+            
+            if (input.tagName === 'SELECT' && input.hasAttribute("required")) {
+                if (!input.value) {
+                    input.classList.add("is-invalid");
+                    valid = false;
+                }
             }
         });
 
         if (step === 1) {
-            const pass = document.getElementById("password").value;
-            const confirm = document.getElementById("confirm_password").value;
-            if (pass !== confirm) {
-                showAlert("As senhas não coincidem!", "danger");
-                return false;
+            const passMatch = validatePasswordMatch();
+            if (!passMatch) {
+                valid = false;
             }
+        }
+
+        if (step === 2) {
+            const bio = document.querySelector("textarea[name='biography']");
+            if (bio) {
+                if (bio.value.length > 300) {
+                    bio.classList.add("is-invalid");
+                    valid = false;
+                    showAlert("A biografia não pode exceder 300 caracteres!", "danger");
+                }
+                if (bio.hasAttribute("required") && !bio.value.trim()) {
+                    bio.classList.add("is-invalid");
+                    valid = false;
+                }
+            }
+        }
+
+        if (step === 3) {
+            const iban = document.querySelector("input[name='iban']");
+            if (iban && iban.value && !isValidIBAN(iban.value)) {
+                iban.classList.add("is-invalid");
+                valid = false;
+                showAlert("Formato de IBAN inválido!", "danger");
+            }
+        }
+
+        if (!valid) {
+            showAlert("Por favor, preencha todos os campos obrigatórios corretamente.", "danger");
         }
 
         return valid;
     }
 
+    function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    function isValidIBAN(iban) {
+        const re = /^[A-Z]{2}\d{2}[A-Z0-9]{4,}$/;
+        return re.test(iban.replace(/\s/g, '').toUpperCase());
+    }
+
     function togglePassword(id) {
         const input = document.getElementById(id);
-        input.type = input.type === "password" ? "text" : "password";
+        if (input) {
+            const type = input.type === "password" ? "text" : "password";
+            input.type = type;
+            feather.replace();
+        }
     }
 
     function showAlert(message, type = "success") {
-        const placeholder = document.getElementById("alert-placeholder");
+        const existingAlerts = document.querySelectorAll(".custom-alert");
+        existingAlerts.forEach(alert => alert.remove());
+        
+        let placeholder = document.getElementById("alert-placeholder");
+        if (!placeholder) {
+            placeholder = document.createElement("div");
+            placeholder.id = "alert-placeholder";
+            placeholder.style.position = "fixed";
+            placeholder.style.top = "20px";
+            placeholder.style.right = "20px";
+            placeholder.style.zIndex = "9999";
+            document.body.appendChild(placeholder);
+        }
+        
         const div = document.createElement("div");
-        div.className = `alert alert-${type}`;
-        div.innerText = message;
-        placeholder.innerHTML = "";
+        div.className = `custom-alert alert alert-${type} alert-dismissible fade show`;
+        div.setAttribute("role", "alert");
+        div.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        `;
+        
         placeholder.appendChild(div);
-        setTimeout(() => div.remove(), 4000);
+        
+        setTimeout(() => {
+            div.classList.remove("show");
+            setTimeout(() => div.remove(), 300);
+        }, 5000);
     }
 
-    // ================== AJAX SUBMIT ==================
-    document.getElementById("wizard-form").addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        if (!validateStep(currentStep)) return;
-
-        const formData = new FormData(this);
-
-        fetch("processar_cadastro.php", {
-            method: "POST",
-            body: formData
-        })
-            .then(r => r.text())
-            .then(res => {
-                showAlert("Cadastro concluído com sucesso!", "success");
-                this.reset();
-                currentStep = 1;
-                showStep(currentStep);
-            })
-            .catch(err => {
-                console.error(err);
-                showAlert("Erro ao enviar os dados!", "danger");
+    function initBioCounter() {
+        const bioTextarea = document.querySelector("textarea[name='biography']");
+        const bioCounter = document.getElementById("bio-counter");
+        
+        if (bioTextarea && bioCounter) {
+            bioTextarea.addEventListener("input", function() {
+                const length = this.value.length;
+                bioCounter.textContent = `${length}/300 caracteres`;
+                
+                if (length > 300) {
+                    bioCounter.classList.add("text-danger");
+                    bioCounter.classList.remove("text-muted");
+                } else {
+                    bioCounter.classList.remove("text-danger");
+                    bioCounter.classList.add("text-muted");
+                }
             });
-    });
+        }
+    }
 
+    function initImagePreview() {
+        const logoUpload = document.getElementById("logoUpload");
+        const logoPreview = document.getElementById("logoPreview");
+        
+        if (logoUpload && logoPreview) {
+            logoUpload.addEventListener("change", function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    if (file.size > 2 * 1024 * 1024) {
+                        showAlert("A imagem não pode exceder 2MB!", "danger");
+                        this.value = "";
+                        return;
+                    }
+                    
+                    if (!file.type.match('image.*')) {
+                        showAlert("Por favor, selecione apenas imagens!", "danger");
+                        this.value = "";
+                        return;
+                    }
+                    
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        logoPreview.src = e.target.result;
+                        logoUpload.classList.remove("is-invalid");
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    }
+
+    function initFormSubmit() {
+        const form = document.getElementById("wizard-form");
+        
+        if (form) {
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                if (!validateStep(currentStep)) {
+                    return false;
+                }
+
+                if (!form.checkValidity()) {
+                    showAlert("Por favor, verifique todos os campos do formulário.", "danger");
+                    return false;
+                }
+
+                const formData = new FormData(this);
+                const submitButton = this.querySelector('button[type="submit"]');
+                
+                if (submitButton) {
+                    const originalText = submitButton.innerHTML;
+                    
+                    submitButton.disabled = true;
+                    submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Enviando...';
+
+                    fetch("processar_cadastro.php", {
+                        method: "POST",
+                        body: formData
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error("Erro na requisição");
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            showAlert("Cadastro concluído com sucesso!", "success");
+                            this.reset();
+                            
+                            const logoPreview = document.getElementById("logoPreview");
+                            if (logoPreview) {
+                                logoPreview.src = "../assets/img/avatar/avatar.png";
+                            }
+                            
+                            currentStep = 1;
+                            showStep(currentStep);
+                            
+                            setTimeout(() => {
+                                window.location.href = "admin.html#/login";
+                            }, 2000);
+                        } else {
+                            showAlert(data.message || "Erro ao processar cadastro!", "danger");
+                        }
+                    })
+                    .catch(err => {
+                        console.error("Erro:", err);
+                        showAlert("Erro ao enviar os dados. Tente novamente.", "danger");
+                    })
+                    .finally(() => {
+                        submitButton.disabled = false;
+                        submitButton.innerHTML = originalText;
+                    });
+                }
+            });
+        }
+    }
 </script>
+
+
 <script>
     // Inicializa feather icons
     if (window.feather) feather.replace();

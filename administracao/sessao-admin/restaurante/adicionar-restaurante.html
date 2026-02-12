@@ -1,6 +1,4 @@
 <style>
-   
-
     /* ========== UPLOAD LOGO ========== */
     .upload-logo {
         display: flex;
@@ -17,8 +15,6 @@
         border: 2px solid #ccc;
 
     }
-
-
 </style>
 
 <div class="container-fluid p-0">
@@ -42,10 +38,10 @@
                 <!-- Upload da Logo -->
                 <div class="upload-logo">
                     <label for="logoUpload">
-                    <img id="logoPreview" src="../assets/img/avatar/restaurante.jpg" class="logo-preview"
-                        alt="Logo Preview">
+                        <img id="logoPreview" src="../assets/img/avatar/restaurante.jpg" class="logo-preview"
+                            alt="Logo Preview">
                     </label>
-                        <input type="file" id="logoUpload" class="form-control w-50" accept="image/*" name="foto_admin">
+                    <input type="file" id="logoUpload" class="form-control w-50" accept="image/*" name="foto_admin">
                 </div>
 
                 <div class="row g-3">
@@ -105,15 +101,6 @@
                     </div>
 
                     <div class="col-md-6">
-                        <label for="password" class="form-label">Senha gerada automaticamente</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="password" name="password" readonly>
-                            <button type="button" class="btn btn-outline-secondary" id="btnRegenerate">Gerar
-                                senha</button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
                         <label class="form-label">Status</label>
                         <select class="form-control">
                             <option>Ativo</option>
@@ -121,21 +108,39 @@
                             <option>Bloqueido</option>
                         </select>
                     </div>
-                </div>
 
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label class="form-label" style="margin-top: 13px;">Nome do Responsável <span class="text-danger">*</span></label>
+                     <div class="col-md-6">
+                        <label class="form-label">Nome do Responsável <span
+                                class="text-danger">*</span></label>
                         <input type="text" class="form-control" required placeholder="nome do responsável">
                     </div>
 
                     <div class="col-md-6">
-                        <label class="form-label" style="margin-top: 13px;">Horário de funcionamento</label>
+                        <label class="form-label">Horário de funcionamento</label>
                         <input type="text" class="form-control" placeholder="Ex: 08h00 às 22h00">
                     </div>
-
+<div class="col-md-6">
+                        <label for="password" class="form-label">Senha gerada automaticamente</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="password" name="password" readonly>
+                            <button type="button" class="btn btn-outline-secondary" id="btnRegenerate">Gerar
+                                senha</button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Nome do proprietário da conta bancária</label>
+                        <input type="text" class="form-control" name="account_owner" placeholder="Nome completo"
+                            required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">IBAN *</label>
+                        <input type="text" class="form-control" name="iban" placeholder="Ex: AO0600..." required>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Nome do banco *</label>
+                        <input type="text" class="form-control" name="bank_name" placeholder="Ex: BFA, BAI..." required>
+                    </div>
                 </div>
-
 
                 <div class="col-12 mt-4">
                     <button type="submit" class="btn btn-primary">

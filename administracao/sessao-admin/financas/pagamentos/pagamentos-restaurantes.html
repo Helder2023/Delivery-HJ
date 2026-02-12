@@ -1,40 +1,41 @@
 <div class="row mb-2 mb-xl-3">
     <div class="content-top col-auto d-sm-block">
-        <h3 id="titulo">Remunerar Restaurante</h3>
+        <h3 id="titulo">Remunerar Restaurantes</h3>
     </div>
 
     <div class="col-auto ms-auto text-end mt-n1">
 
         <div class="col-auto d-flex gap-2">
-            <button class="btn shadow-sm" style="background-color: hsl(0, 0%, 0%);">
-                <a class="no-underline" href="admin.html#/pagamentos-funcionarios" style="color: white;">
-                    <i data-feather="shopping-bag"></i> Remunerar Funcionario
+            <button class="btn shadow-sm" style="background-color: #000;">
+                <a class="no-underline" href="admin.html#/remunerar-administradores" style="color: white;">
+                    <i data-feather="users"></i> Remunerar administradores
                 </a>
             </button>
 
             <button class="btn shadow-sm" style="background-color: #000;">
-                <a class="no-underline" href="admin.html#/pagamentos-entregadores" style="color: white;">
-                    <i data-feather="shopping-bag"></i> Remunerar Entregadores
+                <a class="no-underline" href="admin.html#/remunerar-entregadores" style="color: white;">
+                    <i data-feather="users"></i> Remunerar Entregadores
                 </a>
             </button>
 
-           
-            <button class="btn shadow-sm" onclick="window.history.back()">
-                <i class="align-middle" data-feather="arrow-left">&nbsp;</i> Voltar
+             <button class="btn shadow-sm" style="background-color: #000;">
+                <a class="no-underline" href="admin.html#/remunerar-parceiros" style="color: white;">
+                    <i data-feather="shopping-bag"></i> Remunerar parceiros
+                </a>
             </button>
+
         </div>
     </div>
 </div>
 
     <div class="card mb-4 card-dashboard">
         <div class="card-header">
-            <h5 class="card-title mb-0" style="color: white;">Funcionário</h5>
+            <h5 class="card-title mb-0" style="color: white;">Restaurante</h5>
         </div>
         <div class="card-body">
             <form id="formDespesa" class="row g-3">
                 <div class="col-md-6">
-                    <label for="descricaoDespesa" class="form-label">Nome do funcionário / parceiros (Adminstradores e
-                        parceiros)</label>
+                    <label for="descricaoDespesa" class="form-label">Nome do restaurante</label>
 
                     <select id="nomes" name="nomes" class="form-control">
                         <option value="">-- Escolha o nome --</option>
@@ -154,7 +155,6 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nome</th>
-                                    <th>Tipo Funcioánrio</th>
                                     <th>Data de Remuneração</th>
                                     <th>Valor (Kz)</th>
                                     <th>Comprovativo</th>
@@ -165,7 +165,6 @@
                                 <tr>
                                     <td>001</td>
                                     <td>Helder Adão</td>
-                                    <td>Super Admin</td>
                                     <td>2025-11-05</td>
                                     <td>12.500</td>
                                     <td>
@@ -196,7 +195,6 @@
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
-                        <th>Tipo Funcioánrio</th>
                         <th>Data de Remuneração</th>
                         <th>Valor (Kz)</th>
                         <th>Status</th>
@@ -206,7 +204,6 @@
                     <tr>
                         <td>001</td>
                         <td>Helder Adão</td>
-                        <td>Super Admin</td>
                         <td>2025-11-05</td>
                         <td>12.500</td>
                         <td><span class="status naoPago">Não Pago</span></td>
