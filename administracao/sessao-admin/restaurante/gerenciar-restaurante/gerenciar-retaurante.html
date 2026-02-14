@@ -20,7 +20,7 @@
 
     <!-- Cards -->
     <div class="row g-3">
-        <div class="col-12 col-sm-6 col-xxl-2 d-flex">
+        <div class="col-12 col-sm-4 col-xxl-2 d-flex">
             <div class="card flex-fill card-dashboard">
                 <div class="card-body py-4">
                     <div class="d-flex align-items-start">
@@ -42,7 +42,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-sm-6 col-xxl-2 d-flex">
+        <div class="col-12 col-sm-4 col-xxl-2 d-flex">
             <div class="card flex-fill card-dashboard">
                 <div class="card-body py-4">
                     <div class="d-flex align-items-start">
@@ -64,29 +64,7 @@
             </div>
         </div>
 
-        <div class="col-12 col-sm-6 col-xxl-2 d-flex">
-            <div class="card flex-fill card-dashboard">
-                <div class="card-body py-4">
-                    <div class="d-flex align-items-start">
-                        <div class="flex-grow-1">
-                            <h3 class="mb-2">Entregadores <span class="badge badge-soft-dark indicator"
-                                    style="background-color: white; color: black !important;">40</span></h3>
-                            <p class="mb-2">Disponíveis</p>
-
-                        </div>
-                        <div class="d-inline-block ms-3">
-                            <div class="stat" style="background-color: white; color: black !important;">
-                                <a href="management/users/situation-users.html"
-                                    title="Revê os avisos de utilizadores"><i class="align-middle text-info"
-                                        data-feather="users" style="color: black !important;"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-12 col-sm-6 col-xxl-2 d-flex">
+        <div class="col-12 col-sm-4 col-xxl-2 d-flex">
             <div class="card flex-fill card-dashboard">
                 <div class="card-body py-4">
                     <div class="d-flex align-items-start">
@@ -114,8 +92,6 @@
 
         <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#admins"
                 type="button">Admins</button></li>
-        <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#entregadores"
-                type="button">Entregadores</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#cardapios"
                 type="button">Cardápios</button></li>
         <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#financas"
@@ -343,213 +319,6 @@
                     </table>
                 </div>
             </div>
-        </div>
-
-        <!-- Entregadores -->
-        <div class="tab-pane fade" id="entregadores">
-            <h5 class="mb-3">Cadastrar Entregador</h5>
-            <div class="card flex-fill p-4">
-
-                <form action="processa_entregador.php" method="post" enctype="multipart/form-data"
-                    class="row g-3 needs-validation" novalidate>
-
-                    <!-- Upload da Foto -->
-                    <div class="upload-foto">
-                        <label for="fotoUpload2">
-                        <img id="fotoPreview2" src="../assets/img/avatar/avatar.png" class="foto-preview"
-                            alt="Foto Preview">
-                        </label>
-                            <input type="file" id="fotoUpload2" class="form-control w-50" accept="image/*"
-                            name="foto_entregador">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="nome_entregador" class="form-label">Nome completo <span
-                                class="text-danger">*</span></label>
-                        <input type="text" minlength="3" maxlength="50" placeholder="Insira o nome completo"
-                            class="form-control" id="nome_entregador" name="nome" required>
-                        <div class="invalid-feedback">Por favor insira o nome do entregador.</div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="telefone" class="form-label">Número de Telefone</label>
-                        <input type="tel" maxlength="18" placeholder="+244 900 000 000" class="form-control"
-                            id="telefone" name="telefone">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">E-mail <span class="text-danger">*</span></label>
-                        <input type="email" maxlength="60" placeholder="entregador@exemplo.com" class="form-control"
-                            id="email" name="email" required>
-                        <div class="invalid-feedback">Insira um e-mail válido!</div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="data_nasc" class="form-label">Data de Nascimento</label>
-                        <input type="date" name="data_nasc" id="data_nasc" class="form-control">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="genero" class="form-label">Gênero</label>
-                        <select class="form-control" id="genero" name="genero">
-                            <option value="">Selecione...</option>
-                            <option>Masculino</option>
-                            <option>Feminino</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">Status</label>
-                        <select class="form-control" name="status">
-                            <option>Ativo</option>
-                            <option>Inativo</option>
-                            <option>Em avaliação</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label class="form-label">Tipo de Veículo</label>
-                        <select class="form-control" name="tipo_veiculo">
-                            <option value="">Selecione...</option>
-                            <option>Motocicleta</option>
-                            <option>Carro</option>
-                            <option>Bicicleta</option>
-                            <option>Outro</option>
-                        </select>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="matricula" class="form-label">Matrícula / Placa</label>
-                        <input type="text" maxlength="15" placeholder="ABC-1234" class="form-control" id="matricula"
-                            name="matricula">
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="endereco" class="form-label">Endereço</label>
-                        <textarea id="endereco" name="endereco" class="form-control" rows="2"
-                            placeholder="Ex: Rua Principal, Bairro, Cidade"></textarea>
-                    </div>
-
-                    <div class="col-md-6">
-                        <label for="password2" class="form-label">Senha gerada automaticamente</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control" id="password2" name="password" readonly>
-                            <button type="button" class="btn btn-outline-secondary" id="btnRegenerate2">Gerar
-                                senha</button>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12 form-check">
-                        <input class="form-check-input" type="checkbox" name="notificar" id="notificar" checked>
-                        <label class="form-check-label" for="notificar">
-                            Enviar e-mail com dados de acesso ao entregador
-                        </label>
-                    </div>
-
-                    <div class="col-12 text-left mt-4">
-                        <button class="btn btn-primary w-25" type="submit">Cadastrar Entregador</button>
-                    </div>
-                </form>
-            </div>
-            <div class="card">
-                <div class="card-body">
-                    <table id="tabela_2" class="table table-borderless my-0 w-100">
-                        <thead>
-                            <tr>
-                                <th>Nome</th>
-                                <th>Veículo</th>
-                                <th>Matrícula / Placa</th>
-                                <th>Status</th>
-                                <th>Contato</th>
-                                <th>Endereço</th>
-                                <th>Ações</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Pedro Lima</td>
-                                <td>Motocicleta Yamaha</td>
-                                <td>ABC-1234</td>
-                                <td>Ativo</td>
-                                <td>+244 999 123 456 | pedro.lima@email.com</td>
-                                <td>Rua 1, Bairro Central, Luanda</td>
-                                <td>
-                                    <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
-                                            data-feather="edit"></i></a>
-                                    <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>André Pinto</td>
-                                <td>Carro Toyota Corolla</td>
-                                <td>XYZ-5678</td>
-                                <td>Inativo</td>
-                                <td>+244 922 999 111 | andre.pinto@email.com</td>
-                                <td>Av. da Independência, Talatona</td>
-                                <td>
-                                    <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
-                                            data-feather="edit"></i></a>
-                                    <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Marta Silva</td>
-                                <td>Bicicleta</td>
-                                <td>-</td>
-                                <td>Em avaliação</td>
-                                <td>+244 923 456 789 | marta.silva@email.com</td>
-                                <td>Bairro Benfica, Luanda</td>
-                                <td>
-                                    <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
-                                            data-feather="edit"></i></a>
-                                    <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Carlos Bento</td>
-                                <td>Motocicleta Honda</td>
-                                <td>DEF-2345</td>
-                                <td>Ativo</td>
-                                <td>+244 944 123 789 | carlos.bento@email.com</td>
-                                <td>Rua do Sol, Viana</td>
-                                <td>
-                                    <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
-                                            data-feather="edit"></i></a>
-                                    <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>António Gomes</td>
-                                <td>Carro Ford Ranger</td>
-                                <td>GHI-3456</td>
-                                <td>Ativo</td>
-                                <td>+244 933 987 654 | antonio.gomes@email.com</td>
-                                <td>Bairro Nova Vida, Luanda</td>
-                                <td>
-                                    <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
-                                            data-feather="edit"></i></a>
-                                    <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Helena Lopes</td>
-                                <td>Outro (Patinete Elétrico)</td>
-                                <td>-</td>
-                                <td>Inativo</td>
-                                <td>+244 922 555 666 | helena.lopes@email.com</td>
-                                <td>Av. do Futuro, Talatona</td>
-                                <td>
-                                    <a style="margin-right: 7px;" href="admin.html#/gerenciar-editar-entregador"><i
-                                            data-feather="edit"></i></a>
-                                    <a href="admin.html#/gerenciar-editar-entregador"><i data-feather="trash"></i></a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-
         </div>
 
         <!-- Cardápios -->
@@ -857,39 +626,19 @@
         <!-- Financas -->
         <div class="tab-pane fade" id="financas">
             <div class="row g-3">
-                <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+                <div class="col-12 col-sm-12 col-xxl-3 d-flex">
                     <div class="card flex-fill card-dashboard">
                         <div class="card-body py-4">
                             <div class="d-flex align-items-start">
                                 <div class="flex-grow-1">
                                     <h3 class="mb-2">Receita Semana <span class="badge badge-soft-dark indicator"
-                                            style="background-color: white; color: black !important;">3.200
+                                            style="background-color: white; color: black !important;" id="totalComissoesCard">0
                                             Kz</span></h3>
                                     <p class="mb-2">Valor recebido nesta semana.</p>
                                 </div>
                                 <div class="d-inline-block ms-3">
                                     <div class="stat">
                                         <i data-feather="dollar-sign" class="align-middle text-info"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-sm-6 col-xxl-3 d-flex">
-                    <div class="card flex-fill card-dashboard">
-                        <div class="card-body py-4">
-                            <div class="d-flex align-items-start">
-                                <div class="flex-grow-1">
-                                    <h3 class="mb-2">Pendentes Semana <span class="badge badge-soft-dark indicator"
-                                            style="background-color: white; color: black !important;">0
-                                            Kz</span></h3>
-                                    <p class="mb-2">Pagamentos ainda não confirmados.</p>
-                                </div>
-                                <div class="d-inline-block ms-3">
-                                    <div class="stat">
-                                        <i data-feather="clock" class="align-middle text-warning"></i>
                                     </div>
                                 </div>
                             </div>
@@ -956,9 +705,9 @@
                                 <th>ID</th>
                                 <th>Pedido</th>
                                 <th>Nome</th> <!-- ADICIONADO -->
+                                <th>Data</th>
                                 <th>Preço (AKZ)</th> <!-- ADICIONADO -->
                                 <th>Quantidade</th> <!-- ADICIONADO -->
-                                <th>Data</th>
                                 <th>Valor (AKZ)</th>
                                 <th>Comissão 15%</th>
                                 <th>Valor Final</th>
@@ -966,14 +715,13 @@
                         </thead>
 
                         <tbody>
-
                             <tr data-ano="2025" data-mes="1" data-semana="1">
                                 <td>#001</td>
                                 <td>Pedido 1</td>
                                 <td>Pizza Média</td> <!-- ADICIONADO -->
+                                <td>2025-01-05</td>
                                 <td class="preco">3500</td> <!-- ADICIONADO -->
                                 <td class="quantidade">2</td> <!-- ADICIONADO -->
-                                <td>2025-01-05</td>
                                 <td class="valor"></td> <!-- calculado -->
                                 <td class="comissao"></td> <!-- calculado -->
                                 <td class="final"></td> <!-- calculado -->
@@ -983,9 +731,9 @@
                                 <td>#002</td>
                                 <td>Pedido 2</td>
                                 <td>Hambúrguer Duplo</td> <!-- ADICIONADO -->
+                                <td>2025-01-05</td>
                                 <td class="preco">4000</td> <!-- ADICIONADO -->
                                 <td class="quantidade">2</td> <!-- ADICIONADO -->
-                                <td>2025-02-14</td>
                                 <td class="valor"></td>
                                 <td class="comissao"></td>
                                 <td class="final"></td>
@@ -995,9 +743,9 @@
                                 <td>#003</td>
                                 <td>Pedido 3</td>
                                 <td>Frango Assado</td> <!-- ADICIONADO -->
+                                <td>2025-01-05</td>
                                 <td class="preco">5000</td> <!-- ADICIONADO -->
                                 <td class="quantidade">1</td> <!-- ADICIONADO -->
-                                <td>2023-11-22</td>
                                 <td class="valor"></td>
                                 <td class="comissao"></td>
                                 <td class="final"></td>
@@ -1069,6 +817,8 @@
                 }
             });
             document.getElementById("totalComissoes").textContent =
+                total.toLocaleString("pt-PT") + " AKZ";
+            document.getElementById("totalComissoesCard").textContent =
                 total.toLocaleString("pt-PT") + " AKZ";
         }
 

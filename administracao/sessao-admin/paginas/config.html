@@ -22,15 +22,12 @@
             Segurança
           </a>
           <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#sistema" role="tab">
-            Sistema / Aplicação
+            Taxa de comissão
           </a>
           <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#chat" role="tab">
             WhatsApp e Email (Chat)
           </a>
-          <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#notificacoes" role="tab">
-            Notificações & Automações
-          </a>
-
+         
           <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#contratos" role="tab">
             Contratos
           </a>
@@ -64,28 +61,16 @@
                 <button class="btn btn-dark">Atualizar Senha</button>
               </form>
 
-              <hr>
-              <h6 class="mt-4">Sessões Ativas</h6>
-              <p class="text-muted small">Você está conectado nos seguintes dispositivos:</p>
-              <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Chrome - Windows
-                  <button class="btn btn-sm btn-outline-danger">Encerrar</button>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  Safari - iPhone 13
-                  <button class="btn btn-sm btn-outline-danger">Encerrar</button>
-                </li>
-              </ul>
+             
             </div>
           </div>
         </div>
 
-        <!-- Sistema / Aplicação -->
+        <!-- Taxa de comissão -->
         <div class="tab-pane fade" id="sistema" role="tabpanel">
           <div class="card">
             <div class="card-header">
-              <h5 class="card-title mb-0">Sistema e Aplicação</h5>
+              <h5 class="card-title mb-0">Taxa de comissão</h5>
             </div>
             <div class="card-body">
               <form>
@@ -164,40 +149,6 @@
                   <input type="email" class="form-control" placeholder="suporte@CraveNow.com">
                 </div>
                 <button class="btn btn-dark">Salvar Configurações</button>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <!-- Notificações e Automações -->
-        <div class="tab-pane fade" id="notificacoes" role="tabpanel">
-          <div class="card">
-            <div class="card-header">
-              <h5 class="card-title mb-0">Notificações e Automações</h5>
-            </div>
-            <div class="card-body">
-              <form>
-                <div class="form-check mb-3">
-                  <input class="form-check-input" type="checkbox" id="alertaDívida" checked>
-                  <label class="form-check-label" for="alertaDívida">
-                    Enviar alerta automático quando restaurante não pagar
-                  </label>
-                </div>
-                <div class="form-check mb-3">
-                  <input class="form-check-input" type="checkbox" id="lembreteEmail">
-                  <label class="form-check-label" for="lembreteEmail">
-                    Enviar lembrete de pagamento por e-mail
-                  </label>
-                </div>
-                <div class="mb-3">
-                  <label class="form-label">Tempo para enviar lembrete</label>
-                  <select class="form-select">
-                    <option>1 dia antes</option>
-                    <option>3 dias antes</option>
-                    <option>1 semana antes</option>
-                  </select>
-                </div>
-                <button class="btn btn-dark">Atualizar Automações</button>
               </form>
             </div>
           </div>
@@ -298,58 +249,19 @@
                 </div>
               </div>
 
-              <div class="card card-dashboard p-3" id="cardFinancas" style="cursor: pointer;">
+               <div class="card card-dashboard p-3" id="cardFinancas" style="cursor: pointer;">
                 <h4 class="d-flex align-items-center gap-2">
                   <i data-feather="file"></i>
-                  Contato para o Parceiro - Gestor de Tráfego
+                  Contato para os Entregadores
                 </h4>
                 <!-- Botões de ação -->
                 <div class="document-actions">
-                  <a href="../sessao-admin/paginas/contratos/parceiros/Exercício de Portugol - Lista 03 (2).pdf"
+                  <a href="../sessao-admin/paginas/contratos/entregadores/"
                     target="_blank" class="btn btn-primary">
                     <i class="fas fa-eye"></i> Visualizar Completo
                   </a>
 
-                  <a href="../sessao-admin/paginas/contratos/parceiros/Exercício de Portugol - Lista 03 (2).pdf"
-                    download="documento.pdf" class="btn btn-success">
-                    <i class="fas fa-download"></i> Baixar PDF
-                  </a>
-                   <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#collapseExample3"
-                    aria-expanded="false" aria-controls="collapseExample"> <i class="fas fa-file"></i> Inseerir /
-                    Atualizar
-                    Contratos
-                  </button>
-
-                  <div class="collapse" id="collapseExample3">
-                    <hr>
-                    <form action="" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
-
-                      <div class="col-md-12">
-                        <label for="file" class="form-label">Inserir Contrato</label>
-                        <input type="file" class="form-control" id="file" name="file" required>
-                      </div>
-
-                      <div class="col-12 text-left">
-                        <button class="btn btn-primary" type="submit">Cadastrar Contrato</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card card-dashboard p-3" id="cardFinancas" style="cursor: pointer;">
-                <h4 class="d-flex align-items-center gap-2">
-                  <i data-feather="file"></i>
-                  Contato para o Parceiro - Influencer / Criador de Conteúdo
-                </h4>
-                <!-- Botões de ação -->
-                <div class="document-actions">
-                  <a href="../sessao-admin/paginas/contratos/parceiros/Exercício de Portugol - Lista 03 (2).pdf"
-                    target="_blank" class="btn btn-primary">
-                    <i class="fas fa-eye"></i> Visualizar Completo
-                  </a>
-
-                  <a href="../sessao-admin/paginas/contratos/parceiros/Exercício de Portugol - Lista 03 (2).pdf"
+                  <a href="../sessao-admin/paginas/contratos/parceiros/"
                     download="documento.pdf" class="btn btn-success">
                     <i class="fas fa-download"></i> Baixar PDF
                   </a>
@@ -376,7 +288,44 @@
                 </div>
               </div>
 
+              <div class="card card-dashboard p-3" id="cardFinancas" style="cursor: pointer;">
+                <h4 class="d-flex align-items-center gap-2">
+                  <i data-feather="file"></i>
+                  Contato para o Parceiro - Influencer / Criador de Conteúdo
+                </h4>
+                <!-- Botões de ação -->
+                <div class="document-actions">
+                  <a href="../sessao-admin/paginas/contratos/parceiros/"
+                    target="_blank" class="btn btn-primary">
+                    <i class="fas fa-eye"></i> Visualizar Completo
+                  </a>
 
+                  <a href="../sessao-admin/paginas/contratos/parceiros/"
+                    download="documento.pdf" class="btn btn-success">
+                    <i class="fas fa-download"></i> Baixar PDF
+                  </a>
+                   <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#collapseExample3"
+                    aria-expanded="false" aria-controls="collapseExample"> <i class="fas fa-file"></i> Inseerir /
+                    Atualizar
+                    Contratos
+                  </button>
+
+                  <div class="collapse" id="collapseExample3">
+                    <hr>
+                    <form action="" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+
+                      <div class="col-md-12">
+                        <label for="file" class="form-label">Inserir Contrato</label>
+                        <input type="file" class="form-control" id="file" name="file" required>
+                      </div>
+
+                      <div class="col-12 text-left">
+                        <button class="btn btn-primary" type="submit">Cadastrar Contrato</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -827,6 +776,7 @@
             document.head.insertAdjacentHTML('beforeend', documentStyles);
           </script>
         </div>
+        
       </div>
     </div>
   </div>

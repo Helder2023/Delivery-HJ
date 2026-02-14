@@ -36,6 +36,13 @@
               Gestão da Conta
             </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" id="tab-banco" data-bs-toggle="pill" href="#tab-content-banco" role="tab"
+              aria-controls="tab-content-banco" aria-selected="false">
+              Informações Bancárias
+            </a>
+          </li>
         </ul>
       </div>
     </div>
@@ -112,7 +119,6 @@
               </select>
             </div>
 
-
             <div class="col-md-12 text-end mt-4">
               <button class="btn btn-primary w-25" type="submit">Salvar Alterações</button>
             </div>
@@ -164,6 +170,28 @@
                 <label class="form-label">Confirmar nova palavra-passe</label>
                 <input type="password" class="form-control" placeholder="Repita a nova senha" required>
               </div>
+              <button class="btn btn-primary mt-2">Guardar alterações</button>
+            </div>
+          </form>
+        </div>
+
+         <!-- TAB 3: GESTÃO DE CONTA BANCÁRIA-->
+        <div class="tab-pane fade" id="tab-content-banco" role="tabpanel" aria-labelledby="tab-banco">
+          <h4>Alterar coordenadas bancárias</h4>
+          <form class="row g-3">
+            <div class="col-md-6">
+                        <label class="form-label">Nome do proprietário da conta bancária</label>
+                        <input type="text" class="form-control" name="account_owner" placeholder="Nome completo"
+                            required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">IBAN *</label>
+                        <input type="text" class="form-control" name="iban" placeholder="Ex: AO0600..." required>
+                    </div>
+                    <div class="col-md-12">
+                        <label class="form-label">Nome do banco *</label>
+                        <input type="text" class="form-control" name="bank_name" placeholder="Ex: BFA, BAI..." required>
+                    </div>
               <button class="btn btn-primary mt-2">Guardar alterações</button>
             </div>
           </form>

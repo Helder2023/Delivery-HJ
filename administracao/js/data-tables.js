@@ -170,5 +170,33 @@ $(function () {
     });
 });
 
+ $(function () {
+    // Destrói a DataTable existente antes de criar nova
+    if ($.fn.dataTable.isDataTable('#tabela_7')) {
+        $('#tabela_7').DataTable().destroy();
+    }
+    
+    $("#tabela_7").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+    }).buttons().container().appendTo('#tabela_7_wrapper .col-md-6:eq(0)');
+    
+    // Repete para a segunda tabela se necessário
+    if ($.fn.dataTable.isDataTable('#example7')) {
+        $('#example7').DataTable().destroy();
+    }
+    
+    $('#example7').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+    });
+});
+
 
 
