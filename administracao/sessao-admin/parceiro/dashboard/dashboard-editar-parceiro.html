@@ -114,12 +114,26 @@
           </select>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-6">
           <label for="email_employees" class="form-label">E-mail <span class="text-danger">*</span></label>
           <input type="email" maxlength="60" placeholder="usuario@exemplo.com" class="form-control" id="email_employees"
             name="email" required>
           <div class="invalid-feedback">Insira um e-mail válido!</div>
         </div>
+
+         <div class="col-md-6">
+                        <label class="form-label">Nome do proprietário da conta bancária</label>
+                        <input type="text" class="form-control" name="account_owner" placeholder="Nome completo"
+                            required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">IBAN *</label>
+                        <input type="text" class="form-control" name="iban" placeholder="Ex: AO0600..." required>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Nome do banco *</label>
+                        <input type="text" class="form-control" name="bank_name" placeholder="Ex: BFA, BAI..." required>
+                    </div>
 
         <div class="col-12 text-left mt-4">
           <button class="btn btn-primary w-25" type="submit">Editar perfil</button>

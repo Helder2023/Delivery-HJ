@@ -96,7 +96,7 @@
     '/despesas': { title: 'Despesas', file: DESPESAS + 'despesas.html' },
     '/editar-despesa': { title: 'Editando a Despesa', file: DESPESAS + 'editar-despesa.html' },
 
-    '/remunerar-administrador': { title: 'Pagamento de salário', file: PAGAMENTO_SALARIO + 'pagamentos-administradores.html' },
+    '/remunerar-administradores': { title: 'Pagamento de salário', file: PAGAMENTO_SALARIO + 'pagamentos-administradores.html' },
     '/remunerar-entregadores': { title: 'Pagamento de salário', file: PAGAMENTO_SALARIO + 'pagamentos-entregadores.html' },
     '/remunerar-restaurantes': { title: 'Pagamento de salário', file: PAGAMENTO_SALARIO + 'pagamentos-restaurantes.html' },
     '/remunerar-parceiros': { title: 'Pagamento de salário', file: PAGAMENTO_SALARIO + 'pagamentos-parceiros.html' },
