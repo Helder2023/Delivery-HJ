@@ -25,7 +25,7 @@
               <span class="badge badge-soft-dark indicator"
                 style="background-color: white; color: black !important;">12/12/2025 - 14:32</span>
             </h3>
-            <p class="mb-2">Mostra a data e hora do backup mais <br> recente.</p>
+            <p class="mb-2">Mostra a data e hora do backup mais recente.</p>
           
 
             <div class="mb-0">
@@ -53,8 +53,7 @@
         <div class="d-flex align-items-start">
           <div class="flex-grow-1">
             <h3 class="mb-2">Backup Automático
-              <span class="badge badge-soft-dark indicator"
-                style="background-color: white; color: black !important;">Ativo</span>
+              <span class="badge status ativo">Ativo</span>
             </h3>
             <p class="mb-2">Indica se o sistema está a gerar backups automaticamente.</p>
             <div class="mb-0">
@@ -214,3 +213,22 @@
     }
   }
 </script>
+
+<style>
+  .status {
+    border-radius: 50px;
+    padding: 5px 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+  }
+
+  .status.ativo {
+    background-color: #198754;
+    color: white;
+  }
+
+  .status.desativado {
+    background-color: #dc3545;
+    color: white;
+  }
+</style>
