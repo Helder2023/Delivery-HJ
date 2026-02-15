@@ -28,67 +28,6 @@
     </div>
   </div>
 
-   <!-- Área para responder -->
-    <div class="card flex-fill shadow-sm mt-4">
-        <div class="card-header gradient-header">
-            <h5 class="card-title mb-0 text-light">Avisar ao Restaurante</h5>
-        </div>
-        <div class="card-body">
-            <form action="responder_mensagem.php" method="post" class="row g-3 needs-validation" novalidate>
-                <input type="hidden" name="id_mensagem" value="123"> <!-- ID da mensagem -->
-
-                <div class="col-md-12">
-                    <label for="telefone" class="form-label">Restaurente</label>
-                    <input type="text" class="form-control" value="Lorem ipsum dolor sit" readonly>
-                </div>
-                
-                <div class="col-12">
-                    <label for="resposta" class="form-label">Mensagem (Aviso)</label>
-                    <textarea id="resposta" name="resposta" class="form-control" rows="4"
-                        placeholder="Digite sua resposta aqui..." required></textarea>
-                    <div class="invalid-feedback">Digite uma resposta antes de enviar.</div>
-                </div>
-
-                <div class="col-12 text-left mt-3">
-                    <button type="submit" class="btn btn-primary w-25">Enviar Aviso</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-  <!-- Tabela de respostas anteriores -->
-  <div class="card flex-fill shadow-sm">
-    <div class="card-header gradient-header">
-      <h5 class="card-title mb-0 text-light">Respostas Anteriores</h5>
-    </div>
-    <div class="card-body table-responsive">
-      <table id="datatables-column-search-select-inputs" class="table table-borderless my-0 w-100">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Data</th>
-            <th>Usuário/Responsável</th>
-            <th>Resposta</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>01/11/2025 18:00</td>
-            <td>Administrador</td>
-            <td>Obrigado pelo feedback! Estamos trabalhando para reduzir o tempo de espera.</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>01/11/2025 18:30</td>
-            <td>Supervisor</td>
-            <td>Agradecemos a avaliação. Esperamos vê-la novamente em breve!</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
 </div>
 
 <script>

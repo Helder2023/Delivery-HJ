@@ -1,28 +1,3 @@
-<style>
-
-
-    /* ========== UPLOAD LOGO ========== */
-    .upload-logo {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        margin-bottom: 20px;
-    }
-
-    .logo-preview {
-        width: 120px;
-        height: 120px;
-        border-radius: 10px;
-        object-fit: cover;
-        border: 2px solid #ccc;
-    }
-
-    /* ========== AJUSTES ========== */
-    a.no-underline {
-        text-decoration: none !important;
-    }
-</style>
-
 
 <div class="container-fluid p-0">
 
@@ -51,36 +26,35 @@
             <p><strong>Mensagem:</strong></p>
             <p>Olá, gostaria de saber se a minha encomenda do restaurante Capital já foi processada e quando será
                 entregue.</p>
-                    <button class="btn btn-primary" onclick="marcarComoLida(this)">Marcar como lida</button>
 
-        </div>
-
-        
-    </div>
-
-    <!-- Área para responder -->
-    <div class="card flex-fill shadow-sm mt-4">
-        <div class="card-header gradient-header">
-            <h5 class="card-title mb-0 text-light">Responder Mensagem</h5>
-        </div>
-        <div class="card-body">
-            <form action="responder_mensagem.php" method="post" class="row g-3 needs-validation" novalidate>
-                <input type="hidden" name="id_mensagem" value="123"> <!-- ID da mensagem -->
-
-                <div class="col-12">
-                    <label for="resposta" class="form-label">Sua resposta</label>
-                    <textarea id="resposta" name="resposta" class="form-control" rows="4"
-                        placeholder="Digite sua resposta aqui..." required></textarea>
-                    <div class="invalid-feedback">Digite uma resposta antes de enviar.</div>
-                </div>
-
-                <div class="col-12 text-left mt-3">
-                    <button type="submit" class="btn btn-primary w-25">Enviar Resposta</button>
-                </div>
-            </form>
         </div>
     </div>
 </div>
+
+<style>
+
+
+    /* ========== UPLOAD LOGO ========== */
+    .upload-logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .logo-preview {
+        width: 120px;
+        height: 120px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid #ccc;
+    }
+
+    /* ========== AJUSTES ========== */
+    a.no-underline {
+        text-decoration: none !important;
+    }
+</style>
 
 
 

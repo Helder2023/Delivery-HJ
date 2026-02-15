@@ -26,67 +26,6 @@
     </div>
   </div>
 
-  <!-- Adicionar Nota -->
-  <div class="card flex-fill shadow-sm mb-4">
-    <div class="card-header gradient-header">
-      <h5 class="card-title mb-0 text-light">Adicionar Nota</h5>
-    </div>
-    <div class="card-body">
-      <form action="adicionar_nota.php" method="post" class="row g-3 needs-validation" novalidate>
-        <input type="hidden" name="id_log" value="1023"> <!-- ID do log -->
-
-        <div class="col-12">
-          <label for="nota" class="form-label">Nota</label>
-          <textarea id="nota" name="nota" class="form-control" rows="3" placeholder="Escreva sua nota aqui..." required></textarea>
-          <div class="invalid-feedback">Digite uma nota antes de enviar.</div>
-        </div>
-
-        <div class="col-12 text-left mt-3">
-          <button type="submit" class="btn btn-primary w-25">Salvar Nota</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Tabela de Notas -->
-  <div class="card flex-fill shadow-sm">
-    <div class="card-header gradient-header">
-      <h5 class="card-title mb-0 text-light">Notas Registradas</h5>
-    </div>
-    <div class="card-body table-responsive">
-      <table id="datatables-column-search-select-inputs" class="table table-borderless my-0 w-100">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Data</th>
-            <th>Usuário</th>
-            <th>Nota</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>01/11/2025 16:00</td>
-            <td>Administrador</td>
-            <td>Pedido conferido e entregue corretamente.</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>01/11/2025 16:15</td>
-            <td>Supervisor</td>
-            <td>Cliente informou satisfação com a entrega.</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>01/11/2025 16:45</td>
-            <td>José Mbenga</td>
-            <td>Incluída observação sobre horário de entrega.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
 </div>
 
 <!-- ========================= -->

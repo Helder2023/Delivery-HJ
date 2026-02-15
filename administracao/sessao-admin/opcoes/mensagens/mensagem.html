@@ -1,3 +1,5 @@
+<script src="../js/data-tables.js"></script>
+
 <div class="row mb-2 mb-xl-3">
     <div class="content-top col-auto d-sm-block">
         <h1>Mensagens dos Usuários</h1>
@@ -84,7 +86,7 @@
         </div>
     </div>
 
-<div class="col-12 col-sm-6 col-xxl-3 d-flex">
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
         <div class="card flex-fill card-dashboard">
             <div class="card-body py-4">
                 <div class="d-flex align-items-start">
@@ -164,7 +166,7 @@
                     <td>Problema no pagamento</td>
                     <td>Meu pedido não foi finalizado, mesmo com saldo suficiente...</td>
                     <td>19/10/2025</td>
-                    <td><i class="status respondido">Respondido</i></td>
+                    <td><i class="status pendente">Pendente</i></td>
                     <td>
                         <a style="margin-right: 7px;" href="admin.html#/visualizar-mensagem"><i
                                 data-feather="eye"></i></a>
@@ -191,6 +193,1541 @@
     </div>
 </div>
 
+<hr>
+
+
+<body class="light-mode">
+    <div class="container-fluid p-3">
+        <!-- Cabeçalho -->
+        <div class="row mb-2 mb-xl-3">
+            <div class="col-auto d-sm-block">
+                <h3>Enviar Mensagem em Massa</h3>
+            </div>
+            <div class="col-auto ms-auto text-end mt-n1">
+                <button class="btn shadow-sm" style="background-color: #000;">
+                    <a class="no-underline" style="color: white;" data-bs-toggle="modal"
+                        data-bs-target="#historicoMensagensModal">
+                        <i data-feather="message-square"></i> Histórico de Mensagens
+                    </a>
+                </button>
+            </div>
+        </div>
+
+        <div class="card flex-fill p-4">
+            <form action="processa_mensagem_massa.php" method="post" class="row g-3 needs-validation" novalidate>
+
+                <!-- Assunto -->
+                <div class="col-md-8">
+                    <label for="assunto" class="form-label">Assunto <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" id="assunto" name="assunto"
+                        placeholder="Digite o assunto da mensagem" maxlength="100" required>
+                    <div class="invalid-feedback">Por favor, insira o assunto da mensagem!</div>
+                    <div class="char-counter" id="assuntoCounter">0/100 caracteres</div>
+                </div>
+
+                <!-- Prioridade -->
+                <div class="col-md-4">
+                    <label for="prioridade" class="form-label">Prioridade</label>
+                    <select class="form-control" id="prioridade" name="prioridade">
+                        <option value="normal">Normal</option>
+                        <option value="alta">Alta</option>
+                        <option value="urgente">Urgente</option>
+                        <option value="baixa">Baixa</option>
+                    </select>
+                </div>
+
+                <!-- Mensagem/Descrição -->
+                <div class="col-12">
+                    <label for="mensagem" class="form-label">Mensagem <span class="text-danger">*</span></label>
+                    <textarea class="form-control" id="mensagem" name="mensagem" rows="6"
+                        placeholder="Digite o conteúdo da mensagem..." maxlength="1000" required></textarea>
+                    <div class="invalid-feedback">Por favor, escreva a mensagem!</div>
+                    <div class="char-counter" id="mensagemCounter">0/1000 caracteres</div>
+                </div>
+
+                <!-- Abas de filtro rápido -->
+                <div class="col-12">
+                    <div class="filter-tabs">
+                        <span class="filter-tab active" onclick="filterAll('todos')">Todos os grupos</span>
+                        <span class="filter-tab" onclick="filterAll('restaurantes')">Apenas Restaurantes</span>
+                        <span class="filter-tab" onclick="filterAll('entregadores')">Apenas Entregadores</span>
+                        <span class="filter-tab" onclick="filterAll('parceiros')">Apenas Parceiros</span>
+                        <span class="filter-tab" onclick="filterAll('clientes')">Apenas Clientes</span>
+                    </div>
+                </div>
+
+                <!-- Seção: Restaurantes -->
+                <div class="col-12 recipient-section" id="sectionRestaurantes">
+                    <div class="recipient-header">
+                        <h5>
+                            <i data-feather="users"></i> Restaurantes
+                            <span class="badge-count" id="restaurantesCount">0 selecionados</span>
+                        </h5>
+                        <div>
+                            <button type="button" class="btn btn-sm btn-outline-primary"
+                                onclick="toggleAllRestaurantes()">
+                                Selecionar Todos
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Checkbox para enviar para todos os restaurantes -->
+                    <div class="select-all-wrapper">
+                        <input type="checkbox" id="todosRestaurantes" name="todos_restaurantes" value="1"
+                            onchange="toggleAllRestaurantesCheckboxes(this)">
+                        <label for="todosRestaurantes">Enviar para TODOS os restaurantes</label>
+                    </div>
+
+                    <!-- Busca dentro da seção -->
+                    <div class="search-box">
+                        <i data-feather="search"></i>
+                        <input type="text" class="form-control" placeholder="Buscar por restaurante ou administrador..."
+                            onkeyup="searchInSection('restaurantes', this.value)">
+                    </div>
+
+                    <!-- Lista de administradores dos restaurantes -->
+                    <div class="admin-list" id="restaurantesAdmins">
+                        <div class="admin-checkbox" data-name="joão silva restaurante sabor mineiro">
+                            <input type="checkbox" name="restaurantes[]" value="rest_1_admin_1"
+                                class="restaurante-checkbox" onchange="updateRestaurantesCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label><strong>João Silva</strong> - Restaurante Sabor Mineiro (Admin)</label>
+                        </div>
+                        <div class="admin-checkbox" data-name="maria santos restaurante sabor mineiro">
+                            <input type="checkbox" name="restaurantes[]" value="rest_1_admin_2"
+                                class="restaurante-checkbox" onchange="updateRestaurantesCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label><strong>Maria Santos</strong> - Restaurante Sabor Mineiro (Financeiro)</label>
+                        </div>
+                        <div class="admin-checkbox" data-name="pedro oliveira pizzaria napoli">
+                            <input type="checkbox" name="restaurantes[]" value="rest_2_admin_1"
+                                class="restaurante-checkbox" onchange="updateRestaurantesCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label><strong>Pedro Oliveira</strong> - Pizzaria Napoli (Admin)</label>
+                        </div>
+                        <div class="admin-checkbox" data-name="ana costa pizzaria napoli">
+                            <input type="checkbox" name="restaurantes[]" value="rest_2_admin_2"
+                                class="restaurante-checkbox" onchange="updateRestaurantesCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label><strong>Ana Costa</strong> - Pizzaria Napoli (Gerente)</label>
+                        </div>
+                        <div class="admin-checkbox" data-name="carlos souza hamburgueria do chef">
+                            <input type="checkbox" name="restaurantes[]" value="rest_3_admin_1"
+                                class="restaurante-checkbox" onchange="updateRestaurantesCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label><strong>Carlos Souza</strong> - Hamburgueria do Chef (Admin)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção: Entregadores -->
+                <div class="col-12 recipient-section" id="sectionEntregadores">
+                    <div class="recipient-header">
+                        <h5>
+                            <i data-feather="truck"></i> Entregadores
+                            <span class="badge-count" id="entregadoresCount">0 selecionados</span>
+                        </h5>
+                        <div>
+                            <button type="button" class="btn btn-sm btn-outline-primary"
+                                onclick="toggleAllEntregadores()">
+                                Selecionar Todos
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Checkbox para enviar para todos os entregadores -->
+                    <div class="select-all-wrapper">
+                        <input type="checkbox" id="todosEntregadores" name="todos_entregadores" value="1"
+                            onchange="toggleAllEntregadoresCheckboxes(this)">
+                        <label for="todosEntregadores">Enviar para TODOS os entregadores</label>
+                    </div>
+
+                    <!-- Busca dentro da seção -->
+                    <div class="search-box">
+                        <i data-feather="search"></i>
+                        <input type="text" class="form-control" placeholder="Buscar por entregador ou empresa..."
+                            onkeyup="searchInSection('entregadores', this.value)">
+                    </div>
+
+                    <!-- Lista de administradores dos entregadores -->
+                    <div class="admin-list" id="entregadoresAdmins">
+                        <div class="admin-checkbox" data-name="roberto lima entrega rápida">
+                            <input type="checkbox" name="entregadores[]" value="ent_1_admin_1"
+                                class="entregador-checkbox" onchange="updateEntregadoresCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label><strong>Roberto Lima</strong> - Entrega Rápida (Admin)</label>
+                        </div>
+                        <div class="admin-checkbox" data-name="patrícia mendes entrega rápida">
+                            <input type="checkbox" name="entregadores[]" value="ent_1_admin_2"
+                                class="entregador-checkbox" onchange="updateEntregadoresCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label><strong>Patrícia Mendes</strong> - Entrega Rápida (Financeiro)</label>
+                        </div>
+                        <div class="admin-checkbox" data-name="fernando santos logiexpress">
+                            <input type="checkbox" name="entregadores[]" value="ent_2_admin_1"
+                                class="entregador-checkbox" onchange="updateEntregadoresCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label><strong>Fernando Santos</strong> - LogiExpress (Admin)</label>
+                        </div>
+                        <div class="admin-checkbox" data-name="lucia ferreira logiexpress">
+                            <input type="checkbox" name="entregadores[]" value="ent_2_admin_2"
+                                class="entregador-checkbox" onchange="updateEntregadoresCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label><strong>Lucia Ferreira</strong> - LogiExpress (Operações)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Seção: Parceiros -->
+                <div class="col-12 recipient-section" id="sectionParceiros">
+                    <div class="recipient-header">
+                        <h5>
+                            <i data-feather="star"></i> Parceiros
+                            <span class="badge-count" id="parceirosCount">0 selecionados</span>
+                        </h5>
+                        <div>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="toggleAllParceiros()">
+                                Selecionar Todos
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Checkbox para enviar para todos os parceiros -->
+                    <div class="select-all-wrapper">
+                        <input type="checkbox" id="todosParceiros" name="todos_parceiros" value="1"
+                            onchange="toggleAllParceirosCheckboxes(this)">
+                        <label for="todosParceiros">Enviar para TODOS os parceiros</label>
+                    </div>
+
+                    <!-- Busca dentro da seção -->
+                    <div class="search-box">
+                        <i data-feather="search"></i>
+                        <input type="text" class="form-control" placeholder="Buscar por parceiro ou administrador..."
+                            onkeyup="searchInSection('parceiros', this.value)">
+                    </div>
+
+                    <!-- Lista de administradores dos parceiros -->
+                    <div class="admin-list" id="parceirosAdmins">
+                        <div class="admin-checkbox" data-name="amanda rodrigues fornecedor alimentos">
+                            <input type="checkbox" name="parceiros[]" value="parc_1_admin_1" class="parceiro-checkbox"
+                                onchange="updateParceirosCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label><strong>Amanda Rodrigues</strong> - Fornecedor Alimentos (Admin)</label>
+                        </div>
+                        <div class="admin-checkbox" data-name="bruno costa fornecedor alimentos">
+                            <input type="checkbox" name="parceiros[]" value="parc_1_admin_2" class="parceiro-checkbox"
+                                onchange="updateParceirosCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label><strong>Bruno Costa</strong> - Fornecedor Alimentos (Comercial)</label>
+                        </div>
+                        <div class="admin-checkbox" data-name="cristina alves marketing digital">
+                            <input type="checkbox" name="parceiros[]" value="parc_2_admin_1" class="parceiro-checkbox"
+                                onchange="updateParceirosCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label><strong>Cristina Alves</strong> - Marketing Digital (Admin)</label>
+                        </div>
+                        <div class="admin-checkbox" data-name="daniel pereira marketing digital">
+                            <input type="checkbox" name="parceiros[]" value="parc_2_admin_2" class="parceiro-checkbox"
+                                onchange="updateParceirosCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label><strong>Daniel Pereira</strong> - Marketing Digital (Gerente)</label>
+                        </div>
+                        <div class="admin-checkbox" data-name="elisa martins equipamentos">
+                            <input type="checkbox" name="parceiros[]" value="parc_3_admin_1" class="parceiro-checkbox"
+                                onchange="updateParceirosCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label><strong>Elisa Martins</strong> - Equipamentos (Admin)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NOVA SEÇÃO: Clientes/Usuários -->
+                <div class="col-12 recipient-section" id="sectionClientes">
+                    <div class="recipient-header">
+                        <h5>
+                            <i data-feather="users"></i> Clientes / Usuários
+                            <span class="badge-count" id="clientesCount">0 selecionados</span>
+                        </h5>
+                        <div>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="toggleAllClientes()">
+                                Selecionar Todos
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Checkbox para enviar para todos os clientes -->
+                    <div class="select-all-wrapper">
+                        <input type="checkbox" id="todosClientes" name="todos_clientes" value="1"
+                            onchange="toggleAllClientesCheckboxes(this)">
+                        <label for="todosClientes">Enviar para TODOS os clientes</label>
+                    </div>
+
+                    <!-- Filtros para clientes -->
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <select class="form-control" id="filtroClienteStatus" onchange="filtrarClientes()">
+                                <option value="">Todos os status</option>
+                                <option value="ativo">Ativos</option>
+                                <option value="inativo">Inativos</option>
+                                <option value="novo">Novos (últimos 30 dias)</option>
+                                <option value="vip">VIP</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <select class="form-control" id="filtroClienteCidade" onchange="filtrarClientes()">
+                                <option value="">Todas as cidades</option>
+                                <option value="luanda">Luanda</option>
+                                <option value="huambo">Huambo</option>
+                                <option value="benguela">Benguela</option>
+                                <option value="lubango">Lubango</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Busca dentro da seção -->
+                    <div class="search-box">
+                        <i data-feather="search"></i>
+                        <input type="text" class="form-control" placeholder="Buscar por nome, email ou telefone..."
+                            id="buscaClientes" onkeyup="filtrarClientes()">
+                    </div>
+
+                    <!-- Lista de clientes -->
+                    <div class="user-list" id="clientesList">
+                        <div class="user-checkbox" data-nome="ana carolina silva" data-email="ana.silva@email.com"
+                            data-status="ativo" data-cidade="luanda" data-vip="sim">
+                            <input type="checkbox" name="clientes[]" value="cli_1" class="cliente-checkbox"
+                                onchange="updateClientesCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label>
+                                <strong>Ana Carolina Silva</strong> - ana.silva@email.com
+                                <span class="badge bg-success">VIP</span>
+                                <small class="text-muted">Luanda</small>
+                            </label>
+                        </div>
+                        <div class="user-checkbox" data-nome="bruno henrique oliveira"
+                            data-email="bruno.oliveira@email.com" data-status="ativo" data-cidade="luanda"
+                            data-vip="nao">
+                            <input type="checkbox" name="clientes[]" value="cli_2" class="cliente-checkbox"
+                                onchange="updateClientesCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label>
+                                <strong>Bruno Henrique Oliveira</strong> - bruno.oliveira@email.com
+                                <small class="text-muted">Luanda</small>
+                            </label>
+                        </div>
+                        <div class="user-checkbox" data-nome="carla fernanda santos" data-email="carla.santos@email.com"
+                            data-status="ativo" data-cidade="huambo" data-vip="nao">
+                            <input type="checkbox" name="clientes[]" value="cli_3" class="cliente-checkbox"
+                                onchange="updateClientesCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label>
+                                <strong>Carla Fernanda Santos</strong> - carla.santos@email.com
+                                <small class="text-muted">Huambo</small>
+                            </label>
+                        </div>
+                        <div class="user-checkbox" data-nome="daniel souza lima" data-email="daniel.lima@email.com"
+                            data-status="inativo" data-cidade="benguela" data-vip="nao">
+                            <input type="checkbox" name="clientes[]" value="cli_4" class="cliente-checkbox"
+                                onchange="updateClientesCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label>
+                                <strong>Daniel Souza Lima</strong> - daniel.lima@email.com
+                                <span class="badge bg-secondary">Inativo</span>
+                                <small class="text-muted">Benguela</small>
+                            </label>
+                        </div>
+                        <div class="user-checkbox" data-nome="elena maria rodrigues"
+                            data-email="elena.rodrigues@email.com" data-status="ativo" data-cidade="luanda"
+                            data-vip="sim">
+                            <input type="checkbox" name="clientes[]" value="cli_5" class="cliente-checkbox"
+                                onchange="updateClientesCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label>
+                                <strong>Elena Maria Rodrigues</strong> - elena.rodrigues@email.com
+                                <span class="badge bg-success">VIP</span>
+                                <small class="text-muted">Luanda</small>
+                            </label>
+                        </div>
+                        <div class="user-checkbox" data-nome="fernando costa" data-email="fernando.costa@email.com"
+                            data-status="novo" data-cidade="lubango" data-vip="nao">
+                            <input type="checkbox" name="clientes[]" value="cli_6" class="cliente-checkbox"
+                                onchange="updateClientesCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label>
+                                <strong>Fernando Costa</strong> - fernando.costa@email.com
+                                <span class="badge bg-info">Novo</span>
+                                <small class="text-muted">Lubango</small>
+                            </label>
+                        </div>
+                        <div class="user-checkbox" data-nome="gabriela aparecida lima"
+                            data-email="gabriela.lima@email.com" data-status="ativo" data-cidade="luanda"
+                            data-vip="sim">
+                            <input type="checkbox" name="clientes[]" value="cli_7" class="cliente-checkbox"
+                                onchange="updateClientesCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label>
+                                <strong>Gabriela Aparecida Lima</strong> - gabriela.lima@email.com
+                                <span class="badge bg-success">VIP</span>
+                                <small class="text-muted">Luanda</small>
+                            </label>
+                        </div>
+                        <div class="user-checkbox" data-nome="heitor alves" data-email="heitor.alves@email.com"
+                            data-status="novo" data-cidade="huambo" data-vip="nao">
+                            <input type="checkbox" name="clientes[]" value="cli_8" class="cliente-checkbox"
+                                onchange="updateClientesCount()">
+                            <img src="../assets/img/avatar/avatar.png" class="user-avatar-small" alt="Avatar">
+                            <label>
+                                <strong>Heitor Alves</strong> - heitor.alves@email.com
+                                <span class="badge bg-info">Novo</span>
+                                <small class="text-muted">Huambo</small>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Estatísticas de clientes -->
+                    <div class="mt-2 text-muted small">
+                        <span>Total: <span id="totalClientes">8</span></span> |
+                        <span>Selecionados: <span id="selectedClientes">0</span></span> |
+                        <span>VIP: <span id="vipClientes">3</span></span>
+                    </div>
+                </div>
+
+                <!-- Preview da Mensagem -->
+                <div class="col-12">
+                    <div class="preview-message">
+                        <h6>
+                            <i data-feather="eye"></i> Preview da Mensagem
+                        </h6>
+                        <div class="preview-content" id="messagePreview">
+                            <strong>Assunto:</strong> <span id="previewAssunto">-</span><br>
+                            <strong>Prioridade:</strong> <span id="previewPrioridade">Normal</span><br>
+                            <strong>Mensagem:</strong><br>
+                            <span id="previewMensagem">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resumo de destinatários -->
+                <div class="col-12">
+                    <div class="alert alert-info">
+                        <strong>Resumo de envio:</strong>
+                        <span id="resumoRestaurantes">0 restaurantes</span> |
+                        <span id="resumoEntregadores">0 entregadores</span> |
+                        <span id="resumoParceiros">0 parceiros</span> |
+                        <span id="resumoClientes">0 clientes</span>
+                        <br>
+                        <small>Total de destinatários: <span id="totalDestinatarios">0</span></small>
+                    </div>
+                </div>
+
+                <!-- Opções Adicionais -->
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="agendar_envio" id="agendar_envio">
+                        <label class="form-check-label" for="agendar_envio">
+                            Agendar envio para depois
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="salvar_rascunho" id="salvar_rascunho">
+                        <label class="form-check-label" for="salvar_rascunho">
+                            Salvar como rascunho
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Data de Agendamento (inicialmente oculta) -->
+                <div class="col-md-6" id="agendamentoContainer" style="display: none;">
+                    <label for="data_agendamento" class="form-label">Data e hora do envio</label>
+                    <input type="datetime-local" class="form-control" id="data_agendamento" name="data_agendamento">
+                </div>
+
+                <!-- Confirmação de envio -->
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="confirmar_envio" id="confirmar_envio"
+                            required>
+                        <label class="form-check-label" for="confirmar_envio">
+                            Confirmo que desejo enviar esta mensagem para os destinatários selecionados
+                            <span class="text-danger">*</span>
+                        </label>
+                        <div class="invalid-feedback">Você precisa confirmar o envio!</div>
+                    </div>
+                </div>
+
+                <!-- Botões -->
+                <div class="col-12 text-left mt-4">
+                    <button type="submit" class="btn btn-primary" style="width: 200px;">
+                        <i data-feather="send"></i> Enviar Mensagem
+                    </button>
+                    <button type="button" class="btn btn-outline-secondary ms-2" style="width: 150px;"
+                        onclick="limparFormulario()">
+                        <i data-feather="x"></i> Limpar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+<!-- Modal Histórico de Mensagens -->
+<div class="modal fade" id="historicoMensagensModal" tabindex="-1" aria-labelledby="historicoMensagensModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="historicoMensagensModalLabel">
+                    <i data-feather="message-square"></i> Histórico de Mensagens Enviadas
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Filtros e Busca -->
+                <div class="row mb-4">
+                    <div class="col-md-3">
+                        <label class="form-label">Período</label>
+                        <select class="form-control" id="filtroPeriodo"
+                            onchange="toggleDataPersonalizada(); filtrarTabela()">
+                            <option value="hoje">Hoje</option>
+                            <option value="ontem">Ontem</option>
+                            <option value="semana">Últimos 7 dias</option>
+                            <option value="mes" selected>Últimos 30 dias</option>
+                            <option value="personalizado">Personalizado</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3" id="dataInicioContainer" style="display: none;">
+                        <label class="form-label">Data Início</label>
+                        <input type="date" class="form-control" id="dataInicio" onchange="filtrarTabela()">
+                    </div>
+
+                    <div class="col-md-3" id="dataFimContainer" style="display: none;">
+                        <label class="form-label">Data Fim</label>
+                        <input type="date" class="form-control" id="dataFim" onchange="filtrarTabela()">
+                    </div>
+                    <div class="col-md-12 mt-3">
+                        <div class="input-group">
+                            <span class="input-group-text"><i data-feather="search"></i></span>
+                            <input type="text" class="form-control"
+                                placeholder="Buscar por assunto, mensagem ou destinatário..." id="buscaHistorico"
+                                onkeyup="filtrarTabela()">
+                            <button class="btn btn-outline-secondary" type="button" onclick="limparFiltros()">Limpar
+                                Filtros</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estatísticas Rápidas -->
+                <div class="row">
+                    <div class="row">
+                        <div class="col-12 col-sm-4 col-xxl-3 d-flex">
+                            <div class="card flex-fill card-dashboard">
+                                <div class="card-body py-4">
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-grow-1">
+                                            <h3 class="mb-2">Total Enviadas
+                                                <span class="badge badge-soft-dark indicator"
+                                                    style="background-color: white; color: black !important;">1,247</span>
+                                            </h3>
+                                            <p class="mb-2">últimos 30 dias</p>
+
+                                        </div>
+                                        <div class="d-inline-block ms-3">
+                                            <div class="stat" style="background-color: white; color: black !important;">
+                                                <i class="align-middle" data-feather="mail"
+                                                    style="color: black !important;"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-4 col-xxl-3 d-flex">
+                            <div class="card flex-fill card-dashboard">
+                                <div class="card-body py-4">
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-grow-1">
+                                            <h3 class="mb-2">Entregues
+                                                <span class="badge badge-soft-dark indicator"
+                                                    style="background-color: white; color: black !important;">1,198</span>
+                                            </h3>
+                                            <p class="mb-2">96% taxa de entrega</p>
+
+                                        </div>
+                                        <div class="d-inline-block ms-3">
+                                            <div class="stat" style="background-color: white; color: black !important;">
+                                                <i class="align-middle" data-feather="check-circle"
+                                                    style="color: black !important;"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-4 col-xxl-3 d-flex">
+                            <div class="card flex-fill card-dashboard">
+                                <div class="card-body py-4">
+                                    <div class="d-flex align-items-start">
+                                        <div class="flex-grow-1">
+                                            <h3 class="mb-2">Agendadas
+                                                <span class="badge badge-soft-dark indicator"
+                                                    style="background-color: white; color: black !important;">32</span>
+                                            </h3>
+                                            <p class="mb-2">2.5% do total</p>
+
+                                        </div>
+                                        <div class="d-inline-block ms-3">
+                                            <div class="stat" style="background-color: white; color: black !important;">
+                                                <i class="align-middle" data-feather="clock"
+                                                    style="color: black !important;"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- Lista de Mensagens -->
+                <div class="tab-content" id="historicoTabContent">
+                    <div class="tab-pane fade show active" id="todas" role="tabpanel">
+                        <div class="table-responsive">
+                            <table id="tabela_1" class="table table-borderless my-0 w-100">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th width="50">
+                                            <input type="checkbox" id="selectAll" onchange="selectAllMessages(this)">
+                                        </th>
+                                        <th>Status</th>
+                                        <th>Assunto</th>
+                                        <th>Destinatários</th>
+                                        <th>Data Envio</th>
+                                        <th>Taxa de Abertura</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="historicoMensagensBody">
+                                    <!-- Mensagem 1 -->
+                                    <tr class="message-row" data-status="enviado" data-tipo="email">
+                                        <td><input type="checkbox" class="message-checkbox" value="1"></td>
+                                        <td>
+                                            <span class="badge bg-success">Enviado</span>
+                                        </td>
+                                        <td>
+                                            <strong>Promoção de Final de Semana</strong>
+                                            <br>
+                                            <small class="text-muted">ID: MSG-2024-001</small>
+                                        </td>
+                                        <td>
+                                            <div class="recipient-badges">
+                                                <span class="badge bg-info">12 restaurantes</span>
+                                                <span class="badge bg-secondary">8 entregadores</span>
+                                                <span class="badge bg-success">45 clientes</span>
+                                            </div>
+                                        </td>
+                                        <td>14/02/2024 10:30</td>
+                                        <td>
+                                            <div class="progress" style="height: 10px; background-color: transparent;">
+                                                <div class="progress-bar bg-success" style="width: 78%; height: 100%;">
+                                                    78%</div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-outline-primary"
+                                                    onclick="verDetalhes('MSG-2024-001')" title="Ver detalhes"  data-bs-toggle="modal"
+                        data-bs-target="#detalhesMensagemModal">
+                                                    <i data-feather="eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-secondary"
+                                                    onclick="reenviarMensagem('MSG-2024-001')" title="Reenviar">
+                                                    <i data-feather="repeat"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger"
+                                                    onclick="excluirMensagem('MSG-2024-001')" title="Excluir">
+                                                    <i data-feather="trash-2"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Mensagem 2 -->
+                                    <tr class="message-row" data-status="agendado" data-tipo="whatsapp">
+                                        <td><input type="checkbox" class="message-checkbox" value="2"></td>
+                                        <td>
+                                            <span class="badge bg-warning">Agendado</span>
+                                        </td>
+                                        <td>
+                                            <strong>Lembrete de Pedido</strong>
+                                            <br>
+                                            <small class="text-muted">ID: MSG-2024-002</small>
+                                        </td>
+                                        <td>
+                                            <div class="recipient-badges">
+                                                <span class="badge bg-success">230 clientes</span>
+                                            </div>
+                                        </td>
+                                        <td>20/02/2024 09:00</td>
+                                        <td>
+                                            <div class="progress" style="height: 10px; background-color: transparent;">
+                                                <div class="progress-bar bg-success" style="width: 1%; height: 100%;">1%
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button class="btn btn-sm btn-outline-primary"
+                                                    onclick="verDetalhes('MSG-2024-002')" data-bs-toggle="modal"
+                        data-bs-target="#detalhesMensagemModal">
+                                                    <i data-feather="eye"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-warning"
+                                                    onclick="editarAgendamento('MSG-2024-002')">
+                                                    <i data-feather="edit"></i>
+                                                </button>
+                                                <button class="btn btn-sm btn-outline-danger"
+                                                    onclick="cancelarAgendamento('MSG-2024-002')">
+                                                    <i data-feather="x-circle"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                    <!-- Aba Enviadas -->
+                    <div class="tab-pane fade" id="enviadas" role="tabpanel">
+                        <!-- Conteúdo similar, filtrado por enviadas -->
+                        <p class="text-center text-muted py-3">Mostrando apenas mensagens enviadas</p>
+                    </div>
+
+                    <!-- Aba Agendadas -->
+                    <div class="tab-pane fade" id="agendadas" role="tabpanel">
+                        <!-- Conteúdo para agendadas -->
+                        <p class="text-center text-muted py-3">Mostrando apenas mensagens agendadas</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick="atualizarHistorico()">
+                    <i data-feather="refresh-cw"></i> Atualizar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Detalhes da Mensagem -->
+<div class="modal fade" id="detalhesMensagemModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Detalhes da Mensagem</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><strong>ID:</strong> <span id="detalheId">MSG-2024-001</span></p>
+                        <p><strong>Assunto:</strong> <span id="detalheAssunto">Promoção de Final de Semana</span></p>
+                        <p><strong>Tipo:</strong> <span id="detalheTipo">E-mail</span></p>
+                        <p><strong>Status:</strong> <span class="badge bg-success" id="detalheStatus">Enviado</span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Data Envio:</strong> <span id="detalheData">15/02/2024 10:30</span></p>
+                        <p><strong>Enviado por:</strong> <span id="detalheRemetente">Admin Principal</span></p>
+                        <p><strong>Prioridade:</strong> <span class="badge bg-warning"
+                                id="detalhePrioridade">Normal</span></p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <h6>Conteúdo da Mensagem:</h6>
+                <div class="p-3 rounded" id="detalheConteudo">
+                    <strong>Olá!</strong><br><br>
+                    Aproveite nossa promoção de final de semana com 20% de desconto em todos os pedidos.<br>
+                    Use o cupom: FIM20<br><br>
+                    Válido apenas para pedidos acima de 1000 kz.
+                </div>
+
+                <hr>
+
+                <h6>Destinatários:</h6>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-info text-white">Restaurantes</div>
+                            <div class="card-body">
+                                <p>Total: 12</p>
+                                <ul class="small">
+                                    <li>Restaurante Sabor Mineiro (Admin)</li>
+                                    <li>Pizzaria Napoli (Admin)</li>
+                                    <li>Hamburgueria do Chef (Admin)</li>
+                                </ul>
+                                <a href="#">ver todos</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-secondary text-white">Entregadores</div>
+                            <div class="card-body">
+                                <p>Total: 8</p>
+                                <ul class="small">
+                                    <li>Entrega Rápida (Admin)</li>
+                                    <li>LogiExpress (Admin)</li>
+                                </ul>
+                                <a href="#">ver todos</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">Clientes</div>
+                            <div class="card-body">
+                                <p>Total: 45</p>
+                                <ul class="small">
+                                    <li>Ana Silva (VIP)</li>
+                                    <li>Bruno Oliveira</li>
+                                    <li>Carla Santos</li>
+                                </ul>
+                                <a href="#">ver todos</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <h6>Estatísticas de Entrega:</h6>
+                <div class="progress mb-2" style="height: 25px;">
+                    <div class="progress-bar bg-success" style="width: 78%; height: 100%;">Entregues (78%)</div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" onclick="reenviarMensagem()">
+                    <i data-feather="repeat"></i> Reenviar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Função para aplicar os filtros
+    function filtrarTabela() {
+        console.log('Filtrando tabela...');
+
+        // Pegar valores dos filtros
+        var statusFiltro = document.getElementById('filtroStatus').value;
+        var periodo = document.getElementById('filtroPeriodo').value;
+        var busca = document.getElementById('buscaHistorico').value.toLowerCase().trim();
+
+        console.log('Filtro Status:', statusFiltro);
+        console.log('Filtro Período:', periodo);
+        console.log('Busca:', busca);
+
+        // Pegar todas as linhas da tabela (excluindo o cabeçalho)
+        var linhas = document.querySelectorAll('#tabela_1 tbody tr');
+        console.log('Total de linhas:', linhas.length);
+
+        var linhasVisiveis = 0;
+
+        // Para cada linha, verificar se deve ser mostrada
+        for (var i = 0; i < linhas.length; i++) {
+            var linha = linhas[i];
+
+            // Pular a linha de mensagem de nenhum resultado
+            if (linha.id === 'mensagemSemResultados') {
+                continue;
+            }
+
+            var mostrar = true;
+
+            // FILTRO POR STATUS - Vamos pegar o texto do status diretamente do badge
+            if (statusFiltro !== 'todos') {
+                // Pegar o elemento badge de status
+                var badgeStatus = linha.querySelector('td:nth-child(2) .badge');
+                if (badgeStatus) {
+                    var textoStatus = badgeStatus.textContent.trim().toLowerCase();
+                    console.log('Status da linha', i, ':', textoStatus);
+
+                    // Verificar se o status da linha corresponde ao filtro
+                    if (textoStatus !== statusFiltro) {
+                        mostrar = false;
+                    }
+                } else {
+                    // Se não encontrar o badge, tentar pelo atributo data-status
+                    var dataStatus = linha.getAttribute('data-status');
+                    if (dataStatus && dataStatus !== statusFiltro) {
+                        mostrar = false;
+                    }
+                }
+            }
+
+            // FILTRO POR BUSCA
+            if (mostrar && busca !== '') {
+                var textoLinha = linha.textContent.toLowerCase();
+                if (textoLinha.indexOf(busca) === -1) {
+                    mostrar = false;
+                }
+            }
+
+            // FILTRO POR PERÍODO (simplificado para teste)
+            if (mostrar && periodo !== 'todos' && periodo !== 'personalizado') {
+                var dataTexto = linha.cells[4] ? linha.cells[4].textContent : '';
+
+                if (periodo === 'hoje' && dataTexto.indexOf('15/02') === -1) {
+                    mostrar = false;
+                } else if (periodo === 'ontem' && dataTexto.indexOf('14/02') === -1) {
+                    mostrar = false;
+                } else if (periodo === 'semana' && dataTexto.indexOf('15/02') === -1 && dataTexto.indexOf('14/02') === -1 && dataTexto.indexOf('13/02') === -1) {
+                    mostrar = false;
+                } else if (periodo === 'mes' && dataTexto.indexOf('15/02') === -1 && dataTexto.indexOf('14/02') === -1 && dataTexto.indexOf('13/02') === -1 && dataTexto.indexOf('20/02') === -1) {
+                    mostrar = false;
+                }
+            }
+
+            // Mostrar ou esconder a linha
+            if (mostrar) {
+                linha.style.display = '';
+                linhasVisiveis++;
+                console.log('Linha', i, 'VISÍVEL');
+            } else {
+                linha.style.display = 'none';
+                console.log('Linha', i, 'OCULTA');
+            }
+        }
+
+        console.log('Total de linhas visíveis:', linhasVisiveis);
+
+        // Verificar se há linhas visíveis
+        var tbody = document.getElementById('historicoMensagensBody');
+        var mensagemVazia = document.getElementById('mensagemSemResultados');
+
+        if (linhasVisiveis === 0) {
+            if (!mensagemVazia) {
+                var trVazia = document.createElement('tr');
+                trVazia.id = 'mensagemSemResultados';
+                trVazia.innerHTML = '<td colspan="7" class="text-center py-4"><div class="alert alert-info mb-0">Nenhuma mensagem encontrada com os filtros aplicados.</div></td>';
+                tbody.appendChild(trVazia);
+            }
+        } else {
+            if (mensagemVazia) {
+                mensagemVazia.remove();
+            }
+        }
+    }
+
+    // Função para mostrar/esconder campos de data personalizada
+    function toggleDataPersonalizada() {
+        var periodo = document.getElementById('filtroPeriodo').value;
+        var dataInicioContainer = document.getElementById('dataInicioContainer');
+        var dataFimContainer = document.getElementById('dataFimContainer');
+
+        if (periodo === 'personalizado') {
+            dataInicioContainer.style.display = 'block';
+            dataFimContainer.style.display = 'block';
+        } else {
+            dataInicioContainer.style.display = 'none';
+            dataFimContainer.style.display = 'none';
+            filtrarTabela(); // Aplicar filtro quando mudar o período
+        }
+    }
+
+    // Função para limpar filtros
+    function limparFiltros() {
+        console.log('Limpando filtros...');
+
+        document.getElementById('filtroStatus').value = 'todos';
+        document.getElementById('filtroPeriodo').value = 'mes';
+        document.getElementById('buscaHistorico').value = '';
+        document.getElementById('dataInicio').value = '';
+        document.getElementById('dataFim').value = '';
+
+        document.getElementById('dataInicioContainer').style.display = 'none';
+        document.getElementById('dataFimContainer').style.display = 'none';
+
+        filtrarTabela();
+    }
+
+    // Função para selecionar todos
+    function selectAllMessages(checkbox) {
+        var checkboxes = document.querySelectorAll('#tabela_1 .message-checkbox');
+        for (var i = 0; i < checkboxes.length; i++) {
+            // Só seleciona checkboxes de linhas visíveis
+            var linha = checkboxes[i].closest('tr');
+            if (linha.style.display !== 'none') {
+                checkboxes[i].checked = checkbox.checked;
+            }
+        }
+        updateSelectedCount();
+    }
+
+    // Função para atualizar contador
+    function updateSelectedCount() {
+        var selected = document.querySelectorAll('#tabela_1 .message-checkbox:checked').length;
+        var totalSelecionados = document.getElementById('totalSelecionados');
+        if (totalSelecionados) {
+            totalSelecionados.textContent = selected + ' selecionado' + (selected !== 1 ? 's' : '');
+        }
+    }
+
+    // Função para garantir que os badges de status estão corretos
+    function verificarStatusDasLinhas() {
+        var linhas = document.querySelectorAll('#tabela_1 tbody tr');
+        for (var i = 0; i < linhas.length; i++) {
+            var linha = linhas[i];
+            if (linha.id === 'mensagemSemResultados') continue;
+
+            var badge = linha.querySelector('td:nth-child(2) .badge');
+            if (badge) {
+                var textoStatus = badge.textContent.trim().toLowerCase();
+                // Garantir que o atributo data-status corresponde ao badge
+                linha.setAttribute('data-status', textoStatus);
+                console.log('Linha', i, 'status:', textoStatus);
+            }
+        }
+    }
+
+    // Inicializar quando a página carregar
+    document.addEventListener('DOMContentLoaded', function () {
+        console.log('Página carregada - Inicializando filtros');
+
+        // Verificar status das linhas
+        verificarStatusDasLinhas();
+
+        // Aplicar filtro inicial
+        filtrarTabela();
+
+        // Inicializar Feather Icons
+        if (typeof feather !== 'undefined') {
+            feather.replace();
+        }
+
+        // Adicionar listeners para checkboxes
+        var checkboxes = document.querySelectorAll('#tabela_1 .message-checkbox');
+        for (var i = 0; i < checkboxes.length; i++) {
+            checkboxes[i].addEventListener('change', updateSelectedCount);
+        }
+    });
+
+    // Quando o modal abrir
+    var historicoModal = document.getElementById('historicoMensagensModal');
+    if (historicoModal) {
+        historicoModal.addEventListener('shown.bs.modal', function () {
+            console.log('Modal aberto - Reaplicando filtros');
+            verificarStatusDasLinhas();
+            filtrarTabela();
+
+            if (typeof feather !== 'undefined') {
+                feather.replace();
+            }
+        });
+    }
+
+    // Funções de ação
+    window.verDetalhes = function (id) {
+        alert('Ver detalhes da mensagem ' + id);
+    };
+
+    window.reenviarMensagem = function (id) {
+        if (confirm('Deseja reenviar esta mensagem?')) {
+            alert('Mensagem reenviada com sucesso!');
+        }
+    };
+
+    window.excluirMensagem = function (id) {
+        if (confirm('Tem certeza que deseja excluir esta mensagem?')) {
+            var row = event.currentTarget.closest('tr');
+            if (row) {
+                row.remove();
+                filtrarTabela();
+                updateSelectedCount();
+            }
+        }
+    };
+
+    window.editarAgendamento = function (id) {
+        alert('Editar agendamento ' + id);
+    };
+
+    window.cancelarAgendamento = function (id) {
+        if (confirm('Deseja cancelar este agendamento?')) {
+            var row = event.currentTarget.closest('tr');
+            if (row) {
+                row.remove();
+                filtrarTabela();
+                updateSelectedCount();
+            }
+        }
+    };
+
+</script>
+
+<style>
+    /* ========== UPLOAD LOGO ========== */
+    .upload-logo {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .logo-preview {
+        width: 120px;
+        height: 120px;
+        border-radius: 10px;
+        object-fit: cover;
+        border: 2px solid #ccc;
+    }
+
+    /* ========== ESTILOS ADICIONAIS PARA O FORMULÁRIO DE MENSAGENS ========== */
+    .recipient-section {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #e9ecef;
+    }
+
+    .recipient-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .recipient-header h5 {
+        margin: 0;
+        color: #495057;
+        font-weight: 600;
+    }
+
+    .admin-list,
+    .user-list {
+        background-color: white;
+        border-radius: 6px;
+        padding: 15px;
+        margin-top: 10px;
+        border: 1px solid #e9ecef;
+        max-height: 300px;
+        overflow-y: auto;
+    }
+
+    .admin-checkbox,
+    .user-checkbox {
+        display: flex;
+        align-items: center;
+        padding: 8px 12px;
+        border-bottom: 1px solid #f1f3f5;
+    }
+
+    .admin-checkbox:last-child,
+    .user-checkbox:last-child {
+        border-bottom: none;
+    }
+
+    .admin-checkbox input[type="checkbox"],
+    .user-checkbox input[type="checkbox"] {
+        margin-right: 10px;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+
+    .admin-checkbox label,
+    .user-checkbox label {
+        cursor: pointer;
+        flex: 1;
+        margin: 0;
+        color: #495057;
+    }
+
+    .select-all-wrapper {
+        background-color: #e9ecef;
+        padding: 10px 15px;
+        border-radius: 6px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .select-all-wrapper input[type="checkbox"] {
+        margin-right: 10px;
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+    }
+
+    .select-all-wrapper label {
+        cursor: pointer;
+        margin: 0;
+        font-weight: 500;
+        color: #212529;
+    }
+
+    .badge-count {
+        background-color: #007bff;
+        color: white;
+        padding: 3px 8px;
+        border-radius: 12px;
+        font-size: 12px;
+        margin-left: 8px;
+    }
+
+    .search-box {
+        margin-bottom: 15px;
+        position: relative;
+    }
+
+    .search-box input {
+        padding-left: 35px;
+        border-radius: 20px;
+    }
+
+    .search-box i {
+        position: absolute;
+        left: 12px;
+        top: 10px;
+        color: #6c757d;
+        font-size: 16px;
+    }
+
+    .char-counter {
+        font-size: 12px;
+        color: #6c757d;
+        margin-top: 5px;
+        text-align: right;
+    }
+
+    .char-counter.warning {
+        color: #ffc107;
+    }
+
+    .char-counter.danger {
+        color: #dc3545;
+    }
+
+    .preview-message {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+        border-left: 4px solid #007bff;
+    }
+
+    .preview-message h6 {
+        color: #495057;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .preview-content {
+        background-color: white;
+        padding: 15px;
+        border-radius: 6px;
+        border: 1px solid #e9ecef;
+    }
+
+    .filter-tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+    }
+
+    .filter-tab {
+        padding: 5px 15px;
+        border-radius: 20px;
+        background-color: #e9ecef;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.3s ease;
+    }
+
+    .filter-tab.active {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .user-avatar-small {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 10px;
+        object-fit: cover;
+    }
+</style>
+<script>
+    // Funções para o modal de histórico
+
+    // Selecionar todos os checkboxes
+    function selectAllMessages(checkbox) {
+        const checkboxes = document.querySelectorAll('.message-checkbox');
+        checkboxes.forEach(cb => cb.checked = checkbox.checked);
+        updateSelectedCount();
+    }
+
+    // Atualizar contador de selecionados
+    function updateSelectedCount() {
+        const selected = document.querySelectorAll('.message-checkbox:checked').length;
+        document.getElementById('totalSelecionados').textContent = selected + ' selecionado' + (selected !== 1 ? 's' : '');
+    }
+
+    // Ver detalhes da mensagem
+    function verDetalhes(id) {
+        // Aqui você faria uma chamada AJAX para buscar os detalhes da mensagem
+        console.log('Ver detalhes da mensagem:', id);
+
+        // Abrir modal de detalhes
+        const detalhesModal = new bootstrap.Modal(document.getElementById('detalhesMensagemModal'));
+        detalhesModal.show();
+
+        // Atualizar conteúdo do modal (exemplo)
+        document.getElementById('detalheId').textContent = id;
+    }
+
+    // Reenviar mensagem
+    function reenviarMensagem(id) {
+        if (confirm('Deseja reenviar esta mensagem?')) {
+            console.log('Reenviar mensagem:', id);
+            alert('Mensagem reenviada com sucesso!');
+        }
+    }
+
+    // Excluir mensagem
+    function excluirMensagem(id) {
+        if (confirm('Tem certeza que deseja excluir esta mensagem?')) {
+            console.log('Excluir mensagem:', id);
+            // Remover linha da tabela
+            const row = event.target.closest('tr');
+            if (row) row.remove();
+            alert('Mensagem excluída com sucesso!');
+        }
+    }
+
+    // Editar agendamento
+    function editarAgendamento(id) {
+        console.log('Editar agendamento:', id);
+        alert('Funcionalidade de edição de agendamento');
+    }
+
+    // Cancelar agendamento
+    function cancelarAgendamento(id) {
+        if (confirm('Deseja cancelar este agendamento?')) {
+            console.log('Cancelar agendamento:', id);
+            alert('Agendamento cancelado!');
+        }
+    }
+
+    // Editar rascunho
+    function editarRascunho(id) {
+        console.log('Editar rascunho:', id);
+        // Redirecionar para página de edição
+        window.location.href = 'enviar-mensagem.html?rascunho=' + id;
+    }
+
+    // Enviar rascunho
+    function enviarRascunho(id) {
+        if (confirm('Deseja enviar este rascunho agora?')) {
+            console.log('Enviar rascunho:', id);
+            alert('Rascunho enviado com sucesso!');
+        }
+    }
+
+    // Excluir rascunho
+    function excluirRascunho(id) {
+        if (confirm('Tem certeza que deseja excluir este rascunho?')) {
+            console.log('Excluir rascunho:', id);
+            alert('Rascunho excluído!');
+        }
+    }
+
+    // Tentar reenviar mensagem que falhou
+    function tentarReenviar(id) {
+        if (confirm('Deseja tentar reenviar esta mensagem?')) {
+            console.log('Tentar reenviar:', id);
+            alert('Tentativa de reenvio iniciada!');
+        }
+    }
+
+    // Exportar selecionados
+    function exportarSelecionados() {
+        const selected = document.querySelectorAll('.message-checkbox:checked');
+        if (selected.length === 0) {
+            alert('Selecione pelo menos uma mensagem para exportar!');
+            return;
+        }
+
+        console.log('Exportar mensagens:', selected.length);
+        alert('Exportando ' + selected.length + ' mensagens...');
+    }
+
+    // Excluir selecionados
+    function excluirSelecionados() {
+        const selected = document.querySelectorAll('.message-checkbox:checked');
+        if (selected.length === 0) {
+            alert('Selecione pelo menos uma mensagem para excluir!');
+            return;
+        }
+
+        if (confirm('Tem certeza que deseja excluir ' + selected.length + ' mensagens?')) {
+            selected.forEach(cb => {
+                const row = cb.closest('tr');
+                if (row) row.remove();
+            });
+            alert(selected.length + ' mensagens excluídas com sucesso!');
+        }
+    }
+
+    // Limpar filtros
+    function limparFiltros() {
+        document.getElementById('buscaHistorico').value = '';
+        document.getElementById('filtroPeriodo').value = 'mes';
+        document.getElementById('filtroTipo').value = 'todos';
+        document.getElementById('filtroStatus').value = 'todos';
+
+        // Esconder campos de data personalizada
+        document.getElementById('dataInicioContainer').style.display = 'none';
+        document.getElementById('dataFimContainer').style.display = 'none';
+
+        // Mostrar todas as linhas
+        document.querySelectorAll('.message-row').forEach(row => {
+            row.style.display = '';
+        });
+    }
+
+    // Atualizar histórico
+    function atualizarHistorico() {
+        console.log('Atualizando histórico...');
+        // Aqui você faria uma chamada AJAX para buscar dados atualizados
+        alert('Histórico atualizado!');
+    }
+
+    // Filtro de período
+    document.getElementById('filtroPeriodo').addEventListener('change', function () {
+        const personalizado = this.value === 'personalizado';
+        document.getElementById('dataInicioContainer').style.display = personalizado ? 'block' : 'none';
+        document.getElementById('dataFimContainer').style.display = personalizado ? 'block' : 'none';
+    });
+
+    // Busca em tempo real
+    document.getElementById('buscaHistorico').addEventListener('keyup', function () {
+        const termo = this.value.toLowerCase();
+        const linhas = document.querySelectorAll('.message-row');
+
+        linhas.forEach(linha => {
+            const texto = linha.textContent.toLowerCase();
+            if (texto.includes(termo) || termo === '') {
+                linha.style.display = '';
+            } else {
+                linha.style.display = 'none';
+            }
+        });
+    });
+
+    // Filtro por tipo
+    document.getElementById('filtroTipo').addEventListener('change', function () {
+        const tipo = this.value;
+        const linhas = document.querySelectorAll('.message-row');
+
+        linhas.forEach(linha => {
+            if (tipo === 'todos' || linha.dataset.tipo === tipo) {
+                linha.style.display = '';
+            } else {
+                linha.style.display = 'none';
+            }
+        });
+    });
+
+    // Filtro por status
+    document.getElementById('filtroStatus').addEventListener('change', function () {
+        const status = this.value;
+        const linhas = document.querySelectorAll('.message-row');
+
+        linhas.forEach(linha => {
+            if (status === 'todos' || linha.dataset.status === status) {
+                linha.style.display = '';
+            } else {
+                linha.style.display = 'none';
+            }
+        });
+    });
+
+    // Atualizar contador quando checkbox for clicado
+    document.querySelectorAll('.message-checkbox').forEach(cb => {
+        cb.addEventListener('change', updateSelectedCount);
+    });
+
+    // Inicializar ícones Feather quando o modal for aberto
+    document.getElementById('historicoMensagensModal').addEventListener('shown.bs.modal', function () {
+        if (typeof feather !== 'undefined') {
+            feather.replace();
+        }
+    });
+
+    // Estilos adicionais
+    const style = document.createElement('style');
+    style.textContent = `
+        .recipient-badges span {
+            margin-right: 5px;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+        
+        .message-row:hover {
+            background-color: #f8f9fa;
+            cursor: pointer;
+        }
+        
+        .progress {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        
+        .btn-group .btn {
+            padding: 0.25rem 0.5rem;
+        }
+        
+        .table td {
+            vertical-align: middle;
+        }
+        
+        .card {
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+    `;
+    document.head.appendChild(style);
+</script>
 <script>
     // ====================================================
     // 🔍 FILTRO COM SUPORTE DARK/LIGHT
@@ -1236,9 +2773,6 @@
         }
     };
 </script>
-
-
-
 <style>
     .status {
         border-radius: 50px;
@@ -1260,5 +2794,411 @@
     .status.pendente {
         background-color: #616300;
         color: white;
+    }
+</style>
+<script>
+    // Funções para contar e atualizar seleções
+
+    // Restaurantes
+    function updateRestaurantesCount() {
+        const checkboxes = document.querySelectorAll('.restaurante-checkbox:not(.hidden-checkbox)');
+        const checked = document.querySelectorAll('.restaurante-checkbox:checked:not(.hidden-checkbox)');
+        document.getElementById('restaurantesCount').textContent = checked.length + ' selecionado' + (checked.length !== 1 ? 's' : '');
+
+        const todosCheckbox = document.getElementById('todosRestaurantes');
+        if (todosCheckbox) {
+            todosCheckbox.checked = checkboxes.length === checked.length && checkboxes.length > 0;
+        }
+
+        updateResumo();
+    }
+
+    function toggleAllRestaurantes() {
+        const checkboxes = document.querySelectorAll('.restaurante-checkbox:not(.hidden-checkbox)');
+        const todosCheckbox = document.getElementById('todosRestaurantes');
+        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+
+        checkboxes.forEach(cb => cb.checked = !allChecked);
+
+        if (todosCheckbox) {
+            todosCheckbox.checked = !allChecked;
+        }
+
+        updateRestaurantesCount();
+    }
+
+    function toggleAllRestaurantesCheckboxes(todosCheckbox) {
+        const checkboxes = document.querySelectorAll('.restaurante-checkbox');
+        checkboxes.forEach(cb => cb.checked = todosCheckbox.checked);
+        updateRestaurantesCount();
+    }
+
+    // Entregadores
+    function updateEntregadoresCount() {
+        const checkboxes = document.querySelectorAll('.entregador-checkbox:not(.hidden-checkbox)');
+        const checked = document.querySelectorAll('.entregador-checkbox:checked:not(.hidden-checkbox)');
+        document.getElementById('entregadoresCount').textContent = checked.length + ' selecionado' + (checked.length !== 1 ? 's' : '');
+
+        const todosCheckbox = document.getElementById('todosEntregadores');
+        if (todosCheckbox) {
+            todosCheckbox.checked = checkboxes.length === checked.length && checkboxes.length > 0;
+        }
+
+        updateResumo();
+    }
+
+    function toggleAllEntregadores() {
+        const checkboxes = document.querySelectorAll('.entregador-checkbox:not(.hidden-checkbox)');
+        const todosCheckbox = document.getElementById('todosEntregadores');
+        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+
+        checkboxes.forEach(cb => cb.checked = !allChecked);
+
+        if (todosCheckbox) {
+            todosCheckbox.checked = !allChecked;
+        }
+
+        updateEntregadoresCount();
+    }
+
+    function toggleAllEntregadoresCheckboxes(todosCheckbox) {
+        const checkboxes = document.querySelectorAll('.entregador-checkbox');
+        checkboxes.forEach(cb => cb.checked = todosCheckbox.checked);
+        updateEntregadoresCount();
+    }
+
+    // Parceiros
+    function updateParceirosCount() {
+        const checkboxes = document.querySelectorAll('.parceiro-checkbox:not(.hidden-checkbox)');
+        const checked = document.querySelectorAll('.parceiro-checkbox:checked:not(.hidden-checkbox)');
+        document.getElementById('parceirosCount').textContent = checked.length + ' selecionado' + (checked.length !== 1 ? 's' : '');
+
+        const todosCheckbox = document.getElementById('todosParceiros');
+        if (todosCheckbox) {
+            todosCheckbox.checked = checkboxes.length === checked.length && checkboxes.length > 0;
+        }
+
+        updateResumo();
+    }
+
+    function toggleAllParceiros() {
+        const checkboxes = document.querySelectorAll('.parceiro-checkbox:not(.hidden-checkbox)');
+        const todosCheckbox = document.getElementById('todosParceiros');
+        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+
+        checkboxes.forEach(cb => cb.checked = !allChecked);
+
+        if (todosCheckbox) {
+            todosCheckbox.checked = !allChecked;
+        }
+
+        updateParceirosCount();
+    }
+
+    function toggleAllParceirosCheckboxes(todosCheckbox) {
+        const checkboxes = document.querySelectorAll('.parceiro-checkbox');
+        checkboxes.forEach(cb => cb.checked = todosCheckbox.checked);
+        updateParceirosCount();
+    }
+
+    // Clientes
+    function updateClientesCount() {
+        const checkboxes = document.querySelectorAll('.cliente-checkbox:not(.hidden-checkbox)');
+        const checked = document.querySelectorAll('.cliente-checkbox:checked:not(.hidden-checkbox)');
+        document.getElementById('clientesCount').textContent = checked.length + ' selecionado' + (checked.length !== 1 ? 's' : '');
+        document.getElementById('selectedClientes').textContent = checked.length;
+
+        const todosCheckbox = document.getElementById('todosClientes');
+        if (todosCheckbox) {
+            todosCheckbox.checked = checkboxes.length === checked.length && checkboxes.length > 0;
+        }
+
+        updateResumo();
+    }
+
+    function toggleAllClientes() {
+        const checkboxes = document.querySelectorAll('.cliente-checkbox:not(.hidden-checkbox)');
+        const todosCheckbox = document.getElementById('todosClientes');
+        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+
+        checkboxes.forEach(cb => cb.checked = !allChecked);
+
+        if (todosCheckbox) {
+            todosCheckbox.checked = !allChecked;
+        }
+
+        updateClientesCount();
+    }
+
+    function toggleAllClientesCheckboxes(todosCheckbox) {
+        const checkboxes = document.querySelectorAll('.cliente-checkbox');
+        checkboxes.forEach(cb => cb.checked = todosCheckbox.checked);
+        updateClientesCount();
+    }
+
+    // Função de busca nas seções
+    function searchInSection(section, term) {
+        term = term.toLowerCase();
+        const container = document.getElementById(section + 'Admins') || document.getElementById(section + 'List');
+        const items = container.querySelectorAll('.admin-checkbox, .user-checkbox');
+
+        items.forEach(item => {
+            const text = item.getAttribute('data-name') || item.getAttribute('data-nome') || item.textContent.toLowerCase();
+            if (text.includes(term) || term === '') {
+                item.classList.remove('hidden-checkbox');
+            } else {
+                item.classList.add('hidden-checkbox');
+            }
+        });
+
+        // Atualizar contadores após busca
+        if (section === 'restaurantes') updateRestaurantesCount();
+        if (section === 'entregadores') updateEntregadoresCount();
+        if (section === 'parceiros') updateParceirosCount();
+        if (section === 'clientes') updateClientesCount();
+    }
+
+    // Filtro para clientes
+    function filtrarClientes() {
+        const termo = document.getElementById('buscaClientes').value.toLowerCase();
+        const status = document.getElementById('filtroClienteStatus').value;
+        const cidade = document.getElementById('filtroClienteCidade').value;
+
+        const clientes = document.querySelectorAll('.user-checkbox');
+
+        clientes.forEach(cliente => {
+            const nome = cliente.getAttribute('data-nome') || '';
+            const email = cliente.getAttribute('data-email') || '';
+            const clienteStatus = cliente.getAttribute('data-status') || '';
+            const clienteCidade = cliente.getAttribute('data-cidade') || '';
+            const textoCompleto = nome + ' ' + email;
+
+            let mostrar = true;
+
+            if (termo && !textoCompleto.includes(termo)) mostrar = false;
+            if (status && clienteStatus !== status) mostrar = false;
+            if (cidade && clienteCidade !== cidade) mostrar = false;
+
+            if (mostrar) {
+                cliente.classList.remove('hidden-checkbox');
+            } else {
+                cliente.classList.add('hidden-checkbox');
+            }
+        });
+
+        updateClientesCount();
+    }
+
+    // Filtro por abas
+    function filterAll(tipo) {
+        // Atualizar classes das abas
+        document.querySelectorAll('.filter-tab').forEach(tab => tab.classList.remove('active'));
+        event.target.classList.add('active');
+
+        const sections = {
+            restaurantes: document.getElementById('sectionRestaurantes'),
+            entregadores: document.getElementById('sectionEntregadores'),
+            parceiros: document.getElementById('sectionParceiros'),
+            clientes: document.getElementById('sectionClientes')
+        };
+
+        if (tipo === 'todos') {
+            Object.values(sections).forEach(section => section.style.display = 'block');
+        } else {
+            Object.keys(sections).forEach(key => {
+                sections[key].style.display = key === tipo ? 'block' : 'none';
+            });
+        }
+    }
+
+    // Atualizar resumo
+    function updateResumo() {
+        const restaurantes = document.querySelectorAll('.restaurante-checkbox:checked').length;
+        const entregadores = document.querySelectorAll('.entregador-checkbox:checked').length;
+        const parceiros = document.querySelectorAll('.parceiro-checkbox:checked').length;
+        const clientes = document.querySelectorAll('.cliente-checkbox:checked').length;
+
+        document.getElementById('resumoRestaurantes').textContent = restaurantes + ' restaurantes';
+        document.getElementById('resumoEntregadores').textContent = entregadores + ' entregadores';
+        document.getElementById('resumoParceiros').textContent = parceiros + ' parceiros';
+        document.getElementById('resumoClientes').textContent = clientes + ' clientes';
+        document.getElementById('totalDestinatarios').textContent = restaurantes + entregadores + parceiros + clientes;
+    }
+
+    // Contadores de caracteres
+    document.getElementById('assunto').addEventListener('input', function () {
+        const length = this.value.length;
+        const counter = document.getElementById('assuntoCounter');
+        counter.textContent = length + '/100 caracteres';
+
+        if (length > 90) {
+            counter.classList.add('warning');
+            counter.classList.remove('danger');
+        } else if (length > 95) {
+            counter.classList.add('danger');
+            counter.classList.remove('warning');
+        } else {
+            counter.classList.remove('warning', 'danger');
+        }
+
+        updatePreview();
+    });
+
+    document.getElementById('mensagem').addEventListener('input', function () {
+        const length = this.value.length;
+        const counter = document.getElementById('mensagemCounter');
+        counter.textContent = length + '/1000 caracteres';
+
+        if (length > 900) {
+            counter.classList.add('warning');
+            counter.classList.remove('danger');
+        } else if (length > 950) {
+            counter.classList.add('danger');
+            counter.classList.remove('warning');
+        } else {
+            counter.classList.remove('warning', 'danger');
+        }
+
+        updatePreview();
+    });
+
+    // Preview da mensagem
+    function updatePreview() {
+        const assunto = document.getElementById('assunto').value || '-';
+        const mensagem = document.getElementById('mensagem').value || '-';
+        const prioridade = document.getElementById('prioridade').options[document.getElementById('prioridade').selectedIndex].text;
+
+        document.getElementById('previewAssunto').textContent = assunto;
+        document.getElementById('previewPrioridade').textContent = prioridade;
+        document.getElementById('previewMensagem').textContent = mensagem;
+    }
+
+    document.getElementById('prioridade').addEventListener('change', updatePreview);
+
+    // Agendamento
+    document.getElementById('agendar_envio').addEventListener('change', function () {
+        const container = document.getElementById('agendamentoContainer');
+        container.style.display = this.checked ? 'block' : 'none';
+
+        if (this.checked) {
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            document.getElementById('data_agendamento').min = now.toISOString().slice(0, 16);
+        }
+    });
+
+    // Limpar formulário
+    function limparFormulario() {
+        document.querySelector('form').reset();
+        document.querySelectorAll('.restaurante-checkbox, .entregador-checkbox, .parceiro-checkbox, .cliente-checkbox').forEach(cb => cb.checked = false);
+        document.getElementById('agendamentoContainer').style.display = 'none';
+
+        // Reset dos filtros
+        document.getElementById('buscaClientes').value = '';
+        document.getElementById('filtroClienteStatus').value = '';
+        document.getElementById('filtroClienteCidade').value = '';
+
+        // Mostrar todos os itens
+        document.querySelectorAll('.admin-checkbox, .user-checkbox').forEach(item => {
+            item.classList.remove('hidden-checkbox');
+        });
+
+        updateRestaurantesCount();
+        updateEntregadoresCount();
+        updateParceirosCount();
+        updateClientesCount();
+        updatePreview();
+
+        // Reset contadores
+        document.getElementById('assuntoCounter').textContent = '0/100 caracteres';
+        document.getElementById('mensagemCounter').textContent = '0/1000 caracteres';
+    }
+
+    // Validação do formulário
+    (() => {
+        'use strict';
+        const forms = document.querySelectorAll('.needs-validation');
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                // Verificar se pelo menos um destinatário foi selecionado
+                const restaurantesSelected = document.querySelectorAll('.restaurante-checkbox:checked').length > 0;
+                const entregadoresSelected = document.querySelectorAll('.entregador-checkbox:checked').length > 0;
+                const parceirosSelected = document.querySelectorAll('.parceiro-checkbox:checked').length > 0;
+                const clientesSelected = document.querySelectorAll('.cliente-checkbox:checked').length > 0;
+
+                if (!restaurantesSelected && !entregadoresSelected && !parceirosSelected && !clientesSelected) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    alert('Por favor, selecione pelo menos um destinatário!');
+                    return;
+                }
+
+                if (!form.checkValidity()) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    })();
+
+    // Inicialização
+    document.addEventListener('DOMContentLoaded', function () {
+        updateRestaurantesCount();
+        updateEntregadoresCount();
+        updateParceirosCount();
+        updateClientesCount();
+        updatePreview();
+
+        // Contar VIPs
+        const vips = document.querySelectorAll('.user-checkbox[data-vip="sim"]').length;
+        document.getElementById('vipClientes').textContent = vips;
+
+        // Inicializar ícones do Feather
+        if (typeof feather !== 'undefined') {
+            feather.replace();
+        }
+    });
+</script>
+<style>
+    /* Estilos adicionais */
+    .hidden-checkbox {
+        display: none !important;
+    }
+
+    .user-checkbox label {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .user-checkbox .badge {
+        font-size: 11px;
+        padding: 3px 6px;
+    }
+
+    .user-checkbox small {
+        font-size: 11px;
+        margin-left: auto;
+    }
+
+    .filter-tab {
+        transition: all 0.3s ease;
+    }
+
+    .filter-tab:hover {
+        background-color: #007bff;
+        color: white;
+    }
+
+    #agendamentoContainer {
+        transition: all 0.3s ease;
+    }
+
+    .alert-info {
+        background-color: #e3f2fd;
+        border-color: #b8e0fe;
+        color: #0a58ca;
     }
 </style>
