@@ -2,8 +2,8 @@
   'use strict';
 
   // --- caminhos base ---
-  const AUTH = '../sessao-admin/paginas/authentic/admins/';
-  const AUTENTICACAO_PARCEIRO = '../sessao-admin/paginas/authentic/autenticacao-parceiro/';
+  const AUTH = '../sessao-admin/autenticacao-cadastro/admins/';
+  const AUTENTICACAO_PARCEIRO = '../sessao-admin/autenticacao-cadastro/autenticacao-parceiro/';
   const PAGINA = '../sessao-admin/paginas/';
   const BLOCO_NOTAS = '../sessao-admin/paginas/bloco de notas/';
   const CODIGOS_HTTPS = '../sessao-admin/paginas/codigos de status HTTPS/';
@@ -27,7 +27,6 @@
   const PARCEIRO = '../sessao-admin/parceiro/';
   const DASHBOARD_PARCEIRO = '../sessao-admin/parceiro/dashboard/';
 
-
   // --- rotas ---
   const routes = {
     '/login': { title: 'Login', file: AUTH + 'login.html' },
@@ -36,12 +35,12 @@
     '/-cadastro-superAdmin-': { title: 'Cadastrar Novo Administrador', file: AUTH + 'cadastro-superAdmin.html' },
     '/-cadastro-adminFinanceiro-': { title: 'Cadastrar Novo Administrador', file: AUTH + 'cadastro-adminFinanceiro.html' },
     '/-cadastro-editor-': { title: 'Cadastrar Novo Administrador', file: AUTH + 'cadastro-editor.html' },
-
+ 
     '/login-parceiro': { title: 'Login', file: AUTENTICACAO_PARCEIRO + 'login.html' },
     '/esqueceu-senha-parceiro': { title: 'Esqueceu Senha', file: AUTENTICACAO_PARCEIRO + 'forget-password.html' },
     '/nova-senha-parceiro': { title: 'Nova Senha', file: AUTH + 'new-password.html' },
     '/-cadastro-parceiro-': { title: 'Cadastrar Novo Administrador', file: AUTENTICACAO_PARCEIRO + 'cadastro-parceiro.html' },
-    
+
     '/pub': { title: 'Anucios e Publicidades', file: ANUNCIOS + 'pub.html' },
     '/editar-pub': { title: 'Editando Anucio / Publicidade', file: ANUNCIOS + 'editar-pub.html' },
 
@@ -53,10 +52,9 @@
     '/notas': { title: 'Bloco de notas', file: BLOCO_NOTAS + 'bloco-notas.html' },
     '/editar-nota': { title: 'Editando nota', file: BLOCO_NOTAS + 'editar-nota.html' },
 
-
     '/404': { title: 'Erro 404', file: CODIGOS_HTTPS + '404.html' },
     '/manutencao': { title: 'Dashboard em manuntenção', file: CODIGOS_HTTPS + 'manutencao.html' },
-    '/usuario-banido': { title: 'Usuário foi banido', file: CODIGOS_HTTPS + 'usuario-banido.html' },
+    '/conta-suspensa': { title: 'Usuário foi banido', file: CODIGOS_HTTPS + 'conta-suspensa.html' },
 
     '/calendario': { title: 'Calendário', file: OPCOES + 'calendario.html' },
     '/reciclagem': { title: 'Reciclagem', file: OPCOES + 'reciclagem.html' },
@@ -92,6 +90,7 @@
     '/financas': { title: 'Finanças', file: FINANCAS + 'financas.html' },
     '/analisando': { title: 'Analisando', file: FINANCAS + 'analisando.html' },
     '/contas-bancarias': { title: 'Contas Bancárias dos funcionários', file: FINANCAS + 'contas-bancarias.html' },
+    '/rendimento': { title: 'Rendimento mensal e anual', file: FINANCAS + 'rendimento.html' },
 
     '/despesas': { title: 'Despesas', file: DESPESAS + 'despesas.html' },
     '/editar-despesa': { title: 'Editando a Despesa', file: DESPESAS + 'editar-despesa.html' },
@@ -124,13 +123,13 @@
     '/privacidade': { title: 'Pulíticas de Privacidade', file: FOOTER + 'privacidade.html' },
     '/termosDeUso': { title: 'Termos de Uso do Serviço', file: FOOTER + 'termos_uso.html' },
     '/suporte': { title: 'Caso tivier uma dúvica é só nos contar', file: FOOTER + 'suporte.html' },
-    
+
     '/todos-parceiros': { title: 'Todos os parceiros', file: PARCEIRO + 'todos-parceiro.html' },
     '/adicionar-parceiro': { title: 'Adicionar parceiro', file: PARCEIRO + 'adicionar-parceiro.html' },
     '/visualizar-parceiro': { title: 'Visualizar parceiro', file: PARCEIRO + 'visualizar-parceiro.html' },
     '/editar-parceiro': { title: 'Editar parceiro', file: PARCEIRO + 'editar-parceiro.html' },
     '/deletar-parceiro': { title: 'deletar parceiro', file: PARCEIRO + 'deletar-parceiro.html' },
-    
+
     '/home-parceiro': { title: 'Dashboard para o parceiro', file: DASHBOARD_PARCEIRO + 'dashboard-parceiro.html' },
     '/visualizar-perfil-parceiro': { title: 'Visualizando o seu perfil', file: DASHBOARD_PARCEIRO + 'dashboard-perfil-parceiro.html' },
     '/editar-perfil-parceiro': { title: 'Editando o seu perfil', file: DASHBOARD_PARCEIRO + 'dashboard-editar-parceiro.html' },

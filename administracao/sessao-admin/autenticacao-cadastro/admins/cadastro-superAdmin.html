@@ -190,6 +190,71 @@
 
 
 <style>
+    .profile-preview-wrapper {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 3px solid #007bff;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .profile-preview-wrapper:hover {
+        transform: scale(1.05);
+    }
+
+    .profile-preview-wrapper .overlay {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 35%;
+        background: rgba(0, 0, 0, 0.6);
+        color: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .profile-preview-wrapper:hover .overlay {
+        opacity: 1;
+    }
+
+    .profile-preview {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+
+
+    .wizard-step {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .wizard-step.fade-in {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
+
+    .wizard-step.fade-out {
+        opacity: 0 !important;
+        transform: translateY(-10px) !important;
+    }
+
+    .d-none {
+        display: none !important;
+    }
+</style>
+
+<style>
     .sidebar-content,
     .sidebar,
     .navbar, 
@@ -198,7 +263,50 @@
     }
 </style>
 
+<script>
+    // progressao de senha
+    function checkPasswordStrength() {
+        const password = document.getElementById("password_employees").value;
+        const strength = calculatePasswordStrength(password);
+        const progressBar = document.getElementById("password_strength");
+        progressBar.style.width = `${strength}%`;
+        progressBar.style.backgroundColor = getProgressBarColor(strength);
+    }
+    function calculatePasswordStrength(password) {
+        // Implement your password strength calculation logic here
+        // For simplicity, let's assume the strength is based on password length
+        return Math.min(password.length * 10, 100);
+    }
+    function getProgressBarColor(strength) {
+        if (strength >= 75) {
+            password_strength.style.display = "block";
+            return "green";
+        }
+        if (strength >= 45) {
+            password_strength.style.display = "block";
+            return "orange";
+        }
+        else if (strength >= 30) {
+            password_strength.style.display = "block";
+            return "red";
+        }
+    }
+    // botao de exibir, e esconder a palavra pass
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("password_employees");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            mostrar.style.display = "none";
+            mostrar1.style.display = "block";
 
+        } else {
+            passwordInput.type = "password";
+            mostrar1.style.display = "none";
+            mostrar.style.display = "block";
+        }
+    }
+
+</script>
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -592,6 +700,7 @@
     });
 
 </script>
+
 <script>
     // Preview da logo
     document.getElementById('logoUpload').addEventListener('change', function (event) {
@@ -640,112 +749,3 @@
     })();
 </script>
 
-<style>
-    .profile-preview-wrapper {
-        position: relative;
-        width: 150px;
-        height: 150px;
-        margin: 0 auto;
-        border-radius: 50%;
-        overflow: hidden;
-        border: 3px solid #007bff;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        cursor: pointer;
-        transition: transform 0.3s ease;
-    }
-
-    .profile-preview-wrapper:hover {
-        transform: scale(1.05);
-    }
-
-    .profile-preview-wrapper .overlay {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 35%;
-        background: rgba(0, 0, 0, 0.6);
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        font-size: 1rem;
-        cursor: pointer;
-    }
-
-    .profile-preview-wrapper:hover .overlay {
-        opacity: 1;
-    }
-
-    .profile-preview {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-
-
-    .wizard-step {
-        transition: opacity 0.3s ease, transform 0.3s ease;
-    }
-
-    .wizard-step.fade-in {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-    }
-
-    .wizard-step.fade-out {
-        opacity: 0 !important;
-        transform: translateY(-10px) !important;
-    }
-
-    .d-none {
-        display: none !important;
-    }
-</style>
-
-<script>
-    // progressao de senha
-    function checkPasswordStrength() {
-        const password = document.getElementById("password_employees").value;
-        const strength = calculatePasswordStrength(password);
-        const progressBar = document.getElementById("password_strength");
-        progressBar.style.width = `${strength}%`;
-        progressBar.style.backgroundColor = getProgressBarColor(strength);
-    }
-    function calculatePasswordStrength(password) {
-        // Implement your password strength calculation logic here
-        // For simplicity, let's assume the strength is based on password length
-        return Math.min(password.length * 10, 100);
-    }
-    function getProgressBarColor(strength) {
-        if (strength >= 75) {
-            password_strength.style.display = "block";
-            return "green";
-        }
-        if (strength >= 45) {
-            password_strength.style.display = "block";
-            return "orange";
-        }
-        else if (strength >= 30) {
-            password_strength.style.display = "block";
-            return "red";
-        }
-    }
-    // botao de exibir, e esconder a palavra pass
-    function togglePasswordVisibility() {
-        const passwordInput = document.getElementById("password_employees");
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            mostrar.style.display = "none";
-            mostrar1.style.display = "block";
-
-        } else {
-            passwordInput.type = "password";
-            mostrar1.style.display = "none";
-            mostrar.style.display = "block";
-        }
-    }
-
-</script>

@@ -199,4 +199,33 @@ $(function () {
 });
 
 
+ $(function () {
+    // Destrói a DataTable existente antes de criar nova
+    if ($.fn.dataTable.isDataTable('#tabela_8')) {
+        $('#tabela_8').DataTable().destroy();
+    }
+    
+    $("#tabela_8").DataTable({
+        "responsive": true,
+        "lengthChange": false,
+        "autoWidth": false
+    }).buttons().container().appendTo('#tabela_8_wrapper .col-md-6:eq(0)');
+    
+    // Repete para a segunda tabela se necessário
+    if ($.fn.dataTable.isDataTable('#example8')) {
+        $('#example8').DataTable().destroy();
+    }
+    
+    $('#example8').DataTable({
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false,
+        "responsive": true,
+    });
+});
+
+
 

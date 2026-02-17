@@ -1,0 +1,432 @@
+<script src="../js/data-tables.js"></script>
+
+<div id="conteudo-importado"></div>
+<script>
+    $(function () {
+        $("#conteudo-importado").load("../js/graficos/financas.html");
+    });
+</script>
+
+<div class="row mb-2 mb-xl-3">
+    <div class="content-top col-auto d-sm-block">
+        <h1>Rendimentos CraveNow</h1>
+        <p>Comissões de restaurantes (20%) e clientes (10%)</p>
+    </div>
+
+    <div class="col-auto ms-auto text-end mt-n1">
+        <button class="btn shadow-sm" onclick="window.location.reload()"
+            style="background-color: white; color: black !important;">
+            <i class="align-middle" data-feather="refresh-cw" id="refresh">&nbsp;</i>
+        </button>
+    </div>
+</div>
+
+<!-- Cards de Resumo de Rendimentos -->
+<div class="row g-3 mb-4">
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Total Restaurantes
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important; margin-top: -20px !important;">48.250
+                                Kz</span>
+                        </h3>
+                        <p class="mb-2">Comissão 20% sobre pedidos</p>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat">
+                            <i data-feather="shopping-bag" class="align-middle text-info"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Total Clientes
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important; margin-top: -20px !important;">24.125
+                                Kz</span>
+                        </h3>
+                        <p class="mb-2">Comissão 10% sobre compras</p>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat">
+                            <i data-feather="users" class="align-middle text-success"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Rendimento Total
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important; margin-top: -20px !important;">72.375
+                                Kz</span>
+                        </h3>
+                        <p class="mb-2">Soma de todas as comissões</p>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat">
+                            <i data-feather="trending-up" class="align-middle text-primary"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12 col-sm-6 col-xxl-3 d-flex">
+        <div class="card flex-fill card-dashboard">
+            <div class="card-body py-4">
+                <div class="d-flex align-items-start">
+                    <div class="flex-grow-1">
+                        <h3 class="mb-2">Média Mensal
+                            <span class="badge badge-soft-dark indicator"
+                                style="background-color: white; color: black !important; margin-top: -20px !important;">18.094
+                                Kz</span>
+                        </h3>
+                        <p class="mb-2">Últimos 30 dias</p>
+                    </div>
+                    <div class="d-inline-block ms-3">
+                        <div class="stat">
+                            <i data-feather="bar-chart-2" class="align-middle text-warning"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filtros (exatamente como solicitado) -->
+<form action="" class="row">
+    <div class="col-md-4">
+        <label for="monthFilter" class="form-label fw-bold">Mês</label>
+        <select class="form-select" id="monthFilter">
+            <option value="all" selected>Todos os meses</option>
+            <option value="1">Janeiro</option>
+            <option value="2">Fevereiro</option>
+            <option value="3">Março</option>
+            <option value="4">Abril</option>
+            <option value="5">Maio</option>
+            <option value="6">Junho</option>
+            <option value="7">Julho</option>
+            <option value="8">Agosto</option>
+            <option value="9">Setembro</option>
+            <option value="10">Outubro</option>
+            <option value="11">Novembro</option>
+            <option value="12">Dezembro</option>
+        </select>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label for="yearFilter" class="form-label fw-bold">Ano</label>
+        <select class="form-select" id="yearFilter">
+            <option value="2025" selected>2025</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+        </select>
+    </div>
+    <div class="col-md-4 mb-3 d-flex align-items-end">
+        <button class="btn btn-primary w-100 btn-sm" type="button">
+            <i class="bi bi-funnel me-2"></i>Filtrar Rendimentos
+        </button>
+    </div>
+</form>
+
+<!-- RENDIMENTOS DE RESTAURANTES (COMISSÃO 20%) -->
+<div class="col-12 mt-4">
+    <h3 class="p-1">Comissão de Restaurantes - <i class="status pago">20% por pedido</i></h3>
+
+    <div class="card mb-3">
+        <div class="card-header month-header d-flex justify-content-between align-items-center">
+            <div class="month-title">
+                <i class="bi bi-shop me-2"></i>Rendimentos por Restaurante
+            </div>
+            <div class="d-flex align-items-center">
+                <span class="total-month saldo-negativo me-3">Total: 48.250 Kz</span>
+            </div>
+        </div>
+
+        <!-- Janeiro - Restaurantes -->
+        <div class="mb-3">
+            <div class="card-header month-header d-flex justify-content-between align-items-center"
+                data-bs-toggle="collapse" href="#collapseRestJaneiro">
+                <div class="month-title">
+                    <i class="bi bi-calendar-month me-2"></i>Janeiro 2025
+                </div>
+                <div class="d-flex align-items-center">
+                    <span class="total-month saldo-positivo me-3">Total: 15.800 Kz</span>
+                    <i class="bi bi-chevron-down"></i>
+                </div>
+            </div>
+            <div class="collapse show" id="collapseRestJaneiro">
+                <table id="tabela_1" class="table table-borderless my-0 w-100">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Restaurante</th>
+                            <th>Total Pedidos</th>
+                            <th>Valor Pedidos (Kz)</th>
+                            <th>Comissão 20% (Kz)</th>
+                            <th>Data Pagamento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>Restaurante Kapital</td>
+                            <td>45</td>
+                            <td>225.000</td>
+                            <td><strong>45.000</strong></td>
+                            <td>2025-01-31</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>Burguer House</td>
+                            <td>32</td>
+                            <td>160.000</td>
+                            <td><strong>32.000</strong></td>
+                            <td>2025-01-30</td>
+                        </tr>
+                        <tr>
+                            <td>003</td>
+                            <td>Pizza na Pedra</td>
+                            <td>28</td>
+                            <td>140.000</td>
+                            <td><strong>28.000</strong></td>
+                            <td>2025-01-29</td>
+                        </tr>
+                        <tr>
+                            <td>004</td>
+                            <td>Food City</td>
+                            <td>27</td>
+                            <td>135.000</td>
+                            <td><strong>27.000</strong></td>
+                            <td>2025-01-28</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- RENDIMENTOS DE CLIENTES (COMISSÃO 10%) -->
+<div class="col-12 mt-4">
+    <h3 class="p-1">Comissão de Clientes - <i class="status pago" style="background-color: #0d6efd;">10% por compra</i>
+    </h3>
+
+    <div class="card mb-3">
+        <div class="card-header month-header d-flex justify-content-between align-items-center">
+            <div class="month-title">
+                <i class="bi bi-people me-2"></i>Rendimentos por Cliente
+            </div>
+            <div class="d-flex align-items-center">
+                <span class="total-month saldo-negativo me-3">Total: 24.125 Kz</span>
+            </div>
+        </div>
+
+        <!-- Janeiro - Clientes -->
+        <div class="mb-3">
+            <div class="card-header month-header d-flex justify-content-between align-items-center"
+                data-bs-toggle="collapse" href="#collapseClientJaneiro">
+                <div class="month-title">
+                    <i class="bi bi-calendar-month me-2"></i>Janeiro 2025
+                </div>
+                <div class="d-flex align-items-center">
+                    <span class="total-month saldo-positivo me-3">Total: 7.900 Kz</span>
+                    <i class="bi bi-chevron-down"></i>
+                </div>
+            </div>
+            <div class="collapse show" id="collapseClientJaneiro">
+                <table id="tabela_2" class="table table-borderless my-0 w-100">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Total Compras</th>
+                            <th>Valor Compras (Kz)</th>
+                            <th>Comissão 10% (Kz)</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>101</td>
+                            <td>João Silva</td>
+                            <td>12</td>
+                            <td>36.000</td>
+                            <td><strong>3.600</strong></td>
+                            <td>2025-01-31</td>
+                        </tr>
+                        <tr>
+                            <td>102</td>
+                            <td>Maria Santos</td>
+                            <td>8</td>
+                            <td>24.000</td>
+                            <td><strong>2.400</strong></td>
+                            <td>2025-01-30</td>
+                        </tr>
+                        <tr>
+                            <td>103</td>
+                            <td>Pedro Costa</td>
+                            <td>5</td>
+                            <td>15.000</td>
+                            <td><strong>1.500</strong></td>
+                            <td>2025-01-29</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+      
+    </div>
+</div>
+
+<!-- Resumo Anual -->
+<div class="col-12 mt-4">
+    <div class="card card-dashboard">
+        <div class="card-header">
+            <h5 class="card-title mb-0" style="color: white;">Resumo de Rendimentos 2025</h5>
+        </div>
+        <div class="card-body">
+            <table id="tabela_5" class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th>Mês</th>
+                        <th>Restaurantes (20%)</th>
+                        <th>Clientes (10%)</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Janeiro</td>
+                        <td>15.800 Kz</td>
+                        <td>7.900 Kz</td>
+                        <td><strong>23.700 Kz</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Fevereiro</td>
+                        <td>16.450 Kz</td>
+                        <td>8.225 Kz</td>
+                        <td><strong>24.675 Kz</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Março</td>
+                        <td>16.000 Kz</td>
+                        <td>8.000 Kz</td>
+                        <td><strong>24.000 Kz</strong></td>
+                    </tr>
+                    <tr class="table-active">
+                        <td><strong>Total</strong></td>
+                        <td><strong>48.250 Kz</strong></td>
+                        <td><strong>24.125 Kz</strong></td>
+                        <td><strong>72.375 Kz</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Estilos adicionais específicos para rendimentos -->
+<style>
+    .saldo-positivo {
+        background-color: #198754;
+        color: white;
+        border-radius: 50px;
+        padding: 3px 10px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .saldo-negativo {
+        background-color: #6c757d;
+        color: white;
+        border-radius: 50px;
+        padding: 3px 10px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
+
+    .status.pago {
+        background-color: #198754;
+        color: white;
+        padding: 3px 10px;
+        border-radius: 50px;
+        font-size: 0.75rem;
+        font-weight: 500;
+    }
+
+    .card-dashboard {
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        border: none;
+        margin-bottom: 20px;
+    }
+
+    .month-header {
+        cursor: pointer;
+        transition: all 0.2s ease;
+        padding: 15px;
+        border-radius: 8px;
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .month-header:hover {
+        background-color: rgba(67, 97, 238, 0.1);
+    }
+
+    .bi-chevron-down {
+        transition: transform 0.3s ease;
+    }
+
+    [data-bs-toggle="collapse"].collapsed .bi-chevron-down {
+        transform: rotate(-90deg);
+    }
+
+    .filter-container {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+
+    .btn-primary {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+
+    table td,
+    table th {
+        padding: 12px;
+        vertical-align: middle;
+    }
+
+    .badge-soft-dark {
+        background-color: white;
+        color: black !important;
+        font-size: 0.85rem;
+        padding: 5px 10px;
+    }
+</style>
+
+<!-- Bootstrap Icons (caso não tenha) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
